@@ -20,8 +20,7 @@ namespace WCFConsoleHost
 {
     class Program
     {
-        //test
-
+        
         [Import]
         public static IEnumerable Services { get; set; }
         
