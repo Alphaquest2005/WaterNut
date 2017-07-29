@@ -165,7 +165,8 @@ namespace WaterNut.DataSpace
             var t = 0;
             var exceptions = new ConcurrentQueue<Exception>();
             Parallel.ForEach(itemSets.Values
-                                    //.Where(x => "10204972, 3706".Contains(x.Key))
+                                     //.Where(x => x.Key.Contains("SEAH-2033/QT"))
+                                    //.Where(x => "".Contains(x.Key))
                                      //.Where(x => "FAA/SCPI18X112".Contains(x.ItemNumber))//SND/IVF1010MPSF,BRG/NAVICOTE-GL,
                                      , new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 1 }, itm => //.Where(x => x.ItemNumber == "AT18547")
              {
@@ -690,23 +691,23 @@ namespace WaterNut.DataSpace
 
             var itmLst = CreateItemSetsWithItemNumbers(saleslst, asycudaEntries);
 
-            return itmLst; //.Where(x => x.ItemNumber == "OC1719907");
+            return itmLst; 
         }
 
-        private async Task<ConcurrentDictionary<string, ItemSet>> MatchSalestoAsycudaEntriesOnDescription()
-        {
-            List<ItemEntries> asycudaEntries = new List<ItemEntries>();
-            asycudaEntries.AddRange(await GetAsycudaEntriesWithDescription().ConfigureAwait(false));
-            asycudaEntries.AddRange(await GetAsycudaEntriesWithItemNumber().ConfigureAwait(false));
+        //private async Task<ConcurrentDictionary<string, ItemSet>> MatchSalestoAsycudaEntriesOnDescription()
+        //{
+        //    List<ItemEntries> asycudaEntries = new List<ItemEntries>();
+        //    asycudaEntries.AddRange(await GetAsycudaEntriesWithDescription().ConfigureAwait(false));
+        //    asycudaEntries.AddRange(await GetAsycudaEntriesWithItemNumber().ConfigureAwait(false));
 
-            List<ItemSales> saleslst = new List<ItemSales>();
-            saleslst.AddRange(await GetSaleslstWithDescription().ConfigureAwait(false));
-            saleslst.AddRange(await GetSaleslstWithItemNumber().ConfigureAwait(false));
+        //    List<ItemSales> saleslst = new List<ItemSales>();
+        //    saleslst.AddRange(await GetSaleslstWithDescription().ConfigureAwait(false));
+        //    saleslst.AddRange(await GetSaleslstWithItemNumber().ConfigureAwait(false));
 
-            var itmLst = CreateItemSetsWithDescription(saleslst, asycudaEntries);
+        //    var itmLst = CreateItemSetsWithDescription(saleslst, asycudaEntries);
 
-            return itmLst; //.Where(x => x.ItemNumber == "OC1719907");
-        }
+        //    return itmLst; //.Where(x => x.ItemNumber == "OC1719907");
+        //}
 
         private static ConcurrentDictionary<string,ItemSet> CreateItemSetsWithItemNumbers(IEnumerable<ItemSales> saleslst, IEnumerable<ItemEntries> asycudaEntries)
         {
@@ -733,7 +734,7 @@ namespace WaterNut.DataSpace
             
             foreach (var r in res)
             {
-                var alias = Instance.InventoryAliasCache.Data.Where(x => x.ItemNumber == r.Key).Select(y => y.AliasName).ToList();
+                var alias = Instance.InventoryAliasCache.Data.Where(x => x.ItemNumber.ToUpper().Trim() == r.Key).Select(y => y.AliasName.ToUpper().Trim()).ToList();
                 if (!alias.Any()) continue;
                 var ae = asycudaEntries.Where(x => alias.Contains(x.Key)).SelectMany(y => y.EntriesList).ToList();
                 if (ae.Any()) r.Value.EntriesList.AddRange(ae);
@@ -794,7 +795,7 @@ namespace WaterNut.DataSpace
                 asycudaEntries = from s in lst.Where(x => x.ItemNumber != null)
                    // .Where(x => x.ItemNumber == itmnumber)
                     //       .Where(x => x.AsycudaDocument.CNumber != null).AsEnumerable()
-                    group s by s.ItemNumber.Trim()
+                    group s by s.ItemNumber.ToUpper().Trim()
                     into g
                     select
                         new ItemEntries
@@ -876,7 +877,7 @@ namespace WaterNut.DataSpace
                     //.Where(x => x.QtyAllocated == null || x.QtyAllocated != ((Double) x.Quantity))
                     //.Where(x => x.ItemNumber == itmnumber)
                     // .AsEnumerable()
-                    group d by d.ItemNumber.Trim()
+                    group d by d.ItemNumber.ToUpper().Trim()
                     into g
                     select
                         new ItemSales

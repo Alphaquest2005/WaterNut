@@ -144,11 +144,8 @@ namespace WaterNut.DataSpace
                     return true;
                 }
 
-                if (Environment.MachineName.ToLower() == "linnea-hp".ToLower()
-                   && ctx.Database.Connection.ConnectionString.ToLower().Contains(@"linnea-hp\SQLEXPRESS2012;Initial Catalog=NorthYachtDB-Enterprise".ToLower()))
-                {
-                    return true;
-                }
+                if (Environment.MachineName.ToLower() == "DESKTOP-JP7GRGD".ToLower())return true;
+                
 
                 if (Environment.MachineName.ToLower() == "DESKTOP-VIS2G9B".ToLower())return true;
 
