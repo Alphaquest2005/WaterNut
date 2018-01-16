@@ -646,7 +646,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                    System.Diagnostics.Debugger.Break();
+               //     System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointSales>();
                 var fault = new ValidationFault
@@ -682,7 +682,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+              //  System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return 0;
                 var fault = new ValidationFault
@@ -788,7 +788,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+               // System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointSales>();
                 var fault = new ValidationFault
@@ -995,7 +995,7 @@ namespace CounterPointQS.Business.Services
              }
              catch (Exception updateEx)
              {
-                System.Diagnostics.Debugger.Break();
+                //System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return 0;
                 var fault = new ValidationFault

@@ -68,6 +68,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllBusinessModels.cs" />
+    <Compile Include="AllBusinessModels1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllBusinessModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllClientModels.cs" />
+    <Compile Include="AllClientModels1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllClientModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllDomainInterface.cs" />
+    <Compile Include="AllDomainInterface1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllDomainInterface.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllMapping.cs" />
+    <Compile Include="AllMapping1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllMapping.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllObjectContext.cs" />
+    <Compile Include="AllObjectContext1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllObjectContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllObjectContextRO.cs" />
+    <Compile Include="AllObjectContextRO1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllObjectContextRO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllRepository.cs" />
+    <Compile Include="AllRepository1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllRepository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllServices.cs" />
+    <Compile Include="AllServices1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF6\AllBusinessEntities.cs" />
+    <Compile Include="EF6\AllBusinessEntities1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllBusinessEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF6\AllBusinessMappings.cs" />
+    <Compile Include="EF6\AllBusinessMappings1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllBusinessMappings.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF6\AllClientEntities.cs" />
+    <Compile Include="EF6\AllClientEntities1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllClientEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WaterNutDB.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -88,8 +154,52 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="EF6\" />
+    <Content Include="AllBusinessModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllBusinessModels1.cs</LastGenOutput>
+    </Content>
+    <Content Include="AllClientModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllClientModels1.cs</LastGenOutput>
+    </Content>
+    <Content Include="AllDomainInterface.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllDomainInterface1.cs</LastGenOutput>
+    </Content>
+    <Content Include="AllMapping.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllMapping1.cs</LastGenOutput>
+    </Content>
+    <Content Include="AllObjectContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllObjectContext1.cs</LastGenOutput>
+    </Content>
+    <Content Include="AllObjectContextRO.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllObjectContextRO1.cs</LastGenOutput>
+    </Content>
+    <Content Include="AllRepository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllRepository1.cs</LastGenOutput>
+    </Content>
+    <Content Include="AllServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllServices1.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF6\AllBusinessEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllBusinessEntities1.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF6\AllBusinessMappings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllBusinessMappings1.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF6\AllClientEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllClientEntities1.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

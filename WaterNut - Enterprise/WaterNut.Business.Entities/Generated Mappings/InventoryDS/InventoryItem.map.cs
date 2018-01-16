@@ -12,7 +12,7 @@
         {                        
               this.HasKey(t => t.ItemNumber);        
               this.ToTable("InventoryItems");
-              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(255);
               this.Property(t => t.Description).HasColumnName("Description").IsRequired();
               this.Property(t => t.Category).HasColumnName("Category").HasMaxLength(60);
               this.Property(t => t.TariffCode).HasColumnName("TariffCode").IsUnicode(false).HasMaxLength(8);

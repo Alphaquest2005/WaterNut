@@ -11,6 +11,7 @@ using CoreEntities.Client.Repositories;
 using Microsoft.Win32;
 using SimpleMvvmToolkit;
 using CoreEntities.Client.Entities;
+using WaterNut.QuerySpace.AllocationQS.ViewModels;
 
 
 namespace WaterNut.QuerySpace.CoreEntities.ViewModels
@@ -136,6 +137,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
                     try
                     {
                         await AsycudaDocumentSetExRepository.Instance.ExportDocument(f, BaseViewModel.Instance.CurrentAsycudaDocument.ASYCUDA_Id).ConfigureAwait(false);
+                        await SalesReportModel.Instance.Send2Excel(f, BaseViewModel.Instance.CurrentAsycudaDocument).ConfigureAwait(false);
                     }
                     catch (Exception)
                     {
@@ -190,6 +192,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
                         {
                             var dir = directoryInfo.FullName;
                              await AsycudaDocumentSetExRepository.Instance.ExportDocSet(docSet.AsycudaDocumentSetId, dir).ConfigureAwait(false);
+                            await SalesReportModel.Instance.ExportDocSetSalesReport(docSet, dir).ConfigureAwait(false);
                         }
                     }
                 }

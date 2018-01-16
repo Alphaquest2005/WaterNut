@@ -736,6 +736,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AllocationQS\AllocationQS.csproj">
+      <Project>{859a7626-5ea1-4cfd-bc1b-9f653a81655f}</Project>
+      <Name>AllocationQS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AsycudaWorld421\AsycudaWorld421.csproj">
       <Project>{0426f0e8-f84c-46d2-aa56-759eba752269}</Project>
       <Name>AsycudaWorld421</Name>

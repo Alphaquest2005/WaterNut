@@ -342,16 +342,28 @@ namespace WaterNut.DataSpace
 
         private List<CSVDataSummary> GetCSVDataSummayList(string[] lines, Dictionary<string, int> mapping)
         {
-            var eslst = new List<CSVDataSummary>();
-            for (var i = 1; i < lines.Count(); i++)
+            int i = 0;
+            try
             {
-                var d = GetCSVDataFromLine(lines[i], mapping);
-                if (d != null)
+                var eslst = new List<CSVDataSummary>();
+
+                for (i = 1; i < lines.Count(); i++)
                 {
-                    eslst.Add(d);
+
+                    var d = GetCSVDataFromLine(lines[i], mapping);
+                    if (d != null)
+                    {
+                        eslst.Add(d);
+                    }
                 }
+                return eslst;
             }
-            return eslst;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
 

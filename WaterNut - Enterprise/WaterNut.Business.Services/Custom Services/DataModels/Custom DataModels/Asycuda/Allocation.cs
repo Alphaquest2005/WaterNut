@@ -78,20 +78,7 @@ namespace WaterNut.DataSpace
         {
             try
             {
-                StatusModel.Timer("Clear All Existing Allocations");
-
-                using (var ctx = new AllocationDSContext())
-                {
-                    ctx.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
-                        "delete from AsycudaSalesAllocations" +
-                        "\r\n\r\n" +
-                        "update xcuda_Item" + "\r\n" +
-                        "set DFQtyAllocated = 0, DPQtyAllocated = 0\r\n\r\n\r\n" +
-                        "update EntryDataDetails\r\n" + "set QtyAllocated = 0\r\n\r\n" +
-                        "update xcuda_PreviousItem\r\nset QtyAllocated = 0\r\n\r\n" +
-                        "update SubItems \r\nset QtyAllocated = 0");
-                }
-
+                
                     StatusModel.Timer("Allocating Sales");
                
                 if (itemDescriptionContainsAsycudaAttribute == true)
@@ -165,7 +152,7 @@ namespace WaterNut.DataSpace
             var t = 0;
             var exceptions = new ConcurrentQueue<Exception>();
             Parallel.ForEach(itemSets.Values
-                                     //.Where(x => x.Key.Contains("SEAH-2033/QT"))
+                                    // .Where(x => x.Key.Contains("139761"))
                                     //.Where(x => "".Contains(x.Key))
                                      //.Where(x => "FAA/SCPI18X112".Contains(x.ItemNumber))//SND/IVF1010MPSF,BRG/NAVICOTE-GL,
                                      , new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 1 }, itm => //.Where(x => x.ItemNumber == "AT18547")
@@ -175,9 +162,9 @@ namespace WaterNut.DataSpace
                 try
             {
                     StatusModel.StatusUpdate();
-                    AllocateSalestoAsycudaByKey(itm.SalesList,
+                    AllocateSalestoAsycudaByKey(itm.SalesList.OrderBy(x => x.Sales.EntryDataDate).ToList(),
                         //.SalesList.Where(x => x.DoNotAllocate != true).ToList()
-                        itm.EntriesList).Wait();
+                        itm.EntriesList.OrderBy(x => x.AsycudaDocument.AssessmentDate).ToList()).Wait();
                 }
                 catch (Exception ex)
                 {

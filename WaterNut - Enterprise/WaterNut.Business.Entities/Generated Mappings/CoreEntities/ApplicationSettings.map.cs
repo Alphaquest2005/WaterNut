@@ -42,8 +42,9 @@
               this.Property(t => t.OrderEntriesBy).HasColumnName("OrderEntriesBy").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.OpeningStockDate).HasColumnName("OpeningStockDate");
               this.Property(t => t.AllowWeightEqualQuantity).HasColumnName("AllowWeightEqualQuantity").IsUnicode(false).HasMaxLength(50);
-             // Tracking Properties
-    			this.Ignore(t => t.TrackingState);
+              this.Property(t => t.DeclarantCode).HasColumnName("DeclarantCode").IsUnicode(false);
+            // Tracking Properties
+            this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);
     
     

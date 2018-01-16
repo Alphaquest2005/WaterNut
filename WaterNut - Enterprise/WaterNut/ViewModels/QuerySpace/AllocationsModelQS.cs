@@ -13,6 +13,7 @@ using PreviousDocumentQS.Client.Entities;
 using SimpleMvvmToolkit;
 using WaterNut.QuerySpace.PreviousDocumentQS.ViewModels;
 using AsycudaDocumentItem = CoreEntities.Client.Entities.AsycudaDocumentItem;
+using System.Data.Entity;
 
 namespace WaterNut.QuerySpace.AllocationQS.ViewModels
 {
@@ -616,7 +617,27 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
         public async Task AllocateSales()
         {
             StatusModel.Timer("Allocating Sales");
-           await AsycudaSalesAllocationsExRepository.Instance.AllocateSales(
+
+            var res = MessageBox.Show("Clear Allocations?", "Delete Existing Sales Allocations", MessageBoxButton.YesNo);
+            if (res == MessageBoxResult.Yes)
+            {
+                StatusModel.Timer("Clear All Existing Allocations");
+
+                using (var ctx = new AllocationDS.Business.Entities.AllocationDSContext())
+                {
+                    ctx.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                        "delete from AsycudaSalesAllocations" +
+                        "\r\n\r\n" +
+                        "update xcuda_Item" + "\r\n" +
+                        "set DFQtyAllocated = 0, DPQtyAllocated = 0\r\n\r\n\r\n" +
+                        "update EntryDataDetails\r\n" + "set QtyAllocated = 0\r\n\r\n" +
+                        "update xcuda_PreviousItem\r\nset QtyAllocated = 0\r\n\r\n" +
+                        "update SubItems \r\nset QtyAllocated = 0");
+                }
+            }
+            
+
+            await AsycudaSalesAllocationsExRepository.Instance.AllocateSales(
                 CoreEntities.ViewModels.BaseViewModel.Instance.CurrentApplicationSettings
                     .ItemDescriptionContainsAsycudaAttribute.GetValueOrDefault()).ConfigureAwait(false);
 

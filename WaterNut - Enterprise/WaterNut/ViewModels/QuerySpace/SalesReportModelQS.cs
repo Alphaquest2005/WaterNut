@@ -175,12 +175,12 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
             }
         }
 
-        internal async Task ExportDocSetSalesReport(string folder)
+        internal async Task ExportDocSetSalesReport(AsycudaDocumentSetEx docSet, string folder)
         {
             var doclst =
                 await
                     SalesDataRepository.Instance.GetSalesDocuments(
-                        CoreEntities.ViewModels.BaseViewModel.Instance.CurrentAsycudaDocumentSetEx.AsycudaDocumentSetId)
+                        docSet.AsycudaDocumentSetId)
                         .ConfigureAwait(false);
             StatusModel.StartStatusUpdate("Exporting Files", doclst.Count());
 
@@ -221,6 +221,46 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
                     CancellationToken.None, TaskCreationOptions.None, sta).ConfigureAwait(false);
             }
             if (exceptions.Count > 0) throw new AggregateException(exceptions);
+        }
+
+        public async Task Send2Excel(string folder, AsycudaDocument doc)
+        {
+            using (var sta = new StaTaskScheduler(numberOfThreads: 1))
+            {
+
+                await Task.Factory.StartNew(() =>
+                    {
+                        var s = new ExportToExcel<SaleReportLine, List<SaleReportLine>>();
+                        s.StartUp();
+                       
+                            try
+                            {
+                                folder = Path.GetDirectoryName(folder);
+                                var data = GetDocumentSalesReport(doc.ASYCUDA_Id).Result;
+                                if (data != null)
+                                {
+                                    
+                                    string path = Path.Combine(folder,
+                                        !string.IsNullOrEmpty(doc.CNumber) ? doc.CNumber : doc.ReferenceNumber + ".xls");
+                                    
+                                    s.dataToPrint = data.ToList();
+                                    s.SaveReport(path);
+                                }
+                                else
+                                {
+                                    File.Create(Path.Combine(folder, doc.CNumber ?? doc.ReferenceNumber + ".xls"));
+                                }
+                                StatusModel.StatusUpdate();
+                            }
+                            catch (Exception ex)
+                            {
+                            throw ex;
+                            }
+                        
+                        s.ShutDown();
+                    },
+                    CancellationToken.None, TaskCreationOptions.None, sta).ConfigureAwait(false);
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<#@ template language="C#" debug="false" hostspecific="true"#>
 <#@ output extension=".cs"#>
 <#@ include file="T4Toolbox.tt" #>
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\DbContextMappings.tt" #>
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\DbContextMappings.tt" #>
 <#
 	
     string[] strs = new string[] {  "AllocationDS","AllocationQS","CounterPointQS","CoreEntities", "EntryDataQS"

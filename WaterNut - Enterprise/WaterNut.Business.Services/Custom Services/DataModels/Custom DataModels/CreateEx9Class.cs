@@ -341,7 +341,7 @@ namespace WaterNut.DataSpace
 
                 // {"pExpiryDate", "(DbFunctions.AddDays(PreviousDocumentItem.AsycudaDocument.RegistrationDate.GetValueOrDefault(),730))"},
                 {"Invalid", "EntryDataDetails.InventoryItem.TariffCodes.Invalid"},
-                {"xBond_Item_Id == 0", "PreviousDocumentItem != null"}//xBondAllocations != null  && xBondAllocations.Any() == false
+                {"xBond_Item_Id == 0", "(xEntryItem_Id == null || xEntryItem_Id == 0)"}//xBondAllocations != null  && xBondAllocations.Any() == false
 
             };
             var exp = map.Aggregate(exp1, (current, m) => current.Replace(m.Key, m.Value));
@@ -374,6 +374,7 @@ namespace WaterNut.DataSpace
                     res = pres.Where(exp)
                         .Where(
                             x =>
+                                x.xEntryItem_Id == null &&
                                 x.PreviousDocumentItem.xcuda_Tarification.xcuda_Supplementary_unit.Any() &&
                                 x.PreviousDocumentItem.xcuda_Tarification.xcuda_Supplementary_unit.FirstOrDefault()
                                     .Suppplementary_unit_quantity != 0)

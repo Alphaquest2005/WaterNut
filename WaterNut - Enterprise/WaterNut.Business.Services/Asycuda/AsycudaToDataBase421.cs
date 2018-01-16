@@ -644,7 +644,7 @@ namespace WaterNut.DataSpace.Asycuda
         {
             using (var ctx = new InventoryDSContext())
             {
-                var iv =ctx.InventoryItems.FirstOrDefault(x => x.ItemNumber == ai.Tarification.HScode.Precision_4.Text.FirstOrDefault());
+                var iv = ctx.InventoryItems.FirstOrDefault(x => x.ItemNumber == ai.Tarification.HScode.Precision_4.Text.FirstOrDefault());
                 ////    (await DataSpace.InventoryDS.ViewModels.BaseDataModel.Instance.SearchInventoryItem(new List<string>()
                 ////{
                 ////    string.Format("ItemNumber == \"{0}\"",ai.Tarification.HScode.Precision_4.Text.FirstOrDefault())
@@ -950,6 +950,19 @@ namespace WaterNut.DataSpace.Asycuda
                     su.Suppplementary_unit_name = au.Suppplementary_unit_name.Text[0];
 
                 if (i == 0) su.IsFirstRow = true;
+
+                if(i > 1)
+                {
+                    var tc =(InventoryDS.DataModels.BaseDataModel.Instance.SearchTariffCode(new List<string>()
+                            {
+                                string.Format("TariffCodeName == \"{0}\"", ai.Tarification.HScode.Commodity_code)
+                            }).Result).FirstOrDefault();
+                    var supUnit = new TariffSupUnitLkp() {
+                        SuppUnitCode2 = au.Suppplementary_unit_name.Text[0],
+                        SuppQty = 
+                    };
+                    tc.TariffCategory.TariffSupUnitLkps.Add( );
+                }
 
             }
         }

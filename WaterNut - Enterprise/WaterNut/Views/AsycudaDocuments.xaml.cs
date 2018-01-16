@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SimpleMvvmToolkit;
+using WaterNut.QuerySpace.AllocationQS.ViewModels;
 using WaterNut.QuerySpace.CoreEntities;
 using WaterNut.QuerySpace.CoreEntities.ViewModels;
 
@@ -41,6 +42,7 @@ namespace WaterNut.Views
         private async void ExportDocument(object sender, MouseButtonEventArgs e)
         {
             await AsycudaDocumentSetsModel.Instance.ExportDocuments().ConfigureAwait(false);
+            
         }
 
 	    private async void ImportDocument(object sender, MouseButtonEventArgs e)

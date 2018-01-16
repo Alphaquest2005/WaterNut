@@ -469,12 +469,28 @@ namespace CoreEntities.Business.Entities
         }
         string _allowweightequalquantity;
 
- //       [DataMember]
- //       public TrackingState TrackingState { get; set; }
- //       [DataMember]
- //       public ICollection<string> ModifiedProperties { get; set; }
-//        [DataMember]//JsonProperty,
- //       private Guid EntityIdentifier { get; set; }
+        [DataMember]
+        public string DeclarantCode
+        {
+            get
+            {
+                return _declarantCode;
+            }
+            set
+            {
+                _declarantCode = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _declarantCode;
+
+        //       [DataMember]
+        //       public TrackingState TrackingState { get; set; }
+        //       [DataMember]
+        //       public ICollection<string> ModifiedProperties { get; set; }
+        //        [DataMember]//JsonProperty,
+        //       private Guid EntityIdentifier { get; set; }
     }
 }
 

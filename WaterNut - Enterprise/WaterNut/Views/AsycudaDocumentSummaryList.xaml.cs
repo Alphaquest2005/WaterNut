@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Core.Common.UI.DataVirtualization;
 using CoreEntities.Client.Entities;
+using WaterNut.QuerySpace.AllocationQS.ViewModels;
 using WaterNut.QuerySpace.CoreEntities.ViewModels;
 
 
@@ -73,8 +74,9 @@ namespace WaterNut.Views
 			var asycudaDocumentSet = (frameworkElement.DataContext) as VirtualListItem<AsycudaDocumentSetEx>;
 			if (asycudaDocumentSet != null)
 				await im.ExportDocSet(asycudaDocumentSet.Data as AsycudaDocumentSetEx).ConfigureAwait(false);
-			//  BaseViewModel.Instance.CurrentAsycudaDocumentSet.ExportDocSet();
-		}
+		    
+            //  BaseViewModel.Instance.CurrentAsycudaDocumentSet.ExportDocSet();
+        }
 
 		private void Expander_Collapsed(object sender, RoutedEventArgs e)
 		{

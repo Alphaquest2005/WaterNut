@@ -80,7 +80,7 @@ namespace CounterPointQS.Business.Services
              }
             catch (Exception updateEx)
             {
-                    System.Diagnostics.Debugger.Break();
+               //     System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointPOs>();
                 //var fault = new ValidationFault
@@ -110,7 +110,7 @@ namespace CounterPointQS.Business.Services
              }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+                //System.Diagnostics.Debugger.Break();
                 return new CounterPointPOs();
                 //throw new FaultException(updateEx.Message);
                 //var fault = new ValidationFault
@@ -154,7 +154,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                    System.Diagnostics.Debugger.Break();
+                //    System.Diagnostics.Debugger.Break();
                 return new List<CounterPointPOs>();
                 //throw new FaultException(updateEx.Message);
                 //var fault = new ValidationFault
@@ -196,7 +196,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                    System.Diagnostics.Debugger.Break();
+                //    System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointPOs>();
                 //throw new FaultException(updateEx.Message);
@@ -240,7 +240,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                    System.Diagnostics.Debugger.Break();
+                //    System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointPOs>();
                 //throw new FaultException(updateEx.Message);
@@ -317,7 +317,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+               // System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointPOs>();
                 var fault = new ValidationFault
@@ -391,7 +391,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+                //System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointPOs>();
                 var fault = new ValidationFault
@@ -571,7 +571,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+               // System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return -1;
                 var fault = new ValidationFault
@@ -611,7 +611,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+               // System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return -1;
                 var fault = new ValidationFault
@@ -693,7 +693,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+                //System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return 0;
                 var fault = new ValidationFault
@@ -799,7 +799,7 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                System.Diagnostics.Debugger.Break();
+                //System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
                 return new List<CounterPointPOs>();
                 var fault = new ValidationFault

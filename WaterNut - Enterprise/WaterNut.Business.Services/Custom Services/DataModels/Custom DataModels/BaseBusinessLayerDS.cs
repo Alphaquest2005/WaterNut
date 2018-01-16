@@ -20,7 +20,10 @@ using Omu.ValueInjecter;
 using TrackableEntities;
 using TrackableEntities.EF6;
 using System.Data.Entity;
+using System.Threading;
+using System.Threading.Tasks.Schedulers;
 using Asycuda421;
+using Core.Common.Converters;
 using DocumentItemDS.Business.Entities;
 using Core.Common.UI;
 using InventoryDS.Business.Entities;
@@ -139,7 +142,7 @@ namespace WaterNut.DataSpace
                 if (Environment.MachineName.ToLower() == "alphaquest-PC".ToLower())return true;
 
                 if (Environment.ProcessorCount == 4 && Environment.MachineName.ToLower() == "Alister-PC".ToLower()
-                    && ctx.Database.Connection.ConnectionString.ToLower().Contains(@"Alister-PC\SQLEXPRESS2012;Initial Catalog=IWWDB-Enterprise".ToLower()))
+                    && ctx.Database.Connection.ConnectionString.ToLower().Contains(@"Alister-PC\SQLEXPRESS2017;Initial Catalog=IWWDB-Enterprise".ToLower()))
                 {
                     return true;
                 }
@@ -1259,12 +1262,106 @@ namespace WaterNut.DataSpace
             if (currentDocument != null)
             {
                 DocToXML(currentDocument, f);
+               // ExportDocumentToExcel(currentDocument, f);
             }
             else
             {
                 throw new ApplicationException("Please Select Asycuda Document to Export");
             }
         }
+
+        //private void ExportDocumentToExcel(xcuda_ASYCUDA doc, string folder)
+        //{
+        //    using (var sta = new StaTaskScheduler(numberOfThreads: 1))
+        //    {
+        //         Task.Factory.StartNew(() =>
+        //            {
+        //                var s = new ExportToExcel<SaleReportLine, List<SaleReportLine>>();
+        //                s.StartUp();
+                      
+        //                    try
+        //                    {
+        //                        var data =GetDocumentSalesReport(doc.ASYCUDA_Id);
+        //                        if (data != null)
+        //                        {
+        //                            string path = Path.Combine(folder,
+        //                                !string.IsNullOrEmpty(doc.CNumber) ? doc.CNumber : doc.ReferenceNumber + ".xls");
+        //                            s.dataToPrint = data.ToList();
+        //                            s.SaveReport(path);
+        //                        }
+        //                        else
+        //                        {
+        //                            File.Create(Path.Combine(folder, doc.CNumber ?? doc.ReferenceNumber + ".xls"));
+        //                        }
+        //                        StatusModel.StatusUpdate();
+        //                    }
+        //                    catch (Exception ex)
+        //                    {
+        //                        throw ex;
+        //                    }
+                       
+        //                s.ShutDown();
+        //            },
+        //            CancellationToken.None, TaskCreationOptions.None, sta);
+        //    }
+        //}
+
+        //public List<SaleReportLine> GetDocumentSalesReport(int ASYCUDA_Id)
+        //{
+        //    try
+        //    {
+
+
+        //        using (var ctx = new AsycudaSalesAllocationsExService())
+        //        {
+        //            var alst =
+        //            ctx.GetAsycudaSalesAllocationsExsByExpression(string.Format("xASYCUDA_Id == {0} " +
+        //                                                                               "&& EntryDataDetailsId != null " +
+        //                                                                               "&& PreviousItem_Id != null" +
+        //                                                                               "&& pRegistrationDate != null",
+        //                    ASYCUDA_Id)).Result.ToList();
+        //            if (alst.Count <= 0) return null;
+        //            var d =
+        //                alst.Where(x => x.xLineNumber != null)
+        //                    .OrderBy(s => s.xLineNumber)
+        //                    .ThenBy(s => s.InvoiceNo)
+        //                    .Select(s => new SaleReportLine
+        //                    {
+        //                        Line = Convert.ToInt32(s.xLineNumber),
+        //                        Date = Convert.ToDateTime(s.InvoiceDate),
+        //                        InvoiceNo = s.InvoiceNo,
+        //                        CustomerName = s.CustomerName,
+        //                        ItemNumber = s.ItemNumber,
+        //                        ItemDescription = s.ItemDescription,
+        //                        TariffCode = s.TariffCode,
+        //                        Quantity = Convert.ToDouble(s.QtyAllocated),
+        //                        Price = Convert.ToDouble(s.Cost),
+        //                        SalesType = s.DutyFreePaid,
+        //                        GrossSales = Convert.ToDouble(s.TotalValue),
+        //                        PreviousCNumber = s.pCNumber,
+        //                        PreviousLineNumber = s.pLineNumber.ToString(),
+        //                        PreviousRegDate = Convert.ToDateTime(s.pRegistrationDate).ToShortDateString(),
+        //                        CIFValue =
+        //                            (Convert.ToDouble(s.Total_CIF_itm) / Convert.ToDouble(s.pQuantity)) *
+        //                            Convert.ToDouble(s.QtyAllocated),
+        //                        DutyLiablity =
+        //                            (Convert.ToDouble(s.DutyLiability) / Convert.ToDouble(s.pQuantity)) *
+        //                            Convert.ToDouble(s.QtyAllocated)
+        //                    }).Distinct();
+
+
+
+        //            return new List<SaleReportLine>(d);
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    return null;
+        //}
+
 
         internal  void DocToXML(xcuda_ASYCUDA doc, string f)
         {
@@ -1293,6 +1390,7 @@ namespace WaterNut.DataSpace
                 {
                     try
                     {
+                        
 
                         if (ASYCUDA.CanLoadFromFile(f))
                         {
@@ -1326,6 +1424,16 @@ namespace WaterNut.DataSpace
             {
 
                 var a = Asycuda421.ASYCUDA.LoadFromFile(f);
+                using (var ctx = new CoreEntitiesContext())
+                {
+                    var declarantCode = ctx.ApplicationSettings.First().DeclarantCode;
+                    var fileCode = a.Declarant.Declarant_code;
+                    if (fileCode != declarantCode)
+                    {
+                        throw new ApplicationException($"Could not import file - '{f} - The file is for another warehouse{fileCode}. While this Warehouse is {declarantCode}");
+                    }
+                }
+                    
 
                 if (a != null)
                 {
@@ -1348,7 +1456,7 @@ namespace WaterNut.DataSpace
                     exceptions.Enqueue(
                         new ApplicationException(
                             string.Format("Could not import file - '{0}. Error:{1} Stacktrace:{2}", f,
-                                Ex.InnerException.Message, Ex.InnerException.StackTrace)));
+                                (Ex.InnerException?? Ex).Message, (Ex.InnerException ?? Ex).StackTrace)));
             }
         }
 
@@ -1545,6 +1653,7 @@ namespace WaterNut.DataSpace
                                 {
                                      Instance.DocToXML(doc, Path.Combine(directoryName, doc.ReferenceNumber + ".xml"));
                                                                     StatusModel.StatusUpdate();
+                                   // ExportDocumentToExcel(doc, directoryName);
                                 }
                                 catch (Exception)
                                 {
@@ -1921,6 +2030,26 @@ namespace WaterNut.DataSpace
 
 
      
+    }
+
+    public class SaleReportLine
+    {
+        public int Line { get; set; }
+        public DateTime Date { get; set; }
+        public string InvoiceNo { get; set; }
+        public string CustomerName { get; set; }
+        public string ItemNumber { get; set; }
+        public string ItemDescription { get; set; }
+        public string TariffCode { get; set; }
+        public double Quantity { get; set; }
+        public double Price { get; set; }
+        public string SalesType { get; set; }
+        public double GrossSales { get; set; }
+        public string PreviousCNumber { get; set; }
+        public string PreviousLineNumber { get; set; }
+        public string PreviousRegDate { get; set; }
+        public double CIFValue { get; set; }
+        public double DutyLiablity { get; set; }
     }
 
     public class EntryDataDetailSummary
