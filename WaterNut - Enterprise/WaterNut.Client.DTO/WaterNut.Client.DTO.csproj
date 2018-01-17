@@ -64,8 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="Custom DTO\AsycudaDocument.cs" />
-    <Compile Include="Custom DTO\AsycudaDocumentSetEx.cs" />
     <Compile Include="Generated Client Entities\AllocationQS\AsycudaSalesAllocationsEx.cs" />
     <Compile Include="Generated Client Entities\CoreEntities\ApplicationSettings.cs" />
     <Compile Include="Generated Client Entities\CoreEntities\AsycudaDocument.cs" />

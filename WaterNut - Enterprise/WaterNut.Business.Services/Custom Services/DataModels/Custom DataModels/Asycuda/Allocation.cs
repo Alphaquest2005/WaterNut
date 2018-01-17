@@ -817,7 +817,7 @@ namespace WaterNut.DataSpace
                     }).ConfigureAwait(false);//"EX"
 
 
-                asycudaEntries = from s in lst.Where(x => x.ItemDescription != null)
+                asycudaEntries = from s in lst.Where(x => x.xcuda_Tarification.xcuda_HScode.Precision_4 != null)
                      //.Where(x => x.ItemDescription == "Hardener-Resin 'A' Slow .44Pt")
                     //       .Where(x => x.AsycudaDocument.CNumber != null).AsEnumerable()
                     group s by s.ItemDescription.Trim()

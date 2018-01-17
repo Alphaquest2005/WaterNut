@@ -1156,7 +1156,7 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
                 {
                     InvoiceDate = x.InvoiceDate,
                     InvoiceNo = x.InvoiceNo,
-                    SANumber = x.SANumber,
+                    SANumber = Convert.ToInt32(x.SANumber),
                     ItemNumber = x.ItemNumber,
                     ItemDescription = x.ItemDescription,
                     DutyFreePaid = x.DutyFreePaid,

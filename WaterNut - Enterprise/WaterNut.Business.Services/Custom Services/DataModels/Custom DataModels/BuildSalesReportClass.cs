@@ -151,7 +151,7 @@ namespace WaterNut.DataSpace
 							{
 								Pi = p.xcuda_PreviousItem,
 								CNumber = p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.CNumber,
-								pAssessmentDate = p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.AssessmentDate,
+								pAssessmentDate = Convert.ToDateTime(p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.AssessmentDate),
 								pRegDate =
 									(p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.RegistrationDate.HasValue
 										? p.xcuda_Item.AsycudaDocument.RegistrationDate.Value

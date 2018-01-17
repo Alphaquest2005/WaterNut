@@ -19,7 +19,7 @@ namespace OversShortQS.Client.DTO
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class OverShortDetailsEX : OverShortDetail, OverShortDetailsEX
+    public partial class OverShortDetailsEX : OverShortDetail
     {
         [DataMember]
         public Nullable<double> ReceivedValue

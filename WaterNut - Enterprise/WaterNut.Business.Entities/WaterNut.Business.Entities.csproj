@@ -81,8 +81,6 @@
     <Compile Include="Custom Entities\AllocationsDS\xcuda_Item.cs" />
     <Compile Include="Custom Entities\AllocationsDS\xcuda_PreviousItem.cs" />
     <Compile Include="code backup\AsycudaDocumentSetEx.cs" />
-    <Compile Include="Custom Entities\CoreEntities\AsycudaDocument.cs" />
-    <Compile Include="Custom Entities\CoreEntities\AsycudaDocumentSetEx.cs" />
     <Compile Include="Custom Entities\DocumentCT.cs" />
     <Compile Include="Custom Entities\DocumentDS\AsycudaDocumentSetDS.cs" />
     <Compile Include="Custom Entities\DocumentDS\Customs_Procedure.cs" />
@@ -1076,18 +1074,13 @@
     <Compile Include="Generated Interface Implementation\AllocationDS\IInventoryItem\InventoryItems.cs" />
     <Compile Include="Generated Interface Implementation\AllocationDS\ITariffSupUnitLkp\TariffSupUnitLkps.cs" />
     <Compile Include="Generated Interface Implementation\AllocationDS\ITariffUnit\InventoryItems.cs" />
-    <Compile Include="Generated Interface Implementation\CoreEntities\IDocumentItem\AsycudaDocumentItem.cs" />
-    <Compile Include="Generated Interface Implementation\CoreEntities\IDocument\AsycudaDocument.cs" />
-    <Compile Include="Generated Interface Implementation\CoreEntities\IWeightItem\AsycudaDocumentItem.cs" />
     <Compile Include="Generated Interface Implementation\DocumentDS\IDocument\xcuda_ASYCUDA.cs" />
     <Compile Include="Generated Interface Implementation\DocumentItemDS\IDocumentItem\xcuda_Item.cs" />
     <Compile Include="Generated Interface Implementation\DocumentItemDS\IWeightItem\xcuda_Item.cs" />
     <Compile Include="Generated Interface Implementation\EntryDataDS\IEntryDataDetail\EntryDataDetails.cs" />
-    <Compile Include="Generated Interface Implementation\EntryDataQS\IEntryDataDetail\EntryDataDetailsEx.cs" />
     <Compile Include="Generated Interface Implementation\InventoryDS\IInventoryItem\InventoryItem.cs" />
     <Compile Include="Generated Interface Implementation\InventoryDS\ITariffSupUnitLkp\TariffSupUnitLkp.cs" />
     <Compile Include="Generated Interface Implementation\InventoryDS\ITariffUnit\InventoryItem.cs" />
-    <Compile Include="Generated Interface Implementation\OversShortQS\IInventoryItem\InventoryItem.cs" />
     <Compile Include="Generated Mappings\AllocationDS\AsycudaDocument.map.cs" />
     <Compile Include="Generated Mappings\AllocationDS\AsycudaLkpLst.map.cs" />
     <Compile Include="Generated Mappings\AllocationDS\AsycudaSalesAllocations.map.cs" />
@@ -1298,7 +1291,9 @@
       <Name>InterfacesModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Custom Entities\CoreEntities\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

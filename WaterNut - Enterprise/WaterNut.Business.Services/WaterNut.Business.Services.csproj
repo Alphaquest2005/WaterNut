@@ -776,10 +776,6 @@
       <Project>{978b7943-bd11-41eb-91c9-59a09c6f0ecc}</Project>
       <Name>WaterNut.Business.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WaterNut.Client.Entities\WaterNut.Client.Entities.csproj">
-      <Project>{367497E0-90A4-47BF-B740-717D8769710C}</Project>
-      <Name>WaterNut.Client.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WaterNut.Data\WaterNut.Data.csproj">
       <Project>{92eb0cbf-4018-427b-aa8b-13b088650db8}</Project>
       <Name>WaterNut.Data</Name>

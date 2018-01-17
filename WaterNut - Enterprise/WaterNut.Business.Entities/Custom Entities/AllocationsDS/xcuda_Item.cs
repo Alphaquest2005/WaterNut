@@ -11,6 +11,26 @@ namespace AllocationDS.Business.Entities
     {
         [IgnoreDataMember]
         [NotMapped]
+        public String ItemDescription
+        {
+            get
+            {
+                try
+                {
+                    return this.xcuda_Goods_description.Commercial_Description;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+            }
+            set { this.xcuda_Goods_description.Commercial_Description = value; }
+        }
+
+        [IgnoreDataMember]
+        [NotMapped]
         public double QtyAllocated
         {
             get
