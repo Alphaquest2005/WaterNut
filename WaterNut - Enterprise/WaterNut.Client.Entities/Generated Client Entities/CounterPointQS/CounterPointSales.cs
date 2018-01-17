@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CounterPointQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CounterPointQS.Client.Entities
@@ -53,7 +53,7 @@ public string InvoiceNo
 			{
 			    if (value == this.counterpointsales.InvoiceNo) return;
 				this.counterpointsales.InvoiceNo = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("InvoiceNo");
 			}
 		}
@@ -68,7 +68,7 @@ public Nullable<System.DateTime> Date
 			{
 			    if (value == this.counterpointsales.Date) return;
 				this.counterpointsales.Date = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Date");
 			}
 		}
@@ -83,7 +83,7 @@ public decimal TAX_AMT
 			{
 			    if (value == this.counterpointsales.TAX_AMT) return;
 				this.counterpointsales.TAX_AMT = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TAX_AMT");
 			}
 		}
@@ -100,7 +100,7 @@ public string CustomerName
 			{
 			    if (value == this.counterpointsales.CustomerName) return;
 				this.counterpointsales.CustomerName = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("CustomerName");
 			}
 		}
@@ -115,7 +115,7 @@ public Nullable<int> LineNumber
 			{
 			    if (value == this.counterpointsales.LineNumber) return;
 				this.counterpointsales.LineNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("LineNumber");
 			}
 		}
@@ -130,7 +130,7 @@ public Nullable<bool> Downloaded
 			{
 			    if (value == this.counterpointsales.Downloaded) return;
 				this.counterpointsales.Downloaded = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Downloaded");
 			}
 		}
@@ -150,11 +150,11 @@ public Nullable<bool> Downloaded
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

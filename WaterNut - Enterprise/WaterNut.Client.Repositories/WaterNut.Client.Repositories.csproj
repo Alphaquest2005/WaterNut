@@ -47,10 +47,6 @@
     <Reference Include="Core.Common.Contracts">
       <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Core.Common.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d595048b9b6b744, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Core.Common - Copy\Core.Common.Data\bin\Debug\Core.Common.Data.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -92,7 +88,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseRepository.cs" />
     <Compile Include="Custom Repository\CoreEntities\AsycudaDocumentItemRepository.cs" />
     <Compile Include="Custom Repository\CoreEntities\SystemRepository.cs" />
     <Compile Include="Custom Repository\CoreEntities\AsycudaDocumentSetExRepository.cs" />
@@ -170,6 +165,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
+      <Project>{d6846386-8741-4619-bae3-b0cfedbf2597}</Project>
+      <Name>Core.Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
       <Project>{11235D24-1165-4DC4-B91B-0426EA669451}</Project>
       <Name>InterfacesModel</Name>

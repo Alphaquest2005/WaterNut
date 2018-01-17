@@ -13,7 +13,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using TrackableEntities.Common;
+
 using Core.Common.Client.Services;
 using Core.Common.Client.Repositories;
 using PreviousDocumentQS.Client.Services;
@@ -21,7 +21,6 @@ using PreviousDocumentQS.Client.Entities;
 using PreviousDocumentQS.Client.DTO;
 using Core.Common.Business.Services;
 using System.Diagnostics;
-using TrackableEntities.Client;
 
 
 using System.Threading.Tasks;
@@ -31,6 +30,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System;
 using System.ServiceModel;
+using TrackableEntities.Common;
 
 using PreviousDocument = PreviousDocumentQS.Client.Entities.PreviousDocument;
 

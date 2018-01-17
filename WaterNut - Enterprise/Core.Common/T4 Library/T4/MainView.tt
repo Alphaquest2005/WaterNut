@@ -2,13 +2,13 @@
 <#@ output extension=".cs"#>
 
 <#@ include file="T4Toolbox.tt" #>
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Views\QuerySpace\MainView.tt" #>	
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\Views\QuerySpace\MainViewCS.tt" #>	
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Views\QuerySpace\MainViewModel.tt" #>	
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\Views\QuerySpace\MainWindow.tt" #>	
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\Views\QuerySpace\MainWindowCS.tt" #>	
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\Views\QuerySpace\MainWindowViewModel.tt" #>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Views\QuerySpace\MainView.tt" #>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Views\QuerySpace\MainViewCS.tt" #>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Views\QuerySpace\MainViewModel.tt" #>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Views\QuerySpace\MainWindow.tt" #>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Views\QuerySpace\MainWindowCS.tt" #>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Views\QuerySpace\MainWindowViewModel.tt" #>	
 
 	
 

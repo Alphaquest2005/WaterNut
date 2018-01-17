@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_WarehouseMap : EntityTypeConfiguration<xcuda_Warehouse>
     {
@@ -16,7 +17,7 @@
               this.Property(t => t.Delay).HasColumnName("Delay").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id");
               this.Property(t => t.Warehouse_Id).HasColumnName("Warehouse_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
-              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t => t.xcuda_Warehouse).HasForeignKey(d => d.ASYCUDA_Id);
+              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t =>(ICollection<xcuda_Warehouse>) t.xcuda_Warehouse).HasForeignKey(d => d.ASYCUDA_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

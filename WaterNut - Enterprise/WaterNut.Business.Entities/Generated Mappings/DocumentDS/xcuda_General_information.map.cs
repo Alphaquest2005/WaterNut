@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_General_informationMap : EntityTypeConfiguration<xcuda_General_information>
     {
@@ -17,8 +18,8 @@
               this.Property(t => t.CAP).HasColumnName("CAP").IsUnicode(false);
               this.Property(t => t.Additional_information).HasColumnName("Additional_information").IsUnicode(false);
               this.Property(t => t.Comments_free_text).HasColumnName("Comments_free_text");
-              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => t.xcuda_General_information);
-              this.HasOptional(t => t.xcuda_Country).WithRequired(t => t.xcuda_General_information);
+              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => (xcuda_General_information)t.xcuda_General_information);
+              this.HasOptional(t => t.xcuda_Country).WithRequired(t => (xcuda_General_information)t.xcuda_General_information);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

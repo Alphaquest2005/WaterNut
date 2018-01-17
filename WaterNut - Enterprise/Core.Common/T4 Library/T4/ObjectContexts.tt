@@ -1,6 +1,6 @@
 ﻿
 <#@ include file="EF.Utility.CS.ttinclude"#>
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
 <#@ output extension=".cs"#>
 <#+ 
 public class ObjectContextTPL : CSharpTemplate
@@ -31,12 +31,12 @@ public class ObjectContextTPL : CSharpTemplate
         EdmItemCollection COREItemCollection = (EdmItemCollection)COREmetadataWorkspace.GetItemCollection(DataSpace.CSpace);
         EntityContainer COREcontainer = COREItemCollection.GetItems<EntityContainer>().FirstOrDefault();
 
-        string Namespace = container.Name + ".DataLayer.Entities"; //code.VsNamespaceSuggestion();
+        string Namespace = container.Name + ".Business.Entities"; //code.VsNamespaceSuggestion();
 #>            
 
 
 using System.Data.Entity;
-using CoreEntities.DataLayer.Entities;
+using CoreEntities.Business.Entities;
 using System.Data.Entity.Infrastructure;
 using <#= Namespace + ".Mapping"#>;
 using WaterNut.Data;

@@ -44,10 +44,9 @@ using Core.Common.Client.Repositories;
 using <#=container.Name #>.Client.Services;
 using <#=container.Name #>.Client.Entities;
 using <#=container.Name #>.Client.DTO;
-using Core.Common.DataLayer.Services;
+using Core.Common.Business.Services;
 using System.Diagnostics;
 
-using <#=projectName #>.Interfaces.Client;
 
 using System.Threading.Tasks;
 using System.Linq;
@@ -56,6 +55,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System;
 using System.ServiceModel;
+using TrackableEntities.Common;
 
 using <#=entity.Name#> = <#=container.Name #>.Client.Entities.<#=entity.Name#>;
 
@@ -112,7 +112,7 @@ namespace <#=container.Name #>.Client.Repositories
             {
                 using (var t = new <#=code.GetTypeName(entity)#>Client())
                     {
-					    IEnumerable<I<#=entity.Name#>> res = null;
+					    IEnumerable<DTO.<#=entity.Name#>> res = null;
                         if(exp == "All")
                         {                       
 						    res = await t.Get<#=eSet#>(includesLst).ConfigureAwait(continueOnCapturedContext: false);					
@@ -150,7 +150,7 @@ namespace <#=container.Name #>.Client.Repositories
             {
                 using (var t = new <#=code.GetTypeName(entity)#>Client())
                     {
-					    IEnumerable<I<#=entity.Name#>> res = null;
+					    IEnumerable<DTO.<#=entity.Name#>> res = null;
                        
                         res = await t.Get<#=eSet#>ByExpressionLst(expLst, includesLst).ConfigureAwait(continueOnCapturedContext: false);	                         
                       
@@ -184,7 +184,7 @@ namespace <#=container.Name #>.Client.Repositories
             {
                 using (var t = new <#=code.GetTypeName(entity)#>Client())
                     {
-					    IEnumerable<I<#=entity.Name#>> res = null;
+					    IEnumerable<DTO.<#=entity.Name#>> res = null;
                         if(exp == "All" && navExp.Count == 0)
                         {                       
 						    res = await t.Get<#=eSet#>(includesLst).ConfigureAwait(continueOnCapturedContext: false);					
@@ -363,7 +363,7 @@ namespace <#=container.Name #>.Client.Repositories
                 using (var t = new <#=entity.Name#>Client())
                 {
 
-                    IEnumerable<I<#=entity.Name#>> res = null;
+                    IEnumerable<DTO.<#=entity.Name#>> res = null;
                                          
 						    res = await t.LoadRangeNav(startIndex, count, exp, navExp, includeLst).ConfigureAwait(continueOnCapturedContext: false);
 						    overallCount = await t.CountNav(exp, navExp).ConfigureAwait(continueOnCapturedContext: false);

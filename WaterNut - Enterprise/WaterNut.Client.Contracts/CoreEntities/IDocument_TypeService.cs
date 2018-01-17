@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using CoreEntities.Client.DTO;
 
+
 namespace CoreEntities.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace CoreEntities.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<Document_Type> UpdateDocument_Type(DTO.Document_Type entity);
+        Task<Document_Type> UpdateDocument_Type(Document_Type entity);
 
         [OperationContract]
-        Task<Document_Type> CreateDocument_Type(DTO.Document_Type entity);
+        Task<Document_Type> CreateDocument_Type(Document_Type entity);
 
         [OperationContract]
         Task<bool> DeleteDocument_Type(string id);

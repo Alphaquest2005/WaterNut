@@ -10,10 +10,11 @@
             <PropertyRef Name="ItemNumber" />
           </Key>
           <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="60" />
           <Property Name="TariffCode" Type="varchar" MaxLength="8" />
           <Property Name="EntryTimeStamp" Type="datetime" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityContainer Name="WaterNutDBModelStoreContainer">
           <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
@@ -30,10 +31,11 @@
             <PropertyRef Name="ItemNumber" />
           </Key>
           <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="Category" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
           <Property Name="TariffCode" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
           <Property Name="EntryTimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="Quantity" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -44,6 +46,7 @@
           <EntitySetMapping Name="InventoryItems">
             <EntityTypeMapping TypeName="WaterNutDBModel.InventoryItems">
               <MappingFragment StoreEntitySet="InventoryItems">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Category" ColumnName="Category" />

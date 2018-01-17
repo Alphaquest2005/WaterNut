@@ -13,6 +13,7 @@ using EntryDataQS.Client.DTO;
 using EntryDataQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace EntryDataQS.Client.Services
     public partial class PackageTypeClient :  ClientService<IPackageTypeService>, IPackageTypeService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.PackageType>> GetPackageTypes(List<string> includesLst = null)
+        public async Task<IEnumerable<PackageType>> GetPackageTypes(List<string> includesLst = null)
         {
             return await Channel.GetPackageTypes(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.PackageType> GetPackageTypeByKey(string id, List<string> includesLst = null)
+        public async Task<PackageType> GetPackageTypeByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetPackageTypeByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PackageType>> GetPackageTypesByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<PackageType>> GetPackageTypesByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetPackageTypesByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PackageType>> GetPackageTypesByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<PackageType>> GetPackageTypesByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetPackageTypesByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PackageType>> GetPackageTypesByExpressionNav(string exp,
+		public async Task<IEnumerable<PackageType>> GetPackageTypesByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetPackageTypesByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace EntryDataQS.Client.Services
             return await Channel.GetPackageTypesByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.PackageType> UpdatePackageType(DTO.PackageType entity)
+        public async Task<PackageType> UpdatePackageType(PackageType entity)
         {
            return await Channel.UpdatePackageType(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.PackageType> CreatePackageType(DTO.PackageType entity)
+        public async Task<PackageType> CreatePackageType(PackageType entity)
         {
            return await Channel.CreatePackageType(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace EntryDataQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.PackageType>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<PackageType>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PackageType>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<PackageType>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace EntryDataQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_FinancialMap : EntityTypeConfiguration<xcuda_Financial>
     {
@@ -17,9 +18,9 @@
               this.Property(t => t.Deffered_payment_reference).HasColumnName("Deffered_payment_reference").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Mode_of_payment).HasColumnName("Mode_of_payment").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Financial_Code).HasColumnName("Financial_Code").IsUnicode(false).HasMaxLength(50);
-              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t => t.xcuda_Financial).HasForeignKey(d => d.ASYCUDA_Id);
-              this.HasMany(t => t.xcuda_Financial_Amounts).WithRequired(t => t.xcuda_Financial);
-              this.HasMany(t => t.xcuda_Financial_Guarantee).WithRequired(t => t.xcuda_Financial);
+              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t =>(ICollection<xcuda_Financial>) t.xcuda_Financial).HasForeignKey(d => d.ASYCUDA_Id);
+              this.HasMany(t => t.xcuda_Financial_Amounts).WithRequired(t => (xcuda_Financial)t.xcuda_Financial);
+              this.HasMany(t => t.xcuda_Financial_Guarantee).WithRequired(t => (xcuda_Financial)t.xcuda_Financial);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

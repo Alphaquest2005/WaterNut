@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using EntryDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace EntryDataQS.Client.Entities
@@ -53,7 +53,7 @@ public string EmptyFullCodeName
 			{
 			    if (value == this.emptyfullcode.EmptyFullCodeName) return;
 				this.emptyfullcode.EmptyFullCodeName = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EmptyFullCodeName");
 			}
 		}
@@ -70,7 +70,7 @@ public string EmptyFullDescription
 			{
 			    if (value == this.emptyfullcode.EmptyFullDescription) return;
 				this.emptyfullcode.EmptyFullDescription = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EmptyFullDescription");
 			}
 		}
@@ -85,7 +85,7 @@ public int EmptyFullCodeId
 			{
 			    if (value == this.emptyfullcode.EmptyFullCodeId) return;
 				this.emptyfullcode.EmptyFullCodeId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EmptyFullCodeId");
 			}
 		}
@@ -105,11 +105,11 @@ public int EmptyFullCodeId
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

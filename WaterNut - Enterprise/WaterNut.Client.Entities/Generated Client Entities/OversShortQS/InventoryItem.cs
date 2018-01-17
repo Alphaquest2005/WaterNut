@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using OversShortQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace OversShortQS.Client.Entities
@@ -56,7 +56,7 @@ public string ItemNumber
 			{
 			    if (value == this.inventoryitem.ItemNumber) return;
 				this.inventoryitem.ItemNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemNumber");
 			}
 		}
@@ -73,7 +73,7 @@ public string Description
 			{
 			    if (value == this.inventoryitem.Description) return;
 				this.inventoryitem.Description = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Description");
 			}
 		}
@@ -90,7 +90,7 @@ public string Category
 			{
 			    if (value == this.inventoryitem.Category) return;
 				this.inventoryitem.Category = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Category");
 			}
 		}
@@ -107,7 +107,7 @@ public string TariffCode
 			{
 			    if (value == this.inventoryitem.TariffCode) return;
 				this.inventoryitem.TariffCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCode");
 			}
 		}
@@ -122,8 +122,23 @@ public Nullable<System.DateTime> EntryTimeStamp
 			{
 			    if (value == this.inventoryitem.EntryTimeStamp) return;
 				this.inventoryitem.EntryTimeStamp = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryTimeStamp");
+			}
+		}
+     
+
+       
+       [NumberValidationAttribute]
+public Nullable<int> Quantity
+		{ 
+		    get { return this.inventoryitem.Quantity; }
+			set
+			{
+			    if (value == this.inventoryitem.Quantity) return;
+				this.inventoryitem.Quantity = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("Quantity");
 			}
 		}
      
@@ -151,7 +166,7 @@ public Nullable<System.DateTime> EntryTimeStamp
 				if (value != null)
 					this.inventoryitem.OverShortDetailsEXes = new ChangeTrackingCollection<DTO.OverShortDetailsEX>(value.Select(x => x.DTO).ToList());
                 _OverShortDetailsEXes = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_OverShortDetailsEXes != null)
 				_OverShortDetailsEXes.CollectionChanged += OverShortDetailsEXes_CollectionChanged;               
 				NotifyPropertyChanged("OverShortDetailsEXes");
@@ -168,7 +183,7 @@ public Nullable<System.DateTime> EntryTimeStamp
                         if (itm != null)
                         inventoryitem.OverShortDetailsEXes.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (OverShortDetailsEX itm in e.OldItems)
@@ -176,7 +191,7 @@ public Nullable<System.DateTime> EntryTimeStamp
                         if (itm != null)
                         inventoryitem.OverShortDetailsEXes.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -196,11 +211,11 @@ public Nullable<System.DateTime> EntryTimeStamp
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

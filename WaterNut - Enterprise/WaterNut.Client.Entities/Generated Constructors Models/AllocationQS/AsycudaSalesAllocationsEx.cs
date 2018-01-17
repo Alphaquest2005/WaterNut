@@ -7,6 +7,8 @@
 using AllocationQS.Client.DTO;
 using TrackableEntities.Client;
 
+
+
 namespace AllocationQS.Client.Entities
 {
 

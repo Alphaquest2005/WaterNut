@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Suppliers_documentsMap : EntityTypeConfiguration<xcuda_Suppliers_documents>
     {
@@ -27,7 +28,7 @@
               this.Property(t => t.Suppliers_document_invoice_nbr).HasColumnName("Suppliers_document_invoice_nbr");
               this.Property(t => t.Suppliers_document_invoice_amt).HasColumnName("Suppliers_document_invoice_amt");
               this.Property(t => t.Suppliers_document_type_code).HasColumnName("Suppliers_document_type_code");
-              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t => t.xcuda_Suppliers_documents).HasForeignKey(d => d.ASYCUDA_Id);
+              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t =>(ICollection<xcuda_Suppliers_documents>) t.xcuda_Suppliers_documents).HasForeignKey(d => d.ASYCUDA_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -13,6 +13,7 @@ using CoreEntities.Client.DTO;
 using CoreEntities.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace CoreEntities.Client.Services
     public partial class Document_TypeClient :  ClientService<IDocument_TypeService>, IDocument_TypeService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.Document_Type>> GetDocument_Type(List<string> includesLst = null)
+        public async Task<IEnumerable<Document_Type>> GetDocument_Type(List<string> includesLst = null)
         {
             return await Channel.GetDocument_Type(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.Document_Type> GetDocument_TypeByKey(string id, List<string> includesLst = null)
+        public async Task<Document_Type> GetDocument_TypeByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetDocument_TypeByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Document_Type>> GetDocument_TypeByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<Document_Type>> GetDocument_TypeByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetDocument_TypeByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Document_Type>> GetDocument_TypeByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<Document_Type>> GetDocument_TypeByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetDocument_TypeByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Document_Type>> GetDocument_TypeByExpressionNav(string exp,
+		public async Task<IEnumerable<Document_Type>> GetDocument_TypeByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetDocument_TypeByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace CoreEntities.Client.Services
             return await Channel.GetDocument_TypeByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.Document_Type> UpdateDocument_Type(DTO.Document_Type entity)
+        public async Task<Document_Type> UpdateDocument_Type(Document_Type entity)
         {
            return await Channel.UpdateDocument_Type(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.Document_Type> CreateDocument_Type(DTO.Document_Type entity)
+        public async Task<Document_Type> CreateDocument_Type(Document_Type entity)
         {
            return await Channel.CreateDocument_Type(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace CoreEntities.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.Document_Type>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<Document_Type>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Document_Type>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<Document_Type>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace CoreEntities.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

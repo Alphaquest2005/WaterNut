@@ -13,6 +13,7 @@ using CoreEntities.Client.DTO;
 using CoreEntities.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace CoreEntities.Client.Services
     public partial class EntryPreviousItemsClient :  ClientService<IEntryPreviousItemsService>, IEntryPreviousItemsService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.EntryPreviousItems>> GetEntryPreviousItems(List<string> includesLst = null)
+        public async Task<IEnumerable<EntryPreviousItems>> GetEntryPreviousItems(List<string> includesLst = null)
         {
             return await Channel.GetEntryPreviousItems(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.EntryPreviousItems> GetEntryPreviousItemsByKey(string id, List<string> includesLst = null)
+        public async Task<EntryPreviousItems> GetEntryPreviousItemsByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetEntryPreviousItemsByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryPreviousItems>> GetEntryPreviousItemsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<EntryPreviousItems>> GetEntryPreviousItemsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetEntryPreviousItemsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryPreviousItems>> GetEntryPreviousItemsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<EntryPreviousItems>> GetEntryPreviousItemsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetEntryPreviousItemsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryPreviousItems>> GetEntryPreviousItemsByExpressionNav(string exp,
+		public async Task<IEnumerable<EntryPreviousItems>> GetEntryPreviousItemsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetEntryPreviousItemsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace CoreEntities.Client.Services
             return await Channel.GetEntryPreviousItemsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.EntryPreviousItems> UpdateEntryPreviousItems(DTO.EntryPreviousItems entity)
+        public async Task<EntryPreviousItems> UpdateEntryPreviousItems(EntryPreviousItems entity)
         {
            return await Channel.UpdateEntryPreviousItems(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.EntryPreviousItems> CreateEntryPreviousItems(DTO.EntryPreviousItems entity)
+        public async Task<EntryPreviousItems> CreateEntryPreviousItems(EntryPreviousItems entity)
         {
            return await Channel.CreateEntryPreviousItems(entity).ConfigureAwait(false);
         }
@@ -96,22 +97,22 @@ namespace CoreEntities.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.EntryPreviousItems>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<EntryPreviousItems>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryPreviousItems>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<EntryPreviousItems>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.EntryPreviousItems>> GetEntryPreviousItemsByPreviousItem_Id(string PreviousItem_Id, List<string> includesLst = null)
+		public async Task<IEnumerable<EntryPreviousItems>> GetEntryPreviousItemsByPreviousItem_Id(string PreviousItem_Id, List<string> includesLst = null)
         {
             return  await Channel.GetEntryPreviousItemsByPreviousItem_Id(PreviousItem_Id, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.EntryPreviousItems>> GetEntryPreviousItemsByItem_Id(string Item_Id, List<string> includesLst = null)
+  		public async Task<IEnumerable<EntryPreviousItems>> GetEntryPreviousItemsByItem_Id(string Item_Id, List<string> includesLst = null)
         {
             return  await Channel.GetEntryPreviousItemsByItem_Id(Item_Id, includesLst).ConfigureAwait(false);
         }
@@ -123,7 +124,7 @@ namespace CoreEntities.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

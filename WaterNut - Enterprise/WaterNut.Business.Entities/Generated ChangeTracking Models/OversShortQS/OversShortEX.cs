@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using TrackableEntities.Client;
 
+
 		namespace OversShortQS.Business.Entities
 {
     public partial class OversShortEX
@@ -29,7 +30,7 @@ using TrackableEntities.Client;
             }
         }
 
-         public void StartTracking()
+         public new void StartTracking()
         {
             _changeTracker = new ChangeTrackingCollection<OversShortEX>(this);
         }

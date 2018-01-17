@@ -24,6 +24,7 @@ namespace OverShortsQS
         public string Category { get; set; }
         public string TariffCode { get; set; }
         public Nullable<System.DateTime> EntryTimeStamp { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         public virtual ICollection<OverShortDetailsEX> OverShortDetailsEXes { get; set; }
     }

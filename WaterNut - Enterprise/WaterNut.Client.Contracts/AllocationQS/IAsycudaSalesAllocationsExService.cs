@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using AllocationQS.Client.DTO;
 
+
 namespace AllocationQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace AllocationQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<AsycudaSalesAllocationsEx> UpdateAsycudaSalesAllocationsEx(DTO.AsycudaSalesAllocationsEx entity);
+        Task<AsycudaSalesAllocationsEx> UpdateAsycudaSalesAllocationsEx(AsycudaSalesAllocationsEx entity);
 
         [OperationContract]
-        Task<AsycudaSalesAllocationsEx> CreateAsycudaSalesAllocationsEx(DTO.AsycudaSalesAllocationsEx entity);
+        Task<AsycudaSalesAllocationsEx> CreateAsycudaSalesAllocationsEx(AsycudaSalesAllocationsEx entity);
 
         [OperationContract]
         Task<bool> DeleteAsycudaSalesAllocationsEx(string id);

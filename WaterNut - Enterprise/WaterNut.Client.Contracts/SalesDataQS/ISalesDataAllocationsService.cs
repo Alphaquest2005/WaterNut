@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using SalesDataQS.Client.DTO;
 
+
 namespace SalesDataQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace SalesDataQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<SalesDataAllocations> UpdateSalesDataAllocations(DTO.SalesDataAllocations entity);
+        Task<SalesDataAllocations> UpdateSalesDataAllocations(SalesDataAllocations entity);
 
         [OperationContract]
-        Task<SalesDataAllocations> CreateSalesDataAllocations(DTO.SalesDataAllocations entity);
+        Task<SalesDataAllocations> CreateSalesDataAllocations(SalesDataAllocations entity);
 
         [OperationContract]
         Task<bool> DeleteSalesDataAllocations(string id);

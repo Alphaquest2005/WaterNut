@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Gs_internal_freightMap : EntityTypeConfiguration<xcuda_Gs_internal_freight>
     {
@@ -17,7 +18,7 @@
               this.Property(t => t.Currency_name).HasColumnName("Currency_name").IsUnicode(false);
               this.Property(t => t.Currency_rate).HasColumnName("Currency_rate");
               this.Property(t => t.Valuation_Id).HasColumnName("Valuation_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_Valuation).WithOptional(t => t.xcuda_Gs_internal_freight);
+              this.HasRequired(t => t.xcuda_Valuation).WithOptional(t => (xcuda_Gs_internal_freight)t.xcuda_Gs_internal_freight);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_ItemMap : EntityTypeConfiguration<xcuda_Item>
     {
@@ -19,7 +20,6 @@
               this.Property(t => t.Licence_number).HasColumnName("Licence_number");
               this.Property(t => t.EntryDataDetailsId).HasColumnName("EntryDataDetailsId");
               this.Property(t => t.LineNumber).HasColumnName("LineNumber");
-              this.Property(t => t.SalesFactor).HasColumnName("SalesFactor");
               this.Property(t => t.IsAssessed).HasColumnName("IsAssessed");
               this.Property(t => t.DPQtyAllocated).HasColumnName("DPQtyAllocated");
               this.Property(t => t.DFQtyAllocated).HasColumnName("DFQtyAllocated");
@@ -31,17 +31,18 @@
               this.Property(t => t.Free_text_2).HasColumnName("Free_text_2");
               this.Property(t => t.ImportComplete).HasColumnName("ImportComplete");
               this.Property(t => t.WarehouseError).HasColumnName("WarehouseError").IsUnicode(false).HasMaxLength(50);
-              this.HasRequired(t => t.AsycudaDocument).WithMany(t => t.xcuda_Item).HasForeignKey(d => d.ASYCUDA_Id);
+              this.Property(t => t.SalesFactor).HasColumnName("SalesFactor");
+              this.HasRequired(t => t.AsycudaDocument).WithMany(t =>(ICollection<xcuda_Item>) t.xcuda_Item).HasForeignKey(d => d.ASYCUDA_Id);
               this.HasMany(t => t.AsycudaSalesAllocations).WithOptional(t => t.PreviousDocumentItem).HasForeignKey(d => d.PreviousItem_Id);
-              this.HasOptional(t => t.xcuda_PreviousItem).WithRequired(t => t.xcuda_Item);
-              this.HasMany(t => t.SubItems).WithRequired(t => t.xcuda_Item);
-              this.HasOptional(t => t.xcuda_Goods_description).WithRequired(t => t.xcuda_Item);
-              this.HasOptional(t => t.xcuda_Tarification).WithRequired(t => t.xcuda_Item);
+              this.HasOptional(t => t.xcuda_PreviousItem).WithRequired(t => (xcuda_Item)t.xcuda_Item);
+              this.HasMany(t => t.SubItems).WithRequired(t => (xcuda_Item)t.xcuda_Item);
+              this.HasOptional(t => t.xcuda_Goods_description).WithRequired(t => (xcuda_Item)t.xcuda_Item);
+              this.HasOptional(t => t.xcuda_Tarification).WithRequired(t => (xcuda_Item)t.xcuda_Item);
               this.HasMany(t => t.xcuda_Taxation).WithOptional(t => t.xcuda_Item).HasForeignKey(d => d.Item_Id);
-              this.HasOptional(t => t.xcuda_Valuation_item).WithRequired(t => t.xcuda_Item);
-              this.HasMany(t => t.xBondAllocations).WithRequired(t => t.xcuda_Item);
-              this.HasMany(t => t.EX9AsycudaSalesAllocations).WithRequired(t => t.PreviousDocumentItem);
-              this.HasMany(t => t.EntryPreviousItems).WithRequired(t => t.xcuda_Item);
+              this.HasOptional(t => t.xcuda_Valuation_item).WithRequired(t => (xcuda_Item)t.xcuda_Item);
+              this.HasMany(t => t.xBondAllocations).WithRequired(t => (xcuda_Item)t.xcuda_Item);
+              this.HasMany(t => t.EX9AsycudaSalesAllocations).WithRequired(t => (xcuda_Item)t.PreviousDocumentItem);
+              this.HasMany(t => t.EntryPreviousItems).WithRequired(t => (xcuda_Item)t.xcuda_Item);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

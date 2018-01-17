@@ -16,7 +16,7 @@ public class EntityConstructorTPL : CSharpTemplate
             base.TransformText();
            
 #>
-		namespace <#=conTextName#>.DataLayer.Entities
+		namespace <#=conTextName#>.Business.Entities
 {
     public partial class <#=mainEntity.Name#>
     {

@@ -13,6 +13,7 @@ using SalesDataQS.Client.DTO;
 using SalesDataQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace SalesDataQS.Client.Services
     public partial class SalesDataClient :  ClientService<ISalesDataService>, ISalesDataService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.SalesData>> GetSalesDatas(List<string> includesLst = null)
+        public async Task<IEnumerable<SalesData>> GetSalesDatas(List<string> includesLst = null)
         {
             return await Channel.GetSalesDatas(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.SalesData> GetSalesDataByKey(string id, List<string> includesLst = null)
+        public async Task<SalesData> GetSalesDataByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetSalesDataByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.SalesData>> GetSalesDatasByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<SalesData>> GetSalesDatasByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetSalesDatasByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.SalesData>> GetSalesDatasByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<SalesData>> GetSalesDatasByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetSalesDatasByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.SalesData>> GetSalesDatasByExpressionNav(string exp,
+		public async Task<IEnumerable<SalesData>> GetSalesDatasByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetSalesDatasByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace SalesDataQS.Client.Services
             return await Channel.GetSalesDatasByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.SalesData> UpdateSalesData(DTO.SalesData entity)
+        public async Task<SalesData> UpdateSalesData(SalesData entity)
         {
            return await Channel.UpdateSalesData(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.SalesData> CreateSalesData(DTO.SalesData entity)
+        public async Task<SalesData> CreateSalesData(SalesData entity)
         {
            return await Channel.CreateSalesData(entity).ConfigureAwait(false);
         }
@@ -96,22 +97,22 @@ namespace SalesDataQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.SalesData>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<SalesData>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.SalesData>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<SalesData>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.SalesData>> GetSalesDataByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
+		public async Task<IEnumerable<SalesData>> GetSalesDataByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
         {
             return  await Channel.GetSalesDataByAsycudaDocumentSetId(AsycudaDocumentSetId, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.SalesData>> GetSalesDataByAsycudaDocumentId(string AsycudaDocumentId, List<string> includesLst = null)
+  		public async Task<IEnumerable<SalesData>> GetSalesDataByAsycudaDocumentId(string AsycudaDocumentId, List<string> includesLst = null)
         {
             return  await Channel.GetSalesDataByAsycudaDocumentId(AsycudaDocumentId, includesLst).ConfigureAwait(false);
         }
@@ -123,7 +124,7 @@ namespace SalesDataQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

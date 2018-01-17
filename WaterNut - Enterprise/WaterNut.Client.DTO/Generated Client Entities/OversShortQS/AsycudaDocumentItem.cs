@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace OversShortQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem> , ITrackable, IEquatable<AsycudaDocumentItem>
+    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem>, ITrackable, IEquatable<AsycudaDocumentItem>
     {
         [DataMember]
         public int Item_Id
@@ -33,7 +35,7 @@ namespace OversShortQS.Client.DTO
         private int _Item_Id;
 
         [DataMember]
-        public int AsycudaDocumentId
+        public Nullable<int> AsycudaDocumentId
 		{ 
 		    get { return _AsycudaDocumentId; }
 			set
@@ -43,7 +45,7 @@ namespace OversShortQS.Client.DTO
 				NotifyPropertyChanged();//m => this.AsycudaDocumentId
 			}
 		}
-        private int _AsycudaDocumentId;
+        private Nullable<int> _AsycudaDocumentId;
 
         [DataMember]
         public Nullable<int> EntryDataDetailsId
@@ -59,7 +61,7 @@ namespace OversShortQS.Client.DTO
         private Nullable<int> _EntryDataDetailsId;
 
         [DataMember]
-        public int LineNumber
+        public Nullable<int> LineNumber
 		{ 
 		    get { return _LineNumber; }
 			set
@@ -69,7 +71,7 @@ namespace OversShortQS.Client.DTO
 				NotifyPropertyChanged();//m => this.LineNumber
 			}
 		}
-        private int _LineNumber;
+        private Nullable<int> _LineNumber;
 
         [DataMember]
         public Nullable<bool> IsAssessed
@@ -163,7 +165,7 @@ namespace OversShortQS.Client.DTO
         private double _Gross_weight_itm;
 
         [DataMember]
-        public Nullable<double> Net_weight_itm
+        public double Net_weight_itm
 		{ 
 		    get { return _Net_weight_itm; }
 			set
@@ -173,7 +175,7 @@ namespace OversShortQS.Client.DTO
 				NotifyPropertyChanged();//m => this.Net_weight_itm
 			}
 		}
-        private Nullable<double> _Net_weight_itm;
+        private double _Net_weight_itm;
 
         [DataMember]
         public Nullable<double> Item_price
@@ -332,7 +334,7 @@ namespace OversShortQS.Client.DTO
         private Nullable<double> _Statistical_value;
 
         [DataMember]
-        public double DPQtyAllocated
+        public Nullable<double> DPQtyAllocated
 		{ 
 		    get { return _DPQtyAllocated; }
 			set
@@ -342,10 +344,10 @@ namespace OversShortQS.Client.DTO
 				NotifyPropertyChanged();//m => this.DPQtyAllocated
 			}
 		}
-        private double _DPQtyAllocated;
+        private Nullable<double> _DPQtyAllocated;
 
         [DataMember]
-        public double DFQtyAllocated
+        public Nullable<double> DFQtyAllocated
 		{ 
 		    get { return _DFQtyAllocated; }
 			set
@@ -355,7 +357,7 @@ namespace OversShortQS.Client.DTO
 				NotifyPropertyChanged();//m => this.DFQtyAllocated
 			}
 		}
-        private double _DFQtyAllocated;
+        private Nullable<double> _DFQtyAllocated;
 
         [DataMember]
         public Nullable<double> PiQuantity
@@ -371,7 +373,7 @@ namespace OversShortQS.Client.DTO
         private Nullable<double> _PiQuantity;
 
         [DataMember]
-        public bool ImportComplete
+        public Nullable<bool> ImportComplete
 		{ 
 		    get { return _ImportComplete; }
 			set
@@ -381,7 +383,150 @@ namespace OversShortQS.Client.DTO
 				NotifyPropertyChanged();//m => this.ImportComplete
 			}
 		}
-        private bool _ImportComplete;
+        private Nullable<bool> _ImportComplete;
+
+        [DataMember]
+        public string CNumber
+		{ 
+		    get { return _CNumber; }
+			set
+			{
+			    if (value == _CNumber) return;
+				_CNumber = value;
+				NotifyPropertyChanged();//m => this.CNumber
+			}
+		}
+        private string _CNumber;
+
+        [DataMember]
+        public Nullable<System.DateTime> RegistrationDate
+		{ 
+		    get { return _RegistrationDate; }
+			set
+			{
+			    if (value == _RegistrationDate) return;
+				_RegistrationDate = value;
+				NotifyPropertyChanged();//m => this.RegistrationDate
+			}
+		}
+        private Nullable<System.DateTime> _RegistrationDate;
+
+        [DataMember]
+        public Nullable<double> Number_of_packages
+		{ 
+		    get { return _Number_of_packages; }
+			set
+			{
+			    if (value == _Number_of_packages) return;
+				_Number_of_packages = value;
+				NotifyPropertyChanged();//m => this.Number_of_packages
+			}
+		}
+        private Nullable<double> _Number_of_packages;
+
+        [DataMember]
+        public string Country_of_origin_code
+		{ 
+		    get { return _Country_of_origin_code; }
+			set
+			{
+			    if (value == _Country_of_origin_code) return;
+				_Country_of_origin_code = value;
+				NotifyPropertyChanged();//m => this.Country_of_origin_code
+			}
+		}
+        private string _Country_of_origin_code;
+
+        [DataMember]
+        public Nullable<double> PiWeight
+		{ 
+		    get { return _PiWeight; }
+			set
+			{
+			    if (value == _PiWeight) return;
+				_PiWeight = value;
+				NotifyPropertyChanged();//m => this.PiWeight
+			}
+		}
+        private Nullable<double> _PiWeight;
+
+        [DataMember]
+        public Nullable<double> Currency_rate
+		{ 
+		    get { return _Currency_rate; }
+			set
+			{
+			    if (value == _Currency_rate) return;
+				_Currency_rate = value;
+				NotifyPropertyChanged();//m => this.Currency_rate
+			}
+		}
+        private Nullable<double> _Currency_rate;
+
+        [DataMember]
+        public string Currency_code
+		{ 
+		    get { return _Currency_code; }
+			set
+			{
+			    if (value == _Currency_code) return;
+				_Currency_code = value;
+				NotifyPropertyChanged();//m => this.Currency_code
+			}
+		}
+        private string _Currency_code;
+
+        [DataMember]
+        public Nullable<bool> InvalidHSCode
+		{ 
+		    get { return _InvalidHSCode; }
+			set
+			{
+			    if (value == _InvalidHSCode) return;
+				_InvalidHSCode = value;
+				NotifyPropertyChanged();//m => this.InvalidHSCode
+			}
+		}
+        private Nullable<bool> _InvalidHSCode;
+
+        [DataMember]
+        public string WarehouseError
+		{ 
+		    get { return _WarehouseError; }
+			set
+			{
+			    if (value == _WarehouseError) return;
+				_WarehouseError = value;
+				NotifyPropertyChanged();//m => this.WarehouseError
+			}
+		}
+        private string _WarehouseError;
+
+        [DataMember]
+        public Nullable<bool> Cancelled
+		{ 
+		    get { return _Cancelled; }
+			set
+			{
+			    if (value == _Cancelled) return;
+				_Cancelled = value;
+				NotifyPropertyChanged();//m => this.Cancelled
+			}
+		}
+        private Nullable<bool> _Cancelled;
+
+        [DataMember]
+        public Nullable<double> SalesFactor
+		{ 
+		    get { return _SalesFactor; }
+			set
+			{
+			    if (value == _SalesFactor) return;
+				_SalesFactor = value;
+				NotifyPropertyChanged();//m => this.SalesFactor
+			}
+		}
+        private Nullable<double> _SalesFactor;
 
        
         [DataMember]

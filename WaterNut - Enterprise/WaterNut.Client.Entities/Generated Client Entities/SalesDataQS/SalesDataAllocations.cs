@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using SalesDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace SalesDataQS.Client.Entities
@@ -51,7 +51,7 @@ public int AllocationId
 			{
 			    if (value == this.salesdataallocations.AllocationId) return;
 				this.salesdataallocations.AllocationId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllocationId");
 			}
 		}
@@ -68,7 +68,7 @@ public string EntryDataId
 			{
 			    if (value == this.salesdataallocations.EntryDataId) return;
 				this.salesdataallocations.EntryDataId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataId");
 			}
 		}
@@ -121,7 +121,7 @@ public string EntryDataId
                 _SalesData = value;
                 if(value != null)
                      this.salesdataallocations.SalesData = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("SalesData");
 			}
 		}
@@ -141,11 +141,11 @@ public string EntryDataId
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

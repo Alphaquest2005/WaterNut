@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_TypeMap : EntityTypeConfiguration<xcuda_Type>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.Type_of_declaration).HasColumnName("Type_of_declaration").IsUnicode(false);
               this.Property(t => t.Declaration_gen_procedure_code).HasColumnName("Declaration_gen_procedure_code").IsUnicode(false);
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_Identification).WithOptional(t => t.xcuda_Type);
+              this.HasRequired(t => t.xcuda_Identification).WithOptional(t => (xcuda_Type)t.xcuda_Type);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

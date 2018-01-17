@@ -32,7 +32,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 
-namespace <#=            conTextName#>.DataLayer.Entities
+namespace <#=conTextName#>.Business.Entities
 {
     public partial class <#=            mainEntity.Name#>: IEntityWithKey
     {

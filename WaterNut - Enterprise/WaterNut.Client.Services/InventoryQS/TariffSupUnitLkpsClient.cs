@@ -13,6 +13,7 @@ using InventoryQS.Client.DTO;
 using InventoryQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace InventoryQS.Client.Services
     public partial class TariffSupUnitLkpsClient :  ClientService<ITariffSupUnitLkpsService>, ITariffSupUnitLkpsService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.TariffSupUnitLkps>> GetTariffSupUnitLkps(List<string> includesLst = null)
+        public async Task<IEnumerable<TariffSupUnitLkps>> GetTariffSupUnitLkps(List<string> includesLst = null)
         {
             return await Channel.GetTariffSupUnitLkps(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.TariffSupUnitLkps> GetTariffSupUnitLkpsByKey(string id, List<string> includesLst = null)
+        public async Task<TariffSupUnitLkps> GetTariffSupUnitLkpsByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetTariffSupUnitLkpsByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffSupUnitLkps>> GetTariffSupUnitLkpsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<TariffSupUnitLkps>> GetTariffSupUnitLkpsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetTariffSupUnitLkpsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffSupUnitLkps>> GetTariffSupUnitLkpsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<TariffSupUnitLkps>> GetTariffSupUnitLkpsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetTariffSupUnitLkpsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffSupUnitLkps>> GetTariffSupUnitLkpsByExpressionNav(string exp,
+		public async Task<IEnumerable<TariffSupUnitLkps>> GetTariffSupUnitLkpsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetTariffSupUnitLkpsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace InventoryQS.Client.Services
             return await Channel.GetTariffSupUnitLkpsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.TariffSupUnitLkps> UpdateTariffSupUnitLkps(DTO.TariffSupUnitLkps entity)
+        public async Task<TariffSupUnitLkps> UpdateTariffSupUnitLkps(TariffSupUnitLkps entity)
         {
            return await Channel.UpdateTariffSupUnitLkps(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.TariffSupUnitLkps> CreateTariffSupUnitLkps(DTO.TariffSupUnitLkps entity)
+        public async Task<TariffSupUnitLkps> CreateTariffSupUnitLkps(TariffSupUnitLkps entity)
         {
            return await Channel.CreateTariffSupUnitLkps(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace InventoryQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.TariffSupUnitLkps>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<TariffSupUnitLkps>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffSupUnitLkps>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<TariffSupUnitLkps>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace InventoryQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

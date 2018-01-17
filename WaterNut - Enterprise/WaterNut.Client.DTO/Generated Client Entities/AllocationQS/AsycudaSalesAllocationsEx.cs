@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace AllocationQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaSalesAllocationsEx : BaseEntity<AsycudaSalesAllocationsEx> , ITrackable, IEquatable<AsycudaSalesAllocationsEx>
+    public partial class AsycudaSalesAllocationsEx : BaseEntity<AsycudaSalesAllocationsEx>, ITrackable, IEquatable<AsycudaSalesAllocationsEx>
     {
         [DataMember]
         public int AllocationId
@@ -161,20 +163,6 @@ namespace AllocationQS.Client.DTO
 			}
 		}
         private string _InvoiceNo;
-
-
-        [DataMember]
-        public string CustomerName
-        {
-            get { return _CustomerName; }
-            set
-            {
-                if (value == _CustomerName) return;
-                _CustomerName = value;
-                NotifyPropertyChanged();//m => this.InvoiceNo
-            }
-        }
-        private string _CustomerName;
 
         [DataMember]
         public string ItemNumber
@@ -463,7 +451,7 @@ namespace AllocationQS.Client.DTO
         private Nullable<bool> _DoNotAllocatePreviousEntry;
 
         [DataMember]
-        public int SANumber
+        public Nullable<int> SANumber
 		{ 
 		    get { return _SANumber; }
 			set
@@ -473,7 +461,7 @@ namespace AllocationQS.Client.DTO
 				NotifyPropertyChanged();//m => this.SANumber
 			}
 		}
-        private int _SANumber;
+        private Nullable<int> _SANumber;
 
         [DataMember]
         public string pReferenceNumber
@@ -539,6 +527,45 @@ namespace AllocationQS.Client.DTO
 			}
 		}
         private Nullable<System.DateTime> _pExpiryDate;
+
+        [DataMember]
+        public string CustomerName
+		{ 
+		    get { return _CustomerName; }
+			set
+			{
+			    if (value == _CustomerName) return;
+				_CustomerName = value;
+				NotifyPropertyChanged();//m => this.CustomerName
+			}
+		}
+        private string _CustomerName;
+
+        [DataMember]
+        public string pTariffCode
+		{ 
+		    get { return _pTariffCode; }
+			set
+			{
+			    if (value == _pTariffCode) return;
+				_pTariffCode = value;
+				NotifyPropertyChanged();//m => this.pTariffCode
+			}
+		}
+        private string _pTariffCode;
+
+        [DataMember]
+        public string pItemNumber
+		{ 
+		    get { return _pItemNumber; }
+			set
+			{
+			    if (value == _pItemNumber) return;
+				_pItemNumber = value;
+				NotifyPropertyChanged();//m => this.pItemNumber
+			}
+		}
+        private string _pItemNumber;
 
        
    //     [DataMember]

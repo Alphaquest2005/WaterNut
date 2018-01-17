@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CoreEntities.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CoreEntities.Client.Entities
@@ -51,7 +51,7 @@ public int PreviousItem_Id
 			{
 			    if (value == this.entrypreviousitems.PreviousItem_Id) return;
 				this.entrypreviousitems.PreviousItem_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("PreviousItem_Id");
 			}
 		}
@@ -66,7 +66,7 @@ public int Item_Id
 			{
 			    if (value == this.entrypreviousitems.Item_Id) return;
 				this.entrypreviousitems.Item_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Item_Id");
 			}
 		}
@@ -81,7 +81,7 @@ public int EntryPreviousItemId
 			{
 			    if (value == this.entrypreviousitems.EntryPreviousItemId) return;
 				this.entrypreviousitems.EntryPreviousItemId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryPreviousItemId");
 			}
 		}
@@ -134,7 +134,7 @@ public int EntryPreviousItemId
                 _AsycudaDocumentItem = value;
                 if(value != null)
                      this.entrypreviousitems.AsycudaDocumentItem = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("AsycudaDocumentItem");
 			}
 		}
@@ -154,11 +154,11 @@ public int EntryPreviousItemId
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

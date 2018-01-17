@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CoreEntities.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CoreEntities.Client.Entities
@@ -54,7 +54,7 @@ public int Item_Id
 			{
 			    if (value == this.asycudadocumentitem.Item_Id) return;
 				this.asycudadocumentitem.Item_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Item_Id");
 			}
 		}
@@ -69,7 +69,7 @@ public Nullable<int> AsycudaDocumentId
 			{
 			    if (value == this.asycudadocumentitem.AsycudaDocumentId) return;
 				this.asycudadocumentitem.AsycudaDocumentId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentId");
 			}
 		}
@@ -84,7 +84,7 @@ public Nullable<int> EntryDataDetailsId
 			{
 			    if (value == this.asycudadocumentitem.EntryDataDetailsId) return;
 				this.asycudadocumentitem.EntryDataDetailsId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataDetailsId");
 			}
 		}
@@ -99,7 +99,7 @@ public Nullable<int> LineNumber
 			{
 			    if (value == this.asycudadocumentitem.LineNumber) return;
 				this.asycudadocumentitem.LineNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("LineNumber");
 			}
 		}
@@ -114,7 +114,7 @@ public Nullable<bool> IsAssessed
 			{
 			    if (value == this.asycudadocumentitem.IsAssessed) return;
 				this.asycudadocumentitem.IsAssessed = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("IsAssessed");
 			}
 		}
@@ -129,7 +129,7 @@ public Nullable<bool> DoNotAllocate
 			{
 			    if (value == this.asycudadocumentitem.DoNotAllocate) return;
 				this.asycudadocumentitem.DoNotAllocate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("DoNotAllocate");
 			}
 		}
@@ -144,7 +144,7 @@ public Nullable<bool> DoNotEX
 			{
 			    if (value == this.asycudadocumentitem.DoNotEX) return;
 				this.asycudadocumentitem.DoNotEX = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("DoNotEX");
 			}
 		}
@@ -159,7 +159,7 @@ public Nullable<bool> AttributeOnlyAllocation
 			{
 			    if (value == this.asycudadocumentitem.AttributeOnlyAllocation) return;
 				this.asycudadocumentitem.AttributeOnlyAllocation = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AttributeOnlyAllocation");
 			}
 		}
@@ -176,7 +176,7 @@ public string Description_of_goods
 			{
 			    if (value == this.asycudadocumentitem.Description_of_goods) return;
 				this.asycudadocumentitem.Description_of_goods = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Description_of_goods");
 			}
 		}
@@ -193,7 +193,7 @@ public string Commercial_Description
 			{
 			    if (value == this.asycudadocumentitem.Commercial_Description) return;
 				this.asycudadocumentitem.Commercial_Description = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Commercial_Description");
 			}
 		}
@@ -208,7 +208,7 @@ public double Gross_weight_itm
 			{
 			    if (value == this.asycudadocumentitem.Gross_weight_itm) return;
 				this.asycudadocumentitem.Gross_weight_itm = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Gross_weight_itm");
 			}
 		}
@@ -223,7 +223,7 @@ public double Net_weight_itm
 			{
 			    if (value == this.asycudadocumentitem.Net_weight_itm) return;
 				this.asycudadocumentitem.Net_weight_itm = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Net_weight_itm");
 			}
 		}
@@ -238,7 +238,7 @@ public Nullable<double> Item_price
 			{
 			    if (value == this.asycudadocumentitem.Item_price) return;
 				this.asycudadocumentitem.Item_price = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Item_price");
 			}
 		}
@@ -253,7 +253,7 @@ public Nullable<double> ItemQuantity
 			{
 			    if (value == this.asycudadocumentitem.ItemQuantity) return;
 				this.asycudadocumentitem.ItemQuantity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemQuantity");
 			}
 		}
@@ -270,7 +270,7 @@ public string Suppplementary_unit_code
 			{
 			    if (value == this.asycudadocumentitem.Suppplementary_unit_code) return;
 				this.asycudadocumentitem.Suppplementary_unit_code = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Suppplementary_unit_code");
 			}
 		}
@@ -287,7 +287,7 @@ public string ItemNumber
 			{
 			    if (value == this.asycudadocumentitem.ItemNumber) return;
 				this.asycudadocumentitem.ItemNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemNumber");
 			}
 		}
@@ -304,7 +304,7 @@ public string TariffCode
 			{
 			    if (value == this.asycudadocumentitem.TariffCode) return;
 				this.asycudadocumentitem.TariffCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCode");
 			}
 		}
@@ -319,7 +319,7 @@ public Nullable<bool> TariffCodeLicenseRequired
 			{
 			    if (value == this.asycudadocumentitem.TariffCodeLicenseRequired) return;
 				this.asycudadocumentitem.TariffCodeLicenseRequired = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCodeLicenseRequired");
 			}
 		}
@@ -334,7 +334,7 @@ public Nullable<bool> TariffCategoryLicenseRequired
 			{
 			    if (value == this.asycudadocumentitem.TariffCategoryLicenseRequired) return;
 				this.asycudadocumentitem.TariffCategoryLicenseRequired = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCategoryLicenseRequired");
 			}
 		}
@@ -351,44 +351,44 @@ public string TariffCodeDescription
 			{
 			    if (value == this.asycudadocumentitem.TariffCodeDescription) return;
 				this.asycudadocumentitem.TariffCodeDescription = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCodeDescription");
 			}
 		}
+     
 
+       
+       [NumberValidationAttribute]
+public Nullable<double> DutyLiability
+		{ 
+		    get { return this.asycudadocumentitem.DutyLiability; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.DutyLiability) return;
+				this.asycudadocumentitem.DutyLiability = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("DutyLiability");
+			}
+		}
+     
 
+       
+       [NumberValidationAttribute]
+public Nullable<double> Total_CIF_itm
+		{ 
+		    get { return this.asycudadocumentitem.Total_CIF_itm; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.Total_CIF_itm) return;
+				this.asycudadocumentitem.Total_CIF_itm = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("Total_CIF_itm");
+			}
+		}
+     
 
-        [NumberValidationAttribute]
-        public Nullable<double> DutyLiability
-        {
-            get { return this.asycudadocumentitem.DutyLiability; }
-            set
-            {
-                if (value == this.asycudadocumentitem.DutyLiability) return;
-                this.asycudadocumentitem.DutyLiability = value;
-                if (this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged) this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-                NotifyPropertyChanged("DutyLiability");
-            }
-        }
-
-
-
-        [NumberValidationAttribute]
-        public Nullable<double> Total_CIF_itm
-        {
-            get { return this.asycudadocumentitem.Total_CIF_itm; }
-            set
-            {
-                if (value == this.asycudadocumentitem.Total_CIF_itm) return;
-                this.asycudadocumentitem.Total_CIF_itm = value;
-                if (this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged) this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-                NotifyPropertyChanged("Total_CIF_itm");
-            }
-        }
-
-
-
-        [NumberValidationAttribute]
+       
+       [NumberValidationAttribute]
 public Nullable<double> Freight
 		{ 
 		    get { return this.asycudadocumentitem.Freight; }
@@ -396,7 +396,7 @@ public Nullable<double> Freight
 			{
 			    if (value == this.asycudadocumentitem.Freight) return;
 				this.asycudadocumentitem.Freight = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Freight");
 			}
 		}
@@ -411,7 +411,7 @@ public Nullable<double> Statistical_value
 			{
 			    if (value == this.asycudadocumentitem.Statistical_value) return;
 				this.asycudadocumentitem.Statistical_value = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Statistical_value");
 			}
 		}
@@ -426,7 +426,7 @@ public Nullable<double> DPQtyAllocated
 			{
 			    if (value == this.asycudadocumentitem.DPQtyAllocated) return;
 				this.asycudadocumentitem.DPQtyAllocated = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("DPQtyAllocated");
 			}
 		}
@@ -441,22 +441,22 @@ public Nullable<double> DFQtyAllocated
 			{
 			    if (value == this.asycudadocumentitem.DFQtyAllocated) return;
 				this.asycudadocumentitem.DFQtyAllocated = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("DFQtyAllocated");
 			}
 		}
      
 
-       [RequiredValidationAttribute(ErrorMessage= "PiQuantity is required")]
+       
        [NumberValidationAttribute]
-public double PiQuantity
+public Nullable<double> PiQuantity
 		{ 
 		    get { return this.asycudadocumentitem.PiQuantity; }
 			set
 			{
 			    if (value == this.asycudadocumentitem.PiQuantity) return;
 				this.asycudadocumentitem.PiQuantity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("PiQuantity");
 			}
 		}
@@ -471,7 +471,7 @@ public Nullable<bool> ImportComplete
 			{
 			    if (value == this.asycudadocumentitem.ImportComplete) return;
 				this.asycudadocumentitem.ImportComplete = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ImportComplete");
 			}
 		}
@@ -488,7 +488,7 @@ public string CNumber
 			{
 			    if (value == this.asycudadocumentitem.CNumber) return;
 				this.asycudadocumentitem.CNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("CNumber");
 			}
 		}
@@ -503,7 +503,7 @@ public Nullable<System.DateTime> RegistrationDate
 			{
 			    if (value == this.asycudadocumentitem.RegistrationDate) return;
 				this.asycudadocumentitem.RegistrationDate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("RegistrationDate");
 			}
 		}
@@ -518,7 +518,7 @@ public Nullable<double> Number_of_packages
 			{
 			    if (value == this.asycudadocumentitem.Number_of_packages) return;
 				this.asycudadocumentitem.Number_of_packages = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Number_of_packages");
 			}
 		}
@@ -528,32 +528,32 @@ public Nullable<double> Number_of_packages
        
                 
                 
-//public string Country_of_origin_code
-//		{ 
-//		    get { return this.asycudadocumentitem.Country_of_origin_code; }
-//			set
-//			{
-//			    if (value == this.asycudadocumentitem.Country_of_origin_code) return;
-//				this.asycudadocumentitem.Country_of_origin_code = value;
-//                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-//				NotifyPropertyChanged("Country_of_origin_code");
-//			}
-//		}
+public string Country_of_origin_code
+		{ 
+		    get { return this.asycudadocumentitem.Country_of_origin_code; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.Country_of_origin_code) return;
+				this.asycudadocumentitem.Country_of_origin_code = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("Country_of_origin_code");
+			}
+		}
      
 
-//       [RequiredValidationAttribute(ErrorMessage= "PiWeight is required")]
-//       [NumberValidationAttribute]
-//public double PiWeight
-//		{ 
-//		    get { return this.asycudadocumentitem.PiWeight; }
-//			set
-//			{
-//			    if (value == this.asycudadocumentitem.PiWeight) return;
-//				this.asycudadocumentitem.PiWeight = value;
-//                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-//				NotifyPropertyChanged("PiWeight");
-//			}
-//		}
+       
+       [NumberValidationAttribute]
+public Nullable<double> PiWeight
+		{ 
+		    get { return this.asycudadocumentitem.PiWeight; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.PiWeight) return;
+				this.asycudadocumentitem.PiWeight = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("PiWeight");
+			}
+		}
      
 
        
@@ -565,7 +565,7 @@ public Nullable<double> Currency_rate
 			{
 			    if (value == this.asycudadocumentitem.Currency_rate) return;
 				this.asycudadocumentitem.Currency_rate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Currency_rate");
 			}
 		}
@@ -575,17 +575,17 @@ public Nullable<double> Currency_rate
        
                 
                 
-//public string Currency_code
-//		{ 
-//		    get { return this.asycudadocumentitem.Currency_code; }
-//			set
-//			{
-//			    if (value == this.asycudadocumentitem.Currency_code) return;
-//				this.asycudadocumentitem.Currency_code = value;
-//                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-//				NotifyPropertyChanged("Currency_code");
-//			}
-//		}
+public string Currency_code
+		{ 
+		    get { return this.asycudadocumentitem.Currency_code; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.Currency_code) return;
+				this.asycudadocumentitem.Currency_code = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("Currency_code");
+			}
+		}
      
 
        
@@ -597,7 +597,7 @@ public Nullable<bool> InvalidHSCode
 			{
 			    if (value == this.asycudadocumentitem.InvalidHSCode) return;
 				this.asycudadocumentitem.InvalidHSCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("InvalidHSCode");
 			}
 		}
@@ -614,8 +614,38 @@ public string WarehouseError
 			{
 			    if (value == this.asycudadocumentitem.WarehouseError) return;
 				this.asycudadocumentitem.WarehouseError = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("WarehouseError");
+			}
+		}
+     
+
+       
+       
+public Nullable<bool> Cancelled
+		{ 
+		    get { return this.asycudadocumentitem.Cancelled; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.Cancelled) return;
+				this.asycudadocumentitem.Cancelled = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("Cancelled");
+			}
+		}
+     
+
+       
+       [NumberValidationAttribute]
+public Nullable<double> SalesFactor
+		{ 
+		    get { return this.asycudadocumentitem.SalesFactor; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.SalesFactor) return;
+				this.asycudadocumentitem.SalesFactor = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("SalesFactor");
 			}
 		}
      
@@ -667,119 +697,119 @@ public string WarehouseError
                 _AsycudaDocument = value;
                 if(value != null)
                      this.asycudadocumentitem.AsycudaDocument = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("AsycudaDocument");
 			}
 		}
         
 
-  //      ObservableCollection<SubItems> _SubItems = null;
-  //      public  ObservableCollection<SubItems> SubItems
-		//{
+        ObservableCollection<SubItems> _SubItems = null;
+        public  ObservableCollection<SubItems> SubItems
+		{
             
-		//    get 
-		//		{ 
-		//			if(_SubItems != null) return _SubItems;
-		//			//if (this.asycudadocumentitem.SubItems == null) Debugger.Break();
-		//			if(this.asycudadocumentitem.SubItems != null)
-		//			{
-		//				_SubItems = new ObservableCollection<SubItems>(this.asycudadocumentitem.SubItems.Select(x => new SubItems(x)));
-		//			}
+		    get 
+				{ 
+					if(_SubItems != null) return _SubItems;
+					//if (this.asycudadocumentitem.SubItems == null) Debugger.Break();
+					if(this.asycudadocumentitem.SubItems != null)
+					{
+						_SubItems = new ObservableCollection<SubItems>(this.asycudadocumentitem.SubItems.Select(x => new SubItems(x)));
+					}
 					
-		//				_SubItems.CollectionChanged += SubItems_CollectionChanged; 
+						_SubItems.CollectionChanged += SubItems_CollectionChanged; 
 					
-		//			return _SubItems; 
-		//		}
-		//	set
-		//	{
-		//	    if (Equals(value, _SubItems)) return;
-		//		if (value != null)
-		//			this.asycudadocumentitem.SubItems = new ChangeTrackingCollection<DTO.SubItems>(value.Select(x => x.DTO).ToList());
-  //              _SubItems = value;
-		//		if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-		//		if (_SubItems != null)
-		//		_SubItems.CollectionChanged += SubItems_CollectionChanged;               
-		//		NotifyPropertyChanged("SubItems");
-		//	}
-		//}
+					return _SubItems; 
+				}
+			set
+			{
+			    if (Equals(value, _SubItems)) return;
+				if (value != null)
+					this.asycudadocumentitem.SubItems = new ChangeTrackingCollection<DTO.SubItems>(value.Select(x => x.DTO).ToList());
+                _SubItems = value;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				if (_SubItems != null)
+				_SubItems.CollectionChanged += SubItems_CollectionChanged;               
+				NotifyPropertyChanged("SubItems");
+			}
+		}
         
-  //      void SubItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-  //      {
-  //          switch (e.Action)
-  //          {
-  //              case NotifyCollectionChangedAction.Add:
-  //                  foreach (SubItems itm in e.NewItems)
-  //                  {
-  //                      if (itm != null)
-  //                      asycudadocumentitem.SubItems.Add(itm.DTO);
-  //                  }
-  //                  if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-  //                  break;
-  //              case NotifyCollectionChangedAction.Remove:
-  //                  foreach (SubItems itm in e.OldItems)
-  //                  {
-  //                      if (itm != null)
-  //                      asycudadocumentitem.SubItems.Remove(itm.DTO);
-  //                  }
-		//			if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-  //                  break;
+        void SubItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (SubItems itm in e.NewItems)
+                    {
+                        if (itm != null)
+                        asycudadocumentitem.SubItems.Add(itm.DTO);
+                    }
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (SubItems itm in e.OldItems)
+                    {
+                        if (itm != null)
+                        asycudadocumentitem.SubItems.Remove(itm.DTO);
+                    }
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+                    break;
                 
-  //          }
-  //      }
+            }
+        }
 
-  //      ObservableCollection<EntryPreviousItems> _PreviousItems = null;
-  //      public  ObservableCollection<EntryPreviousItems> PreviousItems
-		//{
+        ObservableCollection<EntryPreviousItems> _PreviousItems = null;
+        public  ObservableCollection<EntryPreviousItems> PreviousItems
+		{
             
-		//    get 
-		//		{ 
-		//			if(_PreviousItems != null) return _PreviousItems;
-		//			//if (this.asycudadocumentitem.PreviousItems == null) Debugger.Break();
-		//			if(this.asycudadocumentitem.PreviousItems != null)
-		//			{
-		//				_PreviousItems = new ObservableCollection<EntryPreviousItems>(this.asycudadocumentitem.PreviousItems.Select(x => new EntryPreviousItems(x)));
-		//			}
+		    get 
+				{ 
+					if(_PreviousItems != null) return _PreviousItems;
+					//if (this.asycudadocumentitem.PreviousItems == null) Debugger.Break();
+					if(this.asycudadocumentitem.PreviousItems != null)
+					{
+						_PreviousItems = new ObservableCollection<EntryPreviousItems>(this.asycudadocumentitem.PreviousItems.Select(x => new EntryPreviousItems(x)));
+					}
 					
-		//				_PreviousItems.CollectionChanged += PreviousItems_CollectionChanged; 
+						_PreviousItems.CollectionChanged += PreviousItems_CollectionChanged; 
 					
-		//			return _PreviousItems; 
-		//		}
-		//	set
-		//	{
-		//	    if (Equals(value, _PreviousItems)) return;
-		//		if (value != null)
-		//			this.asycudadocumentitem.PreviousItems = new ChangeTrackingCollection<DTO.EntryPreviousItems>(value.Select(x => x.DTO).ToList());
-  //              _PreviousItems = value;
-		//		if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-		//		if (_PreviousItems != null)
-		//		_PreviousItems.CollectionChanged += PreviousItems_CollectionChanged;               
-		//		NotifyPropertyChanged("PreviousItems");
-		//	}
-		//}
+					return _PreviousItems; 
+				}
+			set
+			{
+			    if (Equals(value, _PreviousItems)) return;
+				if (value != null)
+					this.asycudadocumentitem.PreviousItems = new ChangeTrackingCollection<DTO.EntryPreviousItems>(value.Select(x => x.DTO).ToList());
+                _PreviousItems = value;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				if (_PreviousItems != null)
+				_PreviousItems.CollectionChanged += PreviousItems_CollectionChanged;               
+				NotifyPropertyChanged("PreviousItems");
+			}
+		}
         
-  //      void PreviousItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-  //      {
-  //          switch (e.Action)
-  //          {
-  //              case NotifyCollectionChangedAction.Add:
-  //                  foreach (EntryPreviousItems itm in e.NewItems)
-  //                  {
-  //                      if (itm != null)
-  //                      asycudadocumentitem.PreviousItems.Add(itm.DTO);
-  //                  }
-  //                  if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-  //                  break;
-  //              case NotifyCollectionChangedAction.Remove:
-  //                  foreach (EntryPreviousItems itm in e.OldItems)
-  //                  {
-  //                      if (itm != null)
-  //                      asycudadocumentitem.PreviousItems.Remove(itm.DTO);
-  //                  }
-		//			if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-  //                  break;
+        void PreviousItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (EntryPreviousItems itm in e.NewItems)
+                    {
+                        if (itm != null)
+                        asycudadocumentitem.PreviousItems.Add(itm.DTO);
+                    }
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (EntryPreviousItems itm in e.OldItems)
+                    {
+                        if (itm != null)
+                        asycudadocumentitem.PreviousItems.Remove(itm.DTO);
+                    }
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+                    break;
                 
-  //          }
-  //      }
+            }
+        }
 
         ObservableCollection<xcuda_Supplementary_unit> _xcuda_Supplementary_unit = null;
         public  ObservableCollection<xcuda_Supplementary_unit> xcuda_Supplementary_unit
@@ -804,7 +834,7 @@ public string WarehouseError
 				if (value != null)
 					this.asycudadocumentitem.xcuda_Supplementary_unit = new ChangeTrackingCollection<DTO.xcuda_Supplementary_unit>(value.Select(x => x.DTO).ToList());
                 _xcuda_Supplementary_unit = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_xcuda_Supplementary_unit != null)
 				_xcuda_Supplementary_unit.CollectionChanged += xcuda_Supplementary_unit_CollectionChanged;               
 				NotifyPropertyChanged("xcuda_Supplementary_unit");
@@ -821,7 +851,7 @@ public string WarehouseError
                         if (itm != null)
                         asycudadocumentitem.xcuda_Supplementary_unit.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (xcuda_Supplementary_unit itm in e.OldItems)
@@ -829,7 +859,7 @@ public string WarehouseError
                         if (itm != null)
                         asycudadocumentitem.xcuda_Supplementary_unit.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -849,11 +879,11 @@ public string WarehouseError
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

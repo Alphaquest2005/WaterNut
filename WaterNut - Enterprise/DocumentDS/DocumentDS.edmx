@@ -139,8 +139,8 @@
           <Property Name="DocumentLines" Type="int" />
           <Property Name="Cancelled" Type="bit" />
           <Property Name="TotalWeight" Type="float" />
-          <Property Name="TotalFrieght" Type="float" />
-          <Property Name="TotalInternalFrieght" Type="float" />
+          <Property Name="TotalFreight" Type="float" />
+          <Property Name="TotalInternalFreight" Type="float" />
           <Property Name="TotalPackages" Type="int" />
         </EntityType>
         <EntityType Name="xcuda_Border_information">
@@ -1682,7 +1682,6 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
           <EntitySet Name="xcuda_Assessment" EntityType="WaterNutDBModel.xcuda_Assessment" />
           <EntitySet Name="xcuda_Assessment_notice" EntityType="WaterNutDBModel.xcuda_Assessment_notice" />
           <EntitySet Name="xcuda_ASYCUDA" EntityType="WaterNutDBModel.xcuda_ASYCUDA" />
-          <EntitySet Name="xcuda_ASYCUDA_ExtendedProperties" EntityType="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" />
           <EntitySet Name="xcuda_Border_information" EntityType="WaterNutDBModel.xcuda_Border_information" />
           <EntitySet Name="xcuda_Border_office" EntityType="WaterNutDBModel.xcuda_Border_office" />
           <EntitySet Name="xcuda_Consignee" EntityType="WaterNutDBModel.xcuda_Consignee" />
@@ -1737,25 +1736,9 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
             <End Role="Document_Type" EntitySet="Document_Type" />
             <End Role="AsycudaDocumentSet" EntitySet="AsycudaDocumentSets" />
           </AssociationSet>
-          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet">
-            <End Role="AsycudaDocumentSet" EntitySet="AsycudaDocumentSets" />
-            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
-          </AssociationSet>
           <AssociationSet Name="FK_Customs_Procedure_Document_Type" Association="WaterNutDBModel.FK_Customs_Procedure_Document_Type">
             <End Role="Document_Type" EntitySet="Document_Type" />
             <End Role="Customs_Procedure" EntitySet="Customs_Procedure" />
-          </AssociationSet>
-          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure">
-            <End Role="Customs_Procedure" EntitySet="Customs_Procedure" />
-            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
-          </AssociationSet>
-          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type">
-            <End Role="Document_Type" EntitySet="Document_Type" />
-            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
-          </AssociationSet>
-          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate">
-            <End Role="ExportTemplate" EntitySet="ExportTemplates" />
-            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
           </AssociationSet>
           <AssociationSet Name="FK_Identification_Assessment" Association="WaterNutDBModel.FK_Identification_Assessment">
             <End Role="xcuda_Identification" EntitySet="xcuda_Identification" />
@@ -1816,10 +1799,6 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
           <AssociationSet Name="FK_ASYCUDA_Warehouse" Association="WaterNutDBModel.FK_ASYCUDA_Warehouse">
             <End Role="xcuda_ASYCUDA" EntitySet="xcuda_ASYCUDA" />
             <End Role="xcuda_Warehouse" EntitySet="xcuda_Warehouse" />
-          </AssociationSet>
-          <AssociationSet Name="FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" Association="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA">
-            <End Role="xcuda_ASYCUDA" EntitySet="xcuda_ASYCUDA" />
-            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
           </AssociationSet>
           <AssociationSet Name="FK_xcuda_Traders_xcuda_ASYCUDA" Association="WaterNutDBModel.FK_xcuda_Traders_xcuda_ASYCUDA">
             <End Role="xcuda_ASYCUDA" EntitySet="xcuda_ASYCUDA" />
@@ -1968,6 +1947,27 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
             <End Role="AsycudaDocumentSet" EntitySet="AsycudaDocumentSets" />
             <End Role="AsycudaDocumentSetEntryData" EntitySet="AsycudaDocumentSetEntryDatas" />
           </AssociationSet>
+          <EntitySet Name="xcuda_ASYCUDA_ExtendedProperties" EntityType="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" />
+          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet">
+            <End Role="AsycudaDocumentSet" EntitySet="AsycudaDocumentSets" />
+            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure">
+            <End Role="Customs_Procedure" EntitySet="Customs_Procedure" />
+            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type">
+            <End Role="Document_Type" EntitySet="Document_Type" />
+            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate" Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate">
+            <End Role="ExportTemplate" EntitySet="ExportTemplates" />
+            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" Association="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA">
+            <End Role="xcuda_ASYCUDA" EntitySet="xcuda_ASYCUDA" />
+            <End Role="xcuda_ASYCUDA_ExtendedProperties" EntitySet="xcuda_ASYCUDA_ExtendedProperties" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AsycudaDocumentSet">
           <Key>
@@ -1987,13 +1987,13 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
           <Property Name="StartingFileCount" Type="Int32" />
           <NavigationProperty Name="Customs_Procedure" Relationship="WaterNutDBModel.FK_AsycudaDocumentSet_Customs_Procedure" FromRole="AsycudaDocumentSet" ToRole="Customs_Procedure" />
           <NavigationProperty Name="Document_Type" Relationship="WaterNutDBModel.FK_AsycudaDocumentSet_Document_Type" FromRole="AsycudaDocumentSet" ToRole="Document_Type" />
-          <NavigationProperty Name="xcuda_ASYCUDA_ExtendedProperties" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" FromRole="AsycudaDocumentSet" ToRole="xcuda_ASYCUDA_ExtendedProperties" />
           <Property Name="ApportionMethod" Type="Int32" />
           <Property Name="TotalWeight" Type="Double" />
           <Property Name="TotalFreight" Type="Double" />
           <Property Name="TotalInternalFreight" Type="Double" />
           <Property Name="TotalPackages" Type="Int32" />
           <NavigationProperty Name="AsycudaDocumentSetEntryDatas" Relationship="WaterNutDBModel.FK_AsycudaDocumentSetEntryData_AsycudaDocumentSet" FromRole="AsycudaDocumentSet" ToRole="AsycudaDocumentSetEntryData" />
+          <NavigationProperty Name="xcuda_ASYCUDA_ExtendedProperties" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" FromRole="AsycudaDocumentSet" ToRole="xcuda_ASYCUDA_ExtendedProperties" />
         </EntityType>
         <EntityType Name="Customs_Procedure">
           <Key>
@@ -2089,45 +2089,10 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
           <NavigationProperty Name="xcuda_Transport" Relationship="WaterNutDBModel.FK_ASYCUDA_Transport" FromRole="xcuda_ASYCUDA" ToRole="xcuda_Transport" />
           <NavigationProperty Name="xcuda_Valuation" Relationship="WaterNutDBModel.FK_ASYCUDA_Valuation" FromRole="xcuda_ASYCUDA" ToRole="xcuda_Valuation" />
           <NavigationProperty Name="xcuda_Warehouse" Relationship="WaterNutDBModel.FK_ASYCUDA_Warehouse" FromRole="xcuda_ASYCUDA" ToRole="xcuda_Warehouse" />
-          <NavigationProperty Name="xcuda_ASYCUDA_ExtendedProperties" Relationship="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" FromRole="xcuda_ASYCUDA" ToRole="xcuda_ASYCUDA_ExtendedProperties" />
           <NavigationProperty Name="xcuda_Traders" Relationship="WaterNutDBModel.FK_xcuda_Traders_xcuda_ASYCUDA" FromRole="xcuda_ASYCUDA" ToRole="xcuda_Traders" />
           <NavigationProperty Name="Ex" Relationship="WaterNutDBModel.xcuda_ASYCUDAxcuda_ASYCUDAEx" FromRole="xcuda_ASYCUDA" ToRole="xcuda_ASYCUDAEx" />
-          <NavigationProperty Name="AsycudaDocumentEntryDatas" Relationship="WaterNutDBModel.FK_AsycudaDocumentEntryData_xcuda_ASYCUDA" FromRole="xcuda_ASYCUDA" ToRole="AsycudaDocumentEntryData" /><a:DomainInterfaceProperty xmlns:a="http://schemas.tempuri.com/DomainInterfaceProperty">IDocument</a:DomainInterfaceProperty>
-        </EntityType>
-        <EntityType Name="xcuda_ASYCUDA_ExtendedProperties">
-          <Key>
-            <PropertyRef Name="ASYCUDA_Id" />
-          </Key>
-          <Property Name="ASYCUDA_Id" Type="Int32" Nullable="false" />
-          <Property Name="AsycudaDocumentSetId" Type="Int32" />
-          <Property Name="FileNumber" Type="Int32" />
-          <Property Name="IsManuallyAssessed" Type="Boolean" />
-          <Property Name="CNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
-          <Property Name="ReferenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Customs_ProcedureId" Type="Int32" />
-          <Property Name="Document_TypeId" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ExportTemplateId" Type="Int32" />
-          <Property Name="BLNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AutoUpdate" Type="Boolean" />
-          <Property Name="EffectiveRegistrationDate" Type="DateTime" Precision="3"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IDocument.EffectiveRegistrationDate</a:ImplementsProperty></Property>
-          <Property Name="DoNotAllocate" Type="Boolean" />
-          <NavigationProperty Name="AsycudaDocumentSet" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="AsycudaDocumentSet" />
-          <NavigationProperty Name="Customs_Procedure" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="Customs_Procedure" />
-          <NavigationProperty Name="Document_Type" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="Document_Type" />
-          <NavigationProperty Name="ExportTemplate" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="ExportTemplate" />
-          <NavigationProperty Name="xcuda_ASYCUDA" Relationship="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="xcuda_ASYCUDA" />
-          <Property Name="ImportComplete" Type="Boolean" Nullable="false" />
-          <Property Name="DocumentLines" Type="Int32" />
-          <Property Name="Cancelled" Type="Boolean" />
-          <Property Name="ApportionMethod" Type="Int32" />
-          <Property Name="TotalWeight" Type="Double" />
-          <Property Name="TotalFreight" Type="Double" />
-          <Property Name="TotalInternalFreight" Type="Double" />
-          <Property Name="TotalPackages" Type="Int32" />
-          <Property Name="TotalFrieght" Type="Double" />
-          <Property Name="TotalInternalFrieght" Type="Double" />
+          <NavigationProperty Name="AsycudaDocumentEntryDatas" Relationship="WaterNutDBModel.FK_AsycudaDocumentEntryData_xcuda_ASYCUDA" FromRole="xcuda_ASYCUDA" ToRole="AsycudaDocumentEntryData" />
+          <NavigationProperty Name="xcuda_ASYCUDA_ExtendedProperties" Relationship="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" FromRole="xcuda_ASYCUDA" ToRole="xcuda_ASYCUDA_ExtendedProperties" /><a:DomainInterfaceProperty xmlns:a="http://schemas.tempuri.com/DomainInterfaceProperty">IDocument</a:DomainInterfaceProperty>
         </EntityType>
         <EntityType Name="xcuda_Border_information">
           <Key>
@@ -2654,20 +2619,6 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet">
-          <End Type="WaterNutDBModel.AsycudaDocumentSet" Role="AsycudaDocumentSet" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AsycudaDocumentSet">
-              <PropertyRef Name="AsycudaDocumentSetId" />
-            </Principal>
-            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
-              <PropertyRef Name="AsycudaDocumentSetId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Customs_Procedure_Document_Type">
           <End Type="WaterNutDBModel.Document_Type" Role="Document_Type" Multiplicity="1" />
           <End Type="WaterNutDBModel.Customs_Procedure" Role="Customs_Procedure" Multiplicity="*" />
@@ -2677,42 +2628,6 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
             </Principal>
             <Dependent Role="Customs_Procedure">
               <PropertyRef Name="Document_TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure">
-          <End Type="WaterNutDBModel.Customs_Procedure" Role="Customs_Procedure" Multiplicity="0..1" />
-          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customs_Procedure">
-              <PropertyRef Name="Customs_ProcedureId" />
-            </Principal>
-            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
-              <PropertyRef Name="Customs_ProcedureId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type">
-          <End Type="WaterNutDBModel.Document_Type" Role="Document_Type" Multiplicity="0..1" />
-          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Document_Type">
-              <PropertyRef Name="Document_TypeId" />
-            </Principal>
-            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
-              <PropertyRef Name="Document_TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate">
-          <End Type="WaterNutDBModel.ExportTemplate" Role="ExportTemplate" Multiplicity="0..1" />
-          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ExportTemplate">
-              <PropertyRef Name="ExportTemplateId" />
-            </Principal>
-            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
-              <PropertyRef Name="ExportTemplateId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2922,20 +2837,6 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
               <PropertyRef Name="ASYCUDA_Id" />
             </Principal>
             <Dependent Role="xcuda_Warehouse">
-              <PropertyRef Name="ASYCUDA_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA">
-          <End Type="WaterNutDBModel.xcuda_ASYCUDA" Role="xcuda_ASYCUDA" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="xcuda_ASYCUDA">
-              <PropertyRef Name="ASYCUDA_Id" />
-            </Principal>
-            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
               <PropertyRef Name="ASYCUDA_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -3468,6 +3369,103 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="xcuda_ASYCUDA_ExtendedProperties">
+          <Key>
+            <PropertyRef Name="ASYCUDA_Id" />
+          </Key>
+          <Property Name="ASYCUDA_Id" Type="Int32" Nullable="false" />
+          <Property Name="AsycudaDocumentSetId" Type="Int32" />
+          <Property Name="FileNumber" Type="Int32" />
+          <Property Name="IsManuallyAssessed" Type="Boolean" />
+          <Property Name="CNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Customs_ProcedureId" Type="Int32" />
+          <Property Name="Document_TypeId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExportTemplateId" Type="Int32" />
+          <Property Name="BLNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AutoUpdate" Type="Boolean" />
+          <Property Name="EffectiveRegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="ApportionMethod" Type="Int32" />
+          <Property Name="DoNotAllocate" Type="Boolean" />
+          <Property Name="ImportComplete" Type="Boolean" Nullable="false" />
+          <Property Name="DocumentLines" Type="Int32" />
+          <Property Name="Cancelled" Type="Boolean" />
+          <Property Name="TotalWeight" Type="Double" />
+          <Property Name="TotalFreight" Type="Double" />
+          <Property Name="TotalInternalFreight" Type="Double" />
+          <Property Name="TotalPackages" Type="Int32" />
+          <NavigationProperty Name="AsycudaDocumentSet" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="AsycudaDocumentSet" />
+          <NavigationProperty Name="Customs_Procedure" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="Customs_Procedure" />
+          <NavigationProperty Name="Document_Type" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="Document_Type" />
+          <NavigationProperty Name="ExportTemplate" Relationship="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="ExportTemplate" />
+          <NavigationProperty Name="xcuda_ASYCUDA" Relationship="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" FromRole="xcuda_ASYCUDA_ExtendedProperties" ToRole="xcuda_ASYCUDA" />
+        </EntityType>
+        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet">
+          <End Type="WaterNutDBModel.AsycudaDocumentSet" Role="AsycudaDocumentSet" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AsycudaDocumentSet">
+              <PropertyRef Name="AsycudaDocumentSetId" />
+            </Principal>
+            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
+              <PropertyRef Name="AsycudaDocumentSetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure">
+          <End Type="WaterNutDBModel.Customs_Procedure" Role="Customs_Procedure" Multiplicity="0..1" />
+          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customs_Procedure">
+              <PropertyRef Name="Customs_ProcedureId" />
+            </Principal>
+            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
+              <PropertyRef Name="Customs_ProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type">
+          <End Type="WaterNutDBModel.Document_Type" Role="Document_Type" Multiplicity="0..1" />
+          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document_Type">
+              <PropertyRef Name="Document_TypeId" />
+            </Principal>
+            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
+              <PropertyRef Name="Document_TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate">
+          <End Type="WaterNutDBModel.ExportTemplate" Role="ExportTemplate" Multiplicity="0..1" />
+          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExportTemplate">
+              <PropertyRef Name="ExportTemplateId" />
+            </Principal>
+            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
+              <PropertyRef Name="ExportTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA">
+          <End Type="WaterNutDBModel.xcuda_ASYCUDA" Role="xcuda_ASYCUDA" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Role="xcuda_ASYCUDA_ExtendedProperties" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="xcuda_ASYCUDA">
+              <PropertyRef Name="ASYCUDA_Id" />
+            </Principal>
+            <Dependent Role="xcuda_ASYCUDA_ExtendedProperties">
+              <PropertyRef Name="ASYCUDA_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3572,35 +3570,6 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
                 <ScalarProperty Name="EntryTimeStamp" ColumnName="EntryTimeStamp" />
                 <ScalarProperty Name="ASYCUDA_Id" ColumnName="ASYCUDA_Id" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="xcuda_ASYCUDA_ExtendedProperties">
-            <EntityTypeMapping TypeName="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties">
-              <MappingFragment StoreEntitySet="xcuda_ASYCUDA_ExtendedProperties">
-                <ScalarProperty Name="TotalInternalFrieght" ColumnName="TotalInternalFrieght" />
-                <ScalarProperty Name="TotalFrieght" ColumnName="TotalFrieght" />
-                <ScalarProperty Name="TotalPackages" ColumnName="TotalPackages" />
-                <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
-                <ScalarProperty Name="ApportionMethod" ColumnName="ApportionMethod" />
-                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
-                <ScalarProperty Name="DocumentLines" ColumnName="DocumentLines" />
-                <ScalarProperty Name="ImportComplete" ColumnName="ImportComplete" />
-                <ScalarProperty Name="DoNotAllocate" ColumnName="DoNotAllocate" />
-                <ScalarProperty Name="EffectiveRegistrationDate" ColumnName="EffectiveRegistrationDate" />
-                <ScalarProperty Name="AutoUpdate" ColumnName="AutoUpdate" />
-                <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
-                <ScalarProperty Name="ExportTemplateId" ColumnName="ExportTemplateId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Document_TypeId" ColumnName="Document_TypeId" />
-                <ScalarProperty Name="Customs_ProcedureId" ColumnName="Customs_ProcedureId" />
-                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
-                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
-                <ScalarProperty Name="CNumber" ColumnName="CNumber" />
-                <ScalarProperty Name="IsManuallyAssessed" ColumnName="IsManuallyAssessed" />
-                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
-                <ScalarProperty Name="AsycudaDocumentSetId" ColumnName="AsycudaDocumentSetId" />
-                <ScalarProperty Name="ASYCUDA_Id" ColumnName="ASYCUDA_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4095,6 +4064,35 @@ FROM [dbo].[xcuda_ASYCUDAEx] AS [xcuda_ASYCUDAEx]</DefiningQuery>
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="EntryDataId" ColumnName="EntryDataId" />
                 <ScalarProperty Name="AsycudaDocumentSetId" ColumnName="AsycudaDocumentSetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="xcuda_ASYCUDA_ExtendedProperties">
+            <EntityTypeMapping TypeName="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties">
+              <MappingFragment StoreEntitySet="xcuda_ASYCUDA_ExtendedProperties">
+                <ScalarProperty Name="TotalPackages" ColumnName="TotalPackages" />
+                <ScalarProperty Name="TotalInternalFreight" ColumnName="TotalInternalFreight" />
+                <ScalarProperty Name="TotalFreight" ColumnName="TotalFreight" />
+                <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="DocumentLines" ColumnName="DocumentLines" />
+                <ScalarProperty Name="ImportComplete" ColumnName="ImportComplete" />
+                <ScalarProperty Name="DoNotAllocate" ColumnName="DoNotAllocate" />
+                <ScalarProperty Name="ApportionMethod" ColumnName="ApportionMethod" />
+                <ScalarProperty Name="EffectiveRegistrationDate" ColumnName="EffectiveRegistrationDate" />
+                <ScalarProperty Name="AutoUpdate" ColumnName="AutoUpdate" />
+                <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+                <ScalarProperty Name="ExportTemplateId" ColumnName="ExportTemplateId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Document_TypeId" ColumnName="Document_TypeId" />
+                <ScalarProperty Name="Customs_ProcedureId" ColumnName="Customs_ProcedureId" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="CNumber" ColumnName="CNumber" />
+                <ScalarProperty Name="IsManuallyAssessed" ColumnName="IsManuallyAssessed" />
+                <ScalarProperty Name="FileNumber" ColumnName="FileNumber" />
+                <ScalarProperty Name="AsycudaDocumentSetId" ColumnName="AsycudaDocumentSetId" />
+                <ScalarProperty Name="ASYCUDA_Id" ColumnName="ASYCUDA_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

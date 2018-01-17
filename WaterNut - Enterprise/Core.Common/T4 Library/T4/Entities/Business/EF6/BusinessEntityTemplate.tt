@@ -43,17 +43,18 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
 
-using Core.Common.DataLayer.Entities;
+using Core.Common.Business.Entities;
 using <#=projectName #>.Interfaces;
+using TrackableEntities;
 
-namespace <#= container.Name #>.DataLayer.Entities
+namespace <#= container.Name #>.Business.Entities
 {
 <#+ 
     //[JsonObject(IsReference = true)]
     //[DataContract(IsReference = true)]#>
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/<#=projectName #>")]
-    public partial class <#= entity.Name #> : <#=entity.BaseType == null?"BaseEntity<" + entity.Name + ">, ITrackable":entity.BaseType.Name + ""#> , <#="I" + entity.Name#>
+    public partial class <#= entity.Name #> : <#=entity.BaseType == null?"BaseEntity<" + entity.Name + ">, ITrackable":entity.BaseType.Name + ""#> 
     {
 <#+
     var collectionNavigations = entity.NavigationProperties.Where(
@@ -70,7 +71,7 @@ namespace <#= container.Name #>.DataLayer.Entities
         foreach (var navProperty in collectionNavigations)
         {
 #>
-            this.<#= code.Escape(navProperty) #> = new List<I<#= code.Escape(navProperty.ToEndMember.GetEntityType()) #>>();
+            this.<#= code.Escape(navProperty) #> = new List<<#= code.Escape(navProperty.ToEndMember.GetEntityType()) #>>();
 <#+
         }
 #>
@@ -119,14 +120,14 @@ namespace <#= container.Name #>.DataLayer.Entities
         {
 #>
         [DataMember]
-        public List<I<#= code.Escape(navProperty.ToEndMember.GetEntityType()) #>> <#= code.Escape(navProperty) #> { get; set; }
+        public List<<#= code.Escape(navProperty.ToEndMember.GetEntityType()) #>> <#= code.Escape(navProperty) #> { get; set; }
 <#+
         }
         else
         {
 #>
         [DataMember]
-        public I<#= code.Escape(navProperty.ToEndMember.GetEntityType()) #> <#= code.Escape(navProperty) #> { get; set; }
+        public <#= code.Escape(navProperty.ToEndMember.GetEntityType()) #> <#= code.Escape(navProperty) #> { get; set; }
 <#+
         }
     }

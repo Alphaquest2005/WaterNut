@@ -10,10 +10,11 @@
             <PropertyRef Name="ItemNumber" />
           </Key>
           <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="60" />
           <Property Name="TariffCode" Type="varchar" MaxLength="8" />
           <Property Name="EntryTimeStamp" Type="datetime" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="OverShortDetailAllocations">
           <Key>
@@ -85,23 +86,24 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocument' does no
           <Property Name="Customs_clearance_office_code" Type="varchar(max)" />
           <Property Name="Lines" Type="int" />
           <Property Name="ImportComplete" Type="bit" />
+          <Property Name="Cancelled" Type="bit" />
+          <Property Name="TotalCIF" Type="float" />
+          <Property Name="TotalGrossWeight" Type="float" />
+          <Property Name="AssessmentDate" Type="datetime" />
+          <Property Name="TotalFreight" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocumentItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AsycudaDocumentItem">
           <Key>
+            
+            
             <PropertyRef Name="Item_Id" />
-            
-            
-            
-            
-            
-            
           </Key>
           <Property Name="Item_Id" Type="int" Nullable="false" />
-          <Property Name="AsycudaDocumentId" Type="int" Nullable="false" />
+          <Property Name="AsycudaDocumentId" Type="int" />
           <Property Name="EntryDataDetailsId" Type="int" />
-          <Property Name="LineNumber" Type="int" Nullable="false" />
+          <Property Name="LineNumber" Type="int" />
           <Property Name="IsAssessed" Type="bit" />
           <Property Name="DoNotAllocate" Type="bit" />
           <Property Name="DoNotEX" Type="bit" />
@@ -109,7 +111,7 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocumentItem' doe
           <Property Name="Description_of_goods" Type="varchar(max)" />
           <Property Name="Commercial_Description" Type="varchar(max)" />
           <Property Name="Gross_weight_itm" Type="float" Nullable="false" />
-          <Property Name="Net_weight_itm" Type="float" />
+          <Property Name="Net_weight_itm" Type="float" Nullable="false" />
           <Property Name="Item_price" Type="float" />
           <Property Name="ItemQuantity" Type="float" />
           <Property Name="Suppplementary_unit_code" Type="nvarchar(max)" />
@@ -122,20 +124,37 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocumentItem' doe
           <Property Name="Total_CIF_itm" Type="float" />
           <Property Name="Freight" Type="float" />
           <Property Name="Statistical_value" Type="float" />
-          <Property Name="DPQtyAllocated" Type="float" Nullable="false" />
-          <Property Name="DFQtyAllocated" Type="float" Nullable="false" />
+          <Property Name="DPQtyAllocated" Type="float" />
+          <Property Name="DFQtyAllocated" Type="float" />
+          <Property Name="ImportComplete" Type="bit" />
+          <Property Name="CNumber" Type="varchar(max)" />
+          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="Number_of_packages" Type="float" />
+          <Property Name="Country_of_origin_code" Type="varchar(max)" />
+          <Property Name="PiWeight" Type="float" />
+          <Property Name="Currency_rate" Type="float" />
+          <Property Name="Currency_code" Type="varchar(max)" />
+          <Property Name="InvalidHSCode" Type="bit" />
+          <Property Name="WarehouseError" Type="varchar" MaxLength="50" />
           <Property Name="PiQuantity" Type="float" />
-          <Property Name="ImportComplete" Type="bit" Nullable="false" />
+          <Property Name="Cancelled" Type="bit" />
+          <Property Name="SalesFactor" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.OverShortAllocationsEX' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OverShortAllocationsEX">
           <Key>
             <PropertyRef Name="OverShortAllocationId" />
+            
+            
+            
+            
+            
+            
           </Key>
           <Property Name="OverShortAllocationId" Type="int" Nullable="false" />
           <Property Name="OverShortDetailId" Type="int" Nullable="false" />
-          <Property Name="Item_Id" Type="int" Nullable="false" />
+          <Property Name="Item_Id" Type="int" />
           <Property Name="OversShortsId" Type="int" Nullable="false" />
           <Property Name="ReceivedQty" Type="float" />
           <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
@@ -153,7 +172,7 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.OverShortAllocationsEX' 
           <Property Name="AllocatedValue" Type="float" />
           <Property Name="ReceivedValue" Type="float" />
           <Property Name="InvoiceValue" Type="float" />
-          <Property Name="LineNumber" Type="int" Nullable="false" />
+          <Property Name="LineNumber" Type="int" />
           <Property Name="PiQuantity" Type="float" />
           <Property Name="QtyAllocated" Type="float" Nullable="false" />
           <Property Name="AllocationStatus" Type="varchar(max)" />
@@ -266,7 +285,12 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.OversShortEX' does not h
 [AsycudaDocument].[Manifest_reference_number] AS [Manifest_reference_number], 
 [AsycudaDocument].[Customs_clearance_office_code] AS [Customs_clearance_office_code], 
 [AsycudaDocument].[Lines] AS [Lines], 
-[AsycudaDocument].[ImportComplete] AS [ImportComplete]
+[AsycudaDocument].[ImportComplete] AS [ImportComplete], 
+[AsycudaDocument].[Cancelled] AS [Cancelled], 
+[AsycudaDocument].[TotalCIF] AS [TotalCIF], 
+[AsycudaDocument].[TotalGrossWeight] AS [TotalGrossWeight], 
+[AsycudaDocument].[AssessmentDate] AS [AssessmentDate], 
+[AsycudaDocument].[TotalFreight] AS [TotalFreight]
 FROM [dbo].[AsycudaDocument] AS [AsycudaDocument]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="AsycudaDocumentItem" EntityType="Self.AsycudaDocumentItem" store:Type="Views" store:Schema="dbo">
@@ -297,8 +321,19 @@ FROM [dbo].[AsycudaDocument] AS [AsycudaDocument]</DefiningQuery>
 [AsycudaDocumentItem].[Statistical_value] AS [Statistical_value], 
 [AsycudaDocumentItem].[DPQtyAllocated] AS [DPQtyAllocated], 
 [AsycudaDocumentItem].[DFQtyAllocated] AS [DFQtyAllocated], 
+[AsycudaDocumentItem].[ImportComplete] AS [ImportComplete], 
+[AsycudaDocumentItem].[CNumber] AS [CNumber], 
+[AsycudaDocumentItem].[RegistrationDate] AS [RegistrationDate], 
+[AsycudaDocumentItem].[Number_of_packages] AS [Number_of_packages], 
+[AsycudaDocumentItem].[Country_of_origin_code] AS [Country_of_origin_code], 
+[AsycudaDocumentItem].[PiWeight] AS [PiWeight], 
+[AsycudaDocumentItem].[Currency_rate] AS [Currency_rate], 
+[AsycudaDocumentItem].[Currency_code] AS [Currency_code], 
+[AsycudaDocumentItem].[InvalidHSCode] AS [InvalidHSCode], 
+[AsycudaDocumentItem].[WarehouseError] AS [WarehouseError], 
 [AsycudaDocumentItem].[PiQuantity] AS [PiQuantity], 
-[AsycudaDocumentItem].[ImportComplete] AS [ImportComplete]
+[AsycudaDocumentItem].[Cancelled] AS [Cancelled], 
+[AsycudaDocumentItem].[SalesFactor] AS [SalesFactor]
 FROM [dbo].[AsycudaDocumentItem] AS [AsycudaDocumentItem]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="OverShortAllocationsEX" EntityType="Self.OverShortAllocationsEX" store:Type="Views" store:Schema="dbo">
@@ -369,11 +404,12 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
             <PropertyRef Name="ItemNumber" />
           </Key>
           <Property Name="ItemNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.ItemNumber</a:ImplementsProperty></Property>
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.Description</a:ImplementsProperty></Property>
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.Description</a:ImplementsProperty></Property>
           <Property Name="Category" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="TariffCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.TariffCode</a:ImplementsProperty></Property>
           <Property Name="EntryTimeStamp" Type="DateTime" Precision="3" />
           <NavigationProperty Name="OverShortDetailsEXes" Relationship="Model.InventoryItemOverShortDetailsEX" FromRole="InventoryItem" ToRole="OverShortDetailsEX" />
+          <Property Name="Quantity" Type="Int32" />
           <a:DomainInterfaceProperty xmlns:a="http://schemas.tempuri.com/DomainInterfaceProperty">IInventoryItem</a:DomainInterfaceProperty>
         </EntityType>
         <EntityType Name="OverShortDetailAllocation">
@@ -476,11 +512,11 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           <Property Name="AllocatedValue" Type="Double"><a:DisplayTotalsProperty xmlns:a="http://schemas.tempuri.com/DisplayTotalsProperty">True</a:DisplayTotalsProperty></Property>
           <Property Name="ReceivedValue" Type="Double"><a:DisplayTotalsProperty xmlns:a="http://schemas.tempuri.com/DisplayTotalsProperty">True</a:DisplayTotalsProperty></Property>
           <Property Name="InvoiceValue" Type="Double"><a:DisplayTotalsProperty xmlns:a="http://schemas.tempuri.com/DisplayTotalsProperty">True</a:DisplayTotalsProperty></Property>
-          <Property Name="LineNumber" Type="Int32" Nullable="false" />
+          <Property Name="LineNumber" Type="Int32" />
           <Property Name="PiQuantity" Type="Double" />
           <NavigationProperty Name="OverShortDetailsEX" Relationship="Model.OverShortDetailsEXOverShortAllocationsEX" FromRole="OverShortAllocationsEX" ToRole="OverShortDetailsEX" />
           <NavigationProperty Name="AsycudaDocumentItem" Relationship="Model.AsycudaDocumentItemOverShortAllocationsEX" FromRole="OverShortAllocationsEX" ToRole="AsycudaDocumentItem" />
-          <Property Name="Item_Id" Type="Int32" Nullable="false" />
+          <Property Name="Item_Id" Type="Int32" />
           <Property Name="OverShortDetailStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="QtyAllocated" Type="Double" Nullable="false" />
           <Property Name="AllocationStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -502,9 +538,9 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
             <PropertyRef Name="Item_Id" />
           </Key>
           <Property Name="Item_Id" Type="Int32" Nullable="false" />
-          <Property Name="AsycudaDocumentId" Type="Int32" Nullable="false" />
+          <Property Name="AsycudaDocumentId" Type="Int32" />
           <Property Name="EntryDataDetailsId" Type="Int32" />
-          <Property Name="LineNumber" Type="Int32" Nullable="false" />
+          <Property Name="LineNumber" Type="Int32" />
           <Property Name="IsAssessed" Type="Boolean" />
           <Property Name="DoNotAllocate" Type="Boolean" />
           <Property Name="DoNotEX" Type="Boolean" />
@@ -512,7 +548,7 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           <Property Name="Description_of_goods" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Commercial_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Gross_weight_itm" Type="Double" Nullable="false" />
-          <Property Name="Net_weight_itm" Type="Double" />
+          <Property Name="Net_weight_itm" Type="Double" Nullable="false" />
           <Property Name="Item_price" Type="Double" />
           <Property Name="ItemQuantity" Type="Double" />
           <Property Name="Suppplementary_unit_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -525,12 +561,23 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           <Property Name="Total_CIF_itm" Type="Double" />
           <Property Name="Freight" Type="Double" />
           <Property Name="Statistical_value" Type="Double" />
-          <Property Name="DPQtyAllocated" Type="Double" Nullable="false" />
-          <Property Name="DFQtyAllocated" Type="Double" Nullable="false" />
+          <Property Name="DPQtyAllocated" Type="Double" />
+          <Property Name="DFQtyAllocated" Type="Double" />
           <Property Name="PiQuantity" Type="Double" />
           <NavigationProperty Name="AsycudaDocument" Relationship="Model.AsycudaDocumentAsycudaDocumentItem" FromRole="AsycudaDocumentItem" ToRole="AsycudaDocument" />
-          <Property Name="ImportComplete" Type="Boolean" Nullable="false" />
+          <Property Name="ImportComplete" Type="Boolean" />
           <NavigationProperty Name="OverShortAllocationsEXes" Relationship="Model.AsycudaDocumentItemOverShortAllocationsEX" FromRole="AsycudaDocumentItem" ToRole="OverShortAllocationsEX" />
+          <Property Name="CNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="Number_of_packages" Type="Double" />
+          <Property Name="Country_of_origin_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PiWeight" Type="Double" />
+          <Property Name="Currency_rate" Type="Double" />
+          <Property Name="Currency_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="InvalidHSCode" Type="Boolean" />
+          <Property Name="WarehouseError" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cancelled" Type="Boolean" />
+          <Property Name="SalesFactor" Type="Double" />
         </EntityType>
         <EntityType Name="AsycudaDocument">
           <Key>
@@ -562,9 +609,14 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           <Property Name="Lines" Type="Int32" />
           <NavigationProperty Name="AsycudaDocumentItems" Relationship="Model.AsycudaDocumentAsycudaDocumentItem" FromRole="AsycudaDocument" ToRole="AsycudaDocumentItem" />
           <Property Name="ImportComplete" Type="Boolean" />
+          <Property Name="Cancelled" Type="Boolean" />
+          <Property Name="TotalCIF" Type="Double" />
+          <Property Name="TotalGrossWeight" Type="Double" />
+          <Property Name="AssessmentDate" Type="DateTime" Precision="3" />
+          <Property Name="TotalFreight" Type="Double" />
         </EntityType>
         <Association Name="AsycudaDocumentAsycudaDocumentItem">
-          <End Type="Model.AsycudaDocument" Role="AsycudaDocument" Multiplicity="1" />
+          <End Type="Model.AsycudaDocument" Role="AsycudaDocument" Multiplicity="0..1" />
           <End Type="Model.AsycudaDocumentItem" Role="AsycudaDocumentItem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AsycudaDocument">
@@ -646,7 +698,7 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           </ReferentialConstraint>
         </Association>
         <Association Name="AsycudaDocumentItemOverShortAllocationsEX">
-          <End Type="Model.AsycudaDocumentItem" Role="AsycudaDocumentItem" Multiplicity="1" />
+          <End Type="Model.AsycudaDocumentItem" Role="AsycudaDocumentItem" Multiplicity="0..1" />
           <End Type="Model.OverShortAllocationsEX" Role="OverShortAllocationsEX" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AsycudaDocumentItem">
@@ -680,6 +732,7 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           <EntitySetMapping Name="InventoryItems">
             <EntityTypeMapping TypeName="Model.InventoryItem">
               <MappingFragment StoreEntitySet="InventoryItems">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ItemNumber" ColumnName="ItemNumber" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
@@ -770,6 +823,17 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           <EntitySetMapping Name="AsycudaDocumentItems">
             <EntityTypeMapping TypeName="Model.AsycudaDocumentItem">
               <MappingFragment StoreEntitySet="AsycudaDocumentItem">
+                <ScalarProperty Name="SalesFactor" ColumnName="SalesFactor" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="WarehouseError" ColumnName="WarehouseError" />
+                <ScalarProperty Name="InvalidHSCode" ColumnName="InvalidHSCode" />
+                <ScalarProperty Name="Currency_code" ColumnName="Currency_code" />
+                <ScalarProperty Name="Currency_rate" ColumnName="Currency_rate" />
+                <ScalarProperty Name="PiWeight" ColumnName="PiWeight" />
+                <ScalarProperty Name="Country_of_origin_code" ColumnName="Country_of_origin_code" />
+                <ScalarProperty Name="Number_of_packages" ColumnName="Number_of_packages" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="CNumber" ColumnName="CNumber" />
                 <ScalarProperty Name="ImportComplete" ColumnName="ImportComplete" />
                 <ScalarProperty Name="PiQuantity" ColumnName="PiQuantity" />
                 <ScalarProperty Name="DFQtyAllocated" ColumnName="DFQtyAllocated" />
@@ -804,6 +868,11 @@ FROM [dbo].[OversShortEX] AS [OversShortEX]</DefiningQuery>
           <EntitySetMapping Name="AsycudaDocuments">
             <EntityTypeMapping TypeName="Model.AsycudaDocument">
               <MappingFragment StoreEntitySet="AsycudaDocument">
+                <ScalarProperty Name="TotalFreight" ColumnName="TotalFreight" />
+                <ScalarProperty Name="AssessmentDate" ColumnName="AssessmentDate" />
+                <ScalarProperty Name="TotalGrossWeight" ColumnName="TotalGrossWeight" />
+                <ScalarProperty Name="TotalCIF" ColumnName="TotalCIF" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
                 <ScalarProperty Name="ImportComplete" ColumnName="ImportComplete" />
                 <ScalarProperty Name="Lines" ColumnName="Lines" />
                 <ScalarProperty Name="Customs_clearance_office_code" ColumnName="Customs_clearance_office_code" />

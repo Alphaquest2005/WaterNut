@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class EntryPreviousItemsMap : EntityTypeConfiguration<EntryPreviousItems>
     {
@@ -15,8 +16,8 @@
               this.Property(t => t.PreviousItem_Id).HasColumnName("PreviousItem_Id");
               this.Property(t => t.Item_Id).HasColumnName("Item_Id");
               this.Property(t => t.EntryPreviousItemId).HasColumnName("EntryPreviousItemId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
-              this.HasRequired(t => t.xcuda_Item).WithMany(t => t.xcuda_PreviousItems).HasForeignKey(d => d.Item_Id);
-              this.HasRequired(t => t.xcuda_PreviousItem).WithMany(t => t.xcuda_Items).HasForeignKey(d => d.PreviousItem_Id);
+              this.HasRequired(t => t.xcuda_Item).WithMany(t =>(ICollection<EntryPreviousItems>) t.xcuda_PreviousItems).HasForeignKey(d => d.Item_Id);
+              this.HasRequired(t => t.xcuda_PreviousItem).WithMany(t =>(ICollection<EntryPreviousItems>) t.xcuda_Items).HasForeignKey(d => d.PreviousItem_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

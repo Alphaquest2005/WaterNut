@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using SalesDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace SalesDataQS.Client.Entities
@@ -51,7 +51,7 @@ public int AsycudaDocumentSetId
 			{
 			    if (value == this.asycudadocumentsetentrydatadetails.AsycudaDocumentSetId) return;
 				this.asycudadocumentsetentrydatadetails.AsycudaDocumentSetId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentSetId");
 			}
 		}
@@ -66,7 +66,7 @@ public int EntryDataDetailsId
 			{
 			    if (value == this.asycudadocumentsetentrydatadetails.EntryDataDetailsId) return;
 				this.asycudadocumentsetentrydatadetails.EntryDataDetailsId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataDetailsId");
 			}
 		}
@@ -81,7 +81,7 @@ public Nullable<long> Id
 			{
 			    if (value == this.asycudadocumentsetentrydatadetails.Id) return;
 				this.asycudadocumentsetentrydatadetails.Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Id");
 			}
 		}
@@ -134,7 +134,7 @@ public Nullable<long> Id
                 _SalesDataDetail = value;
                 if(value != null)
                      this.asycudadocumentsetentrydatadetails.SalesDataDetail = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("SalesDataDetail");
 			}
 		}
@@ -154,11 +154,11 @@ public Nullable<long> Id
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

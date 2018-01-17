@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_FormsMap : EntityTypeConfiguration<xcuda_Forms>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.Number_of_the_form).HasColumnName("Number_of_the_form");
               this.Property(t => t.Total_number_of_forms).HasColumnName("Total_number_of_forms");
-              this.HasRequired(t => t.xcuda_Property).WithOptional(t => t.xcuda_Forms);
+              this.HasRequired(t => t.xcuda_Property).WithOptional(t => (xcuda_Forms)t.xcuda_Forms);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

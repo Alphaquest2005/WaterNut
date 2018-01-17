@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using CounterPointQS.Client.DTO;
 
+
 namespace CounterPointQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace CounterPointQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<CounterPointPOs> UpdateCounterPointPOs(DTO.CounterPointPOs entity);
+        Task<CounterPointPOs> UpdateCounterPointPOs(CounterPointPOs entity);
 
         [OperationContract]
-        Task<CounterPointPOs> CreateCounterPointPOs(DTO.CounterPointPOs entity);
+        Task<CounterPointPOs> CreateCounterPointPOs(CounterPointPOs entity);
 
         [OperationContract]
         Task<bool> DeleteCounterPointPOs(string id);

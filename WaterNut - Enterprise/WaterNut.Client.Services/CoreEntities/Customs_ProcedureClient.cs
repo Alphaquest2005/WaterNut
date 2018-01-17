@@ -13,6 +13,7 @@ using CoreEntities.Client.DTO;
 using CoreEntities.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace CoreEntities.Client.Services
     public partial class Customs_ProcedureClient :  ClientService<ICustoms_ProcedureService>, ICustoms_ProcedureService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.Customs_Procedure>> GetCustoms_Procedure(List<string> includesLst = null)
+        public async Task<IEnumerable<Customs_Procedure>> GetCustoms_Procedure(List<string> includesLst = null)
         {
             return await Channel.GetCustoms_Procedure(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.Customs_Procedure> GetCustoms_ProcedureByKey(string id, List<string> includesLst = null)
+        public async Task<Customs_Procedure> GetCustoms_ProcedureByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetCustoms_ProcedureByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Customs_Procedure>> GetCustoms_ProcedureByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<Customs_Procedure>> GetCustoms_ProcedureByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetCustoms_ProcedureByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Customs_Procedure>> GetCustoms_ProcedureByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<Customs_Procedure>> GetCustoms_ProcedureByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetCustoms_ProcedureByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Customs_Procedure>> GetCustoms_ProcedureByExpressionNav(string exp,
+		public async Task<IEnumerable<Customs_Procedure>> GetCustoms_ProcedureByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetCustoms_ProcedureByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace CoreEntities.Client.Services
             return await Channel.GetCustoms_ProcedureByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.Customs_Procedure> UpdateCustoms_Procedure(DTO.Customs_Procedure entity)
+        public async Task<Customs_Procedure> UpdateCustoms_Procedure(Customs_Procedure entity)
         {
            return await Channel.UpdateCustoms_Procedure(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.Customs_Procedure> CreateCustoms_Procedure(DTO.Customs_Procedure entity)
+        public async Task<Customs_Procedure> CreateCustoms_Procedure(Customs_Procedure entity)
         {
            return await Channel.CreateCustoms_Procedure(entity).ConfigureAwait(false);
         }
@@ -96,17 +97,17 @@ namespace CoreEntities.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.Customs_Procedure>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<Customs_Procedure>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.Customs_Procedure>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<Customs_Procedure>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.Customs_Procedure>> GetCustoms_ProcedureByDocument_TypeId(string Document_TypeId, List<string> includesLst = null)
+		public async Task<IEnumerable<Customs_Procedure>> GetCustoms_ProcedureByDocument_TypeId(string Document_TypeId, List<string> includesLst = null)
         {
             return  await Channel.GetCustoms_ProcedureByDocument_TypeId(Document_TypeId, includesLst).ConfigureAwait(false);
         }
@@ -118,7 +119,7 @@ namespace CoreEntities.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

@@ -23,10 +23,10 @@ public class IMyNavPropTPL : CSharpTemplate
             var ens = mainEntity.Properties.Where(x => ef.IsKey(x) == false && x.Name.EndsWith("Id")  && ef.UnderlyingClrType(x.TypeUsage.EdmType) == typeof(int)  && mainEntity.NavigationProperties.Where(np=>np.GetDependentProperties().Contains(x)).Any()== false);
             if(ens.Any() == false) return this.GenerationEnvironment.ToString();
 #>
-using CoreEntities.DataLayer.Entities;
+using CoreEntities.Business.Entities;
 using System.Linq;
 
-namespace <#=conTextName#>.DataLayer.Entities
+namespace <#=conTextName#>.Business.Entities
 {
     public partial class <#=mainEntity.Name#>
     {

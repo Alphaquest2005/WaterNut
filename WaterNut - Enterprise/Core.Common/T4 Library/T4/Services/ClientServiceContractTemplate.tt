@@ -25,7 +25,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using Core.Common.Contracts;
 using <#=container.Name#>.Client.DTO;
-using <#=projectName #>.Interfaces.Client;
+
 
 namespace <#=container.Name #>.Client.Contracts
 {
@@ -33,32 +33,32 @@ namespace <#=container.Name #>.Client.Contracts
     public partial interface I<#=entity.Name#>Service : IClientService
     {
         [OperationContract]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet#>(List<string> includesLst = null);
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet#>(List<string> includesLst = null);
 
         [OperationContract]
-        Task<<#="I" + entity.Name#>> Get<#=entity.Name#>ByKey(string id, List<string> includesLst = null);
+        Task<<#=entity.Name#>> Get<#=entity.Name#>ByKey(string id, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet#>ByExpression(string exp, List<string> includesLst = null);
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet#>ByExpression(string exp, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet#>ByExpressionLst(List<string> expLst, List<string> includesLst = null);
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet#>ByExpressionLst(List<string> expLst, List<string> includesLst = null);
 
 		[OperationContract]
-		Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
+		Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
 														 Dictionary<string, string> navExp, List<string> includesLst = null);        
         [OperationContract]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
                                                                         int totalrow, List<string> includesLst = null);
         [OperationContract]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> expLst,
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> expLst,
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<<#="I" + entity.Name#>> Update<#=entity.Name#>(<#="I" + entity.Name#> entity);
+        Task<<#=entity.Name#>> Update<#=entity.Name#>(<#=entity.Name#> entity);
 
         [OperationContract]
-        Task<<#="I" + entity.Name#>> Create<#=entity.Name#>(<#="I" + entity.Name#> entity);
+        Task<<#=entity.Name#>> Create<#=entity.Name#>(<#=entity.Name#> entity);
 
         [OperationContract]
         Task<bool> Delete<#=entity.Name#>(string id);
@@ -75,10 +75,10 @@ namespace <#=container.Name #>.Client.Contracts
         Task<int> CountNav(string exp, Dictionary<string, string> navExp);
 
         [OperationContract]
-        Task<IEnumerable<<#="I" + entity.Name#>>> LoadRange(int startIndex, int count, string exp);
+        Task<IEnumerable<<#=entity.Name#>>> LoadRange(int startIndex, int count, string exp);
 
 		[OperationContract]
-		Task<IEnumerable<<#="I" + entity.Name#>>> LoadRangeNav(int startIndex, int count, string exp,
+		Task<IEnumerable<<#=entity.Name#>>> LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null);
 
 		[OperationContract]
@@ -99,7 +99,7 @@ namespace <#=container.Name #>.Client.Contracts
         {
  #>
 		[OperationContract]
-		Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null);
+		Task<IEnumerable<<#=entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null);
         
   <#+ 
 		}

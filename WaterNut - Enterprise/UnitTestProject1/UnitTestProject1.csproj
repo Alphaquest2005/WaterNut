@@ -98,10 +98,6 @@
     <Compile Include="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
-      <Project>{11235d24-1165-4dc4-b91b-0426ea669451}</Project>
-      <Name>InterfacesModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WaterNut.Business.Entities\WaterNut.Business.Entities.csproj">
       <Project>{978b7943-bd11-41eb-91c9-59a09c6f0ecc}</Project>
       <Name>WaterNut.Business.Entities</Name>

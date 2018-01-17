@@ -47,10 +47,6 @@
     <Reference Include="Core.Common.Contracts">
       <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Core.Common.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d595048b9b6b744, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Core.Common - Copy\Core.Common.Data\bin\Debug\Core.Common.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
@@ -317,6 +313,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
+      <Project>{D6846386-8741-4619-BAE3-B0CFEDBF2597}</Project>
+      <Name>Core.Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
       <Project>{11235d24-1165-4dc4-b91b-0426ea669451}</Project>
       <Name>InterfacesModel</Name>

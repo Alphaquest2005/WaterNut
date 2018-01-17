@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using EntryDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace EntryDataQS.Client.Entities
@@ -51,7 +51,7 @@ public int Container_Id
 			{
 			    if (value == this.containerentrydata.Container_Id) return;
 				this.containerentrydata.Container_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Container_Id");
 			}
 		}
@@ -68,7 +68,7 @@ public string EntryDataId
 			{
 			    if (value == this.containerentrydata.EntryDataId) return;
 				this.containerentrydata.EntryDataId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataId");
 			}
 		}
@@ -83,7 +83,7 @@ public int ContainerEntryData1
 			{
 			    if (value == this.containerentrydata.ContainerEntryData1) return;
 				this.containerentrydata.ContainerEntryData1 = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ContainerEntryData1");
 			}
 		}
@@ -136,7 +136,7 @@ public int ContainerEntryData1
                 _EntryDataEx = value;
                 if(value != null)
                      this.containerentrydata.EntryDataEx = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("EntryDataEx");
 			}
 		}
@@ -189,7 +189,7 @@ public int ContainerEntryData1
                 _ContainerEx = value;
                 if(value != null)
                      this.containerentrydata.ContainerEx = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("ContainerEx");
 			}
 		}
@@ -209,11 +209,11 @@ public int ContainerEntryData1
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

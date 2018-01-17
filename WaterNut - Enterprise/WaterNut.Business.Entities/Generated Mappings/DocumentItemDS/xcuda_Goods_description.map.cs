@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Goods_descriptionMap : EntityTypeConfiguration<xcuda_Goods_description>
     {
@@ -16,7 +17,7 @@
               this.Property(t => t.Description_of_goods).HasColumnName("Description_of_goods").IsUnicode(false);
               this.Property(t => t.Commercial_Description).HasColumnName("Commercial_Description").IsUnicode(false);
               this.Property(t => t.Item_Id).HasColumnName("Item_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_Item).WithOptional(t => t.xcuda_Goods_description);
+              this.HasRequired(t => t.xcuda_Item).WithOptional(t => (xcuda_Goods_description)t.xcuda_Goods_description);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

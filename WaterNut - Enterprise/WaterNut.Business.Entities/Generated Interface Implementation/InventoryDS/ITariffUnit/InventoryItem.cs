@@ -17,17 +17,7 @@ namespace InventoryDS.Business.Entities
 {
 		public partial class InventoryItem: ITariffUnit //InventoryDS
 		{  // please don't expect properties here, they are implict, only multilayer will appear here
-            List<ITariffSupUnitLkp> ITariffUnit.TariffSupUnitLkps 
-                {
-                    get{
-                          if(this == null) return null;
-                          if(this.TariffCodes == null) return null;
-                          if(this.TariffCodes.TariffCategory == null) return null;
- 
-                        return new List<ITariffSupUnitLkp>(this.TariffCodes.TariffCategory.TariffSupUnitLkps.Select(x=> x as ITariffSupUnitLkp)); }   //             
-                    set { this.TariffCodes.TariffCategory.TariffSupUnitLkps = new List< TariffSupUnitLkp>(value.Select(x => x as  TariffSupUnitLkp));}
-                }
-            
+          
         }
 }
 

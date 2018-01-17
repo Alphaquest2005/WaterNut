@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class ContainerExMap : EntityTypeConfiguration<ContainerEx>
     {
@@ -29,7 +30,7 @@
               this.Property(t => t.EntryDataId).HasColumnName("EntryDataId").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.PackageDescription).HasColumnName("PackageDescription").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.ContainerTypeDescription).HasColumnName("ContainerTypeDescription").IsUnicode(false).HasMaxLength(50);
-              this.HasMany(t => t.ContainerEntryDatas).WithRequired(t => t.ContainerEx);
+              this.HasMany(t => t.ContainerEntryDatas).WithRequired(t => (ContainerEx)t.ContainerEx);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

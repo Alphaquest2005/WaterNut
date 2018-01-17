@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CoreEntities.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CoreEntities.Client.Entities
@@ -51,7 +51,7 @@ public int SubItem_Id
 			{
 			    if (value == this.subitems.SubItem_Id) return;
 				this.subitems.SubItem_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("SubItem_Id");
 			}
 		}
@@ -66,7 +66,7 @@ public int Item_Id
 			{
 			    if (value == this.subitems.Item_Id) return;
 				this.subitems.Item_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Item_Id");
 			}
 		}
@@ -83,7 +83,7 @@ public string ItemNumber
 			{
 			    if (value == this.subitems.ItemNumber) return;
 				this.subitems.ItemNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemNumber");
 			}
 		}
@@ -100,7 +100,7 @@ public string ItemDescription
 			{
 			    if (value == this.subitems.ItemDescription) return;
 				this.subitems.ItemDescription = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemDescription");
 			}
 		}
@@ -115,7 +115,7 @@ public double Quantity
 			{
 			    if (value == this.subitems.Quantity) return;
 				this.subitems.Quantity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Quantity");
 			}
 		}
@@ -130,7 +130,7 @@ public double QtyAllocated
 			{
 			    if (value == this.subitems.QtyAllocated) return;
 				this.subitems.QtyAllocated = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("QtyAllocated");
 			}
 		}
@@ -183,7 +183,7 @@ public double QtyAllocated
                 _AsycudaDocumentItem = value;
                 if(value != null)
                      this.subitems.AsycudaDocumentItem = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("AsycudaDocumentItem");
 			}
 		}
@@ -203,11 +203,11 @@ public double QtyAllocated
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

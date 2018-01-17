@@ -14,16 +14,20 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading.Tasks;
 //using System.Transactions;
-using TrackableEntities;
-using TrackableEntities.Common;
+
+
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
 using CounterPointQS.Business.Entities;
 using Core.Common.Contracts;
 using Core.Common.Business.Services;
-using TrackableEntities.EF6;
+
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
+using WaterNut.Interfaces;
 
 namespace CounterPointQS.Business.Services
 {
@@ -73,23 +77,22 @@ namespace CounterPointQS.Business.Services
                     IEnumerable<CounterPointPOs> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
              }
             catch (Exception updateEx)
             {
-               //     System.Diagnostics.Debugger.Break();
+                    System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return new List<CounterPointPOs>();
-                //var fault = new ValidationFault
-                //            {
-                //                Result = false,
-                //                Message = updateEx.Message,
-                //                Description = updateEx.StackTrace
-                //            };
-                //throw new FaultException<ValidationFault>(fault);
+                    var fault = new ValidationFault
+                                {
+                                    Result = false,
+                                    Message = updateEx.Message,
+                                    Description = updateEx.StackTrace
+                                };
+                    throw new FaultException<ValidationFault>(fault);
             }
         }
 
@@ -110,16 +113,15 @@ namespace CounterPointQS.Business.Services
              }
             catch (Exception updateEx)
             {
-                //System.Diagnostics.Debugger.Break();
-                return new CounterPointPOs();
+                System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                //var fault = new ValidationFault
-                //            {
-                //                Result = false,
-                //                Message = updateEx.Message,
-                //                Description = updateEx.StackTrace
-                //            };
-                //throw new FaultException<ValidationFault>(fault);
+                    var fault = new ValidationFault
+                                {
+                                    Result = false,
+                                    Message = updateEx.Message,
+                                    Description = updateEx.StackTrace
+                                };
+                    throw new FaultException<ValidationFault>(fault);
             }
         }
 
@@ -137,7 +139,7 @@ namespace CounterPointQS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -145,7 +147,7 @@ namespace CounterPointQS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -154,16 +156,15 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                //    System.Diagnostics.Debugger.Break();
-                return new List<CounterPointPOs>();
+                    System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                //var fault = new ValidationFault
-                //            {
-                //                Result = false,
-                //                Message = updateEx.Message,
-                //                Description = updateEx.StackTrace
-                //            };
-                //throw new FaultException<ValidationFault>(fault);
+                    var fault = new ValidationFault
+                                {
+                                    Result = false,
+                                    Message = updateEx.Message,
+                                    Description = updateEx.StackTrace
+                                };
+                    throw new FaultException<ValidationFault>(fault);
             }
         }
 
@@ -179,7 +180,7 @@ namespace CounterPointQS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -187,7 +188,7 @@ namespace CounterPointQS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -196,17 +197,15 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                //    System.Diagnostics.Debugger.Break();
+                    System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return new List<CounterPointPOs>();
-                //throw new FaultException(updateEx.Message);
-                //var fault = new ValidationFault
-                //            {
-                //                Result = false,
-                //                Message = updateEx.Message,
-                //                Description = updateEx.StackTrace
-                //            };
-                //throw new FaultException<ValidationFault>(fault);
+                    var fault = new ValidationFault
+                                {
+                                    Result = false,
+                                    Message = updateEx.Message,
+                                    Description = updateEx.StackTrace
+                                };
+                    throw new FaultException<ValidationFault>(fault);
             }
         }
 
@@ -233,24 +232,22 @@ namespace CounterPointQS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
             }
             catch (Exception updateEx)
             {
-                //    System.Diagnostics.Debugger.Break();
+                    System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return new List<CounterPointPOs>();
-                //throw new FaultException(updateEx.Message);
-                //var fault = new ValidationFault
-                //            {
-                //                Result = false,
-                //                Message = updateEx.Message,
-                //                Description = updateEx.StackTrace
-                //            };
-                //throw new FaultException<ValidationFault>(fault);
+                    var fault = new ValidationFault
+                                {
+                                    Result = false,
+                                    Message = updateEx.Message,
+                                    Description = updateEx.StackTrace
+                                };
+                    throw new FaultException<ValidationFault>(fault);
             }
         }
 
@@ -311,15 +308,14 @@ namespace CounterPointQS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
 
             }
             catch (Exception updateEx)
             {
-               // System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return new List<CounterPointPOs>();
                 var fault = new ValidationFault
                 {
                     Result = false,
@@ -386,14 +382,13 @@ namespace CounterPointQS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)
             {
-                //System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return new List<CounterPointPOs>();
                 var fault = new ValidationFault
                 {
                     Result = false,
@@ -411,12 +406,13 @@ namespace CounterPointQS.Business.Services
               {
                 try
                 {   
-                    if(entity.TrackingState == TrackingState.Unchanged) entity.TrackingState = TrackingState.Modified;                              
+                     var res = (CounterPointPOs) entity;
+                    if(res.TrackingState == TrackingState.Unchanged) res.TrackingState = TrackingState.Modified;                              
                     
-                    dbContext.ApplyChanges(entity);
+                    dbContext.ApplyChanges(res);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                    entity.AcceptChanges();
-                    return entity;      
+                    res.AcceptChanges();
+                    return res;      
 
                    // var entitychanges = entity.ChangeTracker.GetChanges();
                    // if (entitychanges != null && entitychanges.FirstOrDefault() != null)
@@ -490,12 +486,13 @@ namespace CounterPointQS.Business.Services
         {
             try
             {
-                using ( var dbContext = new CounterPointQSContext(){StartTracking = StartTracking})
+                var res = (CounterPointPOs) entity;
+              using ( var dbContext = new CounterPointQSContext(){StartTracking = StartTracking})
               {
-                dbContext.CounterPointPOs.Add(entity);
+                dbContext.CounterPointPOs.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                entity.AcceptChanges();
-                return entity;
+                res.AcceptChanges();
+                return res;
               }
             }
             catch (Exception updateEx)
@@ -571,9 +568,8 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-               // System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return -1;
                 var fault = new ValidationFault
                 {
                     Result = false,
@@ -611,10 +607,9 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-               // System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return -1;
-                var fault = new ValidationFault
+                    var fault = new ValidationFault
                                 {
                                     Result = false,
                                     Message = updateEx.Message,
@@ -659,8 +654,7 @@ namespace CounterPointQS.Business.Services
             {
                     System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return new List<CounterPointPOs>();
-                var fault = new ValidationFault
+                    var fault = new ValidationFault
                                 {
                                     Result = false,
                                     Message = updateEx.Message,
@@ -693,9 +687,8 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                //System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return 0;
                 var fault = new ValidationFault
                 {
                     Result = false,
@@ -799,10 +792,9 @@ namespace CounterPointQS.Business.Services
             }
             catch (Exception updateEx)
             {
-                //System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Break();
                 //throw new FaultException(updateEx.Message);
-                return new List<CounterPointPOs>();
-                var fault = new ValidationFault
+                    var fault = new ValidationFault
                                 {
                                     Result = false,
                                     Message = updateEx.Message,

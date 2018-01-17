@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class AsycudaDocumentSetMap : EntityTypeConfiguration<AsycudaDocumentSet>
     {
@@ -29,10 +30,10 @@
               this.Property(t => t.TotalFreight).HasColumnName("TotalFreight");
               this.Property(t => t.TotalInternalFreight).HasColumnName("TotalInternalFreight");
               this.Property(t => t.TotalPackages).HasColumnName("TotalPackages");
-              this.HasOptional(t => t.Customs_Procedure).WithMany(t => t.AsycudaDocumentSets).HasForeignKey(d => d.Customs_ProcedureId);
-              this.HasOptional(t => t.Document_Type).WithMany(t => t.AsycudaDocumentSets).HasForeignKey(d => d.Document_TypeId);
+              this.HasOptional(t => t.Customs_Procedure).WithMany(t =>(ICollection<AsycudaDocumentSet>) t.AsycudaDocumentSets).HasForeignKey(d => d.Customs_ProcedureId);
+              this.HasOptional(t => t.Document_Type).WithMany(t =>(ICollection<AsycudaDocumentSet>) t.AsycudaDocumentSets).HasForeignKey(d => d.Document_TypeId);
+              this.HasMany(t => t.AsycudaDocumentSetEntryDatas).WithRequired(t => (AsycudaDocumentSet)t.AsycudaDocumentSet);
               this.HasMany(t => t.xcuda_ASYCUDA_ExtendedProperties).WithOptional(t => t.AsycudaDocumentSet).HasForeignKey(d => d.AsycudaDocumentSetId);
-              this.HasMany(t => t.AsycudaDocumentSetEntryDatas).WithRequired(t => t.AsycudaDocumentSet);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

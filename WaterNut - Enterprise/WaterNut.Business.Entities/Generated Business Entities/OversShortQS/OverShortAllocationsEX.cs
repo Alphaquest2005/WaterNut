@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace OversShortQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class OverShortAllocationsEX : BaseEntity<OverShortAllocationsEX> , ITrackable
+    public partial class OverShortAllocationsEX : BaseEntity<OverShortAllocationsEX>, ITrackable 
     {
         [DataMember]
         public int OverShortDetailId 
@@ -289,7 +290,7 @@ namespace OversShortQS.Business.Entities
         }
         Nullable<double> _invoicevalue;
         [DataMember]
-        public int LineNumber 
+        public Nullable<int> LineNumber 
         {
             get
             {
@@ -302,7 +303,7 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        int _linenumber;
+        Nullable<int> _linenumber;
         [DataMember]
         public Nullable<double> PiQuantity 
         {
@@ -319,7 +320,7 @@ namespace OversShortQS.Business.Entities
         }
         Nullable<double> _piquantity;
         [DataMember]
-        public int Item_Id 
+        public Nullable<int> Item_Id 
         {
             get
             {
@@ -332,7 +333,7 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        int _item_id;
+        Nullable<int> _item_id;
         [DataMember]
         public string OverShortDetailStatus 
         {

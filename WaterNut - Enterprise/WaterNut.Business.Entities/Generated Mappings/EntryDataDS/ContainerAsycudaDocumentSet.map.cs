@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class ContainerAsycudaDocumentSetMap : EntityTypeConfiguration<ContainerAsycudaDocumentSet>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.Container_Id).HasColumnName("Container_Id");
               this.Property(t => t.AsycudaDocumentSetId).HasColumnName("AsycudaDocumentSetId");
               this.Property(t => t.ContainerAsycudaDocumentSetId).HasColumnName("ContainerAsycudaDocumentSetId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.Container).WithMany(t => t.ContainerAsycudaDocumentSets).HasForeignKey(d => d.Container_Id);
+              this.HasRequired(t => t.Container).WithMany(t =>(ICollection<ContainerAsycudaDocumentSet>) t.ContainerAsycudaDocumentSets).HasForeignKey(d => d.Container_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

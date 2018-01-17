@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using EntryDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace EntryDataQS.Client.Entities
@@ -51,7 +51,7 @@ public int AsycudaDocumentSetId
 			{
 			    if (value == this.asycudadocumentsetentrydatadetail.AsycudaDocumentSetId) return;
 				this.asycudadocumentsetentrydatadetail.AsycudaDocumentSetId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentSetId");
 			}
 		}
@@ -66,7 +66,7 @@ public int EntryDataDetailsId
 			{
 			    if (value == this.asycudadocumentsetentrydatadetail.EntryDataDetailsId) return;
 				this.asycudadocumentsetentrydatadetail.EntryDataDetailsId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataDetailsId");
 			}
 		}
@@ -81,7 +81,7 @@ public long Id
 			{
 			    if (value == this.asycudadocumentsetentrydatadetail.Id) return;
 				this.asycudadocumentsetentrydatadetail.Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Id");
 			}
 		}
@@ -134,7 +134,7 @@ public long Id
                 _EntryDataDetailsEx = value;
                 if(value != null)
                      this.asycudadocumentsetentrydatadetail.EntryDataDetailsEx = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("EntryDataDetailsEx");
 			}
 		}
@@ -154,11 +154,11 @@ public long Id
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

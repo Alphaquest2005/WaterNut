@@ -7,6 +7,8 @@
 using CoreEntities.Client.DTO;
 using TrackableEntities.Client;
 
+
+
 namespace CoreEntities.Client.Entities
 {
 

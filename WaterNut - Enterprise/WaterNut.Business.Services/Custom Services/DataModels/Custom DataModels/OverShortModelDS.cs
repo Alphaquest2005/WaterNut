@@ -10,12 +10,13 @@
 //using OversShortQS.Business.Services;
 //using TrackableEntities;
 //using WaterNut.Business.Entities;
+//using WaterNut.DataSpace;
 //using WaterNut.Interfaces;
 //using AsycudaDocumentItem = OversShortQS.Business.Entities.AsycudaDocumentItem;
 //using xcuda_Item = DocumentItemDS.Business.Entities.xcuda_Item;
 //using xcuda_Weight = DocumentDS.Business.Entities.xcuda_Weight;
 
-//namespace WaterNut.DataSpace
+//namespace OversShortQS.Business.Services
 //{
 //    public class OverShortModelDS
 //    {
@@ -34,12 +35,12 @@
 //        public async Task Import(string fileName, string fileType, AsycudaDocumentSet docSet, bool overWriteExisting)
 //        {
 //            await SaveCSVModel.Instance.ProcessDroppedFile(fileName, fileType, docSet, overWriteExisting).ConfigureAwait(false);
-           
+
 //        }
 
 //        internal async Task SaveReferenceNumber(IEnumerable<int> slst, string refTxt)
 //        {
-           
+
 //            if (slst.Any() || string.IsNullOrEmpty(refTxt)) return;
 //            using (var ctx = new OverShortSuggestedDocumentService())
 //            {
@@ -60,7 +61,7 @@
 
 //        internal async Task SaveCNumber(IEnumerable<int> slst, string cntxt)
 //        {
-            
+
 //            if (slst.Any() || string.IsNullOrEmpty(cntxt)) return;
 //            using (var ctx = new OverShortSuggestedDocumentService())
 //            {
@@ -76,7 +77,7 @@
 //                }
 //            }
 
-         
+
 //        }
 
 
@@ -84,16 +85,16 @@
 //        {
 //            var lst = new List<OversShortEX>();
 
-           
-//                using (var ctx = new OversShortEXService())
+
+//            using (var ctx = new OversShortEXService())
+//            {
+//                foreach (var o in slst)
 //                {
-//                    foreach (var o in slst)
-//                    {
-//                        var alst = await ctx.GetOversShortEXByKey(o.ToString(),
-//                        new List<string>() { "OversShort" }).ConfigureAwait(false);
-//                        lst.Add(alst);
-//                    }
+//                    var alst = await ctx.GetOversShortEXByKey(o.ToString(),
+//                    new List<string>() { "OversShort" }).ConfigureAwait(false);
+//                    lst.Add(alst);
 //                }
+//            }
 
 //            return lst;
 //        }
@@ -102,7 +103,7 @@
 //        internal async Task MatchEntries(IEnumerable<int> olst)
 //        {
 //            var lst = new List<IGrouping<OversShortEX, OverShortDetailsEX>>();
-            
+
 //            if (!olst.Any())
 //            {
 //                using (var ctx = new OverShortDetailsEXService())
@@ -175,7 +176,7 @@
 
 //        }
 
-//        private  async Task CreateOverShortDetailAllocation(OverShortDetailAllocation osa)
+//        private async Task CreateOverShortDetailAllocation(OverShortDetailAllocation osa)
 //        {
 //            using (var ctx = new OverShortDetailAllocationService())
 //            {
@@ -183,7 +184,7 @@
 //            }
 //        }
 
-//        private  async Task UpdateOverShortDetail(OverShortDetail osd)
+//        private async Task UpdateOverShortDetail(OverShortDetail osd)
 //        {
 //            using (var ctx = new OverShortDetailService())
 //            {
@@ -207,7 +208,7 @@
 //                }
 
 //                StatusModel.StopStatusUpdate();
-               
+
 //            }
 //            catch (Exception ex)
 //            {
@@ -250,7 +251,7 @@
 
 //        internal async Task RemoveSelectedOverShorts(IEnumerable<int> lst)
 //        {
-         
+
 //            StatusModel.StartStatusUpdate("Removing OversShort", lst.Count());
 //            using (var ctx = new OversShortService())
 //            {
@@ -262,7 +263,7 @@
 //            }
 //            StatusModel.StopStatusUpdate();
 
-          
+
 
 //        }
 
@@ -271,7 +272,7 @@
 //        internal async Task AutoMatch(IEnumerable<int> slst)
 //        {
 //            var lst = new List<IGrouping<OversShortEX, OverShortDetailsEX>>();
-            
+
 //            if (!slst.Any())
 //            {
 //                using (var ctx = new OverShortDetailsEXService())
@@ -284,7 +285,7 @@
 //                                "OverShortSuggestedDocuments.ReferenceNumber != null || OverShortSuggestedDocuments.CNumber != null"
 //                            }
 //                        },
-//                        new List<string>() {"OversShort"}).ConfigureAwait(false);
+//                        new List<string>() { "OversShort" }).ConfigureAwait(false);
 //                    lst.AddRange(alst.GroupBy(x => x.OversShortEX));
 //                }
 //            }
@@ -323,10 +324,10 @@
 //        {
 
 //            var ci = await GetCurrentOSAsycudaDocumentItem(currentDocumentItem).ConfigureAwait(false);
-            
+
 //            await DoMatch(new List<AsycudaDocumentItem>() { { ci } }, osd).ConfigureAwait(false);
 
-          
+
 //        }
 
 //        private async Task<AsycudaDocumentItem> GetCurrentOSAsycudaDocumentItem(int currentDocumentItem)
@@ -343,7 +344,7 @@
 
 //        internal async Task RemoveOverShortDetail(int osd)
 //        {
-//          await DeleteOverShortDetail(osd).ConfigureAwait(false);
+//            await DeleteOverShortDetail(osd).ConfigureAwait(false);
 //        }
 
 
@@ -360,7 +361,7 @@
 //        {
 //            await DeleteOverShortAllocation(osa).ConfigureAwait(false);
 
-            
+
 //        }
 
 //        private async Task DeleteOverShortAllocation(OverShortDetailAllocation osa)
@@ -387,7 +388,7 @@
 //                }
 
 //                StatusModel.StopStatusUpdate();
-                
+
 //            }
 //            catch (Exception ex)
 //            {
@@ -421,10 +422,10 @@
 //            }
 //        }
 
-    
 
 
-        
+
+
 
 //        public async Task CreateOversOps(IEnumerable<OversShortEX> selOS, AsycudaDocumentSet docSet)
 //        {
@@ -432,14 +433,14 @@
 //            if (docSet == null)
 //            {
 //                throw new ApplicationException("Please Select a Asycuda Document Set before proceding");
-             
+
 //            }
 
-           
+
 //            if (selOS.Any() == false)
 //            {
 //                throw new ApplicationException("Please Select Overs/Shorts before proceding");
-              
+
 //            }
 
 //            StatusModel.Timer("Getting Data...");
@@ -452,29 +453,29 @@
 //                return;
 //            }
 //            var slst = (from s in slstSource
-//                group s by new
-//                {
-//                    s.ItemNumber,
-//                    s.ItemDescription,
-//                    s.InventoryItem.TariffCode,
-//                    s.Cost,
-//                    s.InventoryItem
-//                }
+//                        group s by new
+//                        {
+//                            s.ItemNumber,
+//                            s.ItemDescription,
+//                            s.InventoryItem.TariffCode,
+//                            s.Cost,
+//                            s.InventoryItem
+//                        }
 //                into g
-//                select new
-//                {
-//                    EntlnData = new BaseDataModel.EntryLineData()
-//                    {
-//                        ItemNumber = g.Key.ItemNumber,
-//                        ItemDescription = g.Key.ItemDescription,
-//                        TariffCode = g.Key.TariffCode,
-//                        Cost = Convert.ToDouble(g.Key.Cost),
-//                        InventoryItem = g.Key.InventoryItem,
-//                        Quantity = Convert.ToDouble(g.Sum(x => x.OversQuantity)),
-//                        EntryDataDetails = new List<IEntryDataDetail>()
-//                    }
+//                        select new
+//                        {
+//                            EntlnData = new BaseDataModel.EntryLineData()
+//                            {
+//                                ItemNumber = g.Key.ItemNumber,
+//                                ItemDescription = g.Key.ItemDescription,
+//                                TariffCode = g.Key.TariffCode,
+//                                Cost = Convert.ToDouble(g.Key.Cost),
+//                                InventoryItem = g.Key.InventoryItem,
+//                                Quantity = Convert.ToDouble(g.Sum(x => x.OversQuantity)),
+//                                EntryDataDetails = new List<IEntryDataDetail>()
+//                            }
 
-//                }).ToList();
+//                        }).ToList();
 
 //            if (!slst.Any())
 //            {
@@ -496,7 +497,7 @@
 //            {
 //                StatusModel.StopStatusUpdate();
 //                throw new ApplicationException(string.Format("Null Document Type for '{0}' Contact your Network Administrator", "IM7"));
-               
+
 //            }
 
 //            dt.DefaultCustoms_Procedure =
@@ -508,9 +509,9 @@
 //                StatusModel.StopStatusUpdate();
 //                throw new ApplicationException(string.Format("Null Customs Procedure for '{0}' Contact your Network Administrator",
 //                    "OPP"));
-               
+
 //            }
-           
+
 //            CreateOPSClass.Instance.OPSIntializeCdoc(cdoc, dt, docSet);
 //            cdoc.Document.xcuda_ASYCUDA_ExtendedProperties.Customs_Procedure = dt.DefaultCustoms_Procedure;
 
@@ -550,15 +551,15 @@
 //            if (docSet == null)
 //            {
 //                throw new ApplicationException("Please Select a Asycuda Document Set before proceding");
-               
+
 //            }
 
-           
+
 
 //            if (selos.Any() == false)
 //            {
 //                throw new ApplicationException("Please Select Overs/Shorts before proceding");
-               
+
 //            }
 
 //            StatusModel.Timer("Getting Data...");
@@ -573,28 +574,28 @@
 //            if (BreakOnMonthYear)
 //            {
 //                slst = (from s in slstSource
-//                    group s by new {MonthYear = s.OversShortEX.InvoiceDate.ToString("MMM-yy")}
+//                        group s by new { MonthYear = s.OversShortEX.InvoiceDate.ToString("MMM-yy") }
 //                    into g
-//                    select new EXWDataBlock()
-//                    {
-//                        MonthYear = g.Key.MonthYear,
-//                        DutyFreePaid = "DutyFree",
-//                        OverShortDetailsEX = g.ToList(),
+//                        select new EXWDataBlock()
+//                        {
+//                            MonthYear = g.Key.MonthYear,
+//                            DutyFreePaid = "DutyFree",
+//                            OverShortDetailsEX = g.ToList(),
 
-//                    }).ToList();
+//                        }).ToList();
 //            }
 //            else
 //            {
 //                slst = (from s in slstSource
-//                    group s by new {MonthYear = "NoMTY"}
+//                        group s by new { MonthYear = "NoMTY" }
 //                    into g
-//                    select new EXWDataBlock
-//                    {
-//                        MonthYear = g.Key.MonthYear,
-//                        DutyFreePaid = "DutyFree",
-//                        OverShortDetailsEX = g.ToList(),
+//                        select new EXWDataBlock
+//                        {
+//                            MonthYear = g.Key.MonthYear,
+//                            DutyFreePaid = "DutyFree",
+//                            OverShortDetailsEX = g.ToList(),
 
-//                    }).ToList();
+//                        }).ToList();
 
 //            }
 
@@ -603,7 +604,7 @@
 //                StatusModel.StopStatusUpdate();
 //                throw new ApplicationException(
 //                    "No OPS Allocations found! If you just deleted Entries, Please Allocate Sales then continue Else Contact your Network Administrator");
-                
+
 //            }
 
 //            var dfp = "Duty Free";
@@ -613,7 +614,7 @@
 //            if (dt == null) return;
 
 //            DocumentCT cdoc = await BaseDataModel.Instance.CreateDocumentCt(docSet).ConfigureAwait(false);
-//            CreateEx9Class.Instance.Ex9InitializeCdoc(dt, dfp, cdoc,docSet);
+//            CreateEx9Class.Instance.Ex9InitializeCdoc(dt, dfp, cdoc, docSet);
 
 //            cdoc.Document.xcuda_ASYCUDA_ExtendedProperties.Customs_Procedure = dt.DefaultCustoms_Procedure;
 
@@ -638,24 +639,24 @@
 //                        itmcount += 1;
 //                    }
 
-//                    if (itmcount%BaseDataModel.Instance.CurrentApplicationSettings.MaxEntryLines == 0)
+//                    if (itmcount % BaseDataModel.Instance.CurrentApplicationSettings.MaxEntryLines == 0)
 
 //                        await BaseDataModel.Instance.SaveDocumentCT(cdoc).ConfigureAwait(false);
-//                        //dup new file
-//                        cdoc = await BaseDataModel.Instance.CreateDocumentCt(docSet).ConfigureAwait(false);
+//                    //dup new file
+//                    cdoc = await BaseDataModel.Instance.CreateDocumentCt(docSet).ConfigureAwait(false);
 
-//                        CreateEx9Class.Instance.Ex9InitializeCdoc(dt, dfp, cdoc, docSet);
-//                        cdoc.Document.xcuda_ASYCUDA_ExtendedProperties.Customs_Procedure = dt.DefaultCustoms_Procedure;
-//                        if (cdoc.Document != null)
-//                        {
-//                            cdoc.Document.xcuda_Valuation = new xcuda_Valuation();
-//                            cdoc.Document.xcuda_Valuation.xcuda_Weight = new xcuda_Weight();
-//                            cdoc.Document.xcuda_Valuation.xcuda_Weight.Gross_weight =
-//                                cdoc.DocumentItems.Where(x => x.xcuda_PreviousItem != null).Sum(x => x.xcuda_PreviousItem.Net_weight);
-//                        }
+//                    CreateEx9Class.Instance.Ex9InitializeCdoc(dt, dfp, cdoc, docSet);
+//                    cdoc.Document.xcuda_ASYCUDA_ExtendedProperties.Customs_Procedure = dt.DefaultCustoms_Procedure;
+//                    if (cdoc.Document != null)
+//                    {
+//                        cdoc.Document.xcuda_Valuation = new xcuda_Valuation();
+//                        cdoc.Document.xcuda_Valuation.xcuda_Weight = new xcuda_Weight();
+//                        cdoc.Document.xcuda_Valuation.xcuda_Weight.Gross_weight =
+//                            cdoc.DocumentItems.Where(x => x.xcuda_PreviousItem != null).Sum(x => x.xcuda_PreviousItem.Net_weight);
 //                    }
-
 //                }
+
+//            }
 //            if (cdoc.DocumentItems.Count == 0) await BaseDataModel.Instance.DeleteAsycudaDocument(cdoc.Document).ConfigureAwait(false);
 
 
@@ -688,7 +689,7 @@
 //            if (dt == null)
 //            {
 //                throw new ApplicationException(string.Format("Null Document Type for '{0}' Contact your Network Administrator", "EX9"));
-              
+
 //            }
 
 //            dt.DefaultCustoms_Procedure =
@@ -699,45 +700,45 @@
 //            {
 //                throw new ApplicationException(string.Format("Null Customs Procedure for '{0}' Contact your Network Administrator",
 //                    "EXW"));
-               
+
 //            }
-         
+
 //            return dt;
 //        }
 
 //        private List<AllocationsModel.MyPodData> PrepareShortsEXWData(EXWDataBlock monthyear)
 //        {
 //            var slst = from s in monthyear.OverShortDetailsEX.SelectMany(x => x.OverShortAllocationsEXes)
-//                group s by new
-//                {
-//                    s.OverShortDetailsEX.ItemNumber,
-//                    s.OverShortDetailsEX.ItemDescription,
-//                    s.OverShortDetailsEX.InventoryItem.TariffCode,
-//                    s.OverShortDetailsEX.Cost,
-//                    s.OverShortDetailsEX.InventoryItem,
-//                    s.AsycudaDocumentItem
-//                }
+//                       group s by new
+//                       {
+//                           s.OverShortDetailsEX.ItemNumber,
+//                           s.OverShortDetailsEX.ItemDescription,
+//                           s.OverShortDetailsEX.InventoryItem.TariffCode,
+//                           s.OverShortDetailsEX.Cost,
+//                           s.OverShortDetailsEX.InventoryItem,
+//                           s.AsycudaDocumentItem
+//                       }
 //                into g
-//                select new AllocationsModel.MyPodData
-//                {
-//                    Allocations = new List<AsycudaSalesAllocations>(),
-//                    EntlnData = new AllocationsModel.AlloEntryLineData()
-//                    {
-//                        ItemNumber = g.Key.ItemNumber,
-//                        ItemDescription = g.Key.ItemDescription,
-//                        TariffCode = g.Key.TariffCode,
-//                        Cost = Convert.ToDouble(g.Key.Cost),
-//                        InventoryItem = g.Key.InventoryItem,
-//                        Quantity = Convert.ToDouble(g.Sum(x => x.QtyAllocated)),
-//                        EntryDataDetails = new List<IEntryDataDetail>(),
-//                        //PreviousEntry = g.Key.AsycudaDocumentItem
-//                    }
+//                       select new AllocationsModel.MyPodData
+//                       {
+//                           Allocations = new List<AsycudaSalesAllocations>(),
+//                           EntlnData = new AllocationsModel.AlloEntryLineData()
+//                           {
+//                               ItemNumber = g.Key.ItemNumber,
+//                               ItemDescription = g.Key.ItemDescription,
+//                               TariffCode = g.Key.TariffCode,
+//                               Cost = Convert.ToDouble(g.Key.Cost),
+//                               InventoryItem = g.Key.InventoryItem,
+//                               Quantity = Convert.ToDouble(g.Sum(x => x.QtyAllocated)),
+//                               EntryDataDetails = new List<IEntryDataDetail>(),
+//                               //PreviousEntry = g.Key.AsycudaDocumentItem
+//                           }
 
-//                };
+//                       };
 //            return slst.ToList();
 //        }
 
- 
+
 
 
 //    }

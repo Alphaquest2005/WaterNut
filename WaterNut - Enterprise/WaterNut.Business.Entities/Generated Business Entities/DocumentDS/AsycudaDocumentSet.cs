@@ -8,20 +8,21 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace DocumentDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocumentSet : BaseEntity<AsycudaDocumentSet> , ITrackable
+    public partial class AsycudaDocumentSet : BaseEntity<AsycudaDocumentSet>, ITrackable 
     {
         partial void AutoGenStartUp() //AsycudaDocumentSet()
         {
-            this.xcuda_ASYCUDA_ExtendedProperties = new List<xcuda_ASYCUDA_ExtendedProperties>();
             this.AsycudaDocumentSetEntryDatas = new List<AsycudaDocumentSetEntryData>();
+            this.xcuda_ASYCUDA_ExtendedProperties = new List<xcuda_ASYCUDA_ExtendedProperties>();
         }
 
         [DataMember]
@@ -239,31 +240,31 @@ namespace DocumentDS.Business.Entities
         {
             get
             {
-                return _totalFreight;
+                return _totalfreight;
             }
             set
             {
-                _totalFreight = value;
+                _totalfreight = value;
                 //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _totalFreight;
+        Nullable<double> _totalfreight;
         [DataMember]
         public Nullable<double> TotalInternalFreight 
         {
             get
             {
-                return _totalinternalFreight;
+                return _totalinternalfreight;
             }
             set
             {
-                _totalinternalFreight = value;
+                _totalinternalfreight = value;
                 //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _totalinternalFreight;
+        Nullable<double> _totalinternalfreight;
         [DataMember]
         public Nullable<int> TotalPackages 
         {
@@ -284,9 +285,9 @@ namespace DocumentDS.Business.Entities
         [DataMember]
         public Document_Type Document_Type { get; set; }
         [DataMember]
-        public List<xcuda_ASYCUDA_ExtendedProperties> xcuda_ASYCUDA_ExtendedProperties { get; set; }
-        [DataMember]
         public List<AsycudaDocumentSetEntryData> AsycudaDocumentSetEntryDatas { get; set; }
+        [DataMember]
+        public List<xcuda_ASYCUDA_ExtendedProperties> xcuda_ASYCUDA_ExtendedProperties { get; set; }
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

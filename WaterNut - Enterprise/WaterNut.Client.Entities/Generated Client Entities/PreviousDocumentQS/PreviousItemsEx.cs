@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using PreviousDocumentQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace PreviousDocumentQS.Client.Entities
@@ -53,7 +53,7 @@ public string Packages_number
 			{
 			    if (value == this.previousitemsex.Packages_number) return;
 				this.previousitemsex.Packages_number = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Packages_number");
 			}
 		}
@@ -70,7 +70,7 @@ public string Previous_Packages_number
 			{
 			    if (value == this.previousitemsex.Previous_Packages_number) return;
 				this.previousitemsex.Previous_Packages_number = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Previous_Packages_number");
 			}
 		}
@@ -87,7 +87,7 @@ public string Hs_code
 			{
 			    if (value == this.previousitemsex.Hs_code) return;
 				this.previousitemsex.Hs_code = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Hs_code");
 			}
 		}
@@ -104,7 +104,7 @@ public string Commodity_code
 			{
 			    if (value == this.previousitemsex.Commodity_code) return;
 				this.previousitemsex.Commodity_code = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Commodity_code");
 			}
 		}
@@ -121,7 +121,7 @@ public string Previous_item_number
 			{
 			    if (value == this.previousitemsex.Previous_item_number) return;
 				this.previousitemsex.Previous_item_number = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Previous_item_number");
 			}
 		}
@@ -138,7 +138,7 @@ public string Goods_origin
 			{
 			    if (value == this.previousitemsex.Goods_origin) return;
 				this.previousitemsex.Goods_origin = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Goods_origin");
 			}
 		}
@@ -153,7 +153,7 @@ public double Net_weight
 			{
 			    if (value == this.previousitemsex.Net_weight) return;
 				this.previousitemsex.Net_weight = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Net_weight");
 			}
 		}
@@ -168,7 +168,7 @@ public double Prev_net_weight
 			{
 			    if (value == this.previousitemsex.Prev_net_weight) return;
 				this.previousitemsex.Prev_net_weight = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Prev_net_weight");
 			}
 		}
@@ -185,7 +185,7 @@ public string Prev_reg_ser
 			{
 			    if (value == this.previousitemsex.Prev_reg_ser) return;
 				this.previousitemsex.Prev_reg_ser = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Prev_reg_ser");
 			}
 		}
@@ -202,7 +202,7 @@ public string Prev_reg_nbr
 			{
 			    if (value == this.previousitemsex.Prev_reg_nbr) return;
 				this.previousitemsex.Prev_reg_nbr = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Prev_reg_nbr");
 			}
 		}
@@ -219,7 +219,7 @@ public string Prev_reg_dat
 			{
 			    if (value == this.previousitemsex.Prev_reg_dat) return;
 				this.previousitemsex.Prev_reg_dat = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Prev_reg_dat");
 			}
 		}
@@ -236,7 +236,7 @@ public string Prev_reg_cuo
 			{
 			    if (value == this.previousitemsex.Prev_reg_cuo) return;
 				this.previousitemsex.Prev_reg_cuo = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Prev_reg_cuo");
 			}
 		}
@@ -251,7 +251,7 @@ public double Suplementary_Quantity
 			{
 			    if (value == this.previousitemsex.Suplementary_Quantity) return;
 				this.previousitemsex.Suplementary_Quantity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Suplementary_Quantity");
 			}
 		}
@@ -266,7 +266,7 @@ public double Preveious_suplementary_quantity
 			{
 			    if (value == this.previousitemsex.Preveious_suplementary_quantity) return;
 				this.previousitemsex.Preveious_suplementary_quantity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Preveious_suplementary_quantity");
 			}
 		}
@@ -281,7 +281,7 @@ public double Current_value
 			{
 			    if (value == this.previousitemsex.Current_value) return;
 				this.previousitemsex.Current_value = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Current_value");
 			}
 		}
@@ -296,7 +296,7 @@ public double Previous_value
 			{
 			    if (value == this.previousitemsex.Previous_value) return;
 				this.previousitemsex.Previous_value = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Previous_value");
 			}
 		}
@@ -313,7 +313,7 @@ public string Current_item_number
 			{
 			    if (value == this.previousitemsex.Current_item_number) return;
 				this.previousitemsex.Current_item_number = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Current_item_number");
 			}
 		}
@@ -328,7 +328,7 @@ public int PreviousItem_Id
 			{
 			    if (value == this.previousitemsex.PreviousItem_Id) return;
 				this.previousitemsex.PreviousItem_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("PreviousItem_Id");
 			}
 		}
@@ -343,7 +343,7 @@ public Nullable<int> ASYCUDA_Id
 			{
 			    if (value == this.previousitemsex.ASYCUDA_Id) return;
 				this.previousitemsex.ASYCUDA_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ASYCUDA_Id");
 			}
 		}
@@ -358,7 +358,7 @@ public double QtyAllocated
 			{
 			    if (value == this.previousitemsex.QtyAllocated) return;
 				this.previousitemsex.QtyAllocated = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("QtyAllocated");
 			}
 		}
@@ -373,7 +373,7 @@ public double RndCurrent_Value
 			{
 			    if (value == this.previousitemsex.RndCurrent_Value) return;
 				this.previousitemsex.RndCurrent_Value = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("RndCurrent_Value");
 			}
 		}
@@ -390,7 +390,7 @@ public string CNumber
 			{
 			    if (value == this.previousitemsex.CNumber) return;
 				this.previousitemsex.CNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("CNumber");
 			}
 		}
@@ -405,7 +405,7 @@ public Nullable<System.DateTime> RegistrationDate
 			{
 			    if (value == this.previousitemsex.RegistrationDate) return;
 				this.previousitemsex.RegistrationDate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("RegistrationDate");
 			}
 		}
@@ -420,7 +420,7 @@ public Nullable<int> PreviousDocumentItemId
 			{
 			    if (value == this.previousitemsex.PreviousDocumentItemId) return;
 				this.previousitemsex.PreviousDocumentItemId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("PreviousDocumentItemId");
 			}
 		}
@@ -435,7 +435,7 @@ public Nullable<int> AsycudaDocumentItemId
 			{
 			    if (value == this.previousitemsex.AsycudaDocumentItemId) return;
 				this.previousitemsex.AsycudaDocumentItemId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentItemId");
 			}
 		}
@@ -488,7 +488,7 @@ public Nullable<int> AsycudaDocumentItemId
                 _PreviousDocumentItem = value;
                 if(value != null)
                      this.previousitemsex.PreviousDocumentItem = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("PreviousDocumentItem");
 			}
 		}
@@ -541,7 +541,7 @@ public Nullable<int> AsycudaDocumentItemId
                 _AsycudaDocumentItem = value;
                 if(value != null)
                      this.previousitemsex.AsycudaDocumentItem = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("AsycudaDocumentItem");
 			}
 		}
@@ -561,11 +561,11 @@ public Nullable<int> AsycudaDocumentItemId
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

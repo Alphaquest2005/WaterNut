@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class OverShortAllocationsEXMap : EntityTypeConfiguration<OverShortAllocationsEX>
     {
@@ -36,9 +37,9 @@
               this.Property(t => t.OverShortDetailStatus).HasColumnName("OverShortDetailStatus").IsUnicode(false);
               this.Property(t => t.QtyAllocated).HasColumnName("QtyAllocated");
               this.Property(t => t.AllocationStatus).HasColumnName("AllocationStatus").IsUnicode(false);
-              this.HasRequired(t => t.OverShortDetailAllocation).WithOptional(t => t.EX);
-              this.HasRequired(t => t.OverShortDetailsEX).WithMany(t => t.OverShortAllocationsEXes).HasForeignKey(d => d.OverShortDetailId);
-              this.HasRequired(t => t.AsycudaDocumentItem).WithMany(t => t.OverShortAllocationsEXes).HasForeignKey(d => d.Item_Id);
+              this.HasRequired(t => t.OverShortDetailAllocation).WithOptional(t => (OverShortAllocationsEX)t.EX);
+              this.HasRequired(t => t.OverShortDetailsEX).WithMany(t =>(ICollection<OverShortAllocationsEX>) t.OverShortAllocationsEXes).HasForeignKey(d => d.OverShortDetailId);
+              this.HasOptional(t => t.AsycudaDocumentItem).WithMany(t =>(ICollection<OverShortAllocationsEX>) t.OverShortAllocationsEXes).HasForeignKey(d => d.Item_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CoreEntities.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CoreEntities.Client.Entities
@@ -51,7 +51,7 @@ public int Document_TypeId
 			{
 			    if (value == this.customs_procedure.Document_TypeId) return;
 				this.customs_procedure.Document_TypeId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Document_TypeId");
 			}
 		}
@@ -66,7 +66,7 @@ public int Customs_ProcedureId
 			{
 			    if (value == this.customs_procedure.Customs_ProcedureId) return;
 				this.customs_procedure.Customs_ProcedureId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Customs_ProcedureId");
 			}
 		}
@@ -83,7 +83,7 @@ public string Extended_customs_procedure
 			{
 			    if (value == this.customs_procedure.Extended_customs_procedure) return;
 				this.customs_procedure.Extended_customs_procedure = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Extended_customs_procedure");
 			}
 		}
@@ -100,7 +100,7 @@ public string National_customs_procedure
 			{
 			    if (value == this.customs_procedure.National_customs_procedure) return;
 				this.customs_procedure.National_customs_procedure = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("National_customs_procedure");
 			}
 		}
@@ -115,7 +115,7 @@ public Nullable<bool> IsDefault
 			{
 			    if (value == this.customs_procedure.IsDefault) return;
 				this.customs_procedure.IsDefault = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("IsDefault");
 			}
 		}
@@ -168,7 +168,7 @@ public Nullable<bool> IsDefault
                 _Document_Type = value;
                 if(value != null)
                      this.customs_procedure.Document_Type = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("Document_Type");
 			}
 		}
@@ -188,11 +188,11 @@ public Nullable<bool> IsDefault
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

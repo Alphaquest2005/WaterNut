@@ -41,10 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core.Common.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d595048b9b6b744, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Core.Common - Copy\Core.Common.Data\bin\Debug\Core.Common.Data.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -123,6 +119,7 @@
     <Compile Include="Generated Business Entities\AllocationDS\Sales.cs" />
     <Compile Include="Generated Business Entities\AllocationDS\SubItems.cs" />
     <Compile Include="Generated Business Entities\AllocationDS\TariffCategory.cs" />
+    <Compile Include="Generated Business Entities\AllocationDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Business Entities\AllocationDS\TariffCodes.cs" />
     <Compile Include="Generated Business Entities\AllocationDS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated Business Entities\AllocationDS\xBondAllocations.cs" />
@@ -266,11 +263,13 @@
     <Compile Include="Generated Business Entities\InventoryDS\InventoryItem.cs" />
     <Compile Include="Generated Business Entities\InventoryDS\InventoryItemAlia.cs" />
     <Compile Include="Generated Business Entities\InventoryDS\TariffCategory.cs" />
+    <Compile Include="Generated Business Entities\InventoryDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Business Entities\InventoryDS\TariffCode.cs" />
     <Compile Include="Generated Business Entities\InventoryDS\TariffSupUnitLkp.cs" />
     <Compile Include="Generated Business Entities\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated Business Entities\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated Business Entities\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated Business Entities\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Business Entities\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated Business Entities\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated Business Entities\OversShortQS\AsycudaDocument.cs" />
@@ -284,6 +283,7 @@
     <Compile Include="Generated Business Entities\OversShortQS\OversShort.cs" />
     <Compile Include="Generated Business Entities\OversShortQS\OversShortEX.cs" />
     <Compile Include="Generated Business Entities\PreviousDocumentDS\EntryDataDetails.cs" />
+    <Compile Include="Generated Business Entities\PreviousDocumentDS\EntryPreviousItems.cs" />
     <Compile Include="Generated Business Entities\PreviousDocumentDS\PreviousEntry.cs" />
     <Compile Include="Generated Business Entities\PreviousDocumentDS\xcuda_HScode.cs" />
     <Compile Include="Generated Business Entities\PreviousDocumentDS\xcuda_PreviousItem.cs" />
@@ -312,6 +312,7 @@
     <Compile Include="Generated ChangeTracking Models\AllocationDS\Sales.cs" />
     <Compile Include="Generated ChangeTracking Models\AllocationDS\SubItems.cs" />
     <Compile Include="Generated ChangeTracking Models\AllocationDS\TariffCategory.cs" />
+    <Compile Include="Generated ChangeTracking Models\AllocationDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated ChangeTracking Models\AllocationDS\TariffCodes.cs" />
     <Compile Include="Generated ChangeTracking Models\AllocationDS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated ChangeTracking Models\AllocationDS\xBondAllocations.cs" />
@@ -455,11 +456,13 @@
     <Compile Include="Generated ChangeTracking Models\InventoryDS\InventoryItem.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryDS\InventoryItemAlia.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryDS\TariffCategory.cs" />
+    <Compile Include="Generated ChangeTracking Models\InventoryDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryDS\TariffCode.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryDS\TariffSupUnitLkp.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated ChangeTracking Models\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated ChangeTracking Models\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated ChangeTracking Models\OversShortQS\AsycudaDocument.cs" />
@@ -473,6 +476,7 @@
     <Compile Include="Generated ChangeTracking Models\OversShortQS\OversShort.cs" />
     <Compile Include="Generated ChangeTracking Models\OversShortQS\OversShortEX.cs" />
     <Compile Include="Generated ChangeTracking Models\PreviousDocumentDS\EntryDataDetails.cs" />
+    <Compile Include="Generated ChangeTracking Models\PreviousDocumentDS\EntryPreviousItems.cs" />
     <Compile Include="Generated ChangeTracking Models\PreviousDocumentDS\PreviousEntry.cs" />
     <Compile Include="Generated ChangeTracking Models\PreviousDocumentDS\xcuda_HScode.cs" />
     <Compile Include="Generated ChangeTracking Models\PreviousDocumentDS\xcuda_PreviousItem.cs" />
@@ -501,6 +505,7 @@
     <Compile Include="Generated Constructors Models\AllocationDS\Sales.cs" />
     <Compile Include="Generated Constructors Models\AllocationDS\SubItems.cs" />
     <Compile Include="Generated Constructors Models\AllocationDS\TariffCategory.cs" />
+    <Compile Include="Generated Constructors Models\AllocationDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Constructors Models\AllocationDS\TariffCodes.cs" />
     <Compile Include="Generated Constructors Models\AllocationDS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated Constructors Models\AllocationDS\xBondAllocations.cs" />
@@ -644,11 +649,13 @@
     <Compile Include="Generated Constructors Models\InventoryDS\InventoryItem.cs" />
     <Compile Include="Generated Constructors Models\InventoryDS\InventoryItemAlia.cs" />
     <Compile Include="Generated Constructors Models\InventoryDS\TariffCategory.cs" />
+    <Compile Include="Generated Constructors Models\InventoryDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Constructors Models\InventoryDS\TariffCode.cs" />
     <Compile Include="Generated Constructors Models\InventoryDS\TariffSupUnitLkp.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated Constructors Models\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated Constructors Models\OversShortQS\AsycudaDocument.cs" />
@@ -662,6 +669,7 @@
     <Compile Include="Generated Constructors Models\OversShortQS\OversShort.cs" />
     <Compile Include="Generated Constructors Models\OversShortQS\OversShortEX.cs" />
     <Compile Include="Generated Constructors Models\PreviousDocumentDS\EntryDataDetails.cs" />
+    <Compile Include="Generated Constructors Models\PreviousDocumentDS\EntryPreviousItems.cs" />
     <Compile Include="Generated Constructors Models\PreviousDocumentDS\PreviousEntry.cs" />
     <Compile Include="Generated Constructors Models\PreviousDocumentDS\xcuda_HScode.cs" />
     <Compile Include="Generated Constructors Models\PreviousDocumentDS\xcuda_PreviousItem.cs" />
@@ -690,6 +698,7 @@
     <Compile Include="Generated IEntitiyWithKey Models\AllocationDS\Sales.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\AllocationDS\SubItems.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\AllocationDS\TariffCategory.cs" />
+    <Compile Include="Generated IEntitiyWithKey Models\AllocationDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\AllocationDS\TariffCodes.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\AllocationDS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\AllocationDS\xBondAllocations.cs" />
@@ -833,11 +842,13 @@
     <Compile Include="Generated IEntitiyWithKey Models\InventoryDS\InventoryItem.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryDS\InventoryItemAlia.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryDS\TariffCategory.cs" />
+    <Compile Include="Generated IEntitiyWithKey Models\InventoryDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryDS\TariffCode.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryDS\TariffSupUnitLkp.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated IEntitiyWithKey Models\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\OversShortQS\AsycudaDocument.cs" />
@@ -851,6 +862,7 @@
     <Compile Include="Generated IEntitiyWithKey Models\OversShortQS\OversShort.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\OversShortQS\OversShortEX.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\PreviousDocumentDS\EntryDataDetails.cs" />
+    <Compile Include="Generated IEntitiyWithKey Models\PreviousDocumentDS\EntryPreviousItems.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\PreviousDocumentDS\PreviousEntry.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\PreviousDocumentDS\xcuda_HScode.cs" />
     <Compile Include="Generated IEntitiyWithKey Models\PreviousDocumentDS\xcuda_PreviousItem.cs" />
@@ -879,6 +891,7 @@
     <Compile Include="Generated IIdentitfiableEntity Models\AllocationDS\Sales.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\AllocationDS\SubItems.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\AllocationDS\TariffCategory.cs" />
+    <Compile Include="Generated IIdentitfiableEntity Models\AllocationDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\AllocationDS\TariffCodes.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\AllocationDS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\AllocationDS\xBondAllocations.cs" />
@@ -1022,11 +1035,13 @@
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryDS\InventoryItem.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryDS\InventoryItemAlia.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryDS\TariffCategory.cs" />
+    <Compile Include="Generated IIdentitfiableEntity Models\InventoryDS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryDS\TariffCode.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryDS\TariffSupUnitLkp.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\OversShortQS\AsycudaDocument.cs" />
@@ -1040,6 +1055,7 @@
     <Compile Include="Generated IIdentitfiableEntity Models\OversShortQS\OversShort.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\OversShortQS\OversShortEX.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\PreviousDocumentDS\EntryDataDetails.cs" />
+    <Compile Include="Generated IIdentitfiableEntity Models\PreviousDocumentDS\EntryPreviousItems.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\PreviousDocumentDS\PreviousEntry.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\PreviousDocumentDS\xcuda_HScode.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\PreviousDocumentDS\xcuda_PreviousItem.cs" />
@@ -1085,6 +1101,7 @@
     <Compile Include="Generated Mappings\AllocationDS\Sales.map.cs" />
     <Compile Include="Generated Mappings\AllocationDS\SubItems.map.cs" />
     <Compile Include="Generated Mappings\AllocationDS\TariffCategory.map.cs" />
+    <Compile Include="Generated Mappings\AllocationDS\TariffCategoryCodeSuppUnit.map.cs" />
     <Compile Include="Generated Mappings\AllocationDS\TariffCodes.map.cs" />
     <Compile Include="Generated Mappings\AllocationDS\TariffSupUnitLkps.map.cs" />
     <Compile Include="Generated Mappings\AllocationDS\xBondAllocations.map.cs" />
@@ -1228,11 +1245,13 @@
     <Compile Include="Generated Mappings\InventoryDS\InventoryItem.map.cs" />
     <Compile Include="Generated Mappings\InventoryDS\InventoryItemAlia.map.cs" />
     <Compile Include="Generated Mappings\InventoryDS\TariffCategory.map.cs" />
+    <Compile Include="Generated Mappings\InventoryDS\TariffCategoryCodeSuppUnit.map.cs" />
     <Compile Include="Generated Mappings\InventoryDS\TariffCode.map.cs" />
     <Compile Include="Generated Mappings\InventoryDS\TariffSupUnitLkp.map.cs" />
     <Compile Include="Generated Mappings\InventoryQS\EntryDataDetailsEx.map.cs" />
     <Compile Include="Generated Mappings\InventoryQS\InventoryItemsEx.map.cs" />
     <Compile Include="Generated Mappings\InventoryQS\TariffCategory.map.cs" />
+    <Compile Include="Generated Mappings\InventoryQS\TariffCategoryCodeSuppUnit.map.cs" />
     <Compile Include="Generated Mappings\InventoryQS\TariffCodes.map.cs" />
     <Compile Include="Generated Mappings\InventoryQS\TariffSupUnitLkps.map.cs" />
     <Compile Include="Generated Mappings\OversShortQS\AsycudaDocument.map.cs" />
@@ -1246,6 +1265,7 @@
     <Compile Include="Generated Mappings\OversShortQS\OversShort.map.cs" />
     <Compile Include="Generated Mappings\OversShortQS\OversShortEX.map.cs" />
     <Compile Include="Generated Mappings\PreviousDocumentDS\EntryDataDetails.map.cs" />
+    <Compile Include="Generated Mappings\PreviousDocumentDS\EntryPreviousItems.map.cs" />
     <Compile Include="Generated Mappings\PreviousDocumentDS\PreviousEntry.map.cs" />
     <Compile Include="Generated Mappings\PreviousDocumentDS\xcuda_HScode.map.cs" />
     <Compile Include="Generated Mappings\PreviousDocumentDS\xcuda_PreviousItem.map.cs" />
@@ -1269,6 +1289,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
+      <Project>{d6846386-8741-4619-bae3-b0cfedbf2597}</Project>
+      <Name>Core.Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
       <Project>{11235d24-1165-4dc4-b91b-0426ea669451}</Project>
       <Name>InterfacesModel</Name>

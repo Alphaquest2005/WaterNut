@@ -18,9 +18,10 @@ public class EntityTrackableTPL : CSharpTemplate
 #>
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using TrackableEntities.Client;
 
 
-		namespace <#=conTextName#>.DataLayer.Entities
+		namespace <#=conTextName#>.Business.Entities
 {
     public partial class <#=mainEntity.Name#>
     {

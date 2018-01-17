@@ -32,9 +32,9 @@ namespace OverShortsQS
         public Nullable<double> AllocatedValue { get; set; }
         public Nullable<double> ReceivedValue { get; set; }
         public Nullable<double> InvoiceValue { get; set; }
-        public int LineNumber { get; set; }
+        public Nullable<int> LineNumber { get; set; }
         public Nullable<double> PiQuantity { get; set; }
-        public int Item_Id { get; set; }
+        public Nullable<int> Item_Id { get; set; }
         public string OverShortDetailStatus { get; set; }
         public double QtyAllocated { get; set; }
         public string AllocationStatus { get; set; }

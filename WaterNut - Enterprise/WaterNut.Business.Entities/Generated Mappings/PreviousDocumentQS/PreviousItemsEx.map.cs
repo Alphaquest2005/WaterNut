@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class PreviousItemsExMap : EntityTypeConfiguration<PreviousItemsEx>
     {
@@ -37,8 +38,8 @@
               this.Property(t => t.RegistrationDate).HasColumnName("RegistrationDate");
               this.Property(t => t.PreviousDocumentItemId).HasColumnName("PreviousDocumentItemId");
               this.Property(t => t.AsycudaDocumentItemId).HasColumnName("AsycudaDocumentItemId");
-              this.HasOptional(t => t.PreviousDocumentItem).WithMany(t => t.PreviousItemsExes).HasForeignKey(d => d.PreviousDocumentItemId);
-              this.HasOptional(t => t.AsycudaDocumentItem).WithMany(t => t.PreviousItemEx).HasForeignKey(d => d.AsycudaDocumentItemId);
+              this.HasOptional(t => t.PreviousDocumentItem).WithMany(t =>(ICollection<PreviousItemsEx>) t.PreviousItemsExes).HasForeignKey(d => d.PreviousDocumentItemId);
+              this.HasOptional(t => t.AsycudaDocumentItem).WithMany(t =>(ICollection<PreviousItemsEx>) t.PreviousItemEx).HasForeignKey(d => d.AsycudaDocumentItemId);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

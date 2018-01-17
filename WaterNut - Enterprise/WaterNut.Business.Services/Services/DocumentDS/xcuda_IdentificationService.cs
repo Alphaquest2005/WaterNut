@@ -14,16 +14,20 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading.Tasks;
 //using System.Transactions;
-using TrackableEntities;
-using TrackableEntities.Common;
+
+
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
 using DocumentDS.Business.Entities;
 using Core.Common.Contracts;
 using Core.Common.Business.Services;
-using TrackableEntities.EF6;
+
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
+using WaterNut.Interfaces;
 
 namespace DocumentDS.Business.Services
 {
@@ -73,7 +77,7 @@ namespace DocumentDS.Business.Services
                     IEnumerable<xcuda_Identification> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
@@ -135,7 +139,7 @@ namespace DocumentDS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -143,7 +147,7 @@ namespace DocumentDS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -176,7 +180,7 @@ namespace DocumentDS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -184,7 +188,7 @@ namespace DocumentDS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -271,7 +275,7 @@ namespace DocumentDS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
@@ -347,7 +351,7 @@ namespace DocumentDS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
 
             }
@@ -421,7 +425,7 @@ namespace DocumentDS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)
@@ -445,12 +449,13 @@ namespace DocumentDS.Business.Services
               {
                 try
                 {   
-                    if(entity.TrackingState == TrackingState.Unchanged) entity.TrackingState = TrackingState.Modified;                              
+                     var res = (xcuda_Identification) entity;
+                    if(res.TrackingState == TrackingState.Unchanged) res.TrackingState = TrackingState.Modified;                              
                     
-                    dbContext.ApplyChanges(entity);
+                    dbContext.ApplyChanges(res);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                    entity.AcceptChanges();
-                    return entity;      
+                    res.AcceptChanges();
+                    return res;      
 
                    // var entitychanges = entity.ChangeTracker.GetChanges();
                    // if (entitychanges != null && entitychanges.FirstOrDefault() != null)
@@ -524,12 +529,13 @@ namespace DocumentDS.Business.Services
         {
             try
             {
-                using ( var dbContext = new DocumentDSContext(){StartTracking = StartTracking})
+                var res = (xcuda_Identification) entity;
+              using ( var dbContext = new DocumentDSContext(){StartTracking = StartTracking})
               {
-                dbContext.xcuda_Identification.Add(entity);
+                dbContext.xcuda_Identification.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                entity.AcceptChanges();
-                return entity;
+                res.AcceptChanges();
+                return res;
               }
             }
             catch (Exception updateEx)

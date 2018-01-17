@@ -42,18 +42,21 @@ using System.Threading.Tasks;
 
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
-using <#=container.Name#>.DataLayer.Entities;
+using <#=container.Name#>.Business.Entities;
 using Core.Common.Contracts;
-using Core.Common.DataLayer.Services;
+using Core.Common.Business.Services;
 
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
 using <#=projectName #>.Interfaces;
 
-namespace <#=container.Name#>.DataLayer.Services
+namespace <#=container.Name#>.Business.Services
 {
    [Export (typeof(I<#=entity.Name#>Service))]
-   [Export(typeof(IDataLayerService))]
+   [Export(typeof(IBusinessService))]
    [PartCreationPolicy(CreationPolicy.NonShared)]
    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
                     ConcurrencyMode = ConcurrencyMode.Multiple)]
@@ -85,7 +88,7 @@ namespace <#=container.Name#>.DataLayer.Services
             }
         }
 
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>(List<string> includesLst = null, bool tracking = true)
+        public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>(List<string> includesLst = null, bool tracking = true)
         {
             try
             {
@@ -118,7 +121,7 @@ namespace <#=container.Name#>.DataLayer.Services
         }
 
 
-        public async Task<<#="I" + entity.Name#>> Get<#=entity.Name#>ByKey(string <#= entity.KeyMembers.FirstOrDefault().Name #>, List<string> includesLst = null, bool tracking = true)
+        public async Task<<#=entity.Name#>> Get<#=entity.Name#>ByKey(string <#= entity.KeyMembers.FirstOrDefault().Name #>, List<string> includesLst = null, bool tracking = true)
         {
             try
             {
@@ -147,13 +150,13 @@ namespace <#=container.Name#>.DataLayer.Services
         }
 
 
-		 public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpression(string exp, List<string> includesLst = null, bool tracking = true)
+		 public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpression(string exp, List<string> includesLst = null, bool tracking = true)
         {
             try
             {
                 using (var dbContext = new <#=container.Name#>Context(){StartTracking = StartTracking})
                 {
-					if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#="I" + entity.Name#>>();
+					if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#=entity.Name#>>();
 					var set = AddIncludes(includesLst, dbContext);
                     if (exp == "All")
                     {
@@ -189,13 +192,13 @@ namespace <#=container.Name#>.DataLayer.Services
             }
         }
 
-		 public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpressionLst(List<string> expLst, List<string> includesLst = null, bool tracking = true)
+		 public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpressionLst(List<string> expLst, List<string> includesLst = null, bool tracking = true)
         {
             try
             {
                 using (var dbContext = new <#=container.Name#>Context(){StartTracking = StartTracking})
                 {
-					if (expLst.Count == 0 || expLst.FirstOrDefault() == "None") return new List<<#="I" + entity.Name#>>();
+					if (expLst.Count == 0 || expLst.FirstOrDefault() == "None") return new List<<#=entity.Name#>>();
 					var set = AddIncludes(includesLst, dbContext);
                     if (expLst.FirstOrDefault() == "All")
                     {
@@ -230,7 +233,7 @@ namespace <#=container.Name#>.DataLayer.Services
             }
         }
 
-		public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
+		public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
 																							  Dictionary<string, string> navExp,
 																							  List<string> includesLst = null, bool tracking = true)
         {
@@ -239,7 +242,7 @@ namespace <#=container.Name#>.DataLayer.Services
                 using (var dbContext = new <#=container.Name#>Context(){StartTracking = StartTracking})
                 {
 
-                    if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#="I" + entity.Name#>>();
+                    if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#=entity.Name#>>();
 
                     if (exp == "All" && navExp.Count == 0)
                     {
@@ -264,7 +267,7 @@ namespace <#=container.Name#>.DataLayer.Services
                         .NavigationProperties.FirstOrDefault(
                             x =>
                                 x.ToEndMember.GetEntityType().Name ==
-                                (entity.BaseType == null ? "I" + entity.Name : entity.BaseType.Name));
+                                (entity.BaseType == null ? entity.Name : entity.BaseType.Name));
                 if (ep != null)
                     epn = ep.Name;
                 #>
@@ -308,7 +311,7 @@ namespace <#=container.Name#>.DataLayer.Services
             }
         }
 
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
+        public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
             int totalrow, List<string> includesLst = null, bool tracking = true)
         {
             try
@@ -318,7 +321,7 @@ namespace <#=container.Name#>.DataLayer.Services
 
 
 
-                if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#="I" + entity.Name#>>();
+                if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#=entity.Name#>>();
 
 
                 var batchSize = 500;
@@ -382,7 +385,7 @@ namespace <#=container.Name#>.DataLayer.Services
                 throw new FaultException<ValidationFault>(fault);
             }
         }
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> expLst,
+        public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> expLst,
             int totalrow, List<string> includesLst = null, bool tracking = true)
         {
             try
@@ -392,7 +395,7 @@ namespace <#=container.Name#>.DataLayer.Services
 
 
 
-                if (expLst.Count == 0 || expLst.FirstOrDefault() == "None") return new List<<#="I" + entity.Name#>>();
+                if (expLst.Count == 0 || expLst.FirstOrDefault() == "None") return new List<<#=entity.Name#>>();
 
 
                 var batchSize = 500;
@@ -457,7 +460,7 @@ namespace <#=container.Name#>.DataLayer.Services
         }
 
 
-        public async Task<<#="I" + entity.Name#>> Update<#=entity.Name#>(<#="I" + entity.Name#> entity)
+        public async Task<<#=entity.Name#>> Update<#=entity.Name#>(<#=entity.Name#> entity)
         { 
             using ( var dbContext = new <#=container.Name#>Context(){StartTracking = StartTracking})
               {
@@ -539,14 +542,14 @@ namespace <#=container.Name#>.DataLayer.Services
            return entity;
         }
 
-        public async Task<<#="I" + entity.Name#>> Create<#=entity.Name#>(<#="I" + entity.Name#> entity)
+        public async Task<<#=entity.Name#>> Create<#=entity.Name#>(<#=entity.Name#> entity)
         {
             try
             {
                 var res = (<#=entity.Name#>) entity;
               using ( var dbContext = new <#=container.Name#>Context(){StartTracking = StartTracking})
               {
-                dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>.Add(res);
+                dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
                 res.AcceptChanges();
                 return res;
@@ -579,8 +582,8 @@ namespace <#=container.Name#>.DataLayer.Services
                 if (entity == null)
                     return false;
 
-                    dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>.Attach(entity);
-                    dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>.Remove(entity);
+                    dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>.Attach(entity);
+                    dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>.Remove(entity);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
                     return true;
               }
@@ -646,7 +649,7 @@ namespace <#=container.Name#>.DataLayer.Services
                     if (string.IsNullOrEmpty(exp) || exp == "None") return 0;
                     if (exp == "All")
                     {
-                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>
+                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>
                                     .AsNoTracking()
 									.CountAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
@@ -654,7 +657,7 @@ namespace <#=container.Name#>.DataLayer.Services
                     else
                     {
                         
-                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>
+                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>
 									.AsNoTracking()
                                     .Where(exp)
 									.CountAsync()
@@ -676,16 +679,16 @@ namespace <#=container.Name#>.DataLayer.Services
             }
         }
         
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<<#=entity.Name#>>> LoadRange(int startIndex, int count, string exp)
         {
             try
             {
                 using (var dbContext = new <#=container.Name#>Context(){StartTracking = StartTracking})
                 {
-                    if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#="I" + entity.Name#>>();
+                    if (string.IsNullOrEmpty(exp) || exp == "None") return new List<<#=entity.Name#>>();
                     if (exp == "All")
                     {
-                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>
+                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>
 										.AsNoTracking()
                                         .OrderBy(y => y.<#=entity.KeyMembers[0].Name#>)
 										.Skip(startIndex)
@@ -696,7 +699,7 @@ namespace <#=container.Name#>.DataLayer.Services
                     else
                     {
                         
-                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>
+                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>
 										.AsNoTracking()
                                         .Where(exp)
 										.OrderBy(y => y.<#=entity.KeyMembers[0].Name#>)
@@ -730,7 +733,7 @@ namespace <#=container.Name#>.DataLayer.Services
                 {
                     if (exp == "All" && navExp.Count == 0)
                     {
-                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>
+                        return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>
 										.AsNoTracking()
                                         .CountAsync()
 										.ConfigureAwait(continueOnCapturedContext: false);
@@ -750,7 +753,7 @@ namespace <#=container.Name#>.DataLayer.Services
                         .NavigationProperties.FirstOrDefault(
                             x =>
                                 x.ToEndMember.GetEntityType().Name ==
-                                (entity.BaseType == null ? "I" + entity.Name : entity.BaseType.Name));
+                                (entity.BaseType == null ? entity.Name : entity.BaseType.Name));
                 if (ep != null)
                     epn = ep.Name;
                 #>
@@ -767,7 +770,7 @@ namespace <#=container.Name#>.DataLayer.Services
 <#+ 
 } 
 #>
-                    return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>.Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
+                    return await dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>.Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
 											.AsNoTracking()
                                             .CountAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
@@ -809,7 +812,7 @@ namespace <#=container.Name#>.DataLayer.Services
             return await dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .SelectMany(navProp).OfType<<#="I" + entity.Name#>>()
+                .SelectMany(navProp).OfType<<#=entity.Name#>>()
                 .Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
                 .Distinct()
                 .OrderBy("<#=entity.KeyMembers[0].Name#>")
@@ -830,7 +833,7 @@ namespace <#=container.Name#>.DataLayer.Services
             return await dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .Select(navProp).OfType<<#="I" + entity.Name#>>()
+                .Select(navProp).OfType<<#=entity.Name#>>()
                 .Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
                 .Distinct()
                 .OrderBy("<#=entity.KeyMembers[0].Name#>")
@@ -844,14 +847,14 @@ namespace <#=container.Name#>.DataLayer.Services
 			}
         }
 
-		  public async Task<IEnumerable<<#="I" + entity.Name#>>> LoadRangeNav(int startIndex, int count, string exp,
+		  public async Task<IEnumerable<<#=entity.Name#>>> LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             try
             {
                 using (var dbContext = new <#=container.Name#>Context(){StartTracking = StartTracking})
                 {
-                    if ((string.IsNullOrEmpty(exp) && navExp.Count == 0) || exp == "None") return new List<<#="I" + entity.Name#>>();
+                    if ((string.IsNullOrEmpty(exp) && navExp.Count == 0) || exp == "None") return new List<<#=entity.Name#>>();
                     var set = AddIncludes(includeLst, dbContext);
 
                     if (exp == "All" && navExp.Count == 0)
@@ -880,7 +883,7 @@ namespace <#=container.Name#>.DataLayer.Services
                         .NavigationProperties.FirstOrDefault(
                             x =>
                                 x.ToEndMember.GetEntityType().Name ==
-                                (entity.BaseType == null ? "I" + entity.Name : entity.BaseType.Name));
+                                (entity.BaseType == null ? entity.Name : entity.BaseType.Name));
                 if (ep != null)
                     epn = ep.Name;
                 #>
@@ -903,7 +906,7 @@ namespace <#=container.Name#>.DataLayer.Services
 <#+ 
 } 
 #>
-                    return await set//dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>
+                    return await set//dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>
 								.AsNoTracking()
                                 .Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
 								<#+ WriteOrderBy(orderByLst); #> 
@@ -929,7 +932,7 @@ namespace <#=container.Name#>.DataLayer.Services
             }
         }
 
-		private static async Task<IEnumerable<<#="I" + entity.Name#>>> LoadRangeWhere<T>(int startIndex, int count,
+		private static async Task<IEnumerable<<#=entity.Name#>>> LoadRangeWhere<T>(int startIndex, int count,
             <#=container.Name#>Context dbContext, string exp, string navExp, string navProp, string rel, IEnumerable<string> includeLst = null) where T : class
         {
              switch (rel)
@@ -944,7 +947,7 @@ namespace <#=container.Name#>.DataLayer.Services
 		    }
         }
 
-		private static async Task<IEnumerable<<#="I" + entity.Name#>>> LoadRangeSelectMany<T>(int startIndex, int count,
+		private static async Task<IEnumerable<<#=entity.Name#>>> LoadRangeSelectMany<T>(int startIndex, int count,
             <#=container.Name#>Context dbContext, string exp, string navExp, string navProp, IEnumerable<string> includeLst = null) where T : class
         {
 			try
@@ -952,7 +955,7 @@ namespace <#=container.Name#>.DataLayer.Services
             var set = dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .SelectMany(navProp).OfType<<#="I" + entity.Name#>>();
+                .SelectMany(navProp).OfType<<#=entity.Name#>>();
     
             if (includeLst != null) set = includeLst.Aggregate(set, (current, itm) => current.Include(itm));            
 
@@ -972,7 +975,7 @@ namespace <#=container.Name#>.DataLayer.Services
 			}
         }
 
-		private static async Task<IEnumerable<<#="I" + entity.Name#>>> LoadRangeSelect<T>(int startIndex, int count,
+		private static async Task<IEnumerable<<#=entity.Name#>>> LoadRangeSelect<T>(int startIndex, int count,
             <#=container.Name#>Context dbContext, string exp, string navExp, string navProp, IEnumerable<string> includeLst = null) where T : class
         {
 			try
@@ -980,7 +983,7 @@ namespace <#=container.Name#>.DataLayer.Services
               var set = dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .Select(navProp).OfType<<#="I" + entity.Name#>>();
+                .Select(navProp).OfType<<#=entity.Name#>>();
 
                if (includeLst != null) set = includeLst.Aggregate(set, (current, itm) => current.Include(itm)); 
                 
@@ -1000,7 +1003,7 @@ namespace <#=container.Name#>.DataLayer.Services
 			}
         }
 
-        private static async Task<IEnumerable<<#="I" + entity.Name#>>> GetWhere<T>(<#=container.Name#>Context dbContext,
+        private static async Task<IEnumerable<<#=entity.Name#>>> GetWhere<T>(<#=container.Name#>Context dbContext,
             string exp, string navExp, string navProp, string rel, List<string> includesLst = null) where T : class
         {
 			try
@@ -1024,7 +1027,7 @@ namespace <#=container.Name#>.DataLayer.Services
 			}
         }
 
-		private static async Task<IEnumerable<<#="I" + entity.Name#>>> GetWhereSelectMany<T>(<#=container.Name#>Context dbContext,
+		private static async Task<IEnumerable<<#=entity.Name#>>> GetWhereSelectMany<T>(<#=container.Name#>Context dbContext,
             string exp, string navExp, string navProp, List<string> includesLst = null) where T : class
         {
 			try
@@ -1035,7 +1038,7 @@ namespace <#=container.Name#>.DataLayer.Services
 				return await dbContext.Set<T>()
 							.AsNoTracking()
                             .Where(navExp)
-							.SelectMany(navProp).OfType<<#="I" + entity.Name#>>()
+							.SelectMany(navProp).OfType<<#=entity.Name#>>()
 							.Where(exp == "All" || exp == null?"<#=entity.KeyMembers[0].Name#> != null":exp)
 							.Distinct()
 							.ToListAsync()
@@ -1045,7 +1048,7 @@ namespace <#=container.Name#>.DataLayer.Services
 			var set = (DbQuery<<#=entity.Name#>>)dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .SelectMany(navProp).OfType<<#="I" + entity.Name#>>()
+                .SelectMany(navProp).OfType<<#=entity.Name#>>()
                 .Where(exp == "All" || exp == null?"<#=entity.KeyMembers[0].Name#> != null":exp)
                 .Distinct();
 
@@ -1061,7 +1064,7 @@ namespace <#=container.Name#>.DataLayer.Services
 			}
         }
 
-		private static async Task<IEnumerable<<#="I" + entity.Name#>>> GetWhereSelect<T>(<#=container.Name#>Context dbContext,
+		private static async Task<IEnumerable<<#=entity.Name#>>> GetWhereSelect<T>(<#=container.Name#>Context dbContext,
             string exp, string navExp, string navProp, List<string> includesLst = null) where T : class
         {
 			try
@@ -1072,7 +1075,7 @@ namespace <#=container.Name#>.DataLayer.Services
 				return await dbContext.Set<T>()
 							.AsNoTracking()
                             .Where(navExp)
-							.Select(navProp).OfType<<#="I" + entity.Name#>>()
+							.Select(navProp).OfType<<#=entity.Name#>>()
 							.Where(exp == "All" || exp == null?"<#=entity.KeyMembers[0].Name#> != null":exp)
 							.Distinct()
 							.ToListAsync()
@@ -1082,7 +1085,7 @@ namespace <#=container.Name#>.DataLayer.Services
 			var set = (DbQuery<<#=entity.Name#>>)dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .Select(navProp).OfType<<#="I" + entity.Name#>>()
+                .Select(navProp).OfType<<#=entity.Name#>>()
                 .Where(exp == "All" || exp == null?"<#=entity.KeyMembers[0].Name#> != null":exp)
                 .Distinct();
 
@@ -1106,7 +1109,7 @@ namespace <#=container.Name#>.DataLayer.Services
 		foreach (var p in ens)
         {
  #>
-	        public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null)
+	        public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null)
         {
             try
             {
@@ -1114,7 +1117,7 @@ namespace <#=container.Name#>.DataLayer.Services
               {
                 <#+WriteStringToIdType(p); #>
                 var set = AddIncludes(includesLst, dbContext);
-                IEnumerable<<#="I" + entity.Name#>> entities = await set//dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + "I" + entity.Name + ">()")#>
+                IEnumerable<<#=entity.Name#>> entities = await set//dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + entity.Name + ">()")#>
 <#+
         foreach (var navProperty in entity.NavigationProperties.Where(np => np.DeclaringType == entity))
             {
@@ -1158,11 +1161,11 @@ namespace <#=container.Name#>.DataLayer.Services
                      if (string.IsNullOrEmpty(whereExp) || whereExp == "None") return 0;
                      if (whereExp == "All")
                      {
-                          res = Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + "I" + entity.Name + ">()")#>.AsNoTracking().Sum(field));
+                          res = Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + entity.Name + ">()")#>.AsNoTracking().Sum(field));
                      }
                      else
                      {
-                         res = Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + "I" + entity.Name + ">()")#>.AsNoTracking().Where(whereExp).Sum(field));
+                         res = Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + entity.Name + ">()")#>.AsNoTracking().Where(whereExp).Sum(field));
                      }
                      
                      return res;
@@ -1191,7 +1194,7 @@ namespace <#=container.Name#>.DataLayer.Services
                 {
                     if (exp == "All" && navExp.Count == 0)
                     {
-                        return Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>
+                        return Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>
 										.AsNoTracking()
                                         .Sum(field)??0);
                     }
@@ -1210,7 +1213,7 @@ namespace <#=container.Name#>.DataLayer.Services
                         .NavigationProperties.FirstOrDefault(
                             x =>
                                 x.ToEndMember.GetEntityType().Name ==
-                                (entity.BaseType == null ? "I" + entity.Name : entity.BaseType.Name));
+                                (entity.BaseType == null ? entity.Name : entity.BaseType.Name));
                 if (ep != null)
                     epn = ep.Name;
                 #>
@@ -1227,7 +1230,7 @@ namespace <#=container.Name#>.DataLayer.Services
 <#+ 
 } 
 #>
-                    return Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + "I" + entity.Name + ">()")#>.Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
+                    return Convert.ToDecimal(dbContext.<#=(entity.BaseType == null?entitySet:"Set<" + entity.Name + ">()")#>.Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
 											.AsNoTracking()
                                             .Sum(field)??0);
                 }
@@ -1267,7 +1270,7 @@ namespace <#=container.Name#>.DataLayer.Services
             return Convert.ToDecimal(dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .SelectMany(navProp).OfType<<#="I" + entity.Name#>>()
+                .SelectMany(navProp).OfType<<#=entity.Name#>>()
                 .Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
                 .Distinct()
                 .OrderBy("<#=entity.KeyMembers[0].Name#>")
@@ -1287,7 +1290,7 @@ namespace <#=container.Name#>.DataLayer.Services
             return Convert.ToDecimal(dbContext.Set<T>()
 				.AsNoTracking()
                 .Where(navExp)
-                .Select(navProp).OfType<<#="I" + entity.Name#>>()
+                .Select(navProp).OfType<<#=entity.Name#>>()
                 .Where(exp == "All" || exp == null ? "<#=entity.KeyMembers[0].Name#> != null" : exp)
                 .Distinct()
                 .OrderBy("<#=entity.KeyMembers[0].Name#>")
@@ -1312,11 +1315,11 @@ namespace <#=container.Name#>.DataLayer.Services
                      if (string.IsNullOrEmpty(whereExp) || whereExp == "None") return res;
                      if (whereExp == "All")
                      {
-                          res = Convert.ToString(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + "I" + entity.Name + ">()")#>.AsNoTracking().Min(field));
+                          res = Convert.ToString(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + entity.Name + ">()")#>.AsNoTracking().Min(field));
                      }
                      else
                      {
-                         res = Convert.ToString(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + "I" + entity.Name + ">()")#>.AsNoTracking().Where(whereExp).Min(field));
+                         res = Convert.ToString(dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + entity.Name + ">()")#>.AsNoTracking().Where(whereExp).Min(field));
                      }
                      
                      return res;
@@ -1342,7 +1345,7 @@ namespace <#=container.Name#>.DataLayer.Services
 		 try
 			{
 			   if (includesLst == null) includesLst = new List<string>();
-			   var set =(DbQuery<<#=entity.Name#>>) dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + "I" + entity.Name + ">()")#>; 
+			   var set =(DbQuery<<#=entity.Name#>>) dbContext.<#=(entity.BaseType == null?entitySet:entitySet + ".OfType<" + entity.Name + ">()")#>; 
 			   set = includesLst.Where(x => !string.IsNullOrEmpty(x))
                                 .Aggregate(set, (current, itm) => current.Include(itm));
 			   return set;

@@ -9,7 +9,7 @@ namespace Core.Common.Data.Contracts
     public interface IIdentifiableEntity
     {
          string EntityId { get; set; }
-         string EntityName { get; set; }
+         //string EntityName { get; set; }
         
     }
 }

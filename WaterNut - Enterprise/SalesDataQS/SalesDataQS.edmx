@@ -4,22 +4,22 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WaterNutDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="WaterNutDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008">
         <EntityType Name="AsycudaDocumentEntryData">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="AsycudaDocumentId" Type="int" Nullable="false" />
-          <Property Name="EntryDataId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AsycudaDocumentId" Nullable="false" Type="int" />
+          <Property Name="EntryDataId" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
         </EntityType>
         <EntityType Name="AsycudaDocumentSetEntryData">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="AsycudaDocumentSetId" Type="int" Nullable="false" />
-          <Property Name="EntryDataId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AsycudaDocumentSetId" Nullable="false" Type="int" />
+          <Property Name="EntryDataId" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocumentSetEntryDataDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -28,8 +28,8 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocumentSetEntryD
             <PropertyRef Name="AsycudaDocumentSetId" />
             <PropertyRef Name="EntryDataDetailsId" />
           </Key>
-          <Property Name="AsycudaDocumentSetId" Type="int" Nullable="false" />
-          <Property Name="EntryDataDetailsId" Type="int" Nullable="false" />
+          <Property Name="AsycudaDocumentSetId" Nullable="false" Type="int" />
+          <Property Name="EntryDataDetailsId" Nullable="false" Type="int" />
           <Property Name="Id" Type="bigint" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -40,9 +40,9 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.SalesData' does not have
             
             
           </Key>
-          <Property Name="EntryDataId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="EntryDataDate" Type="datetime" Nullable="false" />
-          <Property Name="Type" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="EntryDataId" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="EntryDataDate" Nullable="false" Type="datetime" />
+          <Property Name="Type" Nullable="false" MaxLength="5" Type="varchar" />
           <Property Name="TaxAmount" Type="float" />
           <Property Name="CustomerName" Type="varchar(max)" />
           <Property Name="Total" Type="float" />
@@ -57,40 +57,33 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.SalesDataAllocations' do
             <PropertyRef Name="AllocationId" />
             <PropertyRef Name="EntryDataId" />
           </Key>
-          <Property Name="AllocationId" Type="int" Nullable="false" />
-          <Property Name="EntryDataId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AllocationId" Nullable="false" Type="int" />
+          <Property Name="EntryDataId" Nullable="false" MaxLength="50" Type="varchar" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.SalesDataDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SalesDataDetails">
           <Key>
             <PropertyRef Name="EntryDataDetailsId" />
-            
-            
-            
-            
-            
-            
-            
-            
           </Key>
-          <Property Name="EntryDataDetailsId" Type="int" Nullable="false" />
-          <Property Name="EntryDataId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EntryDataDetailsId" Nullable="false" Type="int" />
+          <Property Name="EntryDataId" Nullable="false" MaxLength="50" Type="varchar" />
           <Property Name="LineNumber" Type="int" />
-          <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Quantity" Type="float" Nullable="false" />
-          <Property Name="Units" Type="varchar" MaxLength="15" />
-          <Property Name="ItemDescription" Type="varchar(max)" Nullable="false" />
-          <Property Name="Cost" Type="float" Nullable="false" />
-          <Property Name="QtyAllocated" Type="float" Nullable="false" />
-          <Property Name="UnitWeight" Type="float" Nullable="false" />
+          <Property Name="ItemNumber" Nullable="false" MaxLength="50" Type="varchar" />
+          <Property Name="Quantity" Nullable="false" Type="float" />
+          <Property Name="Units" MaxLength="15" Type="varchar" />
+          <Property Name="ItemDescription" Nullable="false" Type="varchar(max)" />
+          <Property Name="Cost" Nullable="false" Type="float" />
+          <Property Name="QtyAllocated" Nullable="false" Type="float" />
+          <Property Name="UnitWeight" Nullable="false" Type="float" />
           <Property Name="DoNotAllocate" Type="bit" />
-          <Property Name="TariffCode" Type="varchar" MaxLength="8" />
+          <Property Name="TariffCode" MaxLength="8" Type="varchar" />
           <Property Name="CNumber" Type="varchar(max)" />
           <Property Name="CLineNumber" Type="int" />
           <Property Name="Downloaded" Type="bit" />
           <Property Name="ASYCUDA_Id" Type="int" />
-          <Property Name="SalesValue" Type="float" Nullable="false" />
+          <Property Name="SalesValue" Nullable="false" Type="float" />
+          <Property Name="EntryDataDate" Nullable="false" Type="datetime" />
         </EntityType>
         <EntityContainer Name="WaterNutDBModelStoreContainer">
           <EntitySet Name="AsycudaDocumentEntryData" EntityType="Self.AsycudaDocumentEntryData" Schema="dbo" store:Type="Tables" />
@@ -139,7 +132,8 @@ FROM [dbo].[SalesDataAllocations] AS [SalesDataAllocations]</DefiningQuery>
 [SalesDataDetails].[CLineNumber] AS [CLineNumber], 
 [SalesDataDetails].[Downloaded] AS [Downloaded], 
 [SalesDataDetails].[ASYCUDA_Id] AS [ASYCUDA_Id], 
-[SalesDataDetails].[SalesValue] AS [SalesValue]
+[SalesDataDetails].[SalesValue] AS [SalesValue], 
+[SalesDataDetails].[EntryDataDate] AS [EntryDataDate]
 FROM [dbo].[SalesDataDetails] AS [SalesDataDetails]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -153,10 +147,6 @@ FROM [dbo].[SalesDataDetails] AS [SalesDataDetails]</DefiningQuery>
           <EntitySet Name="AsycudaDocumentSetEntryData" EntityType="WaterNutDBModel.AsycudaDocumentSetEntryData" />
           <EntitySet Name="SalesDataAllocations" EntityType="WaterNutDBModel.SalesDataAllocations" />
           <EntitySet Name="AsycudaDocumentSetEntryDataDetails" EntityType="WaterNutDBModel.AsycudaDocumentSetEntryDataDetails" />
-          <AssociationSet Name="SalesDataDetailAsycudaDocumentSetEntryDataDetails" Association="WaterNutDBModel.SalesDataDetailAsycudaDocumentSetEntryDataDetails">
-            <End Role="SalesDataDetail" EntitySet="SalesDataDetails" />
-            <End Role="AsycudaDocumentSetEntryDataDetails" EntitySet="AsycudaDocumentSetEntryDataDetails" />
-          </AssociationSet>
           <EntitySet Name="SalesDatas" EntityType="WaterNutDBModel.SalesData" />
           <AssociationSet Name="SalesDataSalesDataDetail" Association="WaterNutDBModel.SalesDataSalesDataDetail">
             <End Role="SalesData" EntitySet="SalesDatas" />
@@ -173,6 +163,10 @@ FROM [dbo].[SalesDataDetails] AS [SalesDataDetails]</DefiningQuery>
           <AssociationSet Name="SalesDataAsycudaDocumentEntryData" Association="WaterNutDBModel.SalesDataAsycudaDocumentEntryData">
             <End Role="SalesData" EntitySet="SalesDatas" />
             <End Role="AsycudaDocumentEntryData" EntitySet="AsycudaDocumentEntryData" />
+          </AssociationSet>
+          <AssociationSet Name="SalesDataDetailAsycudaDocumentSetEntryDataDetails" Association="WaterNutDBModel.SalesDataDetailAsycudaDocumentSetEntryDataDetails">
+            <End Role="SalesDataDetail" EntitySet="SalesDataDetails" />
+            <End Role="AsycudaDocumentSetEntryDataDetails" EntitySet="AsycudaDocumentSetEntryDataDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SalesDataDetail">
@@ -196,8 +190,9 @@ FROM [dbo].[SalesDataDetails] AS [SalesDataDetails]</DefiningQuery>
           <Property Name="Downloaded" Type="Boolean" />
           <Property Name="ASYCUDA_Id" Type="Int32" />
           <Property Name="SalesValue" Type="Double" Nullable="false"><a:DisplayTotalsProperty xmlns:a="http://schemas.tempuri.com/DisplayTotalsProperty">True</a:DisplayTotalsProperty></Property>
-          <NavigationProperty Name="AsycudaDocumentSets" Relationship="WaterNutDBModel.SalesDataDetailAsycudaDocumentSetEntryDataDetails" FromRole="SalesDataDetail" ToRole="AsycudaDocumentSetEntryDataDetails" />
           <NavigationProperty Name="SalesData" Relationship="WaterNutDBModel.SalesDataSalesDataDetail" FromRole="SalesDataDetail" ToRole="SalesData" />
+          <Property Name="EntryDataDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AsycudaDocumentSetEntryDataDetails" Relationship="WaterNutDBModel.SalesDataDetailAsycudaDocumentSetEntryDataDetails" FromRole="SalesDataDetail" ToRole="AsycudaDocumentSetEntryDataDetails" />
         </EntityType>
         <EntityType Name="AsycudaDocumentEntryData">
           <Key>
@@ -233,21 +228,9 @@ FROM [dbo].[SalesDataDetails] AS [SalesDataDetails]</DefiningQuery>
           </Key>
           <Property Name="AsycudaDocumentSetId" Type="Int32" Nullable="false" />
           <Property Name="EntryDataDetailsId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="SalesDataDetail" Relationship="WaterNutDBModel.SalesDataDetailAsycudaDocumentSetEntryDataDetails" FromRole="AsycudaDocumentSetEntryDataDetails" ToRole="SalesDataDetail" />
           <Property Name="Id" Type="Int64" />
+          <NavigationProperty Name="SalesDataDetail" Relationship="WaterNutDBModel.SalesDataDetailAsycudaDocumentSetEntryDataDetails" FromRole="AsycudaDocumentSetEntryDataDetails" ToRole="SalesDataDetail" />
         </EntityType>
-        <Association Name="SalesDataDetailAsycudaDocumentSetEntryDataDetails">
-          <End Type="WaterNutDBModel.SalesDataDetail" Role="SalesDataDetail" Multiplicity="1" />
-          <End Type="WaterNutDBModel.AsycudaDocumentSetEntryDataDetails" Role="AsycudaDocumentSetEntryDataDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SalesDataDetail">
-              <PropertyRef Name="EntryDataDetailsId" />
-            </Principal>
-            <Dependent Role="AsycudaDocumentSetEntryDataDetails">
-              <PropertyRef Name="EntryDataDetailsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SalesData">
           <Key>
             <PropertyRef Name="EntryDataId" />
@@ -314,6 +297,18 @@ FROM [dbo].[SalesDataDetails] AS [SalesDataDetails]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="SalesDataDetailAsycudaDocumentSetEntryDataDetails">
+          <End Type="WaterNutDBModel.SalesDataDetail" Role="SalesDataDetail" Multiplicity="1" />
+          <End Type="WaterNutDBModel.AsycudaDocumentSetEntryDataDetails" Role="AsycudaDocumentSetEntryDataDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesDataDetail">
+              <PropertyRef Name="EntryDataDetailsId" />
+            </Principal>
+            <Dependent Role="AsycudaDocumentSetEntryDataDetails">
+              <PropertyRef Name="EntryDataDetailsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -323,6 +318,7 @@ FROM [dbo].[SalesDataDetails] AS [SalesDataDetails]</DefiningQuery>
           <EntitySetMapping Name="SalesDataDetails">
             <EntityTypeMapping TypeName="WaterNutDBModel.SalesDataDetail">
               <MappingFragment StoreEntitySet="SalesDataDetails">
+                <ScalarProperty Name="EntryDataDate" ColumnName="EntryDataDate" />
                 <ScalarProperty Name="SalesValue" ColumnName="SalesValue" />
                 <ScalarProperty Name="ASYCUDA_Id" ColumnName="ASYCUDA_Id" />
                 <ScalarProperty Name="Downloaded" ColumnName="Downloaded" />

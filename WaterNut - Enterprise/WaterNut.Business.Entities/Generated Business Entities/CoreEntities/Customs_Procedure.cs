@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace CoreEntities.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class Customs_Procedure : BaseEntity<Customs_Procedure> , ITrackable
+    public partial class Customs_Procedure : BaseEntity<Customs_Procedure>, ITrackable 
     {
         [DataMember]
         public int Document_TypeId 

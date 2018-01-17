@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace DocumentItemDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class PreviousItemsEx : BaseEntity<PreviousItemsEx> , ITrackable
+    public partial class PreviousItemsEx : BaseEntity<PreviousItemsEx>, ITrackable 
     {
         [DataMember]
         public string Packages_number 
@@ -319,21 +320,6 @@ namespace DocumentItemDS.Business.Entities
         }
         double _qtyallocated;
         [DataMember]
-        public int Item_Id 
-        {
-            get
-            {
-                return _item_id;
-            }
-            set
-            {
-                _item_id = value;
-                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-                NotifyPropertyChanged();
-            }
-        }
-        int _item_id;
-        [DataMember]
         public double RndCurrent_Value 
         {
             get
@@ -364,7 +350,7 @@ namespace DocumentItemDS.Business.Entities
         }
         string _cnumber;
         [DataMember]
-        public string RegistrationDate 
+        public Nullable<System.DateTime> RegistrationDate 
         {
             get
             {
@@ -377,7 +363,37 @@ namespace DocumentItemDS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        string _registrationdate;
+        Nullable<System.DateTime> _registrationdate;
+        [DataMember]
+        public Nullable<int> PreviousDocumentItemId 
+        {
+            get
+            {
+                return _previousdocumentitemid;
+            }
+            set
+            {
+                _previousdocumentitemid = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<int> _previousdocumentitemid;
+        [DataMember]
+        public Nullable<int> AsycudaDocumentItemId 
+        {
+            get
+            {
+                return _asycudadocumentitemid;
+            }
+            set
+            {
+                _asycudadocumentitemid = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<int> _asycudadocumentitemid;
         [DataMember]
         public xcuda_PreviousItem xcuda_PreviousItem { get; set; }
 

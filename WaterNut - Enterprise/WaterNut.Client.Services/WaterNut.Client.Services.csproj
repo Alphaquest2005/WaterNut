@@ -110,6 +110,7 @@
     <Compile Include="InventoryQS\EntryDataDetailsExClient.cs" />
     <Compile Include="InventoryQS\InventoryItemsExClient.cs" />
     <Compile Include="InventoryQS\TariffCategoryClient.cs" />
+    <Compile Include="InventoryQS\TariffCategoryCodeSuppUnitClient.cs" />
     <Compile Include="InventoryQS\TariffCodesClient.cs" />
     <Compile Include="InventoryQS\TariffSupUnitLkpsClient.cs" />
     <Compile Include="OversShortQS\AsycudaDocumentClient.cs" />

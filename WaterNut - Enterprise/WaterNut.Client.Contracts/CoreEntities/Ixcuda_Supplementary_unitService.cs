@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using CoreEntities.Client.DTO;
 
+
 namespace CoreEntities.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace CoreEntities.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<xcuda_Supplementary_unit> Updatexcuda_Supplementary_unit(DTO.xcuda_Supplementary_unit entity);
+        Task<xcuda_Supplementary_unit> Updatexcuda_Supplementary_unit(xcuda_Supplementary_unit entity);
 
         [OperationContract]
-        Task<xcuda_Supplementary_unit> Createxcuda_Supplementary_unit(DTO.xcuda_Supplementary_unit entity);
+        Task<xcuda_Supplementary_unit> Createxcuda_Supplementary_unit(xcuda_Supplementary_unit entity);
 
         [OperationContract]
         Task<bool> Deletexcuda_Supplementary_unit(string id);

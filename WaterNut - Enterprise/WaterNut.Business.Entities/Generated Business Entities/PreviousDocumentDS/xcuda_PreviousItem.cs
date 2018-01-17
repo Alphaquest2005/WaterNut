@@ -8,21 +8,17 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace PreviousDocumentDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class xcuda_PreviousItem : BaseEntity<xcuda_PreviousItem> , ITrackable
+    public partial class xcuda_PreviousItem : BaseEntity<xcuda_PreviousItem>, ITrackable 
     {
-        partial void AutoGenStartUp() //xcuda_PreviousItem()
-        {
-            this.PreviousEntries = new List<PreviousEntry>();
-        }
-
         [DataMember]
         public string Packages_number 
         {
@@ -309,7 +305,7 @@ namespace PreviousDocumentDS.Business.Entities
         }
         Nullable<int> _asycuda_id;
         [DataMember]
-        public Nullable<float> QtyAllocated 
+        public float QtyAllocated 
         {
             get
             {
@@ -322,11 +318,9 @@ namespace PreviousDocumentDS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        Nullable<float> _qtyallocated;
+        float _qtyallocated;
         [DataMember]
         public PreviousEntry PreviousEntry { get; set; }
-        [DataMember]
-        public List<PreviousEntry> PreviousEntries { get; set; }
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

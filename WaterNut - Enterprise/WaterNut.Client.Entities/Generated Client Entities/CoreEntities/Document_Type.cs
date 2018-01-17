@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CoreEntities.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CoreEntities.Client.Entities
@@ -54,7 +54,7 @@ public int Document_TypeId
 			{
 			    if (value == this.document_type.Document_TypeId) return;
 				this.document_type.Document_TypeId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Document_TypeId");
 			}
 		}
@@ -71,7 +71,7 @@ public string Type_of_declaration
 			{
 			    if (value == this.document_type.Type_of_declaration) return;
 				this.document_type.Type_of_declaration = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Type_of_declaration");
 			}
 		}
@@ -88,7 +88,7 @@ public string Declaration_gen_procedure_code
 			{
 			    if (value == this.document_type.Declaration_gen_procedure_code) return;
 				this.document_type.Declaration_gen_procedure_code = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Declaration_gen_procedure_code");
 			}
 		}
@@ -117,7 +117,7 @@ public string Declaration_gen_procedure_code
 				if (value != null)
 					this.document_type.Customs_Procedure = new ChangeTrackingCollection<DTO.Customs_Procedure>(value.Select(x => x.DTO).ToList());
                 _Customs_Procedure = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_Customs_Procedure != null)
 				_Customs_Procedure.CollectionChanged += Customs_Procedure_CollectionChanged;               
 				NotifyPropertyChanged("Customs_Procedure");
@@ -134,7 +134,7 @@ public string Declaration_gen_procedure_code
                         if (itm != null)
                         document_type.Customs_Procedure.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (Customs_Procedure itm in e.OldItems)
@@ -142,7 +142,7 @@ public string Declaration_gen_procedure_code
                         if (itm != null)
                         document_type.Customs_Procedure.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -162,11 +162,11 @@ public string Declaration_gen_procedure_code
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

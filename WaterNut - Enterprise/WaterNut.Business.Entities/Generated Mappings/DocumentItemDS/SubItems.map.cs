@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class SubItemsMap : EntityTypeConfiguration<SubItems>
     {
@@ -18,7 +19,7 @@
               this.Property(t => t.ItemDescription).HasColumnName("ItemDescription").IsUnicode(false);
               this.Property(t => t.Quantity).HasColumnName("Quantity");
               this.Property(t => t.QtyAllocated).HasColumnName("QtyAllocated");
-              this.HasRequired(t => t.xcuda_Item).WithMany(t => t.SubItems).HasForeignKey(d => d.Item_Id);
+              this.HasRequired(t => t.xcuda_Item).WithMany(t =>(ICollection<SubItems>) t.SubItems).HasForeignKey(d => d.Item_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

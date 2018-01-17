@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class InventoryItemsExMap : EntityTypeConfiguration<InventoryItemsEx>
     {
@@ -17,7 +18,7 @@
               this.Property(t => t.Category).HasColumnName("Category").HasMaxLength(60);
               this.Property(t => t.TariffCode).HasColumnName("TariffCode").IsUnicode(false).HasMaxLength(8);
               this.Property(t => t.EntryTimeStamp).HasColumnName("EntryTimeStamp");
-              this.HasMany(t => t.EntryDataDetails).WithRequired(t => t.InventoryItems);
+              this.HasMany(t => t.EntryDataDetails).WithRequired(t => (InventoryItemsEx)t.InventoryItems);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

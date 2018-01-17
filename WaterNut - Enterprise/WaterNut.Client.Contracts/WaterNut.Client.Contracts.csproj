@@ -101,6 +101,7 @@
     <Compile Include="EntryDataQS\IPackageTypeService.cs" />
     <Compile Include="InventoryQS\IEntryDataDetailsExService.cs" />
     <Compile Include="InventoryQS\IInventoryItemsExService.cs" />
+    <Compile Include="InventoryQS\ITariffCategoryCodeSuppUnitService.cs" />
     <Compile Include="InventoryQS\ITariffCategoryService.cs" />
     <Compile Include="InventoryQS\ITariffCodesService.cs" />
     <Compile Include="InventoryQS\ITariffSupUnitLkpsService.cs" />

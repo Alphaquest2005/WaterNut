@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using EntryDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace EntryDataQS.Client.Entities
@@ -56,7 +56,7 @@ public string ItemNumber
 			{
 			    if (value == this.inventoryitemsex.ItemNumber) return;
 				this.inventoryitemsex.ItemNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemNumber");
 			}
 		}
@@ -73,7 +73,7 @@ public string Description
 			{
 			    if (value == this.inventoryitemsex.Description) return;
 				this.inventoryitemsex.Description = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Description");
 			}
 		}
@@ -90,7 +90,7 @@ public string Category
 			{
 			    if (value == this.inventoryitemsex.Category) return;
 				this.inventoryitemsex.Category = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Category");
 			}
 		}
@@ -107,7 +107,7 @@ public string TariffCode
 			{
 			    if (value == this.inventoryitemsex.TariffCode) return;
 				this.inventoryitemsex.TariffCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCode");
 			}
 		}
@@ -122,7 +122,7 @@ public Nullable<System.DateTime> EntryTimeStamp
 			{
 			    if (value == this.inventoryitemsex.EntryTimeStamp) return;
 				this.inventoryitemsex.EntryTimeStamp = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryTimeStamp");
 			}
 		}
@@ -151,7 +151,7 @@ public Nullable<System.DateTime> EntryTimeStamp
 				if (value != null)
 					this.inventoryitemsex.EntryDataDetailsExs = new ChangeTrackingCollection<DTO.EntryDataDetailsEx>(value.Select(x => x.DTO).ToList());
                 _EntryDataDetailsExs = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_EntryDataDetailsExs != null)
 				_EntryDataDetailsExs.CollectionChanged += EntryDataDetailsExs_CollectionChanged;               
 				NotifyPropertyChanged("EntryDataDetailsExs");
@@ -168,7 +168,7 @@ public Nullable<System.DateTime> EntryTimeStamp
                         if (itm != null)
                         inventoryitemsex.EntryDataDetailsExs.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (EntryDataDetailsEx itm in e.OldItems)
@@ -176,7 +176,7 @@ public Nullable<System.DateTime> EntryTimeStamp
                         if (itm != null)
                         inventoryitemsex.EntryDataDetailsExs.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -196,11 +196,11 @@ public Nullable<System.DateTime> EntryTimeStamp
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

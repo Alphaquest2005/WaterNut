@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_ExporterMap : EntityTypeConfiguration<xcuda_Exporter>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.Exporter_name).HasColumnName("Exporter_name").IsUnicode(false);
               this.Property(t => t.Traders_Id).HasColumnName("Traders_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.Exporter_code).HasColumnName("Exporter_code").IsUnicode(false);
-              this.HasRequired(t => t.xcuda_Traders).WithOptional(t => t.xcuda_Exporter);
+              this.HasRequired(t => t.xcuda_Traders).WithOptional(t => (xcuda_Exporter)t.xcuda_Exporter);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using InventoryQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace InventoryQS.Client.Entities
@@ -56,7 +56,7 @@ public string TariffCategoryCode
 			{
 			    if (value == this.tariffcategory.TariffCategoryCode) return;
 				this.tariffcategory.TariffCategoryCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCategoryCode");
 			}
 		}
@@ -73,7 +73,7 @@ public string Description
 			{
 			    if (value == this.tariffcategory.Description) return;
 				this.tariffcategory.Description = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Description");
 			}
 		}
@@ -90,7 +90,7 @@ public string ParentTariffCategoryCode
 			{
 			    if (value == this.tariffcategory.ParentTariffCategoryCode) return;
 				this.tariffcategory.ParentTariffCategoryCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ParentTariffCategoryCode");
 			}
 		}
@@ -105,65 +105,11 @@ public Nullable<bool> LicenseRequired
 			{
 			    if (value == this.tariffcategory.LicenseRequired) return;
 				this.tariffcategory.LicenseRequired = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("LicenseRequired");
 			}
 		}
      
-
-        ObservableCollection<TariffSupUnitLkps> _TariffSupUnitLkps = null;
-        public  ObservableCollection<TariffSupUnitLkps> TariffSupUnitLkps
-		{
-            
-		    get 
-				{ 
-					if(_TariffSupUnitLkps != null) return _TariffSupUnitLkps;
-					//if (this.tariffcategory.TariffSupUnitLkps == null) Debugger.Break();
-					if(this.tariffcategory.TariffSupUnitLkps != null)
-					{
-						_TariffSupUnitLkps = new ObservableCollection<TariffSupUnitLkps>(this.tariffcategory.TariffSupUnitLkps.Select(x => new TariffSupUnitLkps(x)));
-					}
-					
-						_TariffSupUnitLkps.CollectionChanged += TariffSupUnitLkps_CollectionChanged; 
-					
-					return _TariffSupUnitLkps; 
-				}
-			set
-			{
-			    if (Equals(value, _TariffSupUnitLkps)) return;
-				if (value != null)
-					this.tariffcategory.TariffSupUnitLkps = new ChangeTrackingCollection<DTO.TariffSupUnitLkps>(value.Select(x => x.DTO).ToList());
-                _TariffSupUnitLkps = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-				if (_TariffSupUnitLkps != null)
-				_TariffSupUnitLkps.CollectionChanged += TariffSupUnitLkps_CollectionChanged;               
-				NotifyPropertyChanged("TariffSupUnitLkps");
-			}
-		}
-        
-        void TariffSupUnitLkps_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    foreach (TariffSupUnitLkps itm in e.NewItems)
-                    {
-                        if (itm != null)
-                        tariffcategory.TariffSupUnitLkps.Add(itm.DTO);
-                    }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    foreach (TariffSupUnitLkps itm in e.OldItems)
-                    {
-                        if (itm != null)
-                        tariffcategory.TariffSupUnitLkps.Remove(itm.DTO);
-                    }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
-                    break;
-                
-            }
-        }
 
         ObservableCollection<TariffCodes> _TariffCodes = null;
         public  ObservableCollection<TariffCodes> TariffCodes
@@ -188,7 +134,7 @@ public Nullable<bool> LicenseRequired
 				if (value != null)
 					this.tariffcategory.TariffCodes = new ChangeTrackingCollection<DTO.TariffCodes>(value.Select(x => x.DTO).ToList());
                 _TariffCodes = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_TariffCodes != null)
 				_TariffCodes.CollectionChanged += TariffCodes_CollectionChanged;               
 				NotifyPropertyChanged("TariffCodes");
@@ -205,7 +151,7 @@ public Nullable<bool> LicenseRequired
                         if (itm != null)
                         tariffcategory.TariffCodes.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (TariffCodes itm in e.OldItems)
@@ -213,7 +159,61 @@ public Nullable<bool> LicenseRequired
                         if (itm != null)
                         tariffcategory.TariffCodes.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+                    break;
+                
+            }
+        }
+
+        ObservableCollection<TariffCategoryCodeSuppUnit> _TariffCategoryCodeSuppUnit = null;
+        public  ObservableCollection<TariffCategoryCodeSuppUnit> TariffCategoryCodeSuppUnit
+		{
+            
+		    get 
+				{ 
+					if(_TariffCategoryCodeSuppUnit != null) return _TariffCategoryCodeSuppUnit;
+					//if (this.tariffcategory.TariffCategoryCodeSuppUnit == null) Debugger.Break();
+					if(this.tariffcategory.TariffCategoryCodeSuppUnit != null)
+					{
+						_TariffCategoryCodeSuppUnit = new ObservableCollection<TariffCategoryCodeSuppUnit>(this.tariffcategory.TariffCategoryCodeSuppUnit.Select(x => new TariffCategoryCodeSuppUnit(x)));
+					}
+					
+						_TariffCategoryCodeSuppUnit.CollectionChanged += TariffCategoryCodeSuppUnit_CollectionChanged; 
+					
+					return _TariffCategoryCodeSuppUnit; 
+				}
+			set
+			{
+			    if (Equals(value, _TariffCategoryCodeSuppUnit)) return;
+				if (value != null)
+					this.tariffcategory.TariffCategoryCodeSuppUnit = new ChangeTrackingCollection<DTO.TariffCategoryCodeSuppUnit>(value.Select(x => x.DTO).ToList());
+                _TariffCategoryCodeSuppUnit = value;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				if (_TariffCategoryCodeSuppUnit != null)
+				_TariffCategoryCodeSuppUnit.CollectionChanged += TariffCategoryCodeSuppUnit_CollectionChanged;               
+				NotifyPropertyChanged("TariffCategoryCodeSuppUnit");
+			}
+		}
+        
+        void TariffCategoryCodeSuppUnit_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (TariffCategoryCodeSuppUnit itm in e.NewItems)
+                    {
+                        if (itm != null)
+                        tariffcategory.TariffCategoryCodeSuppUnit.Add(itm.DTO);
+                    }
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (TariffCategoryCodeSuppUnit itm in e.OldItems)
+                    {
+                        if (itm != null)
+                        tariffcategory.TariffCategoryCodeSuppUnit.Remove(itm.DTO);
+                    }
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -233,11 +233,11 @@ public Nullable<bool> LicenseRequired
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

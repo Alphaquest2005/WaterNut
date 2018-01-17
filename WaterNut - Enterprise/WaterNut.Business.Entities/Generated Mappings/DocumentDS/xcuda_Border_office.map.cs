@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Border_officeMap : EntityTypeConfiguration<xcuda_Border_office>
     {
@@ -16,7 +17,7 @@
               this.Property(t => t.Transport_Id).HasColumnName("Transport_Id");
               this.Property(t => t.Code).HasColumnName("Code").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Name).HasColumnName("Name").IsUnicode(false).HasMaxLength(50);
-              this.HasOptional(t => t.xcuda_Transport).WithMany(t => t.xcuda_Border_office).HasForeignKey(d => d.Transport_Id);
+              this.HasOptional(t => t.xcuda_Transport).WithMany(t =>(ICollection<xcuda_Border_office>) t.xcuda_Border_office).HasForeignKey(d => d.Transport_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

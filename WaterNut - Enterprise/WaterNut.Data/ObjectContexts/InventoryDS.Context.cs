@@ -12,7 +12,7 @@ using System.Data.Entity.Infrastructure;
 using InventoryDS.Business.Entities.Mapping;
 using WaterNut.Data;
 using System.Data.Entity.Core.Objects;
-using TrackableEntities;
+
 
 
 namespace InventoryDS.Business.Entities
@@ -59,6 +59,8 @@ namespace InventoryDS.Business.Entities
      
         public DbSet<InventoryAsycudaMapping> InventoryAsycudaMappings { get; set; }
      
+        public DbSet<TariffCategoryCodeSuppUnit> TariffCategoryCodeSuppUnits { get; set; }
+     
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -74,6 +76,8 @@ namespace InventoryDS.Business.Entities
             modelBuilder.Configurations.Add(new InventoryItemAliaMap());
          
             modelBuilder.Configurations.Add(new InventoryAsycudaMappingMap());
+         
+            modelBuilder.Configurations.Add(new TariffCategoryCodeSuppUnitMap());
          
 			OnModelCreatingExtentsion(modelBuilder);
 

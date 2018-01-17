@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class InventoryItemsExMap : EntityTypeConfiguration<InventoryItemsEx>
     {
@@ -13,12 +14,12 @@
               this.HasKey(t => t.ItemNumber);        
               this.ToTable("InventoryItemsEx");
               this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(50);
-              this.Property(t => t.Description).HasColumnName("Description").IsRequired();
+              this.Property(t => t.Description).HasColumnName("Description").IsRequired().IsUnicode(false);
               this.Property(t => t.Category).HasColumnName("Category").HasMaxLength(60);
               this.Property(t => t.TariffCode).HasColumnName("TariffCode").IsUnicode(false).HasMaxLength(8);
               this.Property(t => t.EntryTimeStamp).HasColumnName("EntryTimeStamp");
-              this.HasOptional(t => t.TariffCodes).WithMany(t => t.InventoryItemsEx).HasForeignKey(d => d.TariffCode);
-              this.HasMany(t => t.EntryDataDetailsEx).WithRequired(t => t.InventoryItemsEx);
+              this.HasOptional(t => t.TariffCodes).WithMany(t =>(ICollection<InventoryItemsEx>) t.InventoryItemsEx).HasForeignKey(d => d.TariffCode);
+              this.HasMany(t => t.EntryDataDetailsEx).WithRequired(t => (InventoryItemsEx)t.InventoryItemsEx);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

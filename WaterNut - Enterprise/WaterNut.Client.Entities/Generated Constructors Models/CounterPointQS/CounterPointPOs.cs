@@ -7,6 +7,8 @@
 using CounterPointQS.Client.DTO;
 using TrackableEntities.Client;
 
+
+
 namespace CounterPointQS.Client.Entities
 {
 

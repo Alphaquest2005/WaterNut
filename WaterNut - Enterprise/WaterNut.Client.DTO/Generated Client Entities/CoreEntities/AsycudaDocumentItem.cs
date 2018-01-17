@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace CoreEntities.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem> , ITrackable, IEquatable<AsycudaDocumentItem>
+    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem>, ITrackable, IEquatable<AsycudaDocumentItem>
     {
         [DataMember]
         public int Item_Id
@@ -358,7 +360,7 @@ namespace CoreEntities.Client.DTO
         private Nullable<double> _DFQtyAllocated;
 
         [DataMember]
-        public double PiQuantity
+        public Nullable<double> PiQuantity
 		{ 
 		    get { return _PiQuantity; }
 			set
@@ -368,7 +370,7 @@ namespace CoreEntities.Client.DTO
 				NotifyPropertyChanged();//m => this.PiQuantity
 			}
 		}
-        private double _PiQuantity;
+        private Nullable<double> _PiQuantity;
 
         [DataMember]
         public Nullable<bool> ImportComplete
@@ -436,7 +438,7 @@ namespace CoreEntities.Client.DTO
         private string _Country_of_origin_code;
 
         [DataMember]
-        public double PiWeight
+        public Nullable<double> PiWeight
 		{ 
 		    get { return _PiWeight; }
 			set
@@ -446,7 +448,7 @@ namespace CoreEntities.Client.DTO
 				NotifyPropertyChanged();//m => this.PiWeight
 			}
 		}
-        private double _PiWeight;
+        private Nullable<double> _PiWeight;
 
         [DataMember]
         public Nullable<double> Currency_rate
@@ -499,6 +501,32 @@ namespace CoreEntities.Client.DTO
 			}
 		}
         private string _WarehouseError;
+
+        [DataMember]
+        public Nullable<bool> Cancelled
+		{ 
+		    get { return _Cancelled; }
+			set
+			{
+			    if (value == _Cancelled) return;
+				_Cancelled = value;
+				NotifyPropertyChanged();//m => this.Cancelled
+			}
+		}
+        private Nullable<bool> _Cancelled;
+
+        [DataMember]
+        public Nullable<double> SalesFactor
+		{ 
+		    get { return _SalesFactor; }
+			set
+			{
+			    if (value == _SalesFactor) return;
+				_SalesFactor = value;
+				NotifyPropertyChanged();//m => this.SalesFactor
+			}
+		}
+        private Nullable<double> _SalesFactor;
 
        
         [DataMember]

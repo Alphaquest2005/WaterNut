@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class EntryDataDetailsMap : EntityTypeConfiguration<EntryDataDetails>
     {
@@ -23,6 +24,9 @@
               this.Property(t => t.QtyAllocated).HasColumnName("QtyAllocated");
               this.Property(t => t.UnitWeight).HasColumnName("UnitWeight");
               this.Property(t => t.DoNotAllocate).HasColumnName("DoNotAllocate");
+              this.Property(t => t.Freight).HasColumnName("Freight");
+              this.Property(t => t.Weight).HasColumnName("Weight");
+              this.Property(t => t.InternalFreight).HasColumnName("InternalFreight");
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

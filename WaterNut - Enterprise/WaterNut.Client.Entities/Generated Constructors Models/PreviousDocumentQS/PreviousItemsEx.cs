@@ -7,6 +7,8 @@
 using PreviousDocumentQS.Client.DTO;
 using TrackableEntities.Client;
 
+
+
 namespace PreviousDocumentQS.Client.Entities
 {
 

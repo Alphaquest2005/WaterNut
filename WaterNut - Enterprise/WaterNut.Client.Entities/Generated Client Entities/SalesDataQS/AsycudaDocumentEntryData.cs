@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using SalesDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace SalesDataQS.Client.Entities
@@ -53,7 +53,7 @@ public string EntryDataId
 			{
 			    if (value == this.asycudadocumententrydata.EntryDataId) return;
 				this.asycudadocumententrydata.EntryDataId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataId");
 			}
 		}
@@ -68,7 +68,7 @@ public int Id
 			{
 			    if (value == this.asycudadocumententrydata.Id) return;
 				this.asycudadocumententrydata.Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Id");
 			}
 		}
@@ -83,7 +83,7 @@ public int AsycudaDocumentId
 			{
 			    if (value == this.asycudadocumententrydata.AsycudaDocumentId) return;
 				this.asycudadocumententrydata.AsycudaDocumentId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentId");
 			}
 		}
@@ -136,7 +136,7 @@ public int AsycudaDocumentId
                 _SalesData = value;
                 if(value != null)
                      this.asycudadocumententrydata.SalesData = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("SalesData");
 			}
 		}
@@ -156,11 +156,11 @@ public int AsycudaDocumentId
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

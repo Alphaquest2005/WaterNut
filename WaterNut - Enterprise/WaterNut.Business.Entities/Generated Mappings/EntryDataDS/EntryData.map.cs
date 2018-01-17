@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class EntryDataMap : EntityTypeConfiguration<EntryData>
     {
@@ -20,11 +21,11 @@
               this.Property(t => t.TotalFreight).HasColumnName("TotalFreight");
               this.Property(t => t.TotalInternalFreight).HasColumnName("TotalInternalFreight");
               this.Property(t => t.TotalWeight).HasColumnName("TotalWeight");
-              this.HasOptional(t => t.Suppliers).WithMany(t => t.EntryData).HasForeignKey(d => d.SupplierId);
-              this.HasMany(t => t.EntryDataDetails).WithRequired(t => t.EntryData);
-              this.HasMany(t => t.AsycudaDocuments).WithRequired(t => t.EntryData);
-              this.HasMany(t => t.AsycudaDocumentSets).WithRequired(t => t.EntryData);
-              this.HasMany(t => t.ContainerEntryData).WithRequired(t => t.EntryData);
+              this.HasOptional(t => t.Suppliers).WithMany(t =>(ICollection<EntryData>) t.EntryData).HasForeignKey(d => d.SupplierId);
+              this.HasMany(t => t.EntryDataDetails).WithRequired(t => (EntryData)t.EntryData);
+              this.HasMany(t => t.AsycudaDocuments).WithRequired(t => (EntryData)t.EntryData);
+              this.HasMany(t => t.AsycudaDocumentSets).WithRequired(t => (EntryData)t.EntryData);
+              this.HasMany(t => t.ContainerEntryData).WithRequired(t => (EntryData)t.EntryData);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -12,7 +12,7 @@ using System.Data.Entity.Infrastructure;
 using PreviousDocumentDS.Business.Entities.Mapping;
 using WaterNut.Data;
 using System.Data.Entity.Core.Objects;
-using TrackableEntities;
+
 
 
 namespace PreviousDocumentDS.Business.Entities
@@ -59,6 +59,8 @@ namespace PreviousDocumentDS.Business.Entities
      
         public DbSet<EntryDataDetails> EntryDataDetails { get; set; }
      
+        public DbSet<EntryPreviousItems> EntryPreviousItems { get; set; }
+     
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -74,6 +76,8 @@ namespace PreviousDocumentDS.Business.Entities
             modelBuilder.Configurations.Add(new xcuda_Valuation_itemMap());
          
             modelBuilder.Configurations.Add(new EntryDataDetailsMap());
+         
+            modelBuilder.Configurations.Add(new EntryPreviousItemsMap());
          
 			OnModelCreatingExtentsion(modelBuilder);
 

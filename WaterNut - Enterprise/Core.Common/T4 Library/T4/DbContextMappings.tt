@@ -6,9 +6,9 @@
 <#@ import namespace="System.Text"#>
 <#@ import namespace="System.Linq"#>
 <#@ output extension=".cs"#>
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Entities\DataLayer\EF6\DataLayerEntityMappingsTemplate.tt"#>
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Entities\DataLayer\EF6\DataLayerEntityROMappingsTemplate.tt"#>
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Entities\Business\EF6\BusinessEntityMappingsTemplate.tt"#>
+
 
 <#+ 
     
@@ -54,29 +54,13 @@
                be.manyToManyMappings = loadResult.ManyToManyMappings;
                be.tphMappings = loadResult.TphMappings;
                                
-                be.namespaceName = container.Name + ".DataLayer.Entities.Mapping";
+                be.namespaceName = container.Name + ".Business.Entities.Mapping";
                 
                 be.Output.Project = outputProject;
                 be.Output.File = @"Generated Mappings\" + container.Name + @"\"+ entity.Name + ".map.cs";
                 be.Render();  
 
-                //DataLayerEntityROMappingsTPL ro = new DataLayerEntityROMappingsTPL();
-                //ro.entity = entity;
-                //ro.code = code;
-                //ro.container = container;
-                //ro.COREcontainer = COREcontainer;
-                //ro.region = region;
-                //ro.ef = ef;
-//
-               //ro.propertyToColumnMapping = loadResult.PropertyToColumnMapping;
-               //ro.manyToManyMappings = loadResult.ManyToManyMappings;
-               //ro.tphMappings = loadResult.TphMappings;
-                               //
-                //ro.namespaceName = container.Name + ".DataLayer.Entities.Mapping";
-                //
-                //ro.Output.Project = outputProject;
-                //ro.Output.File = @"Generated RO Mappings\" + container.Name + @"\"+ entity.Name + "RO.map.cs";
-                //ro.Render();  
+
 
 
             }

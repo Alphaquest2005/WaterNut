@@ -2,11 +2,11 @@
 <#@ output extension=".cs"#>
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ include file="T4Toolbox.tt" #>
-<#@ include file="C:\Prism\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\DomainInterface\DomainInterfaceTemplate.tt"#>		
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\DomainInterface\DomainEntityInterfaceTemplate.tt"#>		
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\DomainInterface\DomainClientEntityInterfaceTemplate.tt"#>	
-<#@ include file="C:\prism\Core.Common\T4 Library\T4\DomainInterface\EntityInterfaceTemplate.tt"#>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\Utilities\Utils.tt" once="true"#>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\DomainInterface\DomainInterfaceTemplate.tt"#>		
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\DomainInterface\DomainEntityInterfaceTemplate.tt"#>		
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\DomainInterface\DomainClientEntityInterfaceTemplate.tt"#>	
+<#@ include file="C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\Core.Common\T4 Library\T4\DomainInterface\EntityInterfaceTemplate.tt"#>	
 
 
 				
@@ -15,7 +15,7 @@
   //       please add parameters as needed.	
   // To include this templaate just drag this file on another editor
   // then call this.Template_NewTemplate1_Render()
-  void CreateDomainInterface(string projectName,string ModelType,string inputFile, string DomainInterfaceProject, string ClientInterfaceProject, string clientEntitiesProject,List<string> processedInterfaces)
+  void CreateDomainInterface(string projectName,string ModelType,string inputFile, string DomainInterfaceProject,  string clientEntitiesProject,List<string> processedInterfaces)
     {	
         EntityType MainEntity = null;
         string MainEntitySet = "";
@@ -41,31 +41,31 @@
             
            // if(entity.Abstract) continue;
 
-             var vc = new DomainEntityInterfaceTPL();
-                    vc.container = container;
-                    vc.projectName = projectName;
-                    vc.interfaceName = "I" + entity.Name;
-                    vc.entity = entity;
-                   vc.code = code;
-                   vc.ef = ef;
-                    
-					vc.Output.PreserveExistingFile = false;
-                    vc.Output.Project = DomainInterfaceProject;
-                    vc.Output.File = container.Name + @"\Generated Entity Interfaces\" + @"\" + vc.interfaceName + ".cs";
-                    vc.Render();
+             //var vc = new DomainEntityInterfaceTPL();
+                    //vc.container = container;
+                    //vc.projectName = projectName;
+                    //vc.interfaceName = "I" + entity.Name;
+                    //vc.entity = entity;
+                   //vc.code = code;
+                   //vc.ef = ef;
+                    //
+					//vc.Output.PreserveExistingFile = false;
+                    //vc.Output.Project = DomainInterfaceProject;
+                    //vc.Output.File = container.Name + @"\Generated Entity Interfaces\" + @"\" + vc.interfaceName + ".cs";
+                    //vc.Render();
 
-			 var cc = new DomainClientEntityInterfaceTPL();
-                    cc.container = container;
-                    cc.projectName = projectName;
-                    cc.interfaceName = "I" + entity.Name;
-                    cc.entity = entity;
-                   cc.code = code;
-                   cc.ef = ef;
-                    
-					cc.Output.PreserveExistingFile = false;
-                    cc.Output.Project = ClientInterfaceProject;
-                    cc.Output.File = container.Name + @"\Generated Entity Interfaces\" + @"\" + cc.interfaceName + ".cs";
-                    cc.Render();
+			 //var cc = new DomainClientEntityInterfaceTPL();
+                    //cc.container = container;
+                    //cc.projectName = projectName;
+                    //cc.interfaceName = "I" + entity.Name;
+                    //cc.entity = entity;
+                   //cc.code = code;
+                   //cc.ef = ef;
+                    //
+					//cc.Output.PreserveExistingFile = false;
+                    //cc.Output.Project = ClientInterfaceProject;
+                    //cc.Output.File = container.Name + @"\Generated Entity Interfaces\" + @"\" + cc.interfaceName + ".cs";
+                    //cc.Render();
                     
 
 			var i = entity.MetadataProperties.FirstOrDefault(x => x.Name.Contains("DomainInterfaceProperty"));

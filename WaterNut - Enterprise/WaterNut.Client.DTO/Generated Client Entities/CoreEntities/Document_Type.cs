@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace CoreEntities.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class Document_Type : BaseEntity<Document_Type> , ITrackable, IEquatable<Document_Type>
+    public partial class Document_Type : BaseEntity<Document_Type>, ITrackable, IEquatable<Document_Type>
     {
         [DataMember]
         public int Document_TypeId

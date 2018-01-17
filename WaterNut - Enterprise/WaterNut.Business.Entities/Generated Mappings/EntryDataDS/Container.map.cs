@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class ContainerMap : EntityTypeConfiguration<Container>
     {
@@ -25,10 +26,10 @@
               this.Property(t => t.ShipDate).HasColumnName("ShipDate");
               this.Property(t => t.DeliveryDate).HasColumnName("DeliveryDate");
               this.Property(t => t.Seal).HasColumnName("Seal").IsUnicode(false).HasMaxLength(50);
-              this.HasOptional(t => t.ContainerTypes).WithMany(t => t.Container).HasForeignKey(d => d.Container_type);
-              this.HasOptional(t => t.PackageTypes).WithMany(t => t.Container).HasForeignKey(d => d.Packages_type);
-              this.HasMany(t => t.ContainerEntryData).WithRequired(t => t.Container);
-              this.HasMany(t => t.ContainerAsycudaDocumentSets).WithRequired(t => t.Container);
+              this.HasOptional(t => t.ContainerTypes).WithMany(t =>(ICollection<Container>) t.Container).HasForeignKey(d => d.Container_type);
+              this.HasOptional(t => t.PackageTypes).WithMany(t =>(ICollection<Container>) t.Container).HasForeignKey(d => d.Packages_type);
+              this.HasMany(t => t.ContainerEntryData).WithRequired(t => (Container)t.Container);
+              this.HasMany(t => t.ContainerAsycudaDocumentSets).WithRequired(t => (Container)t.Container);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

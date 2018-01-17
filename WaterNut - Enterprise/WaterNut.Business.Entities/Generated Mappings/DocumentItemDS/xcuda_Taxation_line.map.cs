@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Taxation_lineMap : EntityTypeConfiguration<xcuda_Taxation_line>
     {
@@ -19,7 +20,7 @@
               this.Property(t => t.Taxation_Id).HasColumnName("Taxation_Id");
               this.Property(t => t.Duty_tax_code).HasColumnName("Duty_tax_code");
               this.Property(t => t.Duty_tax_MP).HasColumnName("Duty_tax_MP");
-              this.HasOptional(t => t.xcuda_Taxation).WithMany(t => t.xcuda_Taxation_line).HasForeignKey(d => d.Taxation_Id);
+              this.HasOptional(t => t.xcuda_Taxation).WithMany(t =>(ICollection<xcuda_Taxation_line>) t.xcuda_Taxation_line).HasForeignKey(d => d.Taxation_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

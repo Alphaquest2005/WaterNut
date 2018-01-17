@@ -8,8 +8,8 @@
 
 //namespace OversShortQS.Business.Services
 //{
-  
-   
+
+
 //    public partial class OversShortEXService
 //    {
 //        public async Task Import(string fileName, string fileType, int docSetId, bool overWriteExisting)
@@ -19,7 +19,7 @@
 //                    WaterNut.DataSpace.BaseDataModel.Instance.GetAsycudaDocumentSet(docSetId, null)
 //                        .ConfigureAwait(false);
 //            await
-//                WaterNut.DataSpace.OverShortModelDS.Instance.Import(fileName, fileType, docSet, overWriteExisting)
+//                OverShortEXModelDS.Instance.Import(fileName, fileType, docSet, overWriteExisting)
 //                    .ConfigureAwait(false);
 //        }
 
@@ -59,7 +59,7 @@
 //        {
 //            var docSet = await WaterNut.DataSpace.BaseDataModel.Instance.GetAsycudaDocumentSet(docSetId, null).ConfigureAwait(false);
 //            var slst = await WaterNut.DataSpace.OverShortModelDS.Instance.GetOverShortEx(selos).ConfigureAwait(false);
-//            await WaterNut.DataSpace.OverShortModelDS.Instance.CreateShortsEx9(slst, docSet,BreakOnMonthYear, ApplyEX9Bucket).ConfigureAwait(false);
+//            await WaterNut.DataSpace.OverShortModelDS.Instance.CreateShortsEx9(slst, docSet, BreakOnMonthYear, ApplyEX9Bucket).ConfigureAwait(false);
 //        }
 
 //        public async Task<StringBuilder> BuildOSLst(List<int> lst)

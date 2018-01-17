@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class EX9AsycudaSalesAllocationsMap : EntityTypeConfiguration<EX9AsycudaSalesAllocations>
     {
@@ -54,8 +55,8 @@
               this.Property(t => t.Invalid).HasColumnName("Invalid");
               this.Property(t => t.pExpiryDate).HasColumnName("pExpiryDate");
               this.Property(t => t.xBond_Item_Id).HasColumnName("xBond_Item_Id");
-              this.HasRequired(t => t.PreviousDocumentItem).WithMany(t => t.EX9AsycudaSalesAllocations).HasForeignKey(d => d.PreviousItem_Id);
-              this.HasOptional(t => t.InventoryItem).WithMany(t => t.EX9AsycudaSalesAllocations).HasForeignKey(d => d.ItemNumber);
+              this.HasRequired(t => t.PreviousDocumentItem).WithMany(t =>(ICollection<EX9AsycudaSalesAllocations>) t.EX9AsycudaSalesAllocations).HasForeignKey(d => d.PreviousItem_Id);
+              this.HasOptional(t => t.InventoryItem).WithMany(t =>(ICollection<EX9AsycudaSalesAllocations>) t.EX9AsycudaSalesAllocations).HasForeignKey(d => d.ItemNumber);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

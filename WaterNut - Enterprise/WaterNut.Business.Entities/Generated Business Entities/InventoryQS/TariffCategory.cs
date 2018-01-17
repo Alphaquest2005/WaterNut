@@ -8,20 +8,21 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace InventoryQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class TariffCategory : BaseEntity<TariffCategory> , ITrackable
+    public partial class TariffCategory : BaseEntity<TariffCategory>, ITrackable 
     {
         partial void AutoGenStartUp() //TariffCategory()
         {
-            this.TariffSupUnitLkps = new List<TariffSupUnitLkps>();
             this.TariffCodes = new List<TariffCodes>();
+            this.TariffCategoryCodeSuppUnit = new List<TariffCategoryCodeSuppUnit>();
         }
 
         [DataMember]
@@ -85,9 +86,9 @@ namespace InventoryQS.Business.Entities
         }
         Nullable<bool> _licenserequired;
         [DataMember]
-        public List<TariffSupUnitLkps> TariffSupUnitLkps { get; set; }
-        [DataMember]
         public List<TariffCodes> TariffCodes { get; set; }
+        [DataMember]
+        public List<TariffCategoryCodeSuppUnit> TariffCategoryCodeSuppUnit { get; set; }
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace DocumentItemDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class xcuda_Item : BaseEntity<xcuda_Item> , ITrackable
+    public partial class xcuda_Item : BaseEntity<xcuda_Item>, ITrackable 
     {
         partial void AutoGenStartUp() //xcuda_Item()
         {
@@ -285,6 +286,36 @@ namespace DocumentItemDS.Business.Entities
             }
         }
         bool _importcomplete;
+        [DataMember]
+        public string WarehouseError 
+        {
+            get
+            {
+                return _warehouseerror;
+            }
+            set
+            {
+                _warehouseerror = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _warehouseerror;
+        [DataMember]
+        public double SalesFactor 
+        {
+            get
+            {
+                return _salesfactor;
+            }
+            set
+            {
+                _salesfactor = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        double _salesfactor;
         [DataMember]
         public List<SubItems> SubItems { get; set; }
         [DataMember]

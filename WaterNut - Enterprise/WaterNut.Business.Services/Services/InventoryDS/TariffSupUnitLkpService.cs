@@ -14,16 +14,20 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading.Tasks;
 //using System.Transactions;
-using TrackableEntities;
-using TrackableEntities.Common;
+
+
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
 using InventoryDS.Business.Entities;
 using Core.Common.Contracts;
 using Core.Common.Business.Services;
-using TrackableEntities.EF6;
+
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
+using WaterNut.Interfaces;
 
 namespace InventoryDS.Business.Services
 {
@@ -73,7 +77,7 @@ namespace InventoryDS.Business.Services
                     IEnumerable<TariffSupUnitLkp> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
@@ -135,7 +139,7 @@ namespace InventoryDS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -143,7 +147,7 @@ namespace InventoryDS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -176,7 +180,7 @@ namespace InventoryDS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -184,7 +188,7 @@ namespace InventoryDS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -228,10 +232,10 @@ namespace InventoryDS.Business.Services
                     {
                         switch (itm.Key)
                         {
-                            case "TariffCategory":
+                            case "TariffCategoryCodeSuppUnits":
                                 return
                                     await
-                                        GetWhere<TariffCategory>(dbContext, exp, itm.Value, "TariffSupUnitLkps", "SelectMany", includesLst)
+                                        GetWhere<TariffCategoryCodeSuppUnit>(dbContext, exp, itm.Value, "TariffSupUnitLkp", "Select", includesLst)
 										.ConfigureAwait(continueOnCapturedContext: false);
 
                         }
@@ -241,7 +245,7 @@ namespace InventoryDS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
@@ -317,7 +321,7 @@ namespace InventoryDS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
 
             }
@@ -391,7 +395,7 @@ namespace InventoryDS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)
@@ -415,12 +419,13 @@ namespace InventoryDS.Business.Services
               {
                 try
                 {   
-                    if(entity.TrackingState == TrackingState.Unchanged) entity.TrackingState = TrackingState.Modified;                              
+                     var res = (TariffSupUnitLkp) entity;
+                    if(res.TrackingState == TrackingState.Unchanged) res.TrackingState = TrackingState.Modified;                              
                     
-                    dbContext.ApplyChanges(entity);
+                    dbContext.ApplyChanges(res);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                    entity.AcceptChanges();
-                    return entity;      
+                    res.AcceptChanges();
+                    return res;      
 
                    // var entitychanges = entity.ChangeTracker.GetChanges();
                    // if (entitychanges != null && entitychanges.FirstOrDefault() != null)
@@ -494,12 +499,13 @@ namespace InventoryDS.Business.Services
         {
             try
             {
-                using ( var dbContext = new InventoryDSContext(){StartTracking = StartTracking})
+                var res = (TariffSupUnitLkp) entity;
+              using ( var dbContext = new InventoryDSContext(){StartTracking = StartTracking})
               {
-                dbContext.TariffSupUnitLkps.Add(entity);
+                dbContext.TariffSupUnitLkps.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                entity.AcceptChanges();
-                return entity;
+                res.AcceptChanges();
+                return res;
               }
             }
             catch (Exception updateEx)
@@ -689,8 +695,8 @@ namespace InventoryDS.Business.Services
                     {
                         switch (itm.Key)
                         {
-                            case "TariffCategory":
-                                return await CountWhere<TariffCategory>(dbContext, exp, itm.Value, "TariffSupUnitLkps", "SelectMany")
+                            case "TariffCategoryCodeSuppUnits":
+                                return await CountWhere<TariffCategoryCodeSuppUnit>(dbContext, exp, itm.Value, "TariffSupUnitLkp", "Select")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }
@@ -797,10 +803,10 @@ namespace InventoryDS.Business.Services
                     {
                         switch (itm.Key)
                         {
-                            case "TariffCategory":
+                            case "TariffCategoryCodeSuppUnits":
                                 return
                                     await
-                                        LoadRangeWhere<TariffCategory>(startIndex, count, dbContext, exp, itm.Value, "TariffSupUnitLkps", "SelectMany")
+                                        LoadRangeWhere<TariffCategoryCodeSuppUnit>(startIndex, count, dbContext, exp, itm.Value, "TariffSupUnitLkp", "Select")
 													.ConfigureAwait(continueOnCapturedContext: false);
 
                           
@@ -1059,8 +1065,8 @@ namespace InventoryDS.Business.Services
                     {
                         switch (itm.Key)
                         {
-                            case "TariffCategory":
-                                return await SumWhere<TariffCategory>(dbContext, exp, itm.Value, "TariffSupUnitLkps", field, "SelectMany")
+                            case "TariffCategoryCodeSuppUnits":
+                                return await SumWhere<TariffCategoryCodeSuppUnit>(dbContext, exp, itm.Value, "TariffSupUnitLkp", field, "Select")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }

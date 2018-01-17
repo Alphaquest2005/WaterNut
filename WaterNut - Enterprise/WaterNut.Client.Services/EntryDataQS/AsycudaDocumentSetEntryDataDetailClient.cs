@@ -13,6 +13,7 @@ using EntryDataQS.Client.DTO;
 using EntryDataQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace EntryDataQS.Client.Services
     public partial class AsycudaDocumentSetEntryDataDetailClient :  ClientService<IAsycudaDocumentSetEntryDataDetailService>, IAsycudaDocumentSetEntryDataDetailService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetails(List<string> includesLst = null)
+        public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetails(List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentSetEntryDataDetails(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaDocumentSetEntryDataDetail> GetAsycudaDocumentSetEntryDataDetailByKey(string id, List<string> includesLst = null)
+        public async Task<AsycudaDocumentSetEntryDataDetail> GetAsycudaDocumentSetEntryDataDetailByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentSetEntryDataDetailByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentSetEntryDataDetailsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentSetEntryDataDetailsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailsByExpressionNav(string exp,
+		public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetAsycudaDocumentSetEntryDataDetailsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace EntryDataQS.Client.Services
             return await Channel.GetAsycudaDocumentSetEntryDataDetailsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaDocumentSetEntryDataDetail> UpdateAsycudaDocumentSetEntryDataDetail(DTO.AsycudaDocumentSetEntryDataDetail entity)
+        public async Task<AsycudaDocumentSetEntryDataDetail> UpdateAsycudaDocumentSetEntryDataDetail(AsycudaDocumentSetEntryDataDetail entity)
         {
            return await Channel.UpdateAsycudaDocumentSetEntryDataDetail(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaDocumentSetEntryDataDetail> CreateAsycudaDocumentSetEntryDataDetail(DTO.AsycudaDocumentSetEntryDataDetail entity)
+        public async Task<AsycudaDocumentSetEntryDataDetail> CreateAsycudaDocumentSetEntryDataDetail(AsycudaDocumentSetEntryDataDetail entity)
         {
            return await Channel.CreateAsycudaDocumentSetEntryDataDetail(entity).ConfigureAwait(false);
         }
@@ -96,22 +97,22 @@ namespace EntryDataQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaDocumentSetEntryDataDetailByAsycudaDocumentSetId(AsycudaDocumentSetId, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailByEntryDataDetailsId(string EntryDataDetailsId, List<string> includesLst = null)
+  		public async Task<IEnumerable<AsycudaDocumentSetEntryDataDetail>> GetAsycudaDocumentSetEntryDataDetailByEntryDataDetailsId(string EntryDataDetailsId, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaDocumentSetEntryDataDetailByEntryDataDetailsId(EntryDataDetailsId, includesLst).ConfigureAwait(false);
         }
@@ -123,7 +124,7 @@ namespace EntryDataQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

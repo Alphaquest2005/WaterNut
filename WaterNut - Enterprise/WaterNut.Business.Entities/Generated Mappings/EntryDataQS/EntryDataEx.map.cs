@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class EntryDataExMap : EntityTypeConfiguration<EntryDataEx>
     {
@@ -20,10 +21,10 @@
               this.Property(t => t.ImportedTotal).HasColumnName("ImportedTotal");
               this.Property(t => t.ImportedLines).HasColumnName("ImportedLines");
               this.Property(t => t.TotalLines).HasColumnName("TotalLines");
-              this.HasMany(t => t.AsycudaDocumentSets).WithRequired(t => t.EntryDataEx);
-              this.HasMany(t => t.AsycudaDocuments).WithRequired(t => t.EntryDataEx);
-              this.HasMany(t => t.EntryDataDetailsExs).WithRequired(t => t.EntryDataEx);
-              this.HasMany(t => t.ContainerEntryDatas).WithRequired(t => t.EntryDataEx);
+              this.HasMany(t => t.AsycudaDocumentSets).WithRequired(t => (EntryDataEx)t.EntryDataEx);
+              this.HasMany(t => t.AsycudaDocuments).WithRequired(t => (EntryDataEx)t.EntryDataEx);
+              this.HasMany(t => t.EntryDataDetailsExs).WithRequired(t => (EntryDataEx)t.EntryDataEx);
+              this.HasMany(t => t.ContainerEntryDatas).WithRequired(t => (EntryDataEx)t.EntryDataEx);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

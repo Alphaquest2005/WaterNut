@@ -7,6 +7,8 @@
 using SalesDataQS.Client.DTO;
 using TrackableEntities.Client;
 
+
+
 namespace SalesDataQS.Client.Entities
 {
 

@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class PreviousDocumentItemMap : EntityTypeConfiguration<PreviousDocumentItem>
     {
@@ -41,7 +42,7 @@
               this.Property(t => t.ItemQuantity).HasColumnName("ItemQuantity");
               this.Property(t => t.Number).HasColumnName("Number").IsUnicode(false);
               this.Property(t => t.DocumentType).HasColumnName("DocumentType").IsUnicode(false);
-              this.HasRequired(t => t.PreviousDocument).WithMany(t => t.PreviousDocumentItems).HasForeignKey(d => d.ASYCUDA_Id);
+              this.HasRequired(t => t.PreviousDocument).WithMany(t =>(ICollection<PreviousDocumentItem>) t.PreviousDocumentItems).HasForeignKey(d => d.ASYCUDA_Id);
               this.HasMany(t => t.PreviousItemsExes).WithOptional(t => t.PreviousDocumentItem).HasForeignKey(d => d.PreviousDocumentItemId);
               this.HasMany(t => t.PreviousItemEx).WithOptional(t => t.AsycudaDocumentItem).HasForeignKey(d => d.AsycudaDocumentItemId);
              // Tracking Properties

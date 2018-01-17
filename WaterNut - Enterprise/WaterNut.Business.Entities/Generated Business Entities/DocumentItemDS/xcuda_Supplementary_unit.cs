@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace DocumentItemDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class xcuda_Supplementary_unit : BaseEntity<xcuda_Supplementary_unit> , ITrackable
+    public partial class xcuda_Supplementary_unit : BaseEntity<xcuda_Supplementary_unit>, ITrackable 
     {
         [DataMember]
         public Nullable<double> Suppplementary_unit_quantity 

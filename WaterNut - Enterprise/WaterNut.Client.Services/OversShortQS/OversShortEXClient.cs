@@ -13,6 +13,7 @@ using OversShortQS.Client.DTO;
 using OversShortQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace OversShortQS.Client.Services
     public partial class OversShortEXClient :  ClientService<IOversShortEXService>, IOversShortEXService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.OversShortEX>> GetOversShorts(List<string> includesLst = null)
+        public async Task<IEnumerable<OversShortEX>> GetOversShorts(List<string> includesLst = null)
         {
             return await Channel.GetOversShorts(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.OversShortEX> GetOversShortEXByKey(string id, List<string> includesLst = null)
+        public async Task<OversShortEX> GetOversShortEXByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetOversShortEXByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OversShortEX>> GetOversShortsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<OversShortEX>> GetOversShortsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetOversShortsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OversShortEX>> GetOversShortsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<OversShortEX>> GetOversShortsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetOversShortsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OversShortEX>> GetOversShortsByExpressionNav(string exp,
+		public async Task<IEnumerable<OversShortEX>> GetOversShortsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetOversShortsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace OversShortQS.Client.Services
             return await Channel.GetOversShortsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.OversShortEX> UpdateOversShortEX(DTO.OversShortEX entity)
+        public async Task<OversShortEX> UpdateOversShortEX(OversShortEX entity)
         {
            return await Channel.UpdateOversShortEX(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.OversShortEX> CreateOversShortEX(DTO.OversShortEX entity)
+        public async Task<OversShortEX> CreateOversShortEX(OversShortEX entity)
         {
            return await Channel.CreateOversShortEX(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace OversShortQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.OversShortEX>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<OversShortEX>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OversShortEX>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<OversShortEX>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace OversShortQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

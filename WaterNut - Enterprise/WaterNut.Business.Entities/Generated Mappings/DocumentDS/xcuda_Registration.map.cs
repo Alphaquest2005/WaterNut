@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_RegistrationMap : EntityTypeConfiguration<xcuda_Registration>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.Number).HasColumnName("Number").IsUnicode(false);
               this.Property(t => t.Date).HasColumnName("Date").IsUnicode(false);
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_Identification).WithOptional(t => t.xcuda_Registration);
+              this.HasRequired(t => t.xcuda_Identification).WithOptional(t => (xcuda_Registration)t.xcuda_Registration);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

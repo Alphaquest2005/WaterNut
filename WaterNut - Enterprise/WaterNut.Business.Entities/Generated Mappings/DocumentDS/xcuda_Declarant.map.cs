@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_DeclarantMap : EntityTypeConfiguration<xcuda_Declarant>
     {
@@ -17,7 +18,7 @@
               this.Property(t => t.Declarant_representative).HasColumnName("Declarant_representative").IsUnicode(false);
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.Number).HasColumnName("Number");
-              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => t.xcuda_Declarant);
+              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => (xcuda_Declarant)t.xcuda_Declarant);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

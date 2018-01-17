@@ -14,16 +14,20 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading.Tasks;
 //using System.Transactions;
-using TrackableEntities;
-using TrackableEntities.Common;
+
+
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
 using DocumentDS.Business.Entities;
 using Core.Common.Contracts;
 using Core.Common.Business.Services;
-using TrackableEntities.EF6;
+
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
+using WaterNut.Interfaces;
 
 namespace DocumentDS.Business.Services
 {
@@ -73,7 +77,7 @@ namespace DocumentDS.Business.Services
                     IEnumerable<AsycudaDocumentSet> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
@@ -135,7 +139,7 @@ namespace DocumentDS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -143,7 +147,7 @@ namespace DocumentDS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -176,7 +180,7 @@ namespace DocumentDS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -184,7 +188,7 @@ namespace DocumentDS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -240,16 +244,16 @@ namespace DocumentDS.Business.Services
                                         GetWhere<Document_Type>(dbContext, exp, itm.Value, "AsycudaDocumentSets", "SelectMany", includesLst)
 										.ConfigureAwait(continueOnCapturedContext: false);
 
-                            case "xcuda_ASYCUDA_ExtendedProperties":
-                                return
-                                    await
-                                        GetWhere<xcuda_ASYCUDA_ExtendedProperties>(dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select", includesLst)
-										.ConfigureAwait(continueOnCapturedContext: false);
-
                             case "AsycudaDocumentSetEntryDatas":
                                 return
                                     await
                                         GetWhere<AsycudaDocumentSetEntryData>(dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select", includesLst)
+										.ConfigureAwait(continueOnCapturedContext: false);
+
+                            case "xcuda_ASYCUDA_ExtendedProperties":
+                                return
+                                    await
+                                        GetWhere<xcuda_ASYCUDA_ExtendedProperties>(dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select", includesLst)
 										.ConfigureAwait(continueOnCapturedContext: false);
 
                         }
@@ -259,7 +263,7 @@ namespace DocumentDS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
@@ -335,7 +339,7 @@ namespace DocumentDS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
 
             }
@@ -409,7 +413,7 @@ namespace DocumentDS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)
@@ -433,12 +437,13 @@ namespace DocumentDS.Business.Services
               {
                 try
                 {   
-                    if(entity.TrackingState == TrackingState.Unchanged) entity.TrackingState = TrackingState.Modified;                              
+                     var res = (AsycudaDocumentSet) entity;
+                    if(res.TrackingState == TrackingState.Unchanged) res.TrackingState = TrackingState.Modified;                              
                     
-                    dbContext.ApplyChanges(entity);
+                    dbContext.ApplyChanges(res);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                    entity.AcceptChanges();
-                    return entity;      
+                    res.AcceptChanges();
+                    return res;      
 
                    // var entitychanges = entity.ChangeTracker.GetChanges();
                    // if (entitychanges != null && entitychanges.FirstOrDefault() != null)
@@ -512,12 +517,13 @@ namespace DocumentDS.Business.Services
         {
             try
             {
-                using ( var dbContext = new DocumentDSContext(){StartTracking = StartTracking})
+                var res = (AsycudaDocumentSet) entity;
+              using ( var dbContext = new DocumentDSContext(){StartTracking = StartTracking})
               {
-                dbContext.AsycudaDocumentSets.Add(entity);
+                dbContext.AsycudaDocumentSets.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                entity.AcceptChanges();
-                return entity;
+                res.AcceptChanges();
+                return res;
               }
             }
             catch (Exception updateEx)
@@ -713,11 +719,11 @@ namespace DocumentDS.Business.Services
                             case "Document_Type":
                                 return await CountWhere<Document_Type>(dbContext, exp, itm.Value, "AsycudaDocumentSets", "SelectMany")
 											.ConfigureAwait(continueOnCapturedContext: false);
-                            case "xcuda_ASYCUDA_ExtendedProperties":
-                                return await CountWhere<xcuda_ASYCUDA_ExtendedProperties>(dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select")
-											.ConfigureAwait(continueOnCapturedContext: false);
                             case "AsycudaDocumentSetEntryDatas":
                                 return await CountWhere<AsycudaDocumentSetEntryData>(dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select")
+											.ConfigureAwait(continueOnCapturedContext: false);
+                            case "xcuda_ASYCUDA_ExtendedProperties":
+                                return await CountWhere<xcuda_ASYCUDA_ExtendedProperties>(dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }
@@ -836,16 +842,16 @@ namespace DocumentDS.Business.Services
                                         LoadRangeWhere<Document_Type>(startIndex, count, dbContext, exp, itm.Value, "AsycudaDocumentSets", "SelectMany")
 													.ConfigureAwait(continueOnCapturedContext: false);
 
-                            case "xcuda_ASYCUDA_ExtendedProperties":
-                                return
-                                    await
-                                        LoadRangeWhere<xcuda_ASYCUDA_ExtendedProperties>(startIndex, count, dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select")
-													.ConfigureAwait(continueOnCapturedContext: false);
-
                             case "AsycudaDocumentSetEntryDatas":
                                 return
                                     await
                                         LoadRangeWhere<AsycudaDocumentSetEntryData>(startIndex, count, dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select")
+													.ConfigureAwait(continueOnCapturedContext: false);
+
+                            case "xcuda_ASYCUDA_ExtendedProperties":
+                                return
+                                    await
+                                        LoadRangeWhere<xcuda_ASYCUDA_ExtendedProperties>(startIndex, count, dbContext, exp, itm.Value, "AsycudaDocumentSet", "Select")
 													.ConfigureAwait(continueOnCapturedContext: false);
 
                           
@@ -1061,8 +1067,8 @@ namespace DocumentDS.Business.Services
                 var i = Convert.ToInt32(Customs_ProcedureId);
                 var set = AddIncludes(includesLst, dbContext);
                 IEnumerable<AsycudaDocumentSet> entities = await set//dbContext.AsycudaDocumentSets
-                                                    // .Include(x => x.xcuda_ASYCUDA_ExtendedProperties)									  
                                                     // .Include(x => x.AsycudaDocumentSetEntryDatas)									  
+                                                    // .Include(x => x.xcuda_ASYCUDA_ExtendedProperties)									  
                                       .AsNoTracking()
                                         .Where(x => x.Customs_ProcedureId.ToString() == Customs_ProcedureId.ToString())
 										.ToListAsync()
@@ -1092,8 +1098,8 @@ namespace DocumentDS.Business.Services
                 var i = Convert.ToInt32(Document_TypeId);
                 var set = AddIncludes(includesLst, dbContext);
                 IEnumerable<AsycudaDocumentSet> entities = await set//dbContext.AsycudaDocumentSets
-                                                    // .Include(x => x.xcuda_ASYCUDA_ExtendedProperties)									  
                                                     // .Include(x => x.AsycudaDocumentSetEntryDatas)									  
+                                                    // .Include(x => x.xcuda_ASYCUDA_ExtendedProperties)									  
                                       .AsNoTracking()
                                         .Where(x => x.Document_TypeId.ToString() == Document_TypeId.ToString())
 										.ToListAsync()
@@ -1172,11 +1178,11 @@ namespace DocumentDS.Business.Services
                             case "Document_Type":
                                 return await SumWhere<Document_Type>(dbContext, exp, itm.Value, "AsycudaDocumentSets", field, "SelectMany")
 											.ConfigureAwait(continueOnCapturedContext: false);
-                            case "xcuda_ASYCUDA_ExtendedProperties":
-                                return await SumWhere<xcuda_ASYCUDA_ExtendedProperties>(dbContext, exp, itm.Value, "AsycudaDocumentSet", field, "Select")
-											.ConfigureAwait(continueOnCapturedContext: false);
                             case "AsycudaDocumentSetEntryDatas":
                                 return await SumWhere<AsycudaDocumentSetEntryData>(dbContext, exp, itm.Value, "AsycudaDocumentSet", field, "Select")
+											.ConfigureAwait(continueOnCapturedContext: false);
+                            case "xcuda_ASYCUDA_ExtendedProperties":
+                                return await SumWhere<xcuda_ASYCUDA_ExtendedProperties>(dbContext, exp, itm.Value, "AsycudaDocumentSet", field, "Select")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }

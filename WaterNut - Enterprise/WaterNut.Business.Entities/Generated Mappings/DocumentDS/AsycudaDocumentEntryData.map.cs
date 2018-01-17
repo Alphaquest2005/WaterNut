@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class AsycudaDocumentEntryDataMap : EntityTypeConfiguration<AsycudaDocumentEntryData>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.AsycudaDocumentId).HasColumnName("AsycudaDocumentId");
               this.Property(t => t.EntryDataId).HasColumnName("EntryDataId").IsRequired().IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
-              this.HasRequired(t => t.xcuda_ASYCUDA).WithMany(t => t.AsycudaDocumentEntryDatas).HasForeignKey(d => d.AsycudaDocumentId);
+              this.HasRequired(t => t.xcuda_ASYCUDA).WithMany(t =>(ICollection<AsycudaDocumentEntryData>) t.AsycudaDocumentEntryDatas).HasForeignKey(d => d.AsycudaDocumentId);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

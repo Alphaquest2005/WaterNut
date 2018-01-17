@@ -20,9 +20,9 @@ namespace OverShortsQS
         }
     
         public int Item_Id { get; set; }
-        public int AsycudaDocumentId { get; set; }
+        public Nullable<int> AsycudaDocumentId { get; set; }
         public Nullable<int> EntryDataDetailsId { get; set; }
-        public int LineNumber { get; set; }
+        public Nullable<int> LineNumber { get; set; }
         public Nullable<bool> IsAssessed { get; set; }
         public Nullable<bool> DoNotAllocate { get; set; }
         public Nullable<bool> DoNotEX { get; set; }
@@ -30,7 +30,7 @@ namespace OverShortsQS
         public string Description_of_goods { get; set; }
         public string Commercial_Description { get; set; }
         public double Gross_weight_itm { get; set; }
-        public Nullable<double> Net_weight_itm { get; set; }
+        public double Net_weight_itm { get; set; }
         public Nullable<double> Item_price { get; set; }
         public Nullable<double> ItemQuantity { get; set; }
         public string Suppplementary_unit_code { get; set; }
@@ -43,10 +43,21 @@ namespace OverShortsQS
         public Nullable<double> Total_CIF_itm { get; set; }
         public Nullable<double> Freight { get; set; }
         public Nullable<double> Statistical_value { get; set; }
-        public double DPQtyAllocated { get; set; }
-        public double DFQtyAllocated { get; set; }
+        public Nullable<double> DPQtyAllocated { get; set; }
+        public Nullable<double> DFQtyAllocated { get; set; }
         public Nullable<double> PiQuantity { get; set; }
-        public bool ImportComplete { get; set; }
+        public Nullable<bool> ImportComplete { get; set; }
+        public string CNumber { get; set; }
+        public Nullable<System.DateTime> RegistrationDate { get; set; }
+        public Nullable<double> Number_of_packages { get; set; }
+        public string Country_of_origin_code { get; set; }
+        public Nullable<double> PiWeight { get; set; }
+        public Nullable<double> Currency_rate { get; set; }
+        public string Currency_code { get; set; }
+        public Nullable<bool> InvalidHSCode { get; set; }
+        public string WarehouseError { get; set; }
+        public Nullable<bool> Cancelled { get; set; }
+        public Nullable<double> SalesFactor { get; set; }
     
         public virtual AsycudaDocument AsycudaDocument { get; set; }
         public virtual ICollection<OverShortAllocationsEX> OverShortAllocationsEXes { get; set; }

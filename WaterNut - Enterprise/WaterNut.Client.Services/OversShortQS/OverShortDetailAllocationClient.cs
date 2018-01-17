@@ -13,6 +13,7 @@ using OversShortQS.Client.DTO;
 using OversShortQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace OversShortQS.Client.Services
     public partial class OverShortDetailAllocationClient :  ClientService<IOverShortDetailAllocationService>, IOverShortDetailAllocationService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.OverShortDetailAllocation>> GetOverShortDetailAllocations(List<string> includesLst = null)
+        public async Task<IEnumerable<OverShortDetailAllocation>> GetOverShortDetailAllocations(List<string> includesLst = null)
         {
             return await Channel.GetOverShortDetailAllocations(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.OverShortDetailAllocation> GetOverShortDetailAllocationByKey(string id, List<string> includesLst = null)
+        public async Task<OverShortDetailAllocation> GetOverShortDetailAllocationByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetOverShortDetailAllocationByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OverShortDetailAllocation>> GetOverShortDetailAllocationsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<OverShortDetailAllocation>> GetOverShortDetailAllocationsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetOverShortDetailAllocationsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OverShortDetailAllocation>> GetOverShortDetailAllocationsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<OverShortDetailAllocation>> GetOverShortDetailAllocationsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetOverShortDetailAllocationsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OverShortDetailAllocation>> GetOverShortDetailAllocationsByExpressionNav(string exp,
+		public async Task<IEnumerable<OverShortDetailAllocation>> GetOverShortDetailAllocationsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetOverShortDetailAllocationsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace OversShortQS.Client.Services
             return await Channel.GetOverShortDetailAllocationsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.OverShortDetailAllocation> UpdateOverShortDetailAllocation(DTO.OverShortDetailAllocation entity)
+        public async Task<OverShortDetailAllocation> UpdateOverShortDetailAllocation(OverShortDetailAllocation entity)
         {
            return await Channel.UpdateOverShortDetailAllocation(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.OverShortDetailAllocation> CreateOverShortDetailAllocation(DTO.OverShortDetailAllocation entity)
+        public async Task<OverShortDetailAllocation> CreateOverShortDetailAllocation(OverShortDetailAllocation entity)
         {
            return await Channel.CreateOverShortDetailAllocation(entity).ConfigureAwait(false);
         }
@@ -96,22 +97,22 @@ namespace OversShortQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.OverShortDetailAllocation>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<OverShortDetailAllocation>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.OverShortDetailAllocation>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<OverShortDetailAllocation>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.OverShortDetailAllocation>> GetOverShortDetailAllocationByOverShortDetailId(string OverShortDetailId, List<string> includesLst = null)
+		public async Task<IEnumerable<OverShortDetailAllocation>> GetOverShortDetailAllocationByOverShortDetailId(string OverShortDetailId, List<string> includesLst = null)
         {
             return  await Channel.GetOverShortDetailAllocationByOverShortDetailId(OverShortDetailId, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.OverShortDetailAllocation>> GetOverShortDetailAllocationByItem_Id(string Item_Id, List<string> includesLst = null)
+  		public async Task<IEnumerable<OverShortDetailAllocation>> GetOverShortDetailAllocationByItem_Id(string Item_Id, List<string> includesLst = null)
         {
             return  await Channel.GetOverShortDetailAllocationByItem_Id(Item_Id, includesLst).ConfigureAwait(false);
         }
@@ -123,7 +124,7 @@ namespace OversShortQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

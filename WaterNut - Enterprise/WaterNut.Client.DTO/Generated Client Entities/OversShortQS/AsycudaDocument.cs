@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace OversShortQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocument : BaseEntity<AsycudaDocument> , ITrackable, IEquatable<AsycudaDocument>
+    public partial class AsycudaDocument : BaseEntity<AsycudaDocument>, ITrackable, IEquatable<AsycudaDocument>
     {
         [DataMember]
         public int ASYCUDA_Id
@@ -343,6 +345,71 @@ namespace OversShortQS.Client.DTO
 			}
 		}
         private Nullable<bool> _ImportComplete;
+
+        [DataMember]
+        public Nullable<bool> Cancelled
+		{ 
+		    get { return _Cancelled; }
+			set
+			{
+			    if (value == _Cancelled) return;
+				_Cancelled = value;
+				NotifyPropertyChanged();//m => this.Cancelled
+			}
+		}
+        private Nullable<bool> _Cancelled;
+
+        [DataMember]
+        public Nullable<double> TotalCIF
+		{ 
+		    get { return _TotalCIF; }
+			set
+			{
+			    if (value == _TotalCIF) return;
+				_TotalCIF = value;
+				NotifyPropertyChanged();//m => this.TotalCIF
+			}
+		}
+        private Nullable<double> _TotalCIF;
+
+        [DataMember]
+        public Nullable<double> TotalGrossWeight
+		{ 
+		    get { return _TotalGrossWeight; }
+			set
+			{
+			    if (value == _TotalGrossWeight) return;
+				_TotalGrossWeight = value;
+				NotifyPropertyChanged();//m => this.TotalGrossWeight
+			}
+		}
+        private Nullable<double> _TotalGrossWeight;
+
+        [DataMember]
+        public Nullable<System.DateTime> AssessmentDate
+		{ 
+		    get { return _AssessmentDate; }
+			set
+			{
+			    if (value == _AssessmentDate) return;
+				_AssessmentDate = value;
+				NotifyPropertyChanged();//m => this.AssessmentDate
+			}
+		}
+        private Nullable<System.DateTime> _AssessmentDate;
+
+        [DataMember]
+        public Nullable<double> TotalFreight
+		{ 
+		    get { return _TotalFreight; }
+			set
+			{
+			    if (value == _TotalFreight) return;
+				_TotalFreight = value;
+				NotifyPropertyChanged();//m => this.TotalFreight
+			}
+		}
+        private Nullable<double> _TotalFreight;
 
        
         [DataMember]

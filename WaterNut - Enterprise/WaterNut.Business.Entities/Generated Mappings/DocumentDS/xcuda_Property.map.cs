@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_PropertyMap : EntityTypeConfiguration<xcuda_Property>
     {
@@ -17,9 +18,9 @@
               this.Property(t => t.Selected_page).HasColumnName("Selected_page").IsUnicode(false);
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.Place_of_declaration).HasColumnName("Place_of_declaration").IsUnicode(false);
-              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => t.xcuda_Property);
-              this.HasOptional(t => t.xcuda_Forms).WithRequired(t => t.xcuda_Property);
-              this.HasOptional(t => t.xcuda_Nbers).WithRequired(t => t.xcuda_Property);
+              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => (xcuda_Property)t.xcuda_Property);
+              this.HasOptional(t => t.xcuda_Forms).WithRequired(t => (xcuda_Property)t.xcuda_Property);
+              this.HasOptional(t => t.xcuda_Nbers).WithRequired(t => (xcuda_Property)t.xcuda_Property);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

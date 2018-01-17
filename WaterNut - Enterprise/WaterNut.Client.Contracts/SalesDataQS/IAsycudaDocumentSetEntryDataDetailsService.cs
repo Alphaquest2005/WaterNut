@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using SalesDataQS.Client.DTO;
 
+
 namespace SalesDataQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace SalesDataQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<AsycudaDocumentSetEntryDataDetails> UpdateAsycudaDocumentSetEntryDataDetails(DTO.AsycudaDocumentSetEntryDataDetails entity);
+        Task<AsycudaDocumentSetEntryDataDetails> UpdateAsycudaDocumentSetEntryDataDetails(AsycudaDocumentSetEntryDataDetails entity);
 
         [OperationContract]
-        Task<AsycudaDocumentSetEntryDataDetails> CreateAsycudaDocumentSetEntryDataDetails(DTO.AsycudaDocumentSetEntryDataDetails entity);
+        Task<AsycudaDocumentSetEntryDataDetails> CreateAsycudaDocumentSetEntryDataDetails(AsycudaDocumentSetEntryDataDetails entity);
 
         [OperationContract]
         Task<bool> DeleteAsycudaDocumentSetEntryDataDetails(string id);

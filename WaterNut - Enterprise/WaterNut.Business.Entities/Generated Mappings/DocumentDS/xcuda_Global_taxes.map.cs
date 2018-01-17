@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Global_taxesMap : EntityTypeConfiguration<xcuda_Global_taxes>
     {
@@ -14,7 +15,7 @@
               this.ToTable("xcuda_Global_taxes");
               this.Property(t => t.Global_taxes_Id).HasColumnName("Global_taxes_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id");
-              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t => t.xcuda_Global_taxes).HasForeignKey(d => d.ASYCUDA_Id);
+              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t =>(ICollection<xcuda_Global_taxes>) t.xcuda_Global_taxes).HasForeignKey(d => d.ASYCUDA_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace DocumentDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class xcuda_ASYCUDA_ExtendedProperties : BaseEntity<xcuda_ASYCUDA_ExtendedProperties> , ITrackable
+    public partial class xcuda_ASYCUDA_ExtendedProperties : BaseEntity<xcuda_ASYCUDA_ExtendedProperties>, ITrackable 
     {
         [DataMember]
         public int ASYCUDA_Id 
@@ -229,6 +230,21 @@ namespace DocumentDS.Business.Entities
         }
         Nullable<System.DateTime> _effectiveregistrationdate;
         [DataMember]
+        public Nullable<int> ApportionMethod 
+        {
+            get
+            {
+                return _apportionmethod;
+            }
+            set
+            {
+                _apportionmethod = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<int> _apportionmethod;
+        [DataMember]
         public Nullable<bool> DoNotAllocate 
         {
             get
@@ -289,21 +305,6 @@ namespace DocumentDS.Business.Entities
         }
         Nullable<bool> _cancelled;
         [DataMember]
-        public Nullable<int> ApportionMethod 
-        {
-            get
-            {
-                return _apportionmethod;
-            }
-            set
-            {
-                _apportionmethod = value;
-                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-                NotifyPropertyChanged();
-            }
-        }
-        Nullable<int> _apportionmethod;
-        [DataMember]
         public Nullable<double> TotalWeight 
         {
             get
@@ -323,31 +324,31 @@ namespace DocumentDS.Business.Entities
         {
             get
             {
-                return _totalFreight;
+                return _totalfreight;
             }
             set
             {
-                _totalFreight = value;
+                _totalfreight = value;
                 //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _totalFreight;
+        Nullable<double> _totalfreight;
         [DataMember]
         public Nullable<double> TotalInternalFreight 
         {
             get
             {
-                return _totalinternalFreight;
+                return _totalinternalfreight;
             }
             set
             {
-                _totalinternalFreight = value;
+                _totalinternalfreight = value;
                 //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _totalinternalFreight;
+        Nullable<double> _totalinternalfreight;
         [DataMember]
         public Nullable<int> TotalPackages 
         {

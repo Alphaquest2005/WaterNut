@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace OversShortQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem> , ITrackable
+    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem>, ITrackable 
     {
         partial void AutoGenStartUp() //AsycudaDocumentItem()
         {
@@ -39,7 +40,7 @@ namespace OversShortQS.Business.Entities
         }
         int _item_id;
         [DataMember]
-        public int AsycudaDocumentId 
+        public Nullable<int> AsycudaDocumentId 
         {
             get
             {
@@ -52,7 +53,7 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        int _asycudadocumentid;
+        Nullable<int> _asycudadocumentid;
         [DataMember]
         public Nullable<int> EntryDataDetailsId 
         {
@@ -69,7 +70,7 @@ namespace OversShortQS.Business.Entities
         }
         Nullable<int> _entrydatadetailsid;
         [DataMember]
-        public int LineNumber 
+        public Nullable<int> LineNumber 
         {
             get
             {
@@ -82,7 +83,7 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        int _linenumber;
+        Nullable<int> _linenumber;
         [DataMember]
         public Nullable<bool> IsAssessed 
         {
@@ -189,7 +190,7 @@ namespace OversShortQS.Business.Entities
         }
         double _gross_weight_itm;
         [DataMember]
-        public Nullable<double> Net_weight_itm 
+        public double Net_weight_itm 
         {
             get
             {
@@ -202,7 +203,7 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _net_weight_itm;
+        double _net_weight_itm;
         [DataMember]
         public Nullable<double> Item_price 
         {
@@ -384,7 +385,7 @@ namespace OversShortQS.Business.Entities
         }
         Nullable<double> _statistical_value;
         [DataMember]
-        public double DPQtyAllocated 
+        public Nullable<double> DPQtyAllocated 
         {
             get
             {
@@ -397,9 +398,9 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        double _dpqtyallocated;
+        Nullable<double> _dpqtyallocated;
         [DataMember]
-        public double DFQtyAllocated 
+        public Nullable<double> DFQtyAllocated 
         {
             get
             {
@@ -412,7 +413,7 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        double _dfqtyallocated;
+        Nullable<double> _dfqtyallocated;
         [DataMember]
         public Nullable<double> PiQuantity 
         {
@@ -429,7 +430,7 @@ namespace OversShortQS.Business.Entities
         }
         Nullable<double> _piquantity;
         [DataMember]
-        public bool ImportComplete 
+        public Nullable<bool> ImportComplete 
         {
             get
             {
@@ -442,7 +443,172 @@ namespace OversShortQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        bool _importcomplete;
+        Nullable<bool> _importcomplete;
+        [DataMember]
+        public string CNumber 
+        {
+            get
+            {
+                return _cnumber;
+            }
+            set
+            {
+                _cnumber = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _cnumber;
+        [DataMember]
+        public Nullable<System.DateTime> RegistrationDate 
+        {
+            get
+            {
+                return _registrationdate;
+            }
+            set
+            {
+                _registrationdate = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<System.DateTime> _registrationdate;
+        [DataMember]
+        public Nullable<double> Number_of_packages 
+        {
+            get
+            {
+                return _number_of_packages;
+            }
+            set
+            {
+                _number_of_packages = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _number_of_packages;
+        [DataMember]
+        public string Country_of_origin_code 
+        {
+            get
+            {
+                return _country_of_origin_code;
+            }
+            set
+            {
+                _country_of_origin_code = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _country_of_origin_code;
+        [DataMember]
+        public Nullable<double> PiWeight 
+        {
+            get
+            {
+                return _piweight;
+            }
+            set
+            {
+                _piweight = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _piweight;
+        [DataMember]
+        public Nullable<double> Currency_rate 
+        {
+            get
+            {
+                return _currency_rate;
+            }
+            set
+            {
+                _currency_rate = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _currency_rate;
+        [DataMember]
+        public string Currency_code 
+        {
+            get
+            {
+                return _currency_code;
+            }
+            set
+            {
+                _currency_code = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _currency_code;
+        [DataMember]
+        public Nullable<bool> InvalidHSCode 
+        {
+            get
+            {
+                return _invalidhscode;
+            }
+            set
+            {
+                _invalidhscode = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<bool> _invalidhscode;
+        [DataMember]
+        public string WarehouseError 
+        {
+            get
+            {
+                return _warehouseerror;
+            }
+            set
+            {
+                _warehouseerror = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _warehouseerror;
+        [DataMember]
+        public Nullable<bool> Cancelled 
+        {
+            get
+            {
+                return _cancelled;
+            }
+            set
+            {
+                _cancelled = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<bool> _cancelled;
+        [DataMember]
+        public Nullable<double> SalesFactor 
+        {
+            get
+            {
+                return _salesfactor;
+            }
+            set
+            {
+                _salesfactor = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _salesfactor;
         [DataMember]
         public AsycudaDocument AsycudaDocument { get; set; }
         [DataMember]

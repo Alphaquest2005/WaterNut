@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_TransitMap : EntityTypeConfiguration<xcuda_Transit>
     {
@@ -15,11 +16,11 @@
               this.Property(t => t.Time_limit).HasColumnName("Time_limit").IsUnicode(false);
               this.Property(t => t.Transit_Id).HasColumnName("Transit_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id");
-              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t => t.xcuda_Transit).HasForeignKey(d => d.ASYCUDA_Id);
+              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t =>(ICollection<xcuda_Transit>) t.xcuda_Transit).HasForeignKey(d => d.ASYCUDA_Id);
               this.HasMany(t => t.xcuda_Principal).WithOptional(t => t.xcuda_Transit).HasForeignKey(d => d.Transit_Id);
               this.HasMany(t => t.xcuda_Seals).WithOptional(t => t.xcuda_Transit).HasForeignKey(d => d.Transit_Id);
               this.HasMany(t => t.xcuda_Signature).WithOptional(t => t.xcuda_Transit).HasForeignKey(d => d.Transit_Id);
-              this.HasMany(t => t.xcuda_Transit_Destination).WithRequired(t => t.xcuda_Transit);
+              this.HasMany(t => t.xcuda_Transit_Destination).WithRequired(t => (xcuda_Transit)t.xcuda_Transit);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

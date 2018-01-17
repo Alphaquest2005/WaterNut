@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace PreviousDocumentQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class PreviousDocumentItem : BaseEntity<PreviousDocumentItem> , ITrackable
+    public partial class PreviousDocumentItem : BaseEntity<PreviousDocumentItem>, ITrackable 
     {
         partial void AutoGenStartUp() //PreviousDocumentItem()
         {

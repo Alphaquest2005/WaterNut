@@ -8,7 +8,7 @@
 //using DomainInterfaces;
 //using TrackableEntities;
 //using WaterNut.Interfaces;
-//using WaterNut.Client.Entities;
+//
 //using DocumentDS.Client.DTO;
 //using TrackableEntities.Client;
 //using Core.Common.Validation;

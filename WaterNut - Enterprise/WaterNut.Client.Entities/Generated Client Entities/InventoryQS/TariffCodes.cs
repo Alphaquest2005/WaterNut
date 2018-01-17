@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using InventoryQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace InventoryQS.Client.Entities
@@ -56,7 +56,7 @@ public string TariffCode
 			{
 			    if (value == this.tariffcodes.TariffCode) return;
 				this.tariffcodes.TariffCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCode");
 			}
 		}
@@ -73,7 +73,7 @@ public string Description
 			{
 			    if (value == this.tariffcodes.Description) return;
 				this.tariffcodes.Description = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Description");
 			}
 		}
@@ -90,7 +90,7 @@ public string RateofDuty
 			{
 			    if (value == this.tariffcodes.RateofDuty) return;
 				this.tariffcodes.RateofDuty = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("RateofDuty");
 			}
 		}
@@ -107,7 +107,7 @@ public string EnvironmentalLevy
 			{
 			    if (value == this.tariffcodes.EnvironmentalLevy) return;
 				this.tariffcodes.EnvironmentalLevy = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EnvironmentalLevy");
 			}
 		}
@@ -124,7 +124,7 @@ public string CustomsServiceCharge
 			{
 			    if (value == this.tariffcodes.CustomsServiceCharge) return;
 				this.tariffcodes.CustomsServiceCharge = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("CustomsServiceCharge");
 			}
 		}
@@ -141,7 +141,7 @@ public string ExciseTax
 			{
 			    if (value == this.tariffcodes.ExciseTax) return;
 				this.tariffcodes.ExciseTax = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ExciseTax");
 			}
 		}
@@ -158,7 +158,7 @@ public string VatRate
 			{
 			    if (value == this.tariffcodes.VatRate) return;
 				this.tariffcodes.VatRate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("VatRate");
 			}
 		}
@@ -175,7 +175,7 @@ public string PetrolTax
 			{
 			    if (value == this.tariffcodes.PetrolTax) return;
 				this.tariffcodes.PetrolTax = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("PetrolTax");
 			}
 		}
@@ -192,7 +192,7 @@ public string Units
 			{
 			    if (value == this.tariffcodes.Units) return;
 				this.tariffcodes.Units = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Units");
 			}
 		}
@@ -209,7 +209,7 @@ public string SiteRev3
 			{
 			    if (value == this.tariffcodes.SiteRev3) return;
 				this.tariffcodes.SiteRev3 = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("SiteRev3");
 			}
 		}
@@ -226,7 +226,7 @@ public string TariffCategoryCode
 			{
 			    if (value == this.tariffcodes.TariffCategoryCode) return;
 				this.tariffcodes.TariffCategoryCode = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TariffCategoryCode");
 			}
 		}
@@ -241,7 +241,7 @@ public Nullable<bool> LicenseRequired
 			{
 			    if (value == this.tariffcodes.LicenseRequired) return;
 				this.tariffcodes.LicenseRequired = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("LicenseRequired");
 			}
 		}
@@ -256,7 +256,7 @@ public Nullable<bool> Invalid
 			{
 			    if (value == this.tariffcodes.Invalid) return;
 				this.tariffcodes.Invalid = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Invalid");
 			}
 		}
@@ -309,7 +309,7 @@ public Nullable<bool> Invalid
                 _TariffCategory = value;
                 if(value != null)
                      this.tariffcodes.TariffCategory = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("TariffCategory");
 			}
 		}
@@ -338,7 +338,7 @@ public Nullable<bool> Invalid
 				if (value != null)
 					this.tariffcodes.InventoryItemsEx = new ChangeTrackingCollection<DTO.InventoryItemsEx>(value.Select(x => x.DTO).ToList());
                 _InventoryItemsEx = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_InventoryItemsEx != null)
 				_InventoryItemsEx.CollectionChanged += InventoryItemsEx_CollectionChanged;               
 				NotifyPropertyChanged("InventoryItemsEx");
@@ -355,7 +355,7 @@ public Nullable<bool> Invalid
                         if (itm != null)
                         tariffcodes.InventoryItemsEx.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (InventoryItemsEx itm in e.OldItems)
@@ -363,7 +363,7 @@ public Nullable<bool> Invalid
                         if (itm != null)
                         tariffcodes.InventoryItemsEx.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -383,11 +383,11 @@ public Nullable<bool> Invalid
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

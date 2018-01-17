@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class OverShortSuggestedDocumentMap : EntityTypeConfiguration<OverShortSuggestedDocument>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.OversShortsId).HasColumnName("OversShortsId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.CNumber).HasColumnName("CNumber").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.ReferenceNumber).HasColumnName("ReferenceNumber").IsUnicode(false).HasMaxLength(19);
-              this.HasRequired(t => t.OversShortEX).WithOptional(t => t.OverShortSuggestedDocuments);
+              this.HasRequired(t => t.OversShortEX).WithOptional(t => (OverShortSuggestedDocument)t.OverShortSuggestedDocuments);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -91,6 +91,8 @@
           <Property Name="DoNotAllocate" Type="bit" />
           <Property Name="DoNotEX" Type="bit" />
           <Property Name="ImportComplete" Type="bit" Nullable="false" />
+          <Property Name="WarehouseError" Type="varchar" MaxLength="50" />
+          <Property Name="SalesFactor" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="xcuda_item_deduction">
           <Key>
@@ -290,7 +292,6 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.PreviousItemsEx' does no
             <PropertyRef Name="PreviousItem_Id" />
             
             
-            
           </Key>
           <Property Name="Packages_number" Type="varchar(max)" />
           <Property Name="Previous_Packages_number" Type="varchar(max)" />
@@ -312,10 +313,11 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.PreviousItemsEx' does no
           <Property Name="PreviousItem_Id" Type="int" Nullable="false" />
           <Property Name="ASYCUDA_Id" Type="int" />
           <Property Name="QtyAllocated" Type="float" Nullable="false" />
-          <Property Name="Item_Id" Type="int" Nullable="false" />
+          <Property Name="PreviousDocumentItemId" Type="int" />
           <Property Name="RndCurrent_Value" Type="float" Nullable="false" />
           <Property Name="CNumber" Type="varchar(max)" />
-          <Property Name="RegistrationDate" Type="varchar(max)" />
+          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="AsycudaDocumentItemId" Type="int" />
         </EntityType>
         <Association Name="FK_EntryPreviousItems_xcuda_Item">
           <End Role="xcuda_Item" Type="Self.xcuda_Item" Multiplicity="1">
@@ -701,10 +703,11 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.PreviousItemsEx' does no
 [PreviousItemsEx].[PreviousItem_Id] AS [PreviousItem_Id], 
 [PreviousItemsEx].[ASYCUDA_Id] AS [ASYCUDA_Id], 
 [PreviousItemsEx].[QtyAllocated] AS [QtyAllocated], 
-[PreviousItemsEx].[Item_Id] AS [Item_Id], 
+[PreviousItemsEx].[PreviousDocumentItemId] AS [PreviousDocumentItemId], 
 [PreviousItemsEx].[RndCurrent_Value] AS [RndCurrent_Value], 
 [PreviousItemsEx].[CNumber] AS [CNumber], 
-[PreviousItemsEx].[RegistrationDate] AS [RegistrationDate]
+[PreviousItemsEx].[RegistrationDate] AS [RegistrationDate], 
+[PreviousItemsEx].[AsycudaDocumentItemId] AS [AsycudaDocumentItemId]
 FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_EntryPreviousItems_xcuda_Item" Association="Self.FK_EntryPreviousItems_xcuda_Item">
@@ -842,6 +845,8 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           <NavigationProperty Name="xcuda_Suppliers_link" Relationship="WaterNutDBModel.FK_Item_Suppliers_link" FromRole="xcuda_Item" ToRole="xcuda_Suppliers_link" />
           <Property Name="ImportComplete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="xcuda_PreviousItems" Relationship="WaterNutDBModel.FK_EntryPreviousItems_xcuda_Item" FromRole="xcuda_Item" ToRole="EntryPreviousItems" />
+          <Property Name="WarehouseError" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalesFactor" Type="Double" Nullable="false" />
           <a:DomainInterfaceProperty xmlns:a="http://schemas.tempuri.com/DomainInterfaceProperty">IDocumentItem,IWeightItem</a:DomainInterfaceProperty>
         </EntityType>
         <EntityType Name="xcuda_item_deduction">
@@ -1600,11 +1605,12 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           <Property Name="PreviousItem_Id" Type="Int32" Nullable="false" />
           <Property Name="ASYCUDA_Id" Type="Int32" />
           <Property Name="QtyAllocated" Type="Double" Nullable="false" />
-          <Property Name="Item_Id" Type="Int32" Nullable="false" />
           <Property Name="RndCurrent_Value" Type="Double" Nullable="false" />
           <NavigationProperty Name="xcuda_PreviousItem" Relationship="WaterNutDBModel.xcuda_PreviousItemPreviousItemsEx" FromRole="PreviousItemsEx" ToRole="xcuda_PreviousItem" />
           <Property Name="CNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="RegistrationDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationDate" Type="DateTime" />
+          <Property Name="PreviousDocumentItemId" Type="Int32" />
+          <Property Name="AsycudaDocumentItemId" Type="Int32" />
         </EntityType>
         <Association Name="xcuda_PreviousItemPreviousItemsEx">
           <End Type="WaterNutDBModel.xcuda_PreviousItem" Role="xcuda_PreviousItem" Multiplicity="1" />
@@ -1663,6 +1669,8 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           <EntitySetMapping Name="xcuda_Item">
             <EntityTypeMapping TypeName="WaterNutDBModel.xcuda_Item">
               <MappingFragment StoreEntitySet="xcuda_Item">
+                <ScalarProperty Name="SalesFactor" ColumnName="SalesFactor" />
+                <ScalarProperty Name="WarehouseError" ColumnName="WarehouseError" />
                 <ScalarProperty Name="ImportComplete" ColumnName="ImportComplete" />
                 <ScalarProperty Name="Free_text_2" ColumnName="Free_text_2" />
                 <ScalarProperty Name="Free_text_1" ColumnName="Free_text_1" />
@@ -1950,10 +1958,11 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           <EntitySetMapping Name="PreviousItemsEx">
             <EntityTypeMapping TypeName="WaterNutDBModel.PreviousItemsEx">
               <MappingFragment StoreEntitySet="PreviousItemsEx">
+                <ScalarProperty Name="AsycudaDocumentItemId" ColumnName="AsycudaDocumentItemId" />
+                <ScalarProperty Name="PreviousDocumentItemId" ColumnName="PreviousDocumentItemId" />
                 <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
                 <ScalarProperty Name="CNumber" ColumnName="CNumber" />
                 <ScalarProperty Name="RndCurrent_Value" ColumnName="RndCurrent_Value" />
-                <ScalarProperty Name="Item_Id" ColumnName="Item_Id" />
                 <ScalarProperty Name="QtyAllocated" ColumnName="QtyAllocated" />
                 <ScalarProperty Name="ASYCUDA_Id" ColumnName="ASYCUDA_Id" />
                 <ScalarProperty Name="PreviousItem_Id" ColumnName="PreviousItem_Id" />

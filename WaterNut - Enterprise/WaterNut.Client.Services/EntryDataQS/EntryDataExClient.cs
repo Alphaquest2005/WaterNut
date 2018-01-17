@@ -13,6 +13,7 @@ using EntryDataQS.Client.DTO;
 using EntryDataQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace EntryDataQS.Client.Services
     public partial class EntryDataExClient :  ClientService<IEntryDataExService>, IEntryDataExService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.EntryDataEx>> GetEntryDataEx(List<string> includesLst = null)
+        public async Task<IEnumerable<EntryDataEx>> GetEntryDataEx(List<string> includesLst = null)
         {
             return await Channel.GetEntryDataEx(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.EntryDataEx> GetEntryDataExByKey(string id, List<string> includesLst = null)
+        public async Task<EntryDataEx> GetEntryDataExByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetEntryDataExByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryDataEx>> GetEntryDataExByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<EntryDataEx>> GetEntryDataExByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetEntryDataExByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryDataEx>> GetEntryDataExByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<EntryDataEx>> GetEntryDataExByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetEntryDataExByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryDataEx>> GetEntryDataExByExpressionNav(string exp,
+		public async Task<IEnumerable<EntryDataEx>> GetEntryDataExByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetEntryDataExByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace EntryDataQS.Client.Services
             return await Channel.GetEntryDataExByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.EntryDataEx> UpdateEntryDataEx(DTO.EntryDataEx entity)
+        public async Task<EntryDataEx> UpdateEntryDataEx(EntryDataEx entity)
         {
            return await Channel.UpdateEntryDataEx(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.EntryDataEx> CreateEntryDataEx(DTO.EntryDataEx entity)
+        public async Task<EntryDataEx> CreateEntryDataEx(EntryDataEx entity)
         {
            return await Channel.CreateEntryDataEx(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace EntryDataQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.EntryDataEx>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<EntryDataEx>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.EntryDataEx>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<EntryDataEx>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace EntryDataQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

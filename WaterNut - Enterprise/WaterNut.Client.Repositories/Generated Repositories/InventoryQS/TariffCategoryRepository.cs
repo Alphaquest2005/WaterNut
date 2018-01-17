@@ -13,7 +13,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using TrackableEntities.Common;
+
 using Core.Common.Client.Services;
 using Core.Common.Client.Repositories;
 using InventoryQS.Client.Services;
@@ -21,7 +21,6 @@ using InventoryQS.Client.Entities;
 using InventoryQS.Client.DTO;
 using Core.Common.Business.Services;
 using System.Diagnostics;
-using TrackableEntities.Client;
 
 
 using System.Threading.Tasks;
@@ -31,6 +30,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System;
 using System.ServiceModel;
+using TrackableEntities.Common;
 
 using TariffCategory = InventoryQS.Client.Entities.TariffCategory;
 
@@ -202,8 +202,8 @@ namespace InventoryQS.Client.Repositories
                         {
                             return new TariffCategory(res)
                     {
-                     // TariffSupUnitLkps = new System.Collections.ObjectModel.ObservableCollection<TariffSupUnitLkps>(res.TariffSupUnitLkps.Select(y => new TariffSupUnitLkps(y))),    
-                     // TariffCodes = new System.Collections.ObjectModel.ObservableCollection<TariffCodes>(res.TariffCodes.Select(y => new TariffCodes(y)))    
+                     // TariffCodes = new System.Collections.ObjectModel.ObservableCollection<TariffCodes>(res.TariffCodes.Select(y => new TariffCodes(y))),    
+                     // TariffCategoryCodeSuppUnit = new System.Collections.ObjectModel.ObservableCollection<TariffCategoryCodeSuppUnit>(res.TariffCategoryCodeSuppUnit.Select(y => new TariffCategoryCodeSuppUnit(y)))    
                   };
                     }
                     else

@@ -8,20 +8,21 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace CoreEntities.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem> , ITrackable
+    public partial class AsycudaDocumentItem : BaseEntity<AsycudaDocumentItem>, ITrackable 
     {
         partial void AutoGenStartUp() //AsycudaDocumentItem()
         {
             this.SubItems = new List<SubItems>();
-           // this.PreviousItems = new List<EntryPreviousItems>();
+            this.PreviousItems = new List<EntryPreviousItems>();
             this.xcuda_Supplementary_unit = new List<xcuda_Supplementary_unit>();
         }
 
@@ -325,36 +326,36 @@ namespace CoreEntities.Business.Entities
             }
         }
         string _tariffcodedescription;
-        //[DataMember]
-        //public Nullable<double> DutyLiability 
-        //{
-        //    get
-        //    {
-        //        return _dutyliability;
-        //    }
-        //    set
-        //    {
-        //        _dutyliability = value;
-        //        //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-        //Nullable<double> _dutyliability;
-        //[DataMember]
-        //public Nullable<double> Total_CIF_itm 
-        //{
-        //    get
-        //    {
-        //        return _total_cif_itm;
-        //    }
-        //    set
-        //    {
-        //        _total_cif_itm = value;
-        //        //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-        //Nullable<double> _total_cif_itm;
+        [DataMember]
+        public Nullable<double> DutyLiability 
+        {
+            get
+            {
+                return _dutyliability;
+            }
+            set
+            {
+                _dutyliability = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _dutyliability;
+        [DataMember]
+        public Nullable<double> Total_CIF_itm 
+        {
+            get
+            {
+                return _total_cif_itm;
+            }
+            set
+            {
+                _total_cif_itm = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _total_cif_itm;
         [DataMember]
         public Nullable<double> Freight 
         {
@@ -370,21 +371,21 @@ namespace CoreEntities.Business.Entities
             }
         }
         Nullable<double> _freight;
-        //[DataMember]
-        //public Nullable<double> Statistical_value 
-        //{
-        //    get
-        //    {
-        //        return _statistical_value;
-        //    }
-        //    set
-        //    {
-        //        _statistical_value = value;
-        //        //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-        //Nullable<double> _statistical_value;
+        [DataMember]
+        public Nullable<double> Statistical_value 
+        {
+            get
+            {
+                return _statistical_value;
+            }
+            set
+            {
+                _statistical_value = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _statistical_value;
         [DataMember]
         public Nullable<double> DPQtyAllocated 
         {
@@ -416,7 +417,7 @@ namespace CoreEntities.Business.Entities
         }
         Nullable<double> _dfqtyallocated;
         [DataMember]
-        public double PiQuantity 
+        public Nullable<double> PiQuantity 
         {
             get
             {
@@ -429,7 +430,7 @@ namespace CoreEntities.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        double _piquantity;
+        Nullable<double> _piquantity;
         [DataMember]
         public Nullable<bool> ImportComplete 
         {
@@ -490,36 +491,36 @@ namespace CoreEntities.Business.Entities
             }
         }
         Nullable<double> _number_of_packages;
-        //[DataMember]
-        //public string Country_of_origin_code 
-        //{
-        //    get
-        //    {
-        //        return _country_of_origin_code;
-        //    }
-        //    set
-        //    {
-        //        _country_of_origin_code = value;
-        //        //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-        //        NotifyPropertyChanged();
-        //    }
-        //}
+        [DataMember]
+        public string Country_of_origin_code 
+        {
+            get
+            {
+                return _country_of_origin_code;
+            }
+            set
+            {
+                _country_of_origin_code = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
         string _country_of_origin_code;
-        //[DataMember]
-        //public double PiWeight 
-        //{
-        //    get
-        //    {
-        //        return _piweight;
-        //    }
-        //    set
-        //    {
-        //        _piweight = value;
-        //        //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-        //double _piweight;
+        [DataMember]
+        public Nullable<double> PiWeight 
+        {
+            get
+            {
+                return _piweight;
+            }
+            set
+            {
+                _piweight = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _piweight;
         [DataMember]
         public Nullable<double> Currency_rate 
         {
@@ -581,11 +582,41 @@ namespace CoreEntities.Business.Entities
         }
         string _warehouseerror;
         [DataMember]
+        public Nullable<bool> Cancelled 
+        {
+            get
+            {
+                return _cancelled;
+            }
+            set
+            {
+                _cancelled = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<bool> _cancelled;
+        [DataMember]
+        public Nullable<double> SalesFactor 
+        {
+            get
+            {
+                return _salesfactor;
+            }
+            set
+            {
+                _salesfactor = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _salesfactor;
+        [DataMember]
         public AsycudaDocument AsycudaDocument { get; set; }
         [DataMember]
         public List<SubItems> SubItems { get; set; }
-        //[DataMember]
-        //public List<EntryPreviousItems> PreviousItems { get; set; }
+        [DataMember]
+        public List<EntryPreviousItems> PreviousItems { get; set; }
         [DataMember]
         public List<xcuda_Supplementary_unit> xcuda_Supplementary_unit { get; set; }
 

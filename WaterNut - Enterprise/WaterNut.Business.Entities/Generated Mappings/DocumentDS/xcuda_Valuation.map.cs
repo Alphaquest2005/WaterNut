@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_ValuationMap : EntityTypeConfiguration<xcuda_Valuation>
     {
@@ -16,15 +17,15 @@
               this.Property(t => t.Total_cost).HasColumnName("Total_cost");
               this.Property(t => t.Total_CIF).HasColumnName("Total_CIF");
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Gs_deduction).WithRequired(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Gs_insurance).WithRequired(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Gs_internal_freight).WithRequired(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Gs_other_cost).WithRequired(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Total).WithRequired(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Weight).WithRequired(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Gs_Invoice).WithRequired(t => t.xcuda_Valuation);
-              this.HasOptional(t => t.xcuda_Gs_external_freight).WithRequired(t => t.xcuda_Valuation);
+              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Gs_deduction).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Gs_insurance).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Gs_internal_freight).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Gs_other_cost).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Total).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Weight).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Gs_Invoice).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
+              this.HasOptional(t => t.xcuda_Gs_external_freight).WithRequired(t => (xcuda_Valuation)t.xcuda_Valuation);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

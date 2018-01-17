@@ -7,6 +7,8 @@
 using OversShortQS.Client.DTO;
 using TrackableEntities.Client;
 
+
+
 namespace OversShortQS.Client.Entities
 {
 

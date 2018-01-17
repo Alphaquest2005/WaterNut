@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CoreEntities.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CoreEntities.Client.Entities
@@ -51,7 +51,7 @@ public int ApplicationSettingsId
 			{
 			    if (value == this.applicationsettings.ApplicationSettingsId) return;
 				this.applicationsettings.ApplicationSettingsId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ApplicationSettingsId");
 			}
 		}
@@ -68,7 +68,7 @@ public string Description
 			{
 			    if (value == this.applicationsettings.Description) return;
 				this.applicationsettings.Description = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Description");
 			}
 		}
@@ -83,7 +83,7 @@ public Nullable<int> MaxEntryLines
 			{
 			    if (value == this.applicationsettings.MaxEntryLines) return;
 				this.applicationsettings.MaxEntryLines = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("MaxEntryLines");
 			}
 		}
@@ -100,7 +100,7 @@ public string SoftwareName
 			{
 			    if (value == this.applicationsettings.SoftwareName) return;
 				this.applicationsettings.SoftwareName = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("SoftwareName");
 			}
 		}
@@ -117,7 +117,7 @@ public string AllowCounterPoint
 			{
 			    if (value == this.applicationsettings.AllowCounterPoint) return;
 				this.applicationsettings.AllowCounterPoint = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowCounterPoint");
 			}
 		}
@@ -132,7 +132,7 @@ public Nullable<bool> GroupEX9
 			{
 			    if (value == this.applicationsettings.GroupEX9) return;
 				this.applicationsettings.GroupEX9 = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("GroupEX9");
 			}
 		}
@@ -147,7 +147,7 @@ public Nullable<bool> InvoicePerEntry
 			{
 			    if (value == this.applicationsettings.InvoicePerEntry) return;
 				this.applicationsettings.InvoicePerEntry = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("InvoicePerEntry");
 			}
 		}
@@ -164,7 +164,7 @@ public string AllowTariffCodes
 			{
 			    if (value == this.applicationsettings.AllowTariffCodes) return;
 				this.applicationsettings.AllowTariffCodes = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowTariffCodes");
 			}
 		}
@@ -181,7 +181,7 @@ public string AllowWareHouse
 			{
 			    if (value == this.applicationsettings.AllowWareHouse) return;
 				this.applicationsettings.AllowWareHouse = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowWareHouse");
 			}
 		}
@@ -198,7 +198,7 @@ public string AllowXBond
 			{
 			    if (value == this.applicationsettings.AllowXBond) return;
 				this.applicationsettings.AllowXBond = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowXBond");
 			}
 		}
@@ -215,7 +215,7 @@ public string AllowAsycudaManager
 			{
 			    if (value == this.applicationsettings.AllowAsycudaManager) return;
 				this.applicationsettings.AllowAsycudaManager = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowAsycudaManager");
 			}
 		}
@@ -232,7 +232,7 @@ public string AllowQuickBooks
 			{
 			    if (value == this.applicationsettings.AllowQuickBooks) return;
 				this.applicationsettings.AllowQuickBooks = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowQuickBooks");
 			}
 		}
@@ -247,7 +247,7 @@ public Nullable<bool> ItemDescriptionContainsAsycudaAttribute
 			{
 			    if (value == this.applicationsettings.ItemDescriptionContainsAsycudaAttribute) return;
 				this.applicationsettings.ItemDescriptionContainsAsycudaAttribute = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemDescriptionContainsAsycudaAttribute");
 			}
 		}
@@ -264,7 +264,7 @@ public string AllowExportToExcel
 			{
 			    if (value == this.applicationsettings.AllowExportToExcel) return;
 				this.applicationsettings.AllowExportToExcel = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowExportToExcel");
 			}
 		}
@@ -281,7 +281,7 @@ public string AllowAutoWeightCalculation
 			{
 			    if (value == this.applicationsettings.AllowAutoWeightCalculation) return;
 				this.applicationsettings.AllowAutoWeightCalculation = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowAutoWeightCalculation");
 			}
 		}
@@ -298,7 +298,7 @@ public string AllowEntryPerIM7
 			{
 			    if (value == this.applicationsettings.AllowEntryPerIM7) return;
 				this.applicationsettings.AllowEntryPerIM7 = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowEntryPerIM7");
 			}
 		}
@@ -315,7 +315,7 @@ public string AllowSalesToPI
 			{
 			    if (value == this.applicationsettings.AllowSalesToPI) return;
 				this.applicationsettings.AllowSalesToPI = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowSalesToPI");
 			}
 		}
@@ -332,7 +332,7 @@ public string AllowEffectiveAssessmentDate
 			{
 			    if (value == this.applicationsettings.AllowEffectiveAssessmentDate) return;
 				this.applicationsettings.AllowEffectiveAssessmentDate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowEffectiveAssessmentDate");
 			}
 		}
@@ -349,7 +349,7 @@ public string AllowAutoFreightCalculation
 			{
 			    if (value == this.applicationsettings.AllowAutoFreightCalculation) return;
 				this.applicationsettings.AllowAutoFreightCalculation = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowAutoFreightCalculation");
 			}
 		}
@@ -366,7 +366,7 @@ public string AllowSubItems
 			{
 			    if (value == this.applicationsettings.AllowSubItems) return;
 				this.applicationsettings.AllowSubItems = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowSubItems");
 			}
 		}
@@ -383,7 +383,7 @@ public string AllowEntryDoNotAllocate
 			{
 			    if (value == this.applicationsettings.AllowEntryDoNotAllocate) return;
 				this.applicationsettings.AllowEntryDoNotAllocate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowEntryDoNotAllocate");
 			}
 		}
@@ -400,7 +400,7 @@ public string AllowPreviousItems
 			{
 			    if (value == this.applicationsettings.AllowPreviousItems) return;
 				this.applicationsettings.AllowPreviousItems = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowPreviousItems");
 			}
 		}
@@ -417,7 +417,7 @@ public string AllowOversShort
 			{
 			    if (value == this.applicationsettings.AllowOversShort) return;
 				this.applicationsettings.AllowOversShort = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowOversShort");
 			}
 		}
@@ -434,7 +434,7 @@ public string AllowContainers
 			{
 			    if (value == this.applicationsettings.AllowContainers) return;
 				this.applicationsettings.AllowContainers = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowContainers");
 			}
 		}
@@ -451,7 +451,7 @@ public string AllowNonXEntries
 			{
 			    if (value == this.applicationsettings.AllowNonXEntries) return;
 				this.applicationsettings.AllowNonXEntries = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowNonXEntries");
 			}
 		}
@@ -468,7 +468,7 @@ public string AllowValidateTariffCodes
 			{
 			    if (value == this.applicationsettings.AllowValidateTariffCodes) return;
 				this.applicationsettings.AllowValidateTariffCodes = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowValidateTariffCodes");
 			}
 		}
@@ -485,7 +485,7 @@ public string AllowCleanBond
 			{
 			    if (value == this.applicationsettings.AllowCleanBond) return;
 				this.applicationsettings.AllowCleanBond = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowCleanBond");
 			}
 		}
@@ -502,7 +502,7 @@ public string OrderEntriesBy
 			{
 			    if (value == this.applicationsettings.OrderEntriesBy) return;
 				this.applicationsettings.OrderEntriesBy = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("OrderEntriesBy");
 			}
 		}
@@ -517,7 +517,7 @@ public Nullable<System.DateTime> OpeningStockDate
 			{
 			    if (value == this.applicationsettings.OpeningStockDate) return;
 				this.applicationsettings.OpeningStockDate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("OpeningStockDate");
 			}
 		}
@@ -534,8 +534,25 @@ public string AllowWeightEqualQuantity
 			{
 			    if (value == this.applicationsettings.AllowWeightEqualQuantity) return;
 				this.applicationsettings.AllowWeightEqualQuantity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllowWeightEqualQuantity");
+			}
+		}
+     
+
+       
+       
+                
+                [MaxLength(50, ErrorMessage = "DeclarantCode has a max length of 50 letters ")]
+public string DeclarantCode
+		{ 
+		    get { return this.applicationsettings.DeclarantCode; }
+			set
+			{
+			    if (value == this.applicationsettings.DeclarantCode) return;
+				this.applicationsettings.DeclarantCode = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("DeclarantCode");
 			}
 		}
      
@@ -554,11 +571,11 @@ public string AllowWeightEqualQuantity
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

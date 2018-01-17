@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace SalesDataQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocumentSetEntryData : BaseEntity<AsycudaDocumentSetEntryData> , ITrackable, IEquatable<AsycudaDocumentSetEntryData>
+    public partial class AsycudaDocumentSetEntryData : BaseEntity<AsycudaDocumentSetEntryData>, ITrackable, IEquatable<AsycudaDocumentSetEntryData>
     {
         [DataMember]
         public int AsycudaDocumentSetId

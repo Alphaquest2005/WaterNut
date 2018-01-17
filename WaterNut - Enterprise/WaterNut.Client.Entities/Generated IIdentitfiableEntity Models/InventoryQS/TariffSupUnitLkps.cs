@@ -28,44 +28,6 @@ namespace InventoryQS.Client.Entities
                 this.Id = Convert.ToInt32(value);
             }
         }
-        public string TariffCategoryEntityName
-        {
-            get
-            {
-                return this.TariffCategory == null ? "" : this.TariffCategory.EntityName;
-            }
-            set
-            {
-                                if (string.IsNullOrEmpty(value)) return;
-                string[] vals = value.Split(',');
-               
-                    using (TariffCategoryClient ctx = new TariffCategoryClient())
-                    {
-                        var dto = ctx.GetTariffCategory().Result.AsEnumerable().FirstOrDefault(x => x.EntityName == value);
-                        
-
-                        if ( dto == null)
-                        {
-                            this.TariffCategory = (TariffCategory)new TariffCategory().CreateEntityFromString(value);
-							
-							this.Id = Convert.ToInt32(this.TariffCategory.TariffCategoryCode);
-                            this.TrackingState=TrackableEntities.TrackingState.Modified;
-                           NotifyPropertyChanged("AddTariffCategory");
-                        }
-                        else
-                        {
-                            var obj = new TariffCategory(dto);
-                           if (this.TariffCategory == null || this.TariffCategory.EntityId != obj.EntityId) this.TariffCategory = obj;
-                           
-                        }
-                         
-
-
-                    }
-            
-            }
-
-      }
 
 
 

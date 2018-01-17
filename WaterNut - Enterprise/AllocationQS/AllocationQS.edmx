@@ -13,7 +13,6 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
             
             
             
-            
           </Key>
           <Property Name="AllocationId" Type="int" Nullable="false" />
           <Property Name="TotalValue" Type="float" />
@@ -23,6 +22,7 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
           <Property Name="xLineNumber" Type="int" />
           <Property Name="PreviousItem_Id" Type="int" Nullable="false" />
           <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="CustomerName" Type="varchar(max)" />
           <Property Name="SalesQuantity" Type="float" />
           <Property Name="SalesQtyAllocated" Type="float" />
           <Property Name="InvoiceNo" Type="varchar" MaxLength="50" />
@@ -49,11 +49,13 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
           <Property Name="pIsAssessed" Type="bit" />
           <Property Name="DoNotAllocateSales" Type="bit" />
           <Property Name="DoNotAllocatePreviousEntry" Type="bit" />
-          <Property Name="SANumber" Type="int" Nullable="false" />
+          <Property Name="SANumber" Type="int" />
           <Property Name="xReferenceNumber" Type="nvarchar(max)" />
           <Property Name="TariffCode" Type="varchar" MaxLength="8" />
           <Property Name="Invalid" Type="bit" />
           <Property Name="pExpiryDate" Type="datetime" />
+          <Property Name="pTariffCode" Type="varchar" MaxLength="8" />
+          <Property Name="pItemNumber" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="WaterNutDBModelStoreContainer">
           <EntitySet Name="AsycudaSalesAllocationsEx" EntityType="Self.AsycudaSalesAllocationsEx" store:Type="Views" store:Schema="dbo">
@@ -66,6 +68,7 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
 [AsycudaSalesAllocationsEx].[xLineNumber] AS [xLineNumber], 
 [AsycudaSalesAllocationsEx].[PreviousItem_Id] AS [PreviousItem_Id], 
 [AsycudaSalesAllocationsEx].[InvoiceDate] AS [InvoiceDate], 
+[AsycudaSalesAllocationsEx].[CustomerName] AS [CustomerName], 
 [AsycudaSalesAllocationsEx].[SalesQuantity] AS [SalesQuantity], 
 [AsycudaSalesAllocationsEx].[SalesQtyAllocated] AS [SalesQtyAllocated], 
 [AsycudaSalesAllocationsEx].[InvoiceNo] AS [InvoiceNo], 
@@ -96,7 +99,9 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
 [AsycudaSalesAllocationsEx].[xReferenceNumber] AS [xReferenceNumber], 
 [AsycudaSalesAllocationsEx].[TariffCode] AS [TariffCode], 
 [AsycudaSalesAllocationsEx].[Invalid] AS [Invalid], 
-[AsycudaSalesAllocationsEx].[pExpiryDate] AS [pExpiryDate]
+[AsycudaSalesAllocationsEx].[pExpiryDate] AS [pExpiryDate], 
+[AsycudaSalesAllocationsEx].[pTariffCode] AS [pTariffCode], 
+[AsycudaSalesAllocationsEx].[pItemNumber] AS [pItemNumber]
 FROM [dbo].[AsycudaSalesAllocationsEx] AS [AsycudaSalesAllocationsEx]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -144,12 +149,15 @@ FROM [dbo].[AsycudaSalesAllocationsEx] AS [AsycudaSalesAllocationsEx]</DefiningQ
           <Property Name="pIsAssessed" Type="Boolean" />
           <Property Name="DoNotAllocateSales" Type="Boolean" />
           <Property Name="DoNotAllocatePreviousEntry" Type="Boolean" />
-          <Property Name="SANumber" Type="Int32" Nullable="false" />
+          <Property Name="SANumber" Type="Int32" />
           <Property Name="pReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="xReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TariffCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="Invalid" Type="Boolean" />
           <Property Name="pExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pTariffCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="pItemNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -160,6 +168,9 @@ FROM [dbo].[AsycudaSalesAllocationsEx] AS [AsycudaSalesAllocationsEx]</DefiningQ
           <EntitySetMapping Name="AsycudaSalesAllocationsExs">
             <EntityTypeMapping TypeName="WaterNutDBModel.AsycudaSalesAllocationsEx">
               <MappingFragment StoreEntitySet="AsycudaSalesAllocationsEx">
+                <ScalarProperty Name="pItemNumber" ColumnName="pItemNumber" />
+                <ScalarProperty Name="pTariffCode" ColumnName="pTariffCode" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="pExpiryDate" ColumnName="pExpiryDate" />
                 <ScalarProperty Name="Invalid" ColumnName="Invalid" />
                 <ScalarProperty Name="TariffCode" ColumnName="TariffCode" />

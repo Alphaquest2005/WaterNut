@@ -12,7 +12,7 @@ using System.Data.Entity.Infrastructure;
 using DocumentDS.Business.Entities.Mapping;
 using WaterNut.Data;
 using System.Data.Entity.Core.Objects;
-using TrackableEntities;
+
 
 
 namespace DocumentDS.Business.Entities
@@ -60,8 +60,6 @@ namespace DocumentDS.Business.Entities
         public DbSet<xcuda_Assessment_notice> xcuda_Assessment_notice { get; set; }
      
         public DbSet<xcuda_ASYCUDA> xcuda_ASYCUDA { get; set; }
-     
-        public DbSet<xcuda_ASYCUDA_ExtendedProperties> xcuda_ASYCUDA_ExtendedProperties { get; set; }
      
         public DbSet<xcuda_Border_information> xcuda_Border_information { get; set; }
      
@@ -161,6 +159,8 @@ namespace DocumentDS.Business.Entities
      
         public DbSet<AsycudaDocumentSetEntryData> AsycudaDocumentSetEntryDatas { get; set; }
      
+        public DbSet<xcuda_ASYCUDA_ExtendedProperties> xcuda_ASYCUDA_ExtendedProperties { get; set; }
+     
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -178,8 +178,6 @@ namespace DocumentDS.Business.Entities
             modelBuilder.Configurations.Add(new xcuda_Assessment_noticeMap());
          
             modelBuilder.Configurations.Add(new xcuda_ASYCUDAMap());
-         
-            modelBuilder.Configurations.Add(new xcuda_ASYCUDA_ExtendedPropertiesMap());
          
             modelBuilder.Configurations.Add(new xcuda_Border_informationMap());
          
@@ -278,6 +276,8 @@ namespace DocumentDS.Business.Entities
             modelBuilder.Configurations.Add(new AsycudaDocumentEntryDataMap());
          
             modelBuilder.Configurations.Add(new AsycudaDocumentSetEntryDataMap());
+         
+            modelBuilder.Configurations.Add(new xcuda_ASYCUDA_ExtendedPropertiesMap());
          
 			OnModelCreatingExtentsion(modelBuilder);
 

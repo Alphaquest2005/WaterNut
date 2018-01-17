@@ -8,19 +8,20 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace PreviousDocumentDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class PreviousEntry : BaseEntity<PreviousEntry> , ITrackable
+    public partial class PreviousEntry : BaseEntity<PreviousEntry>, ITrackable 
     {
         partial void AutoGenStartUp() //PreviousEntry()
         {
-            this.xcuda_PreviousItem1 = new List<xcuda_PreviousItem>();
+            this.EntryPreviousItems = new List<EntryPreviousItems>();
         }
 
         [DataMember]
@@ -174,7 +175,7 @@ namespace PreviousDocumentDS.Business.Entities
         }
         Nullable<bool> _isassessed;
         [DataMember]
-        public Nullable<double> DPQtyAllocated 
+        public double DPQtyAllocated 
         {
             get
             {
@@ -187,9 +188,9 @@ namespace PreviousDocumentDS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _dpqtyallocated;
+        double _dpqtyallocated;
         [DataMember]
-        public Nullable<double> DFQtyAllocated 
+        public double DFQtyAllocated 
         {
             get
             {
@@ -202,7 +203,7 @@ namespace PreviousDocumentDS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _dfqtyallocated;
+        double _dfqtyallocated;
         [DataMember]
         public Nullable<System.DateTime> EntryTimeStamp 
         {
@@ -264,13 +265,58 @@ namespace PreviousDocumentDS.Business.Entities
         }
         Nullable<bool> _donotex;
         [DataMember]
+        public bool ImportComplete 
+        {
+            get
+            {
+                return _importcomplete;
+            }
+            set
+            {
+                _importcomplete = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        bool _importcomplete;
+        [DataMember]
+        public string WarehouseError 
+        {
+            get
+            {
+                return _warehouseerror;
+            }
+            set
+            {
+                _warehouseerror = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _warehouseerror;
+        [DataMember]
+        public double SalesFactor 
+        {
+            get
+            {
+                return _salesfactor;
+            }
+            set
+            {
+                _salesfactor = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        double _salesfactor;
+        [DataMember]
         public xcuda_Tarification xcuda_Tarification { get; set; }
         [DataMember]
         public xcuda_Valuation_item xcuda_Valuation_item { get; set; }
         [DataMember]
         public xcuda_PreviousItem xcuda_PreviousItem { get; set; }
         [DataMember]
-        public List<xcuda_PreviousItem> xcuda_PreviousItem1 { get; set; }
+        public List<EntryPreviousItems> EntryPreviousItems { get; set; }
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

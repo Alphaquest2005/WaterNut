@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class PreviousEntryMap : EntityTypeConfiguration<PreviousEntry>
     {
@@ -28,16 +29,13 @@
               this.Property(t => t.AttributeOnlyAllocation).HasColumnName("AttributeOnlyAllocation");
               this.Property(t => t.DoNotAllocate).HasColumnName("DoNotAllocate");
               this.Property(t => t.DoNotEX).HasColumnName("DoNotEX");
-              this.HasOptional(t => t.xcuda_Tarification).WithRequired(t => t.xcuda_Item);
-              this.HasOptional(t => t.xcuda_Valuation_item).WithRequired(t => t.xcuda_Item);
-              this.HasOptional(t => t.xcuda_PreviousItem).WithRequired(t => t.PreviousEntry);
-    			this.HasMany(t => t.xcuda_PreviousItem1).WithMany(t => t.PreviousEntries)
-    				.Map(m => 
-    				{
-    					m.ToTable("EntryPreviousItems");
-    					m.MapLeftKey("Item_Id");
-    					m.MapRightKey("PreviousItem_Id");
-    				});
+              this.Property(t => t.ImportComplete).HasColumnName("ImportComplete");
+              this.Property(t => t.WarehouseError).HasColumnName("WarehouseError").IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.SalesFactor).HasColumnName("SalesFactor");
+              this.HasOptional(t => t.xcuda_Tarification).WithRequired(t => (PreviousEntry)t.xcuda_Item);
+              this.HasOptional(t => t.xcuda_Valuation_item).WithRequired(t => (PreviousEntry)t.xcuda_Item);
+              this.HasOptional(t => t.xcuda_PreviousItem).WithRequired(t => (PreviousEntry)t.PreviousEntry);
+              this.HasMany(t => t.EntryPreviousItems).WithRequired(t => (PreviousEntry)t.xcuda_Item);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

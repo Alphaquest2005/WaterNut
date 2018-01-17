@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CoreEntities.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CoreEntities.Client.Entities
@@ -51,7 +51,7 @@ public Nullable<double> Suppplementary_unit_quantity
 			{
 			    if (value == this.xcuda_supplementary_unit.Suppplementary_unit_quantity) return;
 				this.xcuda_supplementary_unit.Suppplementary_unit_quantity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Suppplementary_unit_quantity");
 			}
 		}
@@ -66,7 +66,7 @@ public int Supplementary_unit_Id
 			{
 			    if (value == this.xcuda_supplementary_unit.Supplementary_unit_Id) return;
 				this.xcuda_supplementary_unit.Supplementary_unit_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Supplementary_unit_Id");
 			}
 		}
@@ -81,7 +81,7 @@ public int Tarification_Id
 			{
 			    if (value == this.xcuda_supplementary_unit.Tarification_Id) return;
 				this.xcuda_supplementary_unit.Tarification_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Tarification_Id");
 			}
 		}
@@ -98,7 +98,7 @@ public string Suppplementary_unit_code
 			{
 			    if (value == this.xcuda_supplementary_unit.Suppplementary_unit_code) return;
 				this.xcuda_supplementary_unit.Suppplementary_unit_code = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Suppplementary_unit_code");
 			}
 		}
@@ -115,7 +115,7 @@ public string Suppplementary_unit_name
 			{
 			    if (value == this.xcuda_supplementary_unit.Suppplementary_unit_name) return;
 				this.xcuda_supplementary_unit.Suppplementary_unit_name = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Suppplementary_unit_name");
 			}
 		}
@@ -130,7 +130,7 @@ public Nullable<bool> IsFirstRow
 			{
 			    if (value == this.xcuda_supplementary_unit.IsFirstRow) return;
 				this.xcuda_supplementary_unit.IsFirstRow = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("IsFirstRow");
 			}
 		}
@@ -183,7 +183,7 @@ public Nullable<bool> IsFirstRow
                 _AsycudaDocumentItem = value;
                 if(value != null)
                      this.xcuda_supplementary_unit.AsycudaDocumentItem = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("AsycudaDocumentItem");
 			}
 		}
@@ -203,11 +203,11 @@ public Nullable<bool> IsFirstRow
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

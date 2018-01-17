@@ -8,12 +8,14 @@
         <EntityTypeShape EntityType="WaterNutDBModel.TariffCategory" Width="2" PointX="4.5" PointY="3.5" />
         <EntityTypeShape EntityType="WaterNutDBModel.TariffCodes" Width="2.125" PointX="0.75" PointY="0.875" />
         <EntityTypeShape EntityType="WaterNutDBModel.TariffSupUnitLkps" Width="1.5" PointX="3" PointY="5.25" />
-        <AssociationConnector Association="WaterNutDBModel.FK_TariffCategoryTariffSupUnitLkp" />
         <AssociationConnector Association="WaterNutDBModel.FK_TariffCodes_TariffCategory" />
         <EntityTypeShape EntityType="WaterNutDBModel.InventoryItemsEx" Width="1.5" PointX="4.375" PointY="0.5" />
         <AssociationConnector Association="WaterNutDBModel.TariffCodesInventoryItemsEx" />
         <EntityTypeShape EntityType="WaterNutDBModel.EntryDataDetailsEx" Width="2.125" PointX="7.375" PointY="0.625" />
         <AssociationConnector Association="WaterNutDBModel.InventoryItemsExEntryDataDetailsEx" />
+        <EntityTypeShape EntityType="WaterNutDBModel.TariffCategoryCodeSuppUnit" Width="1.5" PointX="7.25" PointY="6.375" />
+        <AssociationConnector Association="WaterNutDBModel.FK_TariffCategoryCodeSuppUnit_TariffCategory" />
+        <AssociationConnector Association="WaterNutDBModel.FK_TariffCategoryCodeSuppUnit_TariffSupUnitLkps" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

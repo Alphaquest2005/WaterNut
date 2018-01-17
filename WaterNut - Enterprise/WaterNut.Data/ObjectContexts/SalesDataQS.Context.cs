@@ -12,7 +12,7 @@ using System.Data.Entity.Infrastructure;
 using SalesDataQS.Business.Entities.Mapping;
 using WaterNut.Data;
 using System.Data.Entity.Core.Objects;
-using TrackableEntities;
+
 
 
 namespace SalesDataQS.Business.Entities

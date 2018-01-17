@@ -47,10 +47,6 @@
     <Reference Include="Core.Common.Contracts">
       <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="Core.Common.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d595048b9b6b744, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Core.Common - Copy\Core.Common.Data\bin\Debug\Core.Common.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Core.Common.UI">
       <HintPath>..\Common Dlls\Core.Common.UI.dll</HintPath>
     </Reference>
@@ -122,6 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asycuda\AsycudaToDataBase421.cs" />
+    <Compile Include="Contracts\AllocationDS\ITariffCategoryCodeSuppUnitService.cs" />
+    <Compile Include="Contracts\InventoryDS\ITariffCategoryCodeSuppUnitService.cs" />
+    <Compile Include="Contracts\InventoryQS\ITariffCategoryCodeSuppUnitService.cs" />
+    <Compile Include="Contracts\PreviousDocumentDS\IEntryPreviousItemsService.cs" />
     <Compile Include="ExpressionCSharp60.cs" />
     <Compile Include="Contracts\AllocationDS\IAsycudaDocumentService.cs" />
     <Compile Include="Contracts\AllocationDS\IAsycudaLkpLstService.cs" />
@@ -553,6 +553,7 @@
     <Compile Include="Services\AllocationDS\InventoryItemsService.cs" />
     <Compile Include="Services\AllocationDS\SalesService.cs" />
     <Compile Include="Services\AllocationDS\SubItemsService.cs" />
+    <Compile Include="Services\AllocationDS\TariffCategoryCodeSuppUnitService.cs" />
     <Compile Include="Services\AllocationDS\TariffCategoryService.cs" />
     <Compile Include="Services\AllocationDS\TariffCodesService.cs" />
     <Compile Include="Services\AllocationDS\TariffSupUnitLkpsService.cs" />
@@ -696,11 +697,13 @@
     <Compile Include="Services\InventoryDS\InventoryAsycudaMappingService.cs" />
     <Compile Include="Services\InventoryDS\InventoryItemAliaService.cs" />
     <Compile Include="Services\InventoryDS\InventoryItemService.cs" />
+    <Compile Include="Services\InventoryDS\TariffCategoryCodeSuppUnitService.cs" />
     <Compile Include="Services\InventoryDS\TariffCategoryService.cs" />
     <Compile Include="Services\InventoryDS\TariffCodeService.cs" />
     <Compile Include="Services\InventoryDS\TariffSupUnitLkpService.cs" />
     <Compile Include="Services\InventoryQS\EntryDataDetailsExService.cs" />
     <Compile Include="Services\InventoryQS\InventoryItemsExService.cs" />
+    <Compile Include="Services\InventoryQS\TariffCategoryCodeSuppUnitService.cs" />
     <Compile Include="Services\InventoryQS\TariffCategoryService.cs" />
     <Compile Include="Services\InventoryQS\TariffCodesService.cs" />
     <Compile Include="Services\InventoryQS\TariffSupUnitLkpsService.cs" />
@@ -715,6 +718,7 @@
     <Compile Include="Services\OversShortQS\OversShortEXService.cs" />
     <Compile Include="Services\OversShortQS\OversShortService.cs" />
     <Compile Include="Services\PreviousDocumentDS\EntryDataDetailsService.cs" />
+    <Compile Include="Services\PreviousDocumentDS\EntryPreviousItemsService.cs" />
     <Compile Include="Services\PreviousDocumentDS\PreviousEntryService.cs" />
     <Compile Include="Services\PreviousDocumentDS\xcuda_HScodeService.cs" />
     <Compile Include="Services\PreviousDocumentDS\xcuda_PreviousItemService.cs" />
@@ -748,12 +752,16 @@
       <Project>{917d4053-ae15-44b2-a434-4411af44b9a6}</Project>
       <Name>Core.Common.PDF2TXT</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
+      <Project>{d6846386-8741-4619-bae3-b0cfedbf2597}</Project>
+      <Name>Core.Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
       <Project>{11bb58a0-1c42-49d9-bf54-ea05ecc74719}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
-      <Project>{11235D24-1165-4DC4-B91B-0426EA669451}</Project>
+      <Project>{11235d24-1165-4dc4-b91b-0426ea669451}</Project>
       <Name>InterfacesModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\QuickBooks\QuickBooks.csproj">

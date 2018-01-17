@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class PreviousDocumentMap : EntityTypeConfiguration<PreviousDocument>
     {
@@ -28,7 +29,7 @@
               this.Property(t => t.BLNumber).HasColumnName("BLNumber").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Lines).HasColumnName("Lines");
               this.Property(t => t.DocumentType).HasColumnName("DocumentType").IsUnicode(false);
-              this.HasMany(t => t.PreviousDocumentItems).WithRequired(t => t.PreviousDocument);
+              this.HasMany(t => t.PreviousDocumentItems).WithRequired(t => (PreviousDocument)t.PreviousDocument);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

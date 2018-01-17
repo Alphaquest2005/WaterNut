@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace SalesDataQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class SalesDataDetail : BaseEntity<SalesDataDetail> , ITrackable, IEquatable<SalesDataDetail>
+    public partial class SalesDataDetail : BaseEntity<SalesDataDetail>, ITrackable, IEquatable<SalesDataDetail>
     {
         [DataMember]
         public int EntryDataDetailsId
@@ -240,20 +242,20 @@ namespace SalesDataQS.Client.DTO
 		}
         private double _SalesValue;
 
-       
         [DataMember]
-        public ChangeTrackingCollection<AsycudaDocumentSetEntryDataDetails> AsycudaDocumentSets
-		{
-		    get { return _AsycudaDocumentSets; }
+        public System.DateTime EntryDataDate
+		{ 
+		    get { return _EntryDataDate; }
 			set
 			{
-			    if (Equals(value, _AsycudaDocumentSets)) return;
-				_AsycudaDocumentSets = value;
-				NotifyPropertyChanged();//m => this.AsycudaDocumentSets
+			    if (value == _EntryDataDate) return;
+				_EntryDataDate = value;
+				NotifyPropertyChanged();//m => this.EntryDataDate
 			}
 		}
-        private ChangeTrackingCollection<AsycudaDocumentSetEntryDataDetails> _AsycudaDocumentSets = new ChangeTrackingCollection<AsycudaDocumentSetEntryDataDetails>();
+        private System.DateTime _EntryDataDate;
 
+       
         [DataMember]
         public SalesData SalesData
 		{
@@ -269,6 +271,19 @@ namespace SalesDataQS.Client.DTO
 		}
         private SalesData _SalesData;
         private ChangeTrackingCollection<SalesData> SalesDataChangeTracker { get; set; }
+
+        [DataMember]
+        public ChangeTrackingCollection<AsycudaDocumentSetEntryDataDetails> AsycudaDocumentSetEntryDataDetails
+		{
+		    get { return _AsycudaDocumentSetEntryDataDetails; }
+			set
+			{
+			    if (Equals(value, _AsycudaDocumentSetEntryDataDetails)) return;
+				_AsycudaDocumentSetEntryDataDetails = value;
+				NotifyPropertyChanged();//m => this.AsycudaDocumentSetEntryDataDetails
+			}
+		}
+        private ChangeTrackingCollection<AsycudaDocumentSetEntryDataDetails> _AsycudaDocumentSetEntryDataDetails = new ChangeTrackingCollection<AsycudaDocumentSetEntryDataDetails>();
 
    //     [DataMember]
    //     public TrackingState TrackingState { get; set; }

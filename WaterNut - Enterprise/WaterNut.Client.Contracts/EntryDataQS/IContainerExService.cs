@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using EntryDataQS.Client.DTO;
 
+
 namespace EntryDataQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace EntryDataQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<ContainerEx> UpdateContainerEx(DTO.ContainerEx entity);
+        Task<ContainerEx> UpdateContainerEx(ContainerEx entity);
 
         [OperationContract]
-        Task<ContainerEx> CreateContainerEx(DTO.ContainerEx entity);
+        Task<ContainerEx> CreateContainerEx(ContainerEx entity);
 
         [OperationContract]
         Task<bool> DeleteContainerEx(string id);

@@ -23,11 +23,11 @@ public class IIdentifibleEntityTPL : CSharpTemplate
             var ens = mainEntity.Properties.Where(x => x.MetadataProperties.Where(z => z.Name.Contains("EntityNameProperty") && z.Value.ToString().Contains(">True<")).Any() == true).ToList();
 #>
 using System.Linq;
-using CoreEntities.DataLayer.Entities;
+using CoreEntities.Business.Entities;
 using Core.Common.Data.Contracts;
 using System;
 
-namespace <#=conTextName#>.DataLayer.Entities
+namespace <#=conTextName#>.Business.Entities
 {
     public partial class <#=mainEntity.Name#>: IIdentifiableEntity
     {

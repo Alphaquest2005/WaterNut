@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace SalesDataQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class SalesDataAllocations : BaseEntity<SalesDataAllocations> , ITrackable, IEquatable<SalesDataAllocations>
+    public partial class SalesDataAllocations : BaseEntity<SalesDataAllocations>, ITrackable, IEquatable<SalesDataAllocations>
     {
         [DataMember]
         public int AllocationId

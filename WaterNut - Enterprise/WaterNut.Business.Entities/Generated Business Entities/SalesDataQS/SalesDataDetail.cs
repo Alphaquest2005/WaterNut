@@ -8,19 +8,20 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace SalesDataQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class SalesDataDetail : BaseEntity<SalesDataDetail> , ITrackable
+    public partial class SalesDataDetail : BaseEntity<SalesDataDetail>, ITrackable 
     {
         partial void AutoGenStartUp() //SalesDataDetail()
         {
-            this.AsycudaDocumentSets = new List<AsycudaDocumentSetEntryDataDetails>();
+            this.AsycudaDocumentSetEntryDataDetails = new List<AsycudaDocumentSetEntryDataDetails>();
         }
 
         [DataMember]
@@ -279,9 +280,24 @@ namespace SalesDataQS.Business.Entities
         }
         double _salesvalue;
         [DataMember]
-        public List<AsycudaDocumentSetEntryDataDetails> AsycudaDocumentSets { get; set; }
+        public System.DateTime EntryDataDate 
+        {
+            get
+            {
+                return _entrydatadate;
+            }
+            set
+            {
+                _entrydatadate = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        System.DateTime _entrydatadate;
         [DataMember]
         public SalesData SalesData { get; set; }
+        [DataMember]
+        public List<AsycudaDocumentSetEntryDataDetails> AsycudaDocumentSetEntryDataDetails { get; set; }
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

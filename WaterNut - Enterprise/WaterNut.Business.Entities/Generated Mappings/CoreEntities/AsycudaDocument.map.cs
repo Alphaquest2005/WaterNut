@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class AsycudaDocumentMap : EntityTypeConfiguration<AsycudaDocument>
     {
@@ -40,8 +41,9 @@
               this.Property(t => t.Cancelled).HasColumnName("Cancelled");
               this.Property(t => t.TotalCIF).HasColumnName("TotalCIF");
               this.Property(t => t.TotalGrossWeight).HasColumnName("TotalGrossWeight");
+              this.Property(t => t.AssessmentDate).HasColumnName("AssessmentDate");
               this.Property(t => t.TotalFreight).HasColumnName("TotalFreight");
-            this.HasOptional(t => t.AsycudaDocumentSetEx).WithMany(t => t.AsycudaDocuments).HasForeignKey(d => d.AsycudaDocumentSetId);
+              this.HasOptional(t => t.AsycudaDocumentSetEx).WithMany(t =>(ICollection<AsycudaDocument>) t.AsycudaDocuments).HasForeignKey(d => d.AsycudaDocumentSetId);
               this.HasMany(t => t.AsycudaDocumentItems).WithOptional(t => t.AsycudaDocument).HasForeignKey(d => d.AsycudaDocumentId);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);

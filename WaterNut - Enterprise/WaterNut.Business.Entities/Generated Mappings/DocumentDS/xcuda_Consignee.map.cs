@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_ConsigneeMap : EntityTypeConfiguration<xcuda_Consignee>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.Traders_Id).HasColumnName("Traders_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.Consignee_code).HasColumnName("Consignee_code").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Consignee_name).HasColumnName("Consignee_name").IsUnicode(false).HasMaxLength(255);
-              this.HasRequired(t => t.xcuda_Traders).WithOptional(t => t.xcuda_Consignee);
+              this.HasRequired(t => t.xcuda_Traders).WithOptional(t => (xcuda_Consignee)t.xcuda_Consignee);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

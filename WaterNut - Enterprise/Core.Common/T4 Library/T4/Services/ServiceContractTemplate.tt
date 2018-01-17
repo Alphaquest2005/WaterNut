@@ -27,53 +27,53 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 
 using Core.Common.Contracts;
-using <#=container.Name #>.DataLayer.Entities;
-using Core.Common.DataLayer.Services;
+using <#=container.Name #>.Business.Entities;
+using Core.Common.Business.Services;
 using <#=projectName #>.Interfaces;
 
-namespace <#=container.Name #>.DataLayer.Services
+namespace <#=container.Name #>.Business.Services
 {
     [ServiceContract (Namespace="http://www.insight-software.com/<#=projectName #>")]
-    public partial interface I<#=entity.Name#>Service : IDataLayerService
+    public partial interface I<#=entity.Name#>Service : IBusinessService
     {
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<IEnumerable<<#= "I" + entity.Name#>>> Get<#=entitySet#>(List<string> includesLst = null, bool tracking = true);
+        Task<IEnumerable<<#= entity.Name#>>> Get<#=entitySet#>(List<string> includesLst = null, bool tracking = true);
 
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<<#="I" + entity.Name#>> Get<#=entity.Name#>ByKey(string id, List<string> includesLst = null, bool tracking = true);
+        Task<<#=entity.Name#>> Get<#=entity.Name#>ByKey(string id, List<string> includesLst = null, bool tracking = true);
 
 		[OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet#>ByExpression(string exp, List<string> includesLst = null, bool tracking = true);
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet#>ByExpression(string exp, List<string> includesLst = null, bool tracking = true);
 
 		[OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet#>ByExpressionLst(List<string> expLst, List<string> includesLst = null, bool tracking = true);
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet#>ByExpressionLst(List<string> expLst, List<string> includesLst = null, bool tracking = true);
 
 		[OperationContract]
         [FaultContract(typeof(ValidationFault))]
-		Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
+		Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
             Dictionary<string, string> navExp, List<string> includesLst = null, bool tracking = true);
 
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
             int totalrow, List<string> includesLst = null, bool tracking = true);
 
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> exp,
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> exp,
             int totalrow, List<string> includesLst = null, bool tracking = true);
 
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<<#="I" + entity.Name#>> Update<#=entity.Name#>(<#="I" + entity.Name#> entity);
+        Task<<#=entity.Name#>> Update<#=entity.Name#>(<#=entity.Name#> entity);
 
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<<#="I" + entity.Name#>> Create<#=entity.Name#>(<#="I" + entity.Name#> entity);
+        Task<<#=entity.Name#>> Create<#=entity.Name#>(<#=entity.Name#> entity);
 
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
@@ -94,13 +94,13 @@ namespace <#=container.Name #>.DataLayer.Services
 
         [OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<IEnumerable<<#="I" + entity.Name#>>> LoadRange(int startIndex, int count, string exp);
+        Task<IEnumerable<<#=entity.Name#>>> LoadRange(int startIndex, int count, string exp);
 
 
 
 		[OperationContract]
         [FaultContract(typeof(ValidationFault))]
-		Task<IEnumerable<<#="I" + entity.Name#>>> LoadRangeNav(int startIndex, int count, string exp,
+		Task<IEnumerable<<#=entity.Name#>>> LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null);
 
 		[OperationContract]
@@ -125,7 +125,7 @@ namespace <#=container.Name #>.DataLayer.Services
  #>
 		[OperationContract]
         [FaultContract(typeof(ValidationFault))]
-        Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null);
+        Task<IEnumerable<<#=entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null);
   <#+ 
 		}
   #>

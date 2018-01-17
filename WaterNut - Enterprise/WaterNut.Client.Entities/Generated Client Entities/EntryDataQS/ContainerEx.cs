@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using EntryDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace EntryDataQS.Client.Entities
@@ -56,7 +56,7 @@ public string Container_identity
 			{
 			    if (value == this.containerex.Container_identity) return;
 				this.containerex.Container_identity = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Container_identity");
 			}
 		}
@@ -73,7 +73,7 @@ public string Container_type
 			{
 			    if (value == this.containerex.Container_type) return;
 				this.containerex.Container_type = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Container_type");
 			}
 		}
@@ -90,7 +90,7 @@ public string Empty_full_indicator
 			{
 			    if (value == this.containerex.Empty_full_indicator) return;
 				this.containerex.Empty_full_indicator = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Empty_full_indicator");
 			}
 		}
@@ -105,7 +105,7 @@ public double Gross_weight
 			{
 			    if (value == this.containerex.Gross_weight) return;
 				this.containerex.Gross_weight = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Gross_weight");
 			}
 		}
@@ -122,7 +122,7 @@ public string Goods_description
 			{
 			    if (value == this.containerex.Goods_description) return;
 				this.containerex.Goods_description = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Goods_description");
 			}
 		}
@@ -139,7 +139,7 @@ public string Packages_number
 			{
 			    if (value == this.containerex.Packages_number) return;
 				this.containerex.Packages_number = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Packages_number");
 			}
 		}
@@ -156,7 +156,7 @@ public string Packages_type
 			{
 			    if (value == this.containerex.Packages_type) return;
 				this.containerex.Packages_type = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Packages_type");
 			}
 		}
@@ -171,7 +171,7 @@ public double Packages_weight
 			{
 			    if (value == this.containerex.Packages_weight) return;
 				this.containerex.Packages_weight = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Packages_weight");
 			}
 		}
@@ -186,7 +186,7 @@ public int Container_Id
 			{
 			    if (value == this.containerex.Container_Id) return;
 				this.containerex.Container_Id = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Container_Id");
 			}
 		}
@@ -201,7 +201,7 @@ public Nullable<double> TotalValue
 			{
 			    if (value == this.containerex.TotalValue) return;
 				this.containerex.TotalValue = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TotalValue");
 			}
 		}
@@ -216,7 +216,7 @@ public Nullable<System.DateTime> ShipDate
 			{
 			    if (value == this.containerex.ShipDate) return;
 				this.containerex.ShipDate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ShipDate");
 			}
 		}
@@ -231,7 +231,7 @@ public Nullable<System.DateTime> DeliveryDate
 			{
 			    if (value == this.containerex.DeliveryDate) return;
 				this.containerex.DeliveryDate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("DeliveryDate");
 			}
 		}
@@ -248,7 +248,7 @@ public string Seal
 			{
 			    if (value == this.containerex.Seal) return;
 				this.containerex.Seal = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Seal");
 			}
 		}
@@ -263,7 +263,7 @@ public Nullable<int> AsycudaDocumentSetId
 			{
 			    if (value == this.containerex.AsycudaDocumentSetId) return;
 				this.containerex.AsycudaDocumentSetId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentSetId");
 			}
 		}
@@ -280,7 +280,7 @@ public string EntryDataId
 			{
 			    if (value == this.containerex.EntryDataId) return;
 				this.containerex.EntryDataId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataId");
 			}
 		}
@@ -297,7 +297,7 @@ public string PackageDescription
 			{
 			    if (value == this.containerex.PackageDescription) return;
 				this.containerex.PackageDescription = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("PackageDescription");
 			}
 		}
@@ -314,7 +314,7 @@ public string ContainerTypeDescription
 			{
 			    if (value == this.containerex.ContainerTypeDescription) return;
 				this.containerex.ContainerTypeDescription = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ContainerTypeDescription");
 			}
 		}
@@ -343,7 +343,7 @@ public string ContainerTypeDescription
 				if (value != null)
 					this.containerex.ContainerEntryDatas = new ChangeTrackingCollection<DTO.ContainerEntryData>(value.Select(x => x.DTO).ToList());
                 _ContainerEntryDatas = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_ContainerEntryDatas != null)
 				_ContainerEntryDatas.CollectionChanged += ContainerEntryDatas_CollectionChanged;               
 				NotifyPropertyChanged("ContainerEntryDatas");
@@ -360,7 +360,7 @@ public string ContainerTypeDescription
                         if (itm != null)
                         containerex.ContainerEntryDatas.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (ContainerEntryData itm in e.OldItems)
@@ -368,7 +368,7 @@ public string ContainerTypeDescription
                         if (itm != null)
                         containerex.ContainerEntryDatas.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -388,11 +388,11 @@ public string ContainerTypeDescription
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

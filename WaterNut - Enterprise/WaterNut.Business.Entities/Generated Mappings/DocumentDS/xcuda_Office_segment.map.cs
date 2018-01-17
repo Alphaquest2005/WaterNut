@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Office_segmentMap : EntityTypeConfiguration<xcuda_Office_segment>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.Customs_clearance_office_code).HasColumnName("Customs_clearance_office_code").IsUnicode(false);
               this.Property(t => t.Customs_Clearance_office_name).HasColumnName("Customs_Clearance_office_name").IsUnicode(false);
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_Identification).WithOptional(t => t.xcuda_Office_segment);
+              this.HasRequired(t => t.xcuda_Identification).WithOptional(t => (xcuda_Office_segment)t.xcuda_Office_segment);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

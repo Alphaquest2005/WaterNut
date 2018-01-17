@@ -14,16 +14,20 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading.Tasks;
 //using System.Transactions;
-using TrackableEntities;
-using TrackableEntities.Common;
+
+
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
 using AllocationDS.Business.Entities;
 using Core.Common.Contracts;
 using Core.Common.Business.Services;
-using TrackableEntities.EF6;
+
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
+using WaterNut.Interfaces;
 
 namespace AllocationDS.Business.Services
 {
@@ -73,7 +77,7 @@ namespace AllocationDS.Business.Services
                     IEnumerable<AsycudaSalesAllocations> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
@@ -135,7 +139,7 @@ namespace AllocationDS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -143,7 +147,7 @@ namespace AllocationDS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -176,7 +180,7 @@ namespace AllocationDS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -184,7 +188,7 @@ namespace AllocationDS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -253,7 +257,7 @@ namespace AllocationDS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
@@ -329,7 +333,7 @@ namespace AllocationDS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
 
             }
@@ -365,17 +369,16 @@ namespace AllocationDS.Business.Services
                 if (totalrow % batchSize > 0) batches += 1;
                 var exceptions = new ConcurrentQueue<Exception>();
                 Parallel.For(0, batches,
-                   new ParallelOptions() { MaxDegreeOfParallelism = 2 },//Environment.ProcessorCount * 
+                   new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 },
                     bat =>
                     //  for (int bat = 0; bat < batches; bat++)
                     {
                         try
                         {
-                            using (var dbContext = new AllocationDSContext(){StartTracking = StartTracking})//
+                            using (var dbContext = new AllocationDSContext(){StartTracking = StartTracking})
                             {
                                 dbContext.Configuration.AutoDetectChangesEnabled = false;
-                                dbContext.Configuration.LazyLoadingEnabled = false;
-
+                                //dbContext.Configuration.LazyLoadingEnabled = true;
                                 var set = AddIncludes(includesLst, dbContext);
                                 IQueryable<AsycudaSalesAllocations> dset;
                                 if (expLst.FirstOrDefault() == "All")
@@ -404,7 +407,7 @@ namespace AllocationDS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)
@@ -428,12 +431,13 @@ namespace AllocationDS.Business.Services
               {
                 try
                 {   
-                    if(entity.TrackingState == TrackingState.Unchanged) entity.TrackingState = TrackingState.Modified;                              
+                     var res = (AsycudaSalesAllocations) entity;
+                    if(res.TrackingState == TrackingState.Unchanged) res.TrackingState = TrackingState.Modified;                              
                     
-                    dbContext.ApplyChanges(entity);
+                    dbContext.ApplyChanges(res);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                    entity.AcceptChanges();
-                    return entity;      
+                    res.AcceptChanges();
+                    return res;      
 
                    // var entitychanges = entity.ChangeTracker.GetChanges();
                    // if (entitychanges != null && entitychanges.FirstOrDefault() != null)
@@ -507,12 +511,13 @@ namespace AllocationDS.Business.Services
         {
             try
             {
-                using ( var dbContext = new AllocationDSContext(){StartTracking = StartTracking})
+                var res = (AsycudaSalesAllocations) entity;
+              using ( var dbContext = new AllocationDSContext(){StartTracking = StartTracking})
               {
-                dbContext.AsycudaSalesAllocations.Add(entity);
+                dbContext.AsycudaSalesAllocations.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                entity.AcceptChanges();
-                return entity;
+                res.AcceptChanges();
+                return res;
               }
             }
             catch (Exception updateEx)
@@ -1173,7 +1178,6 @@ namespace AllocationDS.Business.Services
                     if (exp == "All" && navExp.Count == 0)
                     {
                         return Convert.ToDecimal(dbContext.AsycudaSalesAllocations
-                                        .Distinct()
 										.AsNoTracking()
                                         .Sum(field)??0);
                     }
@@ -1192,7 +1196,7 @@ namespace AllocationDS.Business.Services
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }
-                    return Convert.ToDecimal(dbContext.AsycudaSalesAllocations.Where(exp == "All" || exp == null ? "AllocationId != null" : exp).Distinct()
+                    return Convert.ToDecimal(dbContext.AsycudaSalesAllocations.Where(exp == "All" || exp == null ? "AllocationId != null" : exp)
 											.AsNoTracking()
                                             .Sum(field)??0);
                 }

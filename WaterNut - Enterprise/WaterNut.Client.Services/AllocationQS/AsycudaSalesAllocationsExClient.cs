@@ -13,6 +13,7 @@ using AllocationQS.Client.DTO;
 using AllocationQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace AllocationQS.Client.Services
     public partial class AsycudaSalesAllocationsExClient :  ClientService<IAsycudaSalesAllocationsExService>, IAsycudaSalesAllocationsExService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExs(List<string> includesLst = null)
+        public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExs(List<string> includesLst = null)
         {
             return await Channel.GetAsycudaSalesAllocationsExs(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaSalesAllocationsEx> GetAsycudaSalesAllocationsExByKey(string id, List<string> includesLst = null)
+        public async Task<AsycudaSalesAllocationsEx> GetAsycudaSalesAllocationsExByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaSalesAllocationsExByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaSalesAllocationsExsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaSalesAllocationsExsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExsByExpressionNav(string exp,
+		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetAsycudaSalesAllocationsExsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace AllocationQS.Client.Services
             return await Channel.GetAsycudaSalesAllocationsExsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaSalesAllocationsEx> UpdateAsycudaSalesAllocationsEx(DTO.AsycudaSalesAllocationsEx entity)
+        public async Task<AsycudaSalesAllocationsEx> UpdateAsycudaSalesAllocationsEx(AsycudaSalesAllocationsEx entity)
         {
            return await Channel.UpdateAsycudaSalesAllocationsEx(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaSalesAllocationsEx> CreateAsycudaSalesAllocationsEx(DTO.AsycudaSalesAllocationsEx entity)
+        public async Task<AsycudaSalesAllocationsEx> CreateAsycudaSalesAllocationsEx(AsycudaSalesAllocationsEx entity)
         {
            return await Channel.CreateAsycudaSalesAllocationsEx(entity).ConfigureAwait(false);
         }
@@ -96,37 +97,37 @@ namespace AllocationQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<AsycudaSalesAllocationsEx>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<AsycudaSalesAllocationsEx>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByPreviousItem_Id(string PreviousItem_Id, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByPreviousItem_Id(string PreviousItem_Id, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaSalesAllocationsExByPreviousItem_Id(PreviousItem_Id, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByEntryDataDetailsId(string EntryDataDetailsId, List<string> includesLst = null)
+  		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByEntryDataDetailsId(string EntryDataDetailsId, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaSalesAllocationsExByEntryDataDetailsId(EntryDataDetailsId, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByxBond_Item_Id(string xBond_Item_Id, List<string> includesLst = null)
+  		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByxBond_Item_Id(string xBond_Item_Id, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaSalesAllocationsExByxBond_Item_Id(xBond_Item_Id, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByxASYCUDA_Id(string xASYCUDA_Id, List<string> includesLst = null)
+  		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExByxASYCUDA_Id(string xASYCUDA_Id, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaSalesAllocationsExByxASYCUDA_Id(xASYCUDA_Id, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExBypASYCUDA_Id(string pASYCUDA_Id, List<string> includesLst = null)
+  		public async Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExBypASYCUDA_Id(string pASYCUDA_Id, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaSalesAllocationsExBypASYCUDA_Id(pASYCUDA_Id, includesLst).ConfigureAwait(false);
         }
@@ -138,7 +139,7 @@ namespace AllocationQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

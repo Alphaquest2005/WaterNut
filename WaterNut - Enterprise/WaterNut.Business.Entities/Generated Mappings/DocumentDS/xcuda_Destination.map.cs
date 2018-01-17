@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_DestinationMap : EntityTypeConfiguration<xcuda_Destination>
     {
@@ -15,7 +16,7 @@
               this.Property(t => t.Destination_country_code).HasColumnName("Destination_country_code").IsUnicode(false);
               this.Property(t => t.Destination_country_name).HasColumnName("Destination_country_name").IsUnicode(false);
               this.Property(t => t.Country_Id).HasColumnName("Country_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_Country).WithOptional(t => t.xcuda_Destination);
+              this.HasRequired(t => t.xcuda_Country).WithOptional(t => (xcuda_Destination)t.xcuda_Destination);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

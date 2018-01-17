@@ -8,30 +8,19 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace InventoryQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class TariffSupUnitLkps : BaseEntity<TariffSupUnitLkps> , ITrackable, IEquatable<TariffSupUnitLkps>
+    public partial class TariffSupUnitLkps : BaseEntity<TariffSupUnitLkps>, ITrackable, IEquatable<TariffSupUnitLkps>
     {
-        [DataMember]
-        public string TariffCategoryCode
-		{ 
-		    get { return _TariffCategoryCode; }
-			set
-			{
-			    if (value == _TariffCategoryCode) return;
-				_TariffCategoryCode = value;
-				NotifyPropertyChanged();//m => this.TariffCategoryCode
-			}
-		}
-        private string _TariffCategoryCode;
-
         [DataMember]
         public string SuppUnitCode2
 		{ 
@@ -86,20 +75,17 @@ namespace InventoryQS.Client.DTO
 
        
         [DataMember]
-        public TariffCategory TariffCategory
+        public ChangeTrackingCollection<TariffCategoryCodeSuppUnit> TariffCategoryCodeSuppUnit
 		{
-		    get { return _TariffCategory; }
+		    get { return _TariffCategoryCodeSuppUnit; }
 			set
 			{
-			    if (value == _TariffCategory) return;
-				_TariffCategory = value;
-                TariffCategoryChangeTracker = _TariffCategory == null ? null
-                    : new ChangeTrackingCollection<TariffCategory> { _TariffCategory };
-				NotifyPropertyChanged();//m => this.TariffCategory
+			    if (Equals(value, _TariffCategoryCodeSuppUnit)) return;
+				_TariffCategoryCodeSuppUnit = value;
+				NotifyPropertyChanged();//m => this.TariffCategoryCodeSuppUnit
 			}
 		}
-        private TariffCategory _TariffCategory;
-        private ChangeTrackingCollection<TariffCategory> TariffCategoryChangeTracker { get; set; }
+        private ChangeTrackingCollection<TariffCategoryCodeSuppUnit> _TariffCategoryCodeSuppUnit = new ChangeTrackingCollection<TariffCategoryCodeSuppUnit>();
 
    //     [DataMember]
    //     public TrackingState TrackingState { get; set; }

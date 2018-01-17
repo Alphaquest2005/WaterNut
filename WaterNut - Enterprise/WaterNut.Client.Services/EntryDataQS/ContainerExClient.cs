@@ -13,6 +13,7 @@ using EntryDataQS.Client.DTO;
 using EntryDataQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace EntryDataQS.Client.Services
     public partial class ContainerExClient :  ClientService<IContainerExService>, IContainerExService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.ContainerEx>> GetContainerExes(List<string> includesLst = null)
+        public async Task<IEnumerable<ContainerEx>> GetContainerExes(List<string> includesLst = null)
         {
             return await Channel.GetContainerExes(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.ContainerEx> GetContainerExByKey(string id, List<string> includesLst = null)
+        public async Task<ContainerEx> GetContainerExByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetContainerExByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.ContainerEx>> GetContainerExesByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<ContainerEx>> GetContainerExesByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetContainerExesByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.ContainerEx>> GetContainerExesByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<ContainerEx>> GetContainerExesByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetContainerExesByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.ContainerEx>> GetContainerExesByExpressionNav(string exp,
+		public async Task<IEnumerable<ContainerEx>> GetContainerExesByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetContainerExesByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace EntryDataQS.Client.Services
             return await Channel.GetContainerExesByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.ContainerEx> UpdateContainerEx(DTO.ContainerEx entity)
+        public async Task<ContainerEx> UpdateContainerEx(ContainerEx entity)
         {
            return await Channel.UpdateContainerEx(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.ContainerEx> CreateContainerEx(DTO.ContainerEx entity)
+        public async Task<ContainerEx> CreateContainerEx(ContainerEx entity)
         {
            return await Channel.CreateContainerEx(entity).ConfigureAwait(false);
         }
@@ -96,22 +97,22 @@ namespace EntryDataQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.ContainerEx>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<ContainerEx>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.ContainerEx>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<ContainerEx>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.ContainerEx>> GetContainerExByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
+		public async Task<IEnumerable<ContainerEx>> GetContainerExByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
         {
             return  await Channel.GetContainerExByAsycudaDocumentSetId(AsycudaDocumentSetId, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.ContainerEx>> GetContainerExByEntryDataId(string EntryDataId, List<string> includesLst = null)
+  		public async Task<IEnumerable<ContainerEx>> GetContainerExByEntryDataId(string EntryDataId, List<string> includesLst = null)
         {
             return  await Channel.GetContainerExByEntryDataId(EntryDataId, includesLst).ConfigureAwait(false);
         }
@@ -123,7 +124,7 @@ namespace EntryDataQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

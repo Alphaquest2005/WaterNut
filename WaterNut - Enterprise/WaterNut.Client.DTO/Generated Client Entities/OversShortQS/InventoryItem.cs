@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace OversShortQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class InventoryItem : BaseEntity<InventoryItem> , ITrackable, IEquatable<InventoryItem>
+    public partial class InventoryItem : BaseEntity<InventoryItem>, ITrackable, IEquatable<InventoryItem>
     {
         [DataMember]
         public string ItemNumber
@@ -83,6 +85,19 @@ namespace OversShortQS.Client.DTO
 			}
 		}
         private Nullable<System.DateTime> _EntryTimeStamp;
+
+        [DataMember]
+        public Nullable<int> Quantity
+		{ 
+		    get { return _Quantity; }
+			set
+			{
+			    if (value == _Quantity) return;
+				_Quantity = value;
+				NotifyPropertyChanged();//m => this.Quantity
+			}
+		}
+        private Nullable<int> _Quantity;
 
        
         [DataMember]

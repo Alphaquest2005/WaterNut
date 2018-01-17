@@ -7,6 +7,8 @@
 using InventoryQS.Client.DTO;
 using TrackableEntities.Client;
 
+
+
 namespace InventoryQS.Client.Entities
 {
 

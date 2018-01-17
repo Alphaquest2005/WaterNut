@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using OversShortQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace OversShortQS.Client.Entities
@@ -24,7 +24,7 @@ namespace OversShortQS.Client.Entities
        public partial class OversShortEX: OversShort
     {
         DTO.OversShortEX oversshortex;
-        public OversShortEX(DTO.OversShortEX dto )
+        public OversShortEX(DTO.OversShortEX dto ) : base(dto)
         {
            
              base.DTO = dto;   
@@ -56,7 +56,7 @@ public Nullable<double> ReceivedValue
 			{
 			    if (value == this.oversshortex.ReceivedValue) return;
 				this.oversshortex.ReceivedValue = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ReceivedValue");
 			}
 		}
@@ -71,7 +71,7 @@ public Nullable<double> InvoiceValue
 			{
 			    if (value == this.oversshortex.InvoiceValue) return;
 				this.oversshortex.InvoiceValue = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("InvoiceValue");
 			}
 		}
@@ -100,7 +100,7 @@ public Nullable<double> InvoiceValue
 				if (value != null)
 					this.oversshortex.OverShortDetailsEXes = new ChangeTrackingCollection<DTO.OverShortDetailsEX>(value.Select(x => x.DTO).ToList());
                 _OverShortDetailsEXes = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_OverShortDetailsEXes != null)
 				_OverShortDetailsEXes.CollectionChanged += OverShortDetailsEXes_CollectionChanged;               
 				NotifyPropertyChanged("OverShortDetailsEXes");
@@ -117,7 +117,7 @@ public Nullable<double> InvoiceValue
                         if (itm != null)
                         oversshortex.OverShortDetailsEXes.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (OverShortDetailsEX itm in e.OldItems)
@@ -125,7 +125,7 @@ public Nullable<double> InvoiceValue
                         if (itm != null)
                         oversshortex.OverShortDetailsEXes.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -178,7 +178,7 @@ public Nullable<double> InvoiceValue
                 _OverShortSuggestedDocuments = value;
                 if(value != null)
                      this.oversshortex.OverShortSuggestedDocuments = value.DTO;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                 NotifyPropertyChanged("OverShortSuggestedDocuments");
 			}
 		}
@@ -198,11 +198,11 @@ public Nullable<double> InvoiceValue
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

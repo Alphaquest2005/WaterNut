@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_PreviousItemMap : EntityTypeConfiguration<xcuda_PreviousItem>
     {
@@ -32,9 +33,9 @@
               this.Property(t => t.PreviousItem_Id).HasColumnName("PreviousItem_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id");
               this.Property(t => t.QtyAllocated).HasColumnName("QtyAllocated");
-              this.HasRequired(t => t.xcuda_Item).WithOptional(t => t.xcuda_PreviousItem);
-              this.HasOptional(t => t.Ex).WithRequired(t => t.xcuda_PreviousItem);
-              this.HasMany(t => t.xcuda_Items).WithRequired(t => t.xcuda_PreviousItem);
+              this.HasRequired(t => t.xcuda_Item).WithOptional(t => (xcuda_PreviousItem)t.xcuda_PreviousItem);
+              this.HasOptional(t => t.Ex).WithRequired(t => (xcuda_PreviousItem) t.xcuda_PreviousItem);
+              this.HasMany(t => t.xcuda_Items).WithRequired(t => (xcuda_PreviousItem)t.xcuda_PreviousItem);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

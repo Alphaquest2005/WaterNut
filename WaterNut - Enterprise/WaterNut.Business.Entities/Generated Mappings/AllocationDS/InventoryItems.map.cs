@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class InventoryItemsMap : EntityTypeConfiguration<InventoryItems>
     {
@@ -18,9 +19,9 @@
               this.Property(t => t.TariffCode).HasColumnName("TariffCode").IsUnicode(false).HasMaxLength(8);
               this.Property(t => t.EntryTimeStamp).HasColumnName("EntryTimeStamp");
               this.Property(t => t.Quantity).HasColumnName("Quantity");
-              this.HasOptional(t => t.TariffCodes).WithMany(t => t.InventoryItems).HasForeignKey(d => d.TariffCode);
-              this.HasMany(t => t.EntryDataDetails).WithRequired(t => t.InventoryItem);
-              this.HasMany(t => t.InventoryItemAlias).WithRequired(t => t.InventoryItems);
+              this.HasOptional(t => t.TariffCodes).WithMany(t =>(ICollection<InventoryItems>) t.InventoryItems).HasForeignKey(d => d.TariffCode);
+              this.HasMany(t => t.EntryDataDetails).WithRequired(t => (InventoryItems)t.InventoryItem);
+              this.HasMany(t => t.InventoryItemAlias).WithRequired(t => (InventoryItems)t.InventoryItems);
               this.HasMany(t => t.EX9AsycudaSalesAllocations).WithOptional(t => t.InventoryItem).HasForeignKey(d => d.ItemNumber);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);

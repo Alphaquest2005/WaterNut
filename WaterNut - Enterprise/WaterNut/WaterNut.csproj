@@ -55,10 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Core.Common.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9d595048b9b6b744, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Core.Common - Copy\Core.Common.Data\bin\Debug\Core.Common.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Core.Common.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Common Dlls\Core.Common.UI.dll</HintPath>
@@ -648,6 +644,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
+      <Project>{d6846386-8741-4619-bae3-b0cfedbf2597}</Project>
+      <Name>Core.Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
       <Project>{11235d24-1165-4dc4-b91b-0426ea669451}</Project>
       <Name>InterfacesModel</Name>

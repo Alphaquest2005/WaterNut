@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace InventoryQS.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class TariffCodes : BaseEntity<TariffCodes> , ITrackable, IEquatable<TariffCodes>
+    public partial class TariffCodes : BaseEntity<TariffCodes>, ITrackable, IEquatable<TariffCodes>
     {
         [DataMember]
         public string TariffCode

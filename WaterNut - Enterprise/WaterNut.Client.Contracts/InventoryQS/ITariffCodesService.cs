@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using InventoryQS.Client.DTO;
 
+
 namespace InventoryQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace InventoryQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<TariffCodes> UpdateTariffCodes(DTO.TariffCodes entity);
+        Task<TariffCodes> UpdateTariffCodes(TariffCodes entity);
 
         [OperationContract]
-        Task<TariffCodes> CreateTariffCodes(DTO.TariffCodes entity);
+        Task<TariffCodes> CreateTariffCodes(TariffCodes entity);
 
         [OperationContract]
         Task<bool> DeleteTariffCodes(string id);

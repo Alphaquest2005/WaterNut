@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using CoreEntities.Client.DTO;
 
+
 namespace CoreEntities.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace CoreEntities.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<ApplicationSettings> UpdateApplicationSettings(DTO.ApplicationSettings entity);
+        Task<ApplicationSettings> UpdateApplicationSettings(ApplicationSettings entity);
 
         [OperationContract]
-        Task<ApplicationSettings> CreateApplicationSettings(DTO.ApplicationSettings entity);
+        Task<ApplicationSettings> CreateApplicationSettings(ApplicationSettings entity);
 
         [OperationContract]
         Task<bool> DeleteApplicationSettings(string id);

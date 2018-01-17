@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using OversShortQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace OversShortQS.Client.Entities
@@ -54,7 +54,7 @@ public int OverShortDetailId
 			{
 			    if (value == this.overshortdetail.OverShortDetailId) return;
 				this.overshortdetail.OverShortDetailId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("OverShortDetailId");
 			}
 		}
@@ -69,7 +69,7 @@ public int OversShortsId
 			{
 			    if (value == this.overshortdetail.OversShortsId) return;
 				this.overshortdetail.OversShortsId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("OversShortsId");
 			}
 		}
@@ -84,7 +84,7 @@ public Nullable<double> ReceivedQty
 			{
 			    if (value == this.overshortdetail.ReceivedQty) return;
 				this.overshortdetail.ReceivedQty = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ReceivedQty");
 			}
 		}
@@ -101,7 +101,7 @@ public string ItemNumber
 			{
 			    if (value == this.overshortdetail.ItemNumber) return;
 				this.overshortdetail.ItemNumber = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemNumber");
 			}
 		}
@@ -118,7 +118,7 @@ public string ItemDescription
 			{
 			    if (value == this.overshortdetail.ItemDescription) return;
 				this.overshortdetail.ItemDescription = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ItemDescription");
 			}
 		}
@@ -133,7 +133,7 @@ public Nullable<double> Cost
 			{
 			    if (value == this.overshortdetail.Cost) return;
 				this.overshortdetail.Cost = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Cost");
 			}
 		}
@@ -148,7 +148,7 @@ public Nullable<double> InvoiceQty
 			{
 			    if (value == this.overshortdetail.InvoiceQty) return;
 				this.overshortdetail.InvoiceQty = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("InvoiceQty");
 			}
 		}
@@ -165,7 +165,7 @@ public string Status
 			{
 			    if (value == this.overshortdetail.Status) return;
 				this.overshortdetail.Status = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Status");
 			}
 		}
@@ -194,7 +194,7 @@ public string Status
 				if (value != null)
 					this.overshortdetail.OverShortDetailAllocations = new ChangeTrackingCollection<DTO.OverShortDetailAllocation>(value.Select(x => x.DTO).ToList());
                 _OverShortDetailAllocations = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_OverShortDetailAllocations != null)
 				_OverShortDetailAllocations.CollectionChanged += OverShortDetailAllocations_CollectionChanged;               
 				NotifyPropertyChanged("OverShortDetailAllocations");
@@ -211,7 +211,7 @@ public string Status
                         if (itm != null)
                         overshortdetail.OverShortDetailAllocations.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (OverShortDetailAllocation itm in e.OldItems)
@@ -219,7 +219,7 @@ public string Status
                         if (itm != null)
                         overshortdetail.OverShortDetailAllocations.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -239,11 +239,11 @@ public string Status
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

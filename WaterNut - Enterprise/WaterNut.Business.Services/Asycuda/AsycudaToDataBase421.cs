@@ -959,9 +959,9 @@ namespace WaterNut.DataSpace.Asycuda
                             }).Result).FirstOrDefault();
                     var supUnit = new TariffSupUnitLkp() {
                         SuppUnitCode2 = au.Suppplementary_unit_name.Text[0],
-                        SuppQty = 
+                        //SuppQty = 
                     };
-                    tc.TariffCategory.TariffSupUnitLkps.Add( );
+                    //tc.TariffCategory.TariffSupUnitLkps.Add( );
                 }
 
             }

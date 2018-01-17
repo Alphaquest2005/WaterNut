@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class SalesDataDetailMap : EntityTypeConfiguration<SalesDataDetail>
     {
@@ -29,8 +30,9 @@
               this.Property(t => t.Downloaded).HasColumnName("Downloaded");
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id");
               this.Property(t => t.SalesValue).HasColumnName("SalesValue");
-              this.HasRequired(t => t.SalesData).WithMany(t => t.SalesDataDetails).HasForeignKey(d => d.EntryDataId);
-              this.HasMany(t => t.AsycudaDocumentSets).WithRequired(t => t.SalesDataDetail);
+              this.Property(t => t.EntryDataDate).HasColumnName("EntryDataDate");
+              this.HasRequired(t => t.SalesData).WithMany(t =>(ICollection<SalesDataDetail>) t.SalesDataDetails).HasForeignKey(d => d.EntryDataId);
+              this.HasMany(t => t.AsycudaDocumentSetEntryDataDetails).WithRequired(t => (SalesDataDetail)t.SalesDataDetail);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

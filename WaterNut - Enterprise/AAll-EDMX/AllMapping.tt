@@ -12,10 +12,10 @@
     foreach (var conTextname in strs)
     {
         DbContextMappingsTPL sv = new DbContextMappingsTPL(); 
-        sv.inputFile = @"C:\Prism\WaterNut - Enterprise\" + conTextname + @"\" + conTextname +".edmx";
-        sv.coreEdmx = string.Format(@"C:\Prism\WaterNut - Enterprise\{0}\{0}.edmx", conTextname);
-        sv.outputProject = @"C:\Prism\WaterNut - Enterprise\WaterNut.Business.Entities\WaterNut.Business.Entities.csproj"; 
-        sv.Output.Project = @"C:\Prism\WaterNut - Enterprise\WaterNut.Data\WaterNut.Data.csproj";
+        sv.inputFile = @"C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\" + conTextname + @"\" + conTextname +".edmx";
+        sv.coreEdmx = string.Format(@"C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\{0}\{0}.edmx", conTextname);
+        sv.outputProject = @"C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\WaterNut.Business.Entities\WaterNut.Business.Entities.csproj"; 
+        sv.Output.Project = @"C:\Prism\GitRepositiory\WaterNut\WaterNut\WaterNut - Enterprise\WaterNut.Data\WaterNut.Data.csproj";
         sv.Output.File = @"DbContextMappings\" + conTextname + ".Mappings.cs";
         sv.Render();
         

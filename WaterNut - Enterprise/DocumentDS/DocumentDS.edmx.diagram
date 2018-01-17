@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="WaterNutDBModel.xcuda_Assessment" Width="1.5" PointX="5.25" PointY="16.625" />
         <EntityTypeShape EntityType="WaterNutDBModel.xcuda_Assessment_notice" Width="1.5" PointX="3" PointY="85" />
         <EntityTypeShape EntityType="WaterNutDBModel.xcuda_ASYCUDA" Width="1.875" PointX="0.5" PointY="55.75" />
-        <EntityTypeShape EntityType="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Width="2.125" PointX="3" PointY="56.5" />
         <EntityTypeShape EntityType="WaterNutDBModel.xcuda_Border_information" Width="1.5" PointX="7.5" PointY="79.375" />
         <EntityTypeShape EntityType="WaterNutDBModel.xcuda_Border_office" Width="1.5" PointX="5.25" PointY="76.625" />
         <EntityTypeShape EntityType="WaterNutDBModel.xcuda_Consignee" Width="1.5" PointX="5.25" PointY="108.875" />
@@ -61,11 +60,7 @@
         <EntityTypeShape EntityType="WaterNutDBModel.xcuda_Weight" Width="1.5" PointX="5.25" PointY="30.25" />
         <AssociationConnector Association="WaterNutDBModel.FK_AsycudaDocumentSet_Customs_Procedure" />
         <AssociationConnector Association="WaterNutDBModel.FK_AsycudaDocumentSet_Document_Type" />
-        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" />
         <AssociationConnector Association="WaterNutDBModel.FK_Customs_Procedure_Document_Type" />
-        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure" />
-        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type" />
-        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate" />
         <AssociationConnector Association="WaterNutDBModel.FK_Identification_Assessment" />
         <AssociationConnector Association="WaterNutDBModel.FK_ASYCUDA_Assessment_notice" />
         <AssociationConnector Association="WaterNutDBModel.FK_ASYCUDA_Container" />
@@ -81,7 +76,6 @@
         <AssociationConnector Association="WaterNutDBModel.FK_ASYCUDA_Transport" />
         <AssociationConnector Association="WaterNutDBModel.FK_ASYCUDA_Valuation" />
         <AssociationConnector Association="WaterNutDBModel.FK_ASYCUDA_Warehouse" />
-        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" />
         <AssociationConnector Association="WaterNutDBModel.FK_xcuda_Traders_xcuda_ASYCUDA" />
         <AssociationConnector Association="WaterNutDBModel.FK_Means_of_transport_Border_information" />
         <AssociationConnector Association="WaterNutDBModel.FK_Transport_Border_office" />
@@ -121,6 +115,12 @@
         <EntityTypeShape EntityType="WaterNutDBModel.AsycudaDocumentSetEntryData" Width="1.5" PointX="3.375" PointY="64.375" />
         <AssociationConnector Association="WaterNutDBModel.FK_AsycudaDocumentEntryData_xcuda_ASYCUDA" />
         <AssociationConnector Association="WaterNutDBModel.FK_AsycudaDocumentSetEntryData_AsycudaDocumentSet" />
+        <EntityTypeShape EntityType="WaterNutDBModel.xcuda_ASYCUDA_ExtendedProperties" Width="1.5" PointX="10.25" PointY="57.5" />
+        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_AsycudaDocumentSet" />
+        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Customs_Procedure" />
+        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_Document_Type" />
+        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ASYCUDA_ExtendedProperties_ExportTemplate" />
+        <AssociationConnector Association="WaterNutDBModel.FK_xcuda_ExtendedProperty_inherits_xcuda_ASYCUDA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

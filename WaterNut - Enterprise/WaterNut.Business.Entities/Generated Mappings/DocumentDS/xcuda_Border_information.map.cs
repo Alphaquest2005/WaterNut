@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Border_informationMap : EntityTypeConfiguration<xcuda_Border_information>
     {
@@ -17,7 +18,7 @@
               this.Property(t => t.Identity).HasColumnName("Identity").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Nationality).HasColumnName("Nationality").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Mode).HasColumnName("Mode");
-              this.HasOptional(t => t.xcuda_Means_of_transport).WithMany(t => t.xcuda_Border_information).HasForeignKey(d => d.Means_of_transport_Id);
+              this.HasOptional(t => t.xcuda_Means_of_transport).WithMany(t =>(ICollection<xcuda_Border_information>) t.xcuda_Border_information).HasForeignKey(d => d.Means_of_transport_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

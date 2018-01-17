@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class SalesMap : EntityTypeConfiguration<Sales>
     {
@@ -16,7 +17,7 @@
               this.Property(t => t.INVNumber).HasColumnName("INVNumber").IsRequired();
               this.Property(t => t.TaxAmount).HasColumnName("TaxAmount");
               this.Property(t => t.CustomerName).HasColumnName("CustomerName").IsUnicode(false);
-              this.HasMany(t => t.EntryDataDetails).WithRequired(t => t.Sales);
+              this.HasMany(t => t.EntryDataDetails).WithRequired(t => (Sales)t.Sales);
              // Nav Property Names
                   
     

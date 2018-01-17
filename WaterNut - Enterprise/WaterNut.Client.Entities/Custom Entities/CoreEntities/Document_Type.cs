@@ -2,7 +2,7 @@
 using System;
 
 using System.Collections.ObjectModel;
-using WaterNut.Client.Entities;
+
 using CoreEntities.Client.DTO;
 using TrackableEntities.Client;
 using Core.Common.Validation;

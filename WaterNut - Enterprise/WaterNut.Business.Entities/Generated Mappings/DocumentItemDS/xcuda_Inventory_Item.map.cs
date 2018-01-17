@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Inventory_ItemMap : EntityTypeConfiguration<xcuda_Inventory_Item>
     {
@@ -14,7 +15,7 @@
               this.ToTable("xcuda_Inventory_Item");
               this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_HScode).WithMany(t => t.xcuda_Inventory_Item).HasForeignKey(d => d.Id);
+              this.HasRequired(t => t.xcuda_HScode).WithMany(t =>(ICollection<xcuda_Inventory_Item>) t.xcuda_Inventory_Item).HasForeignKey(d => d.Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

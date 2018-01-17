@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class EntryDataDetailsMap : EntityTypeConfiguration<EntryDataDetails>
     {
@@ -26,9 +27,9 @@
               this.Property(t => t.Freight).HasColumnName("Freight");
               this.Property(t => t.Weight).HasColumnName("Weight");
               this.Property(t => t.InternalFreight).HasColumnName("InternalFreight");
-              this.HasRequired(t => t.EntryData).WithMany(t => t.EntryDataDetails).HasForeignKey(d => d.EntryDataId);
-              this.HasRequired(t => t.InventoryItems).WithMany(t => t.EntryDataDetails).HasForeignKey(d => d.ItemNumber);
-              this.HasOptional(t => t.EntryDataDetailsEx).WithRequired(t => t.EntryDataDetails);
+              this.HasRequired(t => t.EntryData).WithMany(t =>(ICollection<EntryDataDetails>) t.EntryDataDetails).HasForeignKey(d => d.EntryDataId);
+              this.HasRequired(t => t.InventoryItems).WithMany(t =>(ICollection<EntryDataDetails>) t.EntryDataDetails).HasForeignKey(d => d.ItemNumber);
+              this.HasOptional(t => t.EntryDataDetailsEx).WithRequired(t => (EntryDataDetails) t.EntryDataDetails);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

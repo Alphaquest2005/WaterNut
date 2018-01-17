@@ -14,16 +14,20 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading.Tasks;
 //using System.Transactions;
-using TrackableEntities;
-using TrackableEntities.Common;
+
+
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
 using SalesDataQS.Business.Entities;
 using Core.Common.Contracts;
 using Core.Common.Business.Services;
-using TrackableEntities.EF6;
+
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
+using WaterNut.Interfaces;
 
 namespace SalesDataQS.Business.Services
 {
@@ -73,7 +77,7 @@ namespace SalesDataQS.Business.Services
                     IEnumerable<AsycudaDocumentSetEntryDataDetails> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
@@ -135,7 +139,7 @@ namespace SalesDataQS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -143,7 +147,7 @@ namespace SalesDataQS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -176,7 +180,7 @@ namespace SalesDataQS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -184,7 +188,7 @@ namespace SalesDataQS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -231,7 +235,7 @@ namespace SalesDataQS.Business.Services
                             case "SalesDataDetail":
                                 return
                                     await
-                                        GetWhere<SalesDataDetail>(dbContext, exp, itm.Value, "AsycudaDocumentSets", "SelectMany", includesLst)
+                                        GetWhere<SalesDataDetail>(dbContext, exp, itm.Value, "AsycudaDocumentSetEntryDataDetails", "SelectMany", includesLst)
 										.ConfigureAwait(continueOnCapturedContext: false);
 
                         }
@@ -241,7 +245,7 @@ namespace SalesDataQS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
@@ -317,7 +321,7 @@ namespace SalesDataQS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
 
             }
@@ -391,7 +395,7 @@ namespace SalesDataQS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)
@@ -415,12 +419,13 @@ namespace SalesDataQS.Business.Services
               {
                 try
                 {   
-                    if(entity.TrackingState == TrackingState.Unchanged) entity.TrackingState = TrackingState.Modified;                              
+                     var res = (AsycudaDocumentSetEntryDataDetails) entity;
+                    if(res.TrackingState == TrackingState.Unchanged) res.TrackingState = TrackingState.Modified;                              
                     
-                    dbContext.ApplyChanges(entity);
+                    dbContext.ApplyChanges(res);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                    entity.AcceptChanges();
-                    return entity;      
+                    res.AcceptChanges();
+                    return res;      
 
                    // var entitychanges = entity.ChangeTracker.GetChanges();
                    // if (entitychanges != null && entitychanges.FirstOrDefault() != null)
@@ -494,12 +499,13 @@ namespace SalesDataQS.Business.Services
         {
             try
             {
-                using ( var dbContext = new SalesDataQSContext(){StartTracking = StartTracking})
+                var res = (AsycudaDocumentSetEntryDataDetails) entity;
+              using ( var dbContext = new SalesDataQSContext(){StartTracking = StartTracking})
               {
-                dbContext.AsycudaDocumentSetEntryDataDetails.Add(entity);
+                dbContext.AsycudaDocumentSetEntryDataDetails.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                entity.AcceptChanges();
-                return entity;
+                res.AcceptChanges();
+                return res;
               }
             }
             catch (Exception updateEx)
@@ -690,7 +696,7 @@ namespace SalesDataQS.Business.Services
                         switch (itm.Key)
                         {
                             case "SalesDataDetail":
-                                return await CountWhere<SalesDataDetail>(dbContext, exp, itm.Value, "AsycudaDocumentSets", "SelectMany")
+                                return await CountWhere<SalesDataDetail>(dbContext, exp, itm.Value, "AsycudaDocumentSetEntryDataDetails", "SelectMany")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }
@@ -800,7 +806,7 @@ namespace SalesDataQS.Business.Services
                             case "SalesDataDetail":
                                 return
                                     await
-                                        LoadRangeWhere<SalesDataDetail>(startIndex, count, dbContext, exp, itm.Value, "AsycudaDocumentSets", "SelectMany")
+                                        LoadRangeWhere<SalesDataDetail>(startIndex, count, dbContext, exp, itm.Value, "AsycudaDocumentSetEntryDataDetails", "SelectMany")
 													.ConfigureAwait(continueOnCapturedContext: false);
 
                           
@@ -1089,7 +1095,7 @@ namespace SalesDataQS.Business.Services
                         switch (itm.Key)
                         {
                             case "SalesDataDetail":
-                                return await SumWhere<SalesDataDetail>(dbContext, exp, itm.Value, "AsycudaDocumentSets", field, "SelectMany")
+                                return await SumWhere<SalesDataDetail>(dbContext, exp, itm.Value, "AsycudaDocumentSetEntryDataDetails", field, "SelectMany")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }

@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace OversShortQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class InventoryItem : BaseEntity<InventoryItem> , ITrackable
+    public partial class InventoryItem : BaseEntity<InventoryItem>, ITrackable 
     {
         partial void AutoGenStartUp() //InventoryItem()
         {
@@ -98,6 +99,21 @@ namespace OversShortQS.Business.Entities
             }
         }
         Nullable<System.DateTime> _entrytimestamp;
+        [DataMember]
+        public Nullable<int> Quantity 
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<int> _quantity;
         [DataMember]
         public List<OverShortDetailsEX> OverShortDetailsEXes { get; set; }
 

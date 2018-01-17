@@ -8,16 +8,18 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
+
+
+using Core.Common.Client.DTO;
 using TrackableEntities;
 using TrackableEntities.Client;
-using Core.Common.Client.DTO;
 
 namespace CoreEntities.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocumentSetEx : BaseEntity<AsycudaDocumentSetEx> , ITrackable, IEquatable<AsycudaDocumentSetEx>
+    public partial class AsycudaDocumentSetEx : BaseEntity<AsycudaDocumentSetEx>, ITrackable, IEquatable<AsycudaDocumentSetEx>
     {
         [DataMember]
         public int AsycudaDocumentSetId
@@ -227,6 +229,19 @@ namespace CoreEntities.Client.DTO
 		}
         private Nullable<double> _TotalGrossWeight;
 
+        [DataMember]
+        public Nullable<double> TotalFreight
+		{ 
+		    get { return _TotalFreight; }
+			set
+			{
+			    if (value == _TotalFreight) return;
+				_TotalFreight = value;
+				NotifyPropertyChanged();//m => this.TotalFreight
+			}
+		}
+        private Nullable<double> _TotalFreight;
+
        
         [DataMember]
         public ChangeTrackingCollection<AsycudaDocument> AsycudaDocuments
@@ -252,9 +267,6 @@ namespace CoreEntities.Client.DTO
 				NotifyPropertyChanged();//m => this.LicenceSummary
 			}
 		}
-
-       
-
         private ChangeTrackingCollection<LicenceSummary> _LicenceSummary = new ChangeTrackingCollection<LicenceSummary>();
 
    //     [DataMember]

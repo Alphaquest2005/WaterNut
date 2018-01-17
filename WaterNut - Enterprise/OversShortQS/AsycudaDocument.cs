@@ -44,6 +44,11 @@ namespace OverShortsQS
         public string Customs_clearance_office_code { get; set; }
         public Nullable<int> Lines { get; set; }
         public Nullable<bool> ImportComplete { get; set; }
+        public Nullable<bool> Cancelled { get; set; }
+        public Nullable<double> TotalCIF { get; set; }
+        public Nullable<double> TotalGrossWeight { get; set; }
+        public Nullable<System.DateTime> AssessmentDate { get; set; }
+        public Nullable<double> TotalFreight { get; set; }
     
         public virtual ICollection<AsycudaDocumentItem> AsycudaDocumentItems { get; set; }
     }

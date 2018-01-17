@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class SalesDataAllocationsMap : EntityTypeConfiguration<SalesDataAllocations>
     {
@@ -14,7 +15,7 @@
               this.ToTable("SalesDataAllocations");
               this.Property(t => t.AllocationId).HasColumnName("AllocationId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.EntryDataId).HasColumnName("EntryDataId").IsRequired().IsUnicode(false).HasMaxLength(50);
-              this.HasRequired(t => t.SalesData).WithMany(t => t.SalesDataAllocations).HasForeignKey(d => d.EntryDataId);
+              this.HasRequired(t => t.SalesData).WithMany(t =>(ICollection<SalesDataAllocations>) t.SalesDataAllocations).HasForeignKey(d => d.EntryDataId);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

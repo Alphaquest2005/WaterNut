@@ -49,7 +49,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using <#=projectName #>.Interfaces.Client;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using <#=container.Name#>.Client.DTO;
 
@@ -62,8 +62,8 @@ namespace <#=container.Name#>.Client.Entities
     //[DataContract(IsReference = true)]#>
     public partial class <#=entity.Name #>: <#=(entity.BaseType != null? entity.BaseType.Name :"BaseEntity<" + entity.Name +  ">")#>
     {
-        I<#= code.Escape(entity) #> <#=dto#>;
-        public <#= code.Escape(entity) #>(I<#= code.Escape(entity) #> dto )<#=(entity.BaseType == null? "" :" : base(dto)")#>
+        DTO.<#= code.Escape(entity) #> <#=dto#>;
+        public <#= code.Escape(entity) #>(DTO.<#= code.Escape(entity) #> dto )<#=(entity.BaseType == null? "" :" : base(dto)")#>
         {
  <#+ if(entity.BaseType != null)
             {
@@ -72,11 +72,11 @@ namespace <#=container.Name#>.Client.Entities
 <#+            }
  #>
              <#=dto#> = dto;
-             _changeTracker = new ChangeTrackingCollection<I<#=entity.Name #>>(<#=dto#>);
+             _changeTracker = new ChangeTrackingCollection<DTO.<#=entity.Name #>>(<#=dto#>);
 
         }
 
-        public I<#= code.Escape(entity) #> DTO
+        public DTO.<#= code.Escape(entity) #> DTO
         {
             get
             {
@@ -174,7 +174,7 @@ namespace <#=container.Name#>.Client.Entities
 			{
 			    if (Equals(value, _<#=code.Escape(navProperty) #>)) return;
 				if (value != null)
-					this.<#=dto#>.<#=code.Escape(navProperty) #> = new ChangeTrackingCollection<I<#= code.Escape(navProperty.ToEndMember.GetEntityType()) #>>(value.Select(x => x.DTO).ToList());
+					this.<#=dto#>.<#=code.Escape(navProperty) #> = new ChangeTrackingCollection<DTO.<#= code.Escape(navProperty.ToEndMember.GetEntityType()) #>>(value.Select(x => x.DTO).ToList());
                 _<#=code.Escape(navProperty) #> = value;
 				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_<#=code.Escape(navProperty) #> != null)
@@ -270,8 +270,8 @@ namespace <#=container.Name#>.Client.Entities
             }
 #>
 
-        ChangeTrackingCollection<I<#=entity.Name#>> _changeTracker;    
-        public ChangeTrackingCollection<I<#=entity.Name#>> ChangeTracker
+        ChangeTrackingCollection<DTO.<#=entity.Name#>> _changeTracker;    
+        public ChangeTrackingCollection<DTO.<#=entity.Name#>> ChangeTracker
         {
             get
             {

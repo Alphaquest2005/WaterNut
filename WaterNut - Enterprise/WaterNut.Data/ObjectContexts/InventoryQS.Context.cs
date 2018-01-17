@@ -12,7 +12,7 @@ using System.Data.Entity.Infrastructure;
 using InventoryQS.Business.Entities.Mapping;
 using WaterNut.Data;
 using System.Data.Entity.Core.Objects;
-using TrackableEntities;
+
 
 
 namespace InventoryQS.Business.Entities
@@ -57,6 +57,8 @@ namespace InventoryQS.Business.Entities
      
         public DbSet<EntryDataDetailsEx> EntryDataDetailsEx { get; set; }
      
+        public DbSet<TariffCategoryCodeSuppUnit> TariffCategoryCodeSuppUnit { get; set; }
+     
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -70,6 +72,8 @@ namespace InventoryQS.Business.Entities
             modelBuilder.Configurations.Add(new InventoryItemsExMap());
          
             modelBuilder.Configurations.Add(new EntryDataDetailsExMap());
+         
+            modelBuilder.Configurations.Add(new TariffCategoryCodeSuppUnitMap());
          
 			OnModelCreatingExtentsion(modelBuilder);
 

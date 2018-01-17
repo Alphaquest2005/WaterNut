@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace PreviousDocumentDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class EntryDataDetails : BaseEntity<EntryDataDetails> , ITrackable
+    public partial class EntryDataDetails : BaseEntity<EntryDataDetails>, ITrackable 
     {
         [DataMember]
         public int EntryDataDetailsId 
@@ -139,7 +140,7 @@ namespace PreviousDocumentDS.Business.Entities
         }
         float _cost;
         [DataMember]
-        public Nullable<double> QtyAllocated 
+        public double QtyAllocated 
         {
             get
             {
@@ -152,9 +153,9 @@ namespace PreviousDocumentDS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        Nullable<double> _qtyallocated;
+        double _qtyallocated;
         [DataMember]
-        public Nullable<float> UnitWeight 
+        public float UnitWeight 
         {
             get
             {
@@ -167,7 +168,7 @@ namespace PreviousDocumentDS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        Nullable<float> _unitweight;
+        float _unitweight;
         [DataMember]
         public Nullable<bool> DoNotAllocate 
         {
@@ -183,6 +184,51 @@ namespace PreviousDocumentDS.Business.Entities
             }
         }
         Nullable<bool> _donotallocate;
+        [DataMember]
+        public Nullable<double> Freight 
+        {
+            get
+            {
+                return _freight;
+            }
+            set
+            {
+                _freight = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _freight;
+        [DataMember]
+        public Nullable<double> Weight 
+        {
+            get
+            {
+                return _weight;
+            }
+            set
+            {
+                _weight = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _weight;
+        [DataMember]
+        public Nullable<double> InternalFreight 
+        {
+            get
+            {
+                return _internalfreight;
+            }
+            set
+            {
+                _internalfreight = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _internalfreight;
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

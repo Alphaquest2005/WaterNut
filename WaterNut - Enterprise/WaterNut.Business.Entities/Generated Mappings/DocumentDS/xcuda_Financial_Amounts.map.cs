@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Financial_AmountsMap : EntityTypeConfiguration<xcuda_Financial_Amounts>
     {
@@ -17,7 +18,7 @@
               this.Property(t => t.Total_manual_taxes).HasColumnName("Total_manual_taxes");
               this.Property(t => t.Global_taxes).HasColumnName("Global_taxes");
               this.Property(t => t.Totals_taxes).HasColumnName("Totals_taxes");
-              this.HasRequired(t => t.xcuda_Financial).WithMany(t => t.xcuda_Financial_Amounts).HasForeignKey(d => d.Financial_Id);
+              this.HasRequired(t => t.xcuda_Financial).WithMany(t =>(ICollection<xcuda_Financial_Amounts>) t.xcuda_Financial_Amounts).HasForeignKey(d => d.Financial_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

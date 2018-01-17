@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class PreviousItemsExMap : EntityTypeConfiguration<PreviousItemsEx>
     {
@@ -32,11 +33,12 @@
               this.Property(t => t.PreviousItem_Id).HasColumnName("PreviousItem_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id");
               this.Property(t => t.QtyAllocated).HasColumnName("QtyAllocated");
-              this.Property(t => t.Item_Id).HasColumnName("Item_Id");
               this.Property(t => t.RndCurrent_Value).HasColumnName("RndCurrent_Value");
               this.Property(t => t.CNumber).HasColumnName("CNumber").IsUnicode(false);
-              this.Property(t => t.RegistrationDate).HasColumnName("RegistrationDate").IsUnicode(false);
-              this.HasRequired(t => t.xcuda_PreviousItem).WithOptional(t => t.Ex);
+              this.Property(t => t.RegistrationDate).HasColumnName("RegistrationDate");
+              this.Property(t => t.PreviousDocumentItemId).HasColumnName("PreviousDocumentItemId");
+              this.Property(t => t.AsycudaDocumentItemId).HasColumnName("AsycudaDocumentItemId");
+              this.HasRequired(t => t.xcuda_PreviousItem).WithOptional(t => (PreviousItemsEx)t.Ex);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

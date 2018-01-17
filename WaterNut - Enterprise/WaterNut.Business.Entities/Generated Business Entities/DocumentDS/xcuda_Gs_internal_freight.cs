@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace DocumentDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class xcuda_Gs_internal_freight : BaseEntity<xcuda_Gs_internal_freight> , ITrackable
+    public partial class xcuda_Gs_internal_freight : BaseEntity<xcuda_Gs_internal_freight>, ITrackable 
     {
         [DataMember]
         public double Amount_national_currency 

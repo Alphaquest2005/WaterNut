@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Transit_DestinationMap : EntityTypeConfiguration<xcuda_Transit_Destination>
     {
@@ -16,7 +17,7 @@
               this.Property(t => t.Office).HasColumnName("Office").IsUnicode(false);
               this.Property(t => t.Country).HasColumnName("Country").IsUnicode(false);
               this.Property(t => t.Transit_Id).HasColumnName("Transit_Id");
-              this.HasRequired(t => t.xcuda_Transit).WithMany(t => t.xcuda_Transit_Destination).HasForeignKey(d => d.Transit_Id);
+              this.HasRequired(t => t.xcuda_Transit).WithMany(t =>(ICollection<xcuda_Transit_Destination>) t.xcuda_Transit_Destination).HasForeignKey(d => d.Transit_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace InventoryQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class InventoryItemsEx : BaseEntity<InventoryItemsEx> , ITrackable
+    public partial class InventoryItemsEx : BaseEntity<InventoryItemsEx>, ITrackable 
     {
         partial void AutoGenStartUp() //InventoryItemsEx()
         {

@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 using <#=container.Name#>.Client.DTO;
 using <#=container.Name#>.Client.Contracts;
 using Core.Common.Client.Services;
-using <#=projectName #>.Interfaces.Client;
+
 
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
@@ -42,50 +42,50 @@ namespace <#=container.Name#>.Client.Services
     public partial class <#=entity.Name#>Client :  ClientService<I<#=entity.Name#>Service>, I<#=entity.Name#>Service, IDisposable
     {
         
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>(List<string> includesLst = null)
+        public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>(List<string> includesLst = null)
         {
             return await Channel.Get<#=entitySet #>(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<<#="I" + entity.Name#>> Get<#=entity.Name#>ByKey(string id, List<string> includesLst = null)
+        public async Task<<#=entity.Name#>> Get<#=entity.Name#>ByKey(string id, List<string> includesLst = null)
         {
             return await Channel.Get<#= entity.Name#>ByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.Get<#=entitySet #>ByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.Get<#=entitySet #>ByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
+		public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.Get<#=entitySet #>ByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
 		}
 
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
+        public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatch(string exp,
                                                                         int totalrow, List<string> includesLst = null)
         {
             return await Channel.Get<#=entitySet #>ByBatch(exp, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> expLst,
+        public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entitySet #>ByBatchExpressionLst(List<string> expLst,
                                                                         int totalrow, List<string> includesLst = null)
         {
             return await Channel.Get<#=entitySet #>ByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<<#="I" + entity.Name#>> Update<#=entity.Name#>(<#="I" + entity.Name#> entity)
+        public async Task<<#=entity.Name#>> Update<#=entity.Name#>(<#=entity.Name#> entity)
         {
            return await Channel.Update<#=entity.Name#>(entity).ConfigureAwait(false);
         }
 
-        public async Task<<#="I" + entity.Name#>> Create<#=entity.Name#>(<#="I" + entity.Name#> entity)
+        public async Task<<#=entity.Name#>> Create<#=entity.Name#>(<#=entity.Name#> entity)
         {
            return await Channel.Create<#=entity.Name#>(entity).ConfigureAwait(false);
         }
@@ -112,12 +112,12 @@ namespace <#=container.Name#>.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<<#="I" + entity.Name#>>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<<#=entity.Name#>>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<<#="I" + entity.Name#>>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<<#=entity.Name#>>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -130,7 +130,7 @@ namespace <#=container.Name#>.Client.Services
 		foreach (var p in ens)
         {
  #>
-		public async Task<IEnumerable<<#="I" + entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null)
+		public async Task<IEnumerable<<#=entity.Name#>>> Get<#=entity.Name#>By<#= p.Name #>(string <#= p.Name #>, List<string> includesLst = null)
         {
             return  await Channel.Get<#=entity.Name#>By<#= p.Name #>(<#= p.Name #>, includesLst).ConfigureAwait(false);
         }

@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using CounterPointQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace CounterPointQS.Client.Entities
@@ -53,7 +53,7 @@ public string INVNO
 			{
 			    if (value == this.counterpointsalesdetails.INVNO) return;
 				this.counterpointsalesdetails.INVNO = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("INVNO");
 			}
 		}
@@ -68,7 +68,7 @@ public Nullable<int> SEQ_NO
 			{
 			    if (value == this.counterpointsalesdetails.SEQ_NO) return;
 				this.counterpointsalesdetails.SEQ_NO = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("SEQ_NO");
 			}
 		}
@@ -85,7 +85,7 @@ public string ITEM_NO
 			{
 			    if (value == this.counterpointsalesdetails.ITEM_NO) return;
 				this.counterpointsalesdetails.ITEM_NO = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ITEM_NO");
 			}
 		}
@@ -102,7 +102,7 @@ public string ITEM_DESCR
 			{
 			    if (value == this.counterpointsalesdetails.ITEM_DESCR) return;
 				this.counterpointsalesdetails.ITEM_DESCR = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ITEM_DESCR");
 			}
 		}
@@ -117,7 +117,7 @@ public Nullable<decimal> QUANTITY
 			{
 			    if (value == this.counterpointsalesdetails.QUANTITY) return;
 				this.counterpointsalesdetails.QUANTITY = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("QUANTITY");
 			}
 		}
@@ -132,7 +132,7 @@ public Nullable<decimal> COST
 			{
 			    if (value == this.counterpointsalesdetails.COST) return;
 				this.counterpointsalesdetails.COST = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("COST");
 			}
 		}
@@ -149,7 +149,7 @@ public string ACCT_NO
 			{
 			    if (value == this.counterpointsalesdetails.ACCT_NO) return;
 				this.counterpointsalesdetails.ACCT_NO = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("ACCT_NO");
 			}
 		}
@@ -166,7 +166,7 @@ public string CUSTOMER_NAME
 			{
 			    if (value == this.counterpointsalesdetails.CUSTOMER_NAME) return;
 				this.counterpointsalesdetails.CUSTOMER_NAME = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("CUSTOMER_NAME");
 			}
 		}
@@ -181,7 +181,7 @@ public Nullable<System.DateTime> DATE
 			{
 			    if (value == this.counterpointsalesdetails.DATE) return;
 				this.counterpointsalesdetails.DATE = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("DATE");
 			}
 		}
@@ -196,7 +196,7 @@ public decimal TAX_AMT
 			{
 			    if (value == this.counterpointsalesdetails.TAX_AMT) return;
 				this.counterpointsalesdetails.TAX_AMT = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TAX_AMT");
 			}
 		}
@@ -211,7 +211,7 @@ public Nullable<decimal> UNIT_WEIGHT
 			{
 			    if (value == this.counterpointsalesdetails.UNIT_WEIGHT) return;
 				this.counterpointsalesdetails.UNIT_WEIGHT = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("UNIT_WEIGHT");
 			}
 		}
@@ -228,7 +228,7 @@ public string QTY_UNIT
 			{
 			    if (value == this.counterpointsalesdetails.QTY_UNIT) return;
 				this.counterpointsalesdetails.QTY_UNIT = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("QTY_UNIT");
 			}
 		}
@@ -248,11 +248,11 @@ public string QTY_UNIT
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

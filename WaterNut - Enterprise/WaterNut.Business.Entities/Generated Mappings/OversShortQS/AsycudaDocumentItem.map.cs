@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class AsycudaDocumentItemMap : EntityTypeConfiguration<AsycudaDocumentItem>
     {
@@ -40,8 +41,19 @@
               this.Property(t => t.DFQtyAllocated).HasColumnName("DFQtyAllocated");
               this.Property(t => t.PiQuantity).HasColumnName("PiQuantity");
               this.Property(t => t.ImportComplete).HasColumnName("ImportComplete");
-              this.HasRequired(t => t.AsycudaDocument).WithMany(t => t.AsycudaDocumentItems).HasForeignKey(d => d.AsycudaDocumentId);
-              this.HasMany(t => t.OverShortAllocationsEXes).WithRequired(t => t.AsycudaDocumentItem);
+              this.Property(t => t.CNumber).HasColumnName("CNumber").IsUnicode(false);
+              this.Property(t => t.RegistrationDate).HasColumnName("RegistrationDate");
+              this.Property(t => t.Number_of_packages).HasColumnName("Number_of_packages");
+              this.Property(t => t.Country_of_origin_code).HasColumnName("Country_of_origin_code").IsUnicode(false);
+              this.Property(t => t.PiWeight).HasColumnName("PiWeight");
+              this.Property(t => t.Currency_rate).HasColumnName("Currency_rate");
+              this.Property(t => t.Currency_code).HasColumnName("Currency_code").IsUnicode(false);
+              this.Property(t => t.InvalidHSCode).HasColumnName("InvalidHSCode");
+              this.Property(t => t.WarehouseError).HasColumnName("WarehouseError").IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.Cancelled).HasColumnName("Cancelled");
+              this.Property(t => t.SalesFactor).HasColumnName("SalesFactor");
+              this.HasOptional(t => t.AsycudaDocument).WithMany(t =>(ICollection<AsycudaDocumentItem>) t.AsycudaDocumentItems).HasForeignKey(d => d.AsycudaDocumentId);
+              this.HasMany(t => t.OverShortAllocationsEXes).WithOptional(t => t.AsycudaDocumentItem).HasForeignKey(d => d.Item_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

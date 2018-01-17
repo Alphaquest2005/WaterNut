@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_ASYCUDA_ExtendedPropertiesMap : EntityTypeConfiguration<xcuda_ASYCUDA_ExtendedProperties>
     {
@@ -26,20 +27,20 @@
               this.Property(t => t.BLNumber).HasColumnName("BLNumber").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.AutoUpdate).HasColumnName("AutoUpdate");
               this.Property(t => t.EffectiveRegistrationDate).HasColumnName("EffectiveRegistrationDate");
+              this.Property(t => t.ApportionMethod).HasColumnName("ApportionMethod");
               this.Property(t => t.DoNotAllocate).HasColumnName("DoNotAllocate");
               this.Property(t => t.ImportComplete).HasColumnName("ImportComplete");
               this.Property(t => t.DocumentLines).HasColumnName("DocumentLines");
               this.Property(t => t.Cancelled).HasColumnName("Cancelled");
-              this.Property(t => t.ApportionMethod).HasColumnName("ApportionMethod");
               this.Property(t => t.TotalWeight).HasColumnName("TotalWeight");
               this.Property(t => t.TotalFreight).HasColumnName("TotalFreight");
               this.Property(t => t.TotalInternalFreight).HasColumnName("TotalInternalFreight");
               this.Property(t => t.TotalPackages).HasColumnName("TotalPackages");
-              this.HasOptional(t => t.AsycudaDocumentSet).WithMany(t => t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.AsycudaDocumentSetId);
-              this.HasOptional(t => t.Customs_Procedure).WithMany(t => t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.Customs_ProcedureId);
-              this.HasOptional(t => t.Document_Type).WithMany(t => t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.Document_TypeId);
-              this.HasOptional(t => t.ExportTemplate).WithMany(t => t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.ExportTemplateId);
-              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => t.xcuda_ASYCUDA_ExtendedProperties);
+              this.HasOptional(t => t.AsycudaDocumentSet).WithMany(t =>(ICollection<xcuda_ASYCUDA_ExtendedProperties>) t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.AsycudaDocumentSetId);
+              this.HasOptional(t => t.Customs_Procedure).WithMany(t =>(ICollection<xcuda_ASYCUDA_ExtendedProperties>) t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.Customs_ProcedureId);
+              this.HasOptional(t => t.Document_Type).WithMany(t =>(ICollection<xcuda_ASYCUDA_ExtendedProperties>) t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.Document_TypeId);
+              this.HasOptional(t => t.ExportTemplate).WithMany(t =>(ICollection<xcuda_ASYCUDA_ExtendedProperties>) t.xcuda_ASYCUDA_ExtendedProperties).HasForeignKey(d => d.ExportTemplateId);
+              this.HasRequired(t => t.xcuda_ASYCUDA).WithOptional(t => (xcuda_ASYCUDA_ExtendedProperties)t.xcuda_ASYCUDA_ExtendedProperties);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using WaterNut.Interfaces;
-using WaterNut.Client.Entities;
+
 using AllocationQS.Client.DTO;
 using TrackableEntities.Client;
 using Core.Common.Validation;

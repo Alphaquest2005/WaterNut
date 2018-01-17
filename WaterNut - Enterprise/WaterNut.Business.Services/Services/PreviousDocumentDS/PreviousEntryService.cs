@@ -14,16 +14,20 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading.Tasks;
 //using System.Transactions;
-using TrackableEntities;
-using TrackableEntities.Common;
+
+
 using System.Linq.Dynamic;
 using System.ComponentModel.Composition;
 using PreviousDocumentDS.Business.Entities;
 using Core.Common.Contracts;
 using Core.Common.Business.Services;
-using TrackableEntities.EF6;
+
 using System.Data.Entity;
 using System.Linq;
+using TrackableEntities;
+using TrackableEntities.Common;
+using TrackableEntities.EF6;
+using WaterNut.Interfaces;
 
 namespace PreviousDocumentDS.Business.Services
 {
@@ -73,7 +77,7 @@ namespace PreviousDocumentDS.Business.Services
                     IEnumerable<PreviousEntry> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
@@ -135,7 +139,7 @@ namespace PreviousDocumentDS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -143,7 +147,7 @@ namespace PreviousDocumentDS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -176,7 +180,7 @@ namespace PreviousDocumentDS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -184,7 +188,7 @@ namespace PreviousDocumentDS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -246,10 +250,10 @@ namespace PreviousDocumentDS.Business.Services
                                         GetWhere<xcuda_PreviousItem>(dbContext, exp, itm.Value, "PreviousEntry", "SelectMany", includesLst)
 										.ConfigureAwait(continueOnCapturedContext: false);
 
-                            case "xcuda_PreviousItem1":
+                            case "EntryPreviousItems":
                                 return
                                     await
-                                        GetWhere<xcuda_PreviousItem>(dbContext, exp, itm.Value, "PreviousEntry", "Select", includesLst)
+                                        GetWhere<EntryPreviousItems>(dbContext, exp, itm.Value, "xcuda_Item", "Select", includesLst)
 										.ConfigureAwait(continueOnCapturedContext: false);
 
                         }
@@ -259,7 +263,7 @@ namespace PreviousDocumentDS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
@@ -335,7 +339,7 @@ namespace PreviousDocumentDS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
 
             }
@@ -409,7 +413,7 @@ namespace PreviousDocumentDS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel(new ParallelLinqOptions() {MaxDegreeOfParallelism = Environment.ProcessorCount}).ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)
@@ -433,12 +437,13 @@ namespace PreviousDocumentDS.Business.Services
               {
                 try
                 {   
-                    if(entity.TrackingState == TrackingState.Unchanged) entity.TrackingState = TrackingState.Modified;                              
+                     var res = (PreviousEntry) entity;
+                    if(res.TrackingState == TrackingState.Unchanged) res.TrackingState = TrackingState.Modified;                              
                     
-                    dbContext.ApplyChanges(entity);
+                    dbContext.ApplyChanges(res);
                     await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                    entity.AcceptChanges();
-                    return entity;      
+                    res.AcceptChanges();
+                    return res;      
 
                    // var entitychanges = entity.ChangeTracker.GetChanges();
                    // if (entitychanges != null && entitychanges.FirstOrDefault() != null)
@@ -512,12 +517,13 @@ namespace PreviousDocumentDS.Business.Services
         {
             try
             {
-                using ( var dbContext = new PreviousDocumentDSContext(){StartTracking = StartTracking})
+                var res = (PreviousEntry) entity;
+              using ( var dbContext = new PreviousDocumentDSContext(){StartTracking = StartTracking})
               {
-                dbContext.PreviousEntries.Add(entity);
+                dbContext.PreviousEntries.Add(res);
                 await dbContext.SaveChangesAsync().ConfigureAwait(continueOnCapturedContext: false);
-                entity.AcceptChanges();
-                return entity;
+                res.AcceptChanges();
+                return res;
               }
             }
             catch (Exception updateEx)
@@ -716,8 +722,8 @@ namespace PreviousDocumentDS.Business.Services
                             case "xcuda_PreviousItem":
                                 return await CountWhere<xcuda_PreviousItem>(dbContext, exp, itm.Value, "PreviousEntry", "SelectMany")
 											.ConfigureAwait(continueOnCapturedContext: false);
-                            case "xcuda_PreviousItem1":
-                                return await CountWhere<xcuda_PreviousItem>(dbContext, exp, itm.Value, "PreviousEntry", "Select")
+                            case "EntryPreviousItems":
+                                return await CountWhere<EntryPreviousItems>(dbContext, exp, itm.Value, "xcuda_Item", "Select")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }
@@ -842,10 +848,10 @@ namespace PreviousDocumentDS.Business.Services
                                         LoadRangeWhere<xcuda_PreviousItem>(startIndex, count, dbContext, exp, itm.Value, "PreviousEntry", "SelectMany")
 													.ConfigureAwait(continueOnCapturedContext: false);
 
-                            case "xcuda_PreviousItem1":
+                            case "EntryPreviousItems":
                                 return
                                     await
-                                        LoadRangeWhere<xcuda_PreviousItem>(startIndex, count, dbContext, exp, itm.Value, "PreviousEntry", "Select")
+                                        LoadRangeWhere<EntryPreviousItems>(startIndex, count, dbContext, exp, itm.Value, "xcuda_Item", "Select")
 													.ConfigureAwait(continueOnCapturedContext: false);
 
                           
@@ -1061,7 +1067,7 @@ namespace PreviousDocumentDS.Business.Services
                 var i = Convert.ToInt32(ASYCUDA_Id);
                 var set = AddIncludes(includesLst, dbContext);
                 IEnumerable<PreviousEntry> entities = await set//dbContext.PreviousEntries
-                                                    // .Include(x => x.xcuda_PreviousItem1)									  
+                                                    // .Include(x => x.EntryPreviousItems)									  
                                       .AsNoTracking()
                                         .Where(x => x.ASYCUDA_Id.ToString() == ASYCUDA_Id.ToString())
 										.ToListAsync()
@@ -1091,7 +1097,7 @@ namespace PreviousDocumentDS.Business.Services
                 var i = Convert.ToInt32(EntryDataDetailsId);
                 var set = AddIncludes(includesLst, dbContext);
                 IEnumerable<PreviousEntry> entities = await set//dbContext.PreviousEntries
-                                                    // .Include(x => x.xcuda_PreviousItem1)									  
+                                                    // .Include(x => x.EntryPreviousItems)									  
                                       .AsNoTracking()
                                         .Where(x => x.EntryDataDetailsId.ToString() == EntryDataDetailsId.ToString())
 										.ToListAsync()
@@ -1173,8 +1179,8 @@ namespace PreviousDocumentDS.Business.Services
                             case "xcuda_PreviousItem":
                                 return await SumWhere<xcuda_PreviousItem>(dbContext, exp, itm.Value, "PreviousEntry", field, "SelectMany")
 											.ConfigureAwait(continueOnCapturedContext: false);
-                            case "xcuda_PreviousItem1":
-                                return await SumWhere<xcuda_PreviousItem>(dbContext, exp, itm.Value, "PreviousEntry", field, "Select")
+                            case "EntryPreviousItems":
+                                return await SumWhere<EntryPreviousItems>(dbContext, exp, itm.Value, "xcuda_Item", field, "Select")
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }

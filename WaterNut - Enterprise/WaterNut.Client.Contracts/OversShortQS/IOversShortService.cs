@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using OversShortQS.Client.DTO;
 
+
 namespace OversShortQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace OversShortQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<OversShort> UpdateOversShort(DTO.OversShort entity);
+        Task<OversShort> UpdateOversShort(OversShort entity);
 
         [OperationContract]
-        Task<OversShort> CreateOversShort(DTO.OversShort entity);
+        Task<OversShort> CreateOversShort(OversShort entity);
 
         [OperationContract]
         Task<bool> DeleteOversShort(string id);

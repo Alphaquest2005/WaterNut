@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_PackagesMap : EntityTypeConfiguration<xcuda_Packages>
     {
@@ -19,7 +20,7 @@
               this.Property(t => t.Item_Id).HasColumnName("Item_Id");
               this.Property(t => t.Marks1_of_packages).HasColumnName("Marks1_of_packages");
               this.Property(t => t.Marks2_of_packages).HasColumnName("Marks2_of_packages");
-              this.HasOptional(t => t.xcuda_Item).WithMany(t => t.xcuda_Packages).HasForeignKey(d => d.Item_Id);
+              this.HasOptional(t => t.xcuda_Item).WithMany(t =>(ICollection<xcuda_Packages>) t.xcuda_Packages).HasForeignKey(d => d.Item_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -19,8 +19,9 @@ public class EntityConstructorTPL : CSharpTemplate
 #>
 
 using <#=conTextName#>.Client.DTO;
+using TrackableEntities.Client;
 
-using <#=projectName #>.Interfaces.Client;
+
 
 namespace <#=conTextName#>.Client.Entities
 {
@@ -30,7 +31,7 @@ namespace <#=conTextName#>.Client.Entities
        public <#=mainEntity.Name#>()
         {
             this.DTO = new DTO.<#=mainEntity.Name#>();//{TrackingState = TrackableEntities.TrackingState.Added}
-            _changeTracker = new ChangeTrackingCollection<I<#=mainEntity.Name#>>(this.DTO);
+            _changeTracker = new ChangeTrackingCollection<DTO.<#=mainEntity.Name#>>(this.DTO);
 
             CustomClassStartUp();
             MyNavPropStartUp();

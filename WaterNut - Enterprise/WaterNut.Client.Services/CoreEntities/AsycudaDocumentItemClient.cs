@@ -13,6 +13,7 @@ using CoreEntities.Client.DTO;
 using CoreEntities.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace CoreEntities.Client.Services
     public partial class AsycudaDocumentItemClient :  ClientService<IAsycudaDocumentItemService>, IAsycudaDocumentItemService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.AsycudaDocumentItem>> GetAsycudaDocumentItems(List<string> includesLst = null)
+        public async Task<IEnumerable<AsycudaDocumentItem>> GetAsycudaDocumentItems(List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentItems(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaDocumentItem> GetAsycudaDocumentItemByKey(string id, List<string> includesLst = null)
+        public async Task<AsycudaDocumentItem> GetAsycudaDocumentItemByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentItemByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentItem>> GetAsycudaDocumentItemsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaDocumentItem>> GetAsycudaDocumentItemsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentItemsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentItem>> GetAsycudaDocumentItemsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaDocumentItem>> GetAsycudaDocumentItemsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetAsycudaDocumentItemsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentItem>> GetAsycudaDocumentItemsByExpressionNav(string exp,
+		public async Task<IEnumerable<AsycudaDocumentItem>> GetAsycudaDocumentItemsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetAsycudaDocumentItemsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace CoreEntities.Client.Services
             return await Channel.GetAsycudaDocumentItemsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaDocumentItem> UpdateAsycudaDocumentItem(DTO.AsycudaDocumentItem entity)
+        public async Task<AsycudaDocumentItem> UpdateAsycudaDocumentItem(AsycudaDocumentItem entity)
         {
            return await Channel.UpdateAsycudaDocumentItem(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.AsycudaDocumentItem> CreateAsycudaDocumentItem(DTO.AsycudaDocumentItem entity)
+        public async Task<AsycudaDocumentItem> CreateAsycudaDocumentItem(AsycudaDocumentItem entity)
         {
            return await Channel.CreateAsycudaDocumentItem(entity).ConfigureAwait(false);
         }
@@ -96,22 +97,22 @@ namespace CoreEntities.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.AsycudaDocumentItem>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<AsycudaDocumentItem>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.AsycudaDocumentItem>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<AsycudaDocumentItem>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.AsycudaDocumentItem>> GetAsycudaDocumentItemByAsycudaDocumentId(string AsycudaDocumentId, List<string> includesLst = null)
+		public async Task<IEnumerable<AsycudaDocumentItem>> GetAsycudaDocumentItemByAsycudaDocumentId(string AsycudaDocumentId, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaDocumentItemByAsycudaDocumentId(AsycudaDocumentId, includesLst).ConfigureAwait(false);
         }
 			 
-  		public async Task<IEnumerable<DTO.AsycudaDocumentItem>> GetAsycudaDocumentItemByEntryDataDetailsId(string EntryDataDetailsId, List<string> includesLst = null)
+  		public async Task<IEnumerable<AsycudaDocumentItem>> GetAsycudaDocumentItemByEntryDataDetailsId(string EntryDataDetailsId, List<string> includesLst = null)
         {
             return  await Channel.GetAsycudaDocumentItemByEntryDataDetailsId(EntryDataDetailsId, includesLst).ConfigureAwait(false);
         }
@@ -123,7 +124,7 @@ namespace CoreEntities.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

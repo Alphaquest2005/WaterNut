@@ -15,7 +15,8 @@
         <AssociationConnector Association="WaterNutDBModel.FK_Item_Valuation_item" />
         <AssociationConnector Association="WaterNutDBModel.FK_xcuda_PreviousItem_xcuda_Item" />
         <EntityTypeShape EntityType="WaterNutDBModel.EntryDataDetails" Width="1.5" PointX="6.8910939762792989" PointY="16.152512125741929" />
-        <AssociationConnector Association="WaterNutDBModel.EntryPreviousItems" />
+        <EntityTypeShape EntityType="WaterNutDBModel.EntryPreviousItems" Width="1.5" PointX="3" PointY="14.625" />
+        <AssociationConnector Association="WaterNutDBModel.FK_EntryPreviousItems_xcuda_Item" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

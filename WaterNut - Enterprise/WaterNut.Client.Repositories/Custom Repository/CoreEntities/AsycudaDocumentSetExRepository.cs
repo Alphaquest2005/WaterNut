@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using Core.Common.Business.Services;
 using WaterNut.Client.Services;
-using WaterNut.Client.Repositories;
+
 using CoreEntities.Client.Services;
 using CoreEntities.Client.Entities;
 using CoreEntities.Client.DTO;

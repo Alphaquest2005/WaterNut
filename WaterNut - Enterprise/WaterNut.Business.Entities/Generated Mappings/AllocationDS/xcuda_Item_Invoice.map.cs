@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Item_InvoiceMap : EntityTypeConfiguration<xcuda_Item_Invoice>
     {
@@ -17,7 +18,7 @@
               this.Property(t => t.Currency_code).HasColumnName("Currency_code").IsUnicode(false);
               this.Property(t => t.Currency_rate).HasColumnName("Currency_rate");
               this.Property(t => t.Valuation_item_Id).HasColumnName("Valuation_item_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
-              this.HasRequired(t => t.xcuda_Valuation_item).WithOptional(t => t.xcuda_Item_Invoice);
+              this.HasRequired(t => t.xcuda_Valuation_item).WithOptional(t => (xcuda_Item_Invoice)t.xcuda_Item_Invoice);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

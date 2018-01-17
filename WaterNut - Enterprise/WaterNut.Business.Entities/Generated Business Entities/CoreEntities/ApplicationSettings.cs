@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace CoreEntities.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class ApplicationSettings : BaseEntity<ApplicationSettings> , ITrackable
+    public partial class ApplicationSettings : BaseEntity<ApplicationSettings>, ITrackable 
     {
         [DataMember]
         public int ApplicationSettingsId 
@@ -468,29 +469,28 @@ namespace CoreEntities.Business.Entities
             }
         }
         string _allowweightequalquantity;
-
         [DataMember]
-        public string DeclarantCode
+        public string DeclarantCode 
         {
             get
             {
-                return _declarantCode;
+                return _declarantcode;
             }
             set
             {
-                _declarantCode = value;
+                _declarantcode = value;
                 //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
                 NotifyPropertyChanged();
             }
         }
-        string _declarantCode;
+        string _declarantcode;
 
-        //       [DataMember]
-        //       public TrackingState TrackingState { get; set; }
-        //       [DataMember]
-        //       public ICollection<string> ModifiedProperties { get; set; }
-        //        [DataMember]//JsonProperty,
-        //       private Guid EntityIdentifier { get; set; }
+ //       [DataMember]
+ //       public TrackingState TrackingState { get; set; }
+ //       [DataMember]
+ //       public ICollection<string> ModifiedProperties { get; set; }
+//        [DataMember]//JsonProperty,
+ //       private Guid EntityIdentifier { get; set; }
     }
 }
 

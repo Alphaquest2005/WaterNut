@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class OverShortDetailMap : EntityTypeConfiguration<OverShortDetail>
     {
@@ -20,7 +21,7 @@
               this.Property(t => t.Cost).HasColumnName("Cost");
               this.Property(t => t.InvoiceQty).HasColumnName("InvoiceQty");
               this.Property(t => t.Status).HasColumnName("Status").IsUnicode(false);
-              this.HasMany(t => t.OverShortDetailAllocations).WithRequired(t => t.OverShortDetail);
+              this.HasMany(t => t.OverShortDetailAllocations).WithRequired(t => (OverShortDetail)t.OverShortDetail);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_TransportMap : EntityTypeConfiguration<xcuda_Transport>
     {
@@ -17,7 +18,7 @@
               this.Property(t => t.Transport_Id).HasColumnName("Transport_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
               this.Property(t => t.ASYCUDA_Id).HasColumnName("ASYCUDA_Id");
               this.Property(t => t.Location_of_goods).HasColumnName("Location_of_goods").IsUnicode(false).HasMaxLength(50);
-              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t => t.xcuda_Transport).HasForeignKey(d => d.ASYCUDA_Id);
+              this.HasOptional(t => t.xcuda_ASYCUDA).WithMany(t =>(ICollection<xcuda_Transport>) t.xcuda_Transport).HasForeignKey(d => d.ASYCUDA_Id);
               this.HasMany(t => t.xcuda_Border_office).WithOptional(t => t.xcuda_Transport).HasForeignKey(d => d.Transport_Id);
               this.HasMany(t => t.xcuda_Delivery_terms).WithOptional(t => t.xcuda_Transport).HasForeignKey(d => d.Transport_Id);
               this.HasMany(t => t.xcuda_Means_of_transport).WithOptional(t => t.xcuda_Transport).HasForeignKey(d => d.Transport_Id);

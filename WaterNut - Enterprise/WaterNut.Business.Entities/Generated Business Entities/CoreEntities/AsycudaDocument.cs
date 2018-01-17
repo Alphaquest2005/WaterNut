@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace CoreEntities.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaDocument : BaseEntity<AsycudaDocument> , ITrackable
+    public partial class AsycudaDocument : BaseEntity<AsycudaDocument>, ITrackable 
     {
         partial void AutoGenStartUp() //AsycudaDocument()
         {
@@ -443,6 +444,36 @@ namespace CoreEntities.Business.Entities
             }
         }
         Nullable<double> _totalgrossweight;
+        [DataMember]
+        public Nullable<System.DateTime> AssessmentDate 
+        {
+            get
+            {
+                return _assessmentdate;
+            }
+            set
+            {
+                _assessmentdate = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<System.DateTime> _assessmentdate;
+        [DataMember]
+        public Nullable<double> TotalFreight 
+        {
+            get
+            {
+                return _totalfreight;
+            }
+            set
+            {
+                _totalfreight = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _totalfreight;
         [DataMember]
         public List<AsycudaDocumentItem> AsycudaDocumentItems { get; set; }
         [DataMember]

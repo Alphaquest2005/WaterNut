@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class TariffCategoryMap : EntityTypeConfiguration<TariffCategory>
     {
@@ -16,8 +17,8 @@
               this.Property(t => t.Description).HasColumnName("Description").IsUnicode(false).HasMaxLength(999);
               this.Property(t => t.ParentTariffCategoryCode).HasColumnName("ParentTariffCategoryCode").IsUnicode(false).HasMaxLength(5);
               this.Property(t => t.LicenseRequired).HasColumnName("LicenseRequired");
-              this.HasMany(t => t.TariffSupUnitLkps).WithRequired(t => t.TariffCategory);
               this.HasMany(t => t.TariffCodes).WithOptional(t => t.TariffCategory).HasForeignKey(d => d.TariffCategoryCode);
+              this.HasMany(t => t.TariffCategoryCodeSuppUnit).WithRequired(t => (TariffCategory)t.TariffCategory);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

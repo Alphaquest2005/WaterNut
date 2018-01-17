@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace QuickBooksDS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class InventoryItems : BaseEntity<InventoryItems> , ITrackable
+    public partial class InventoryItems : BaseEntity<InventoryItems>, ITrackable 
     {
         [DataMember]
         public string ItemNumber 
@@ -93,6 +94,21 @@ namespace QuickBooksDS.Business.Entities
             }
         }
         Nullable<System.DateTime> _entrytimestamp;
+        [DataMember]
+        public Nullable<int> Quantity 
+        {
+            get
+            {
+                return _quantity;
+            }
+            set
+            {
+                _quantity = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<int> _quantity;
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

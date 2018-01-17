@@ -8,15 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 //using Newtonsoft.Json;
-using TrackableEntities;
-using Core.Common.Business.Entities;
 
+using Core.Common.Business.Entities;
+using WaterNut.Interfaces;
+using TrackableEntities;
 
 namespace AllocationQS.Business.Entities
 {
     //[JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/WaterNut")]
-    public partial class AsycudaSalesAllocationsEx : BaseEntity<AsycudaSalesAllocationsEx> , ITrackable
+    public partial class AsycudaSalesAllocationsEx : BaseEntity<AsycudaSalesAllocationsEx>, ITrackable 
     {
         [DataMember]
         public int AllocationId 
@@ -183,25 +184,6 @@ namespace AllocationQS.Business.Entities
             }
         }
         string _invoiceno;
-
-
-        [DataMember]
-        public string CustomerName
-        {
-            get
-            {
-                return _CustomerName;
-            }
-            set
-            {
-                _CustomerName = value;
-                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
-                NotifyPropertyChanged();
-            }
-        }
-        string _CustomerName;
-
-
         [DataMember]
         public string ItemNumber 
         {
@@ -533,7 +515,7 @@ namespace AllocationQS.Business.Entities
         }
         Nullable<bool> _donotallocatepreviousentry;
         [DataMember]
-        public int SANumber 
+        public Nullable<int> SANumber 
         {
             get
             {
@@ -546,7 +528,7 @@ namespace AllocationQS.Business.Entities
                 NotifyPropertyChanged();
             }
         }
-        int _sanumber;
+        Nullable<int> _sanumber;
         [DataMember]
         public string pReferenceNumber 
         {
@@ -622,6 +604,51 @@ namespace AllocationQS.Business.Entities
             }
         }
         Nullable<System.DateTime> _pexpirydate;
+        [DataMember]
+        public string CustomerName 
+        {
+            get
+            {
+                return _customername;
+            }
+            set
+            {
+                _customername = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _customername;
+        [DataMember]
+        public string pTariffCode 
+        {
+            get
+            {
+                return _ptariffcode;
+            }
+            set
+            {
+                _ptariffcode = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _ptariffcode;
+        [DataMember]
+        public string pItemNumber 
+        {
+            get
+            {
+                return _pitemnumber;
+            }
+            set
+            {
+                _pitemnumber = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _pitemnumber;
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

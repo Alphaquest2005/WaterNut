@@ -47,14 +47,15 @@ using System.Runtime.Serialization;
 
 
 using Core.Common.Client.DTO;
-using <#=projectName #>.Interfaces.Client;
+using TrackableEntities;
+using TrackableEntities.Client;
 
 namespace <#=container.Name#>.Client.DTO
 {
 
    // [JsonObject(IsReference = true)]
     [DataContract(IsReference = true, Namespace="http://www.insight-software.com/<#=projectName #>")]
-    public partial class <#=entity.Name #> : <#=entity.BaseType == null?"BaseEntity<" + entity.Name + ">, I" + entity.Name + ", ITrackable, IEquatable<" + entity.Name + ">":entity.BaseType.Name + ", I" + entity.Name  #>
+    public partial class <#=entity.Name #> : <#=entity.BaseType == null?"BaseEntity<" + entity.Name + ">, ITrackable, IEquatable<" + entity.Name + ">":entity.BaseType.Name + ", " + entity.Name  #>
     {
 <#+
             foreach (var property in entity.Properties)
@@ -100,7 +101,7 @@ typeUsage = typeUsage.Replace(
                 {
 #>
         [DataMember]
-        public ChangeTrackingCollection<I<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> <#=code.Escape(navProperty) #>
+        public ChangeTrackingCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> <#=code.Escape(navProperty) #>
 		{
 		    get { return _<#=code.Escape(navProperty) #>; }
 			set
@@ -110,7 +111,7 @@ typeUsage = typeUsage.Replace(
 				NotifyPropertyChanged();//m => this.<#=code.Escape(navProperty) #>
 			}
 		}
-        private ChangeTrackingCollection<I<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> _<#=code.Escape(navProperty) #> = new ChangeTrackingCollection<I<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>>();
+        private ChangeTrackingCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> _<#=code.Escape(navProperty) #> = new ChangeTrackingCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>>();
 
 <#+
                 }
@@ -118,7 +119,7 @@ typeUsage = typeUsage.Replace(
                 {
 #>
         [DataMember]
-        public I<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #> <#=code.Escape(navProperty) #>
+        public <#=code.Escape(navProperty.ToEndMember.GetEntityType()) #> <#=code.Escape(navProperty) #>
 		{
 		    get { return _<#=code.Escape(navProperty) #>; }
 			set
@@ -126,12 +127,12 @@ typeUsage = typeUsage.Replace(
 			    if (value == _<#=code.Escape(navProperty) #>) return;
 				_<#=code.Escape(navProperty) #> = value;
                 <#=code.Escape(navProperty) #>ChangeTracker = _<#=code.Escape(navProperty) #> == null ? null
-                    : new ChangeTrackingCollection<I<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> { _<#=code.Escape(navProperty) #> };
+                    : new ChangeTrackingCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> { _<#=code.Escape(navProperty) #> };
 				NotifyPropertyChanged();//m => this.<#=code.Escape(navProperty) #>
 			}
 		}
-        private I<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #> _<#=code.Escape(navProperty) #>;
-        private ChangeTrackingCollection<I<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> <#=code.Escape(navProperty) #>ChangeTracker { get; set; }
+        private <#=code.Escape(navProperty.ToEndMember.GetEntityType()) #> _<#=code.Escape(navProperty) #>;
+        private ChangeTrackingCollection<<#=code.Escape(navProperty.ToEndMember.GetEntityType()) #>> <#=code.Escape(navProperty) #>ChangeTracker { get; set; }
 
 <#+
                 }

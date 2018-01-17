@@ -13,6 +13,7 @@ using PreviousDocumentQS.Client.DTO;
 using PreviousDocumentQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace PreviousDocumentQS.Client.Services
     public partial class PreviousDocumentClient :  ClientService<IPreviousDocumentService>, IPreviousDocumentService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.PreviousDocument>> GetPreviousDocuments(List<string> includesLst = null)
+        public async Task<IEnumerable<PreviousDocument>> GetPreviousDocuments(List<string> includesLst = null)
         {
             return await Channel.GetPreviousDocuments(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.PreviousDocument> GetPreviousDocumentByKey(string id, List<string> includesLst = null)
+        public async Task<PreviousDocument> GetPreviousDocumentByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetPreviousDocumentByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PreviousDocument>> GetPreviousDocumentsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<PreviousDocument>> GetPreviousDocumentsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetPreviousDocumentsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PreviousDocument>> GetPreviousDocumentsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<PreviousDocument>> GetPreviousDocumentsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetPreviousDocumentsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PreviousDocument>> GetPreviousDocumentsByExpressionNav(string exp,
+		public async Task<IEnumerable<PreviousDocument>> GetPreviousDocumentsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetPreviousDocumentsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace PreviousDocumentQS.Client.Services
             return await Channel.GetPreviousDocumentsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.PreviousDocument> UpdatePreviousDocument(DTO.PreviousDocument entity)
+        public async Task<PreviousDocument> UpdatePreviousDocument(PreviousDocument entity)
         {
            return await Channel.UpdatePreviousDocument(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.PreviousDocument> CreatePreviousDocument(DTO.PreviousDocument entity)
+        public async Task<PreviousDocument> CreatePreviousDocument(PreviousDocument entity)
         {
            return await Channel.CreatePreviousDocument(entity).ConfigureAwait(false);
         }
@@ -96,17 +97,17 @@ namespace PreviousDocumentQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.PreviousDocument>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<PreviousDocument>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.PreviousDocument>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<PreviousDocument>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.PreviousDocument>> GetPreviousDocumentByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
+		public async Task<IEnumerable<PreviousDocument>> GetPreviousDocumentByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
         {
             return  await Channel.GetPreviousDocumentByAsycudaDocumentSetId(AsycudaDocumentSetId, includesLst).ConfigureAwait(false);
         }
@@ -118,7 +119,7 @@ namespace PreviousDocumentQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

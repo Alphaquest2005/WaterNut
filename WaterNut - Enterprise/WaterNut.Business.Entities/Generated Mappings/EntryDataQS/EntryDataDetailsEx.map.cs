@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class EntryDataDetailsExMap : EntityTypeConfiguration<EntryDataDetailsEx>
     {
@@ -30,9 +31,9 @@
               this.Property(t => t.DutyFreePaid).HasColumnName("DutyFreePaid").IsUnicode(false).HasMaxLength(9);
               this.Property(t => t.Total).HasColumnName("Total");
               this.Property(t => t.AsycudaDocumentSetId).HasColumnName("AsycudaDocumentSetId");
-              this.HasRequired(t => t.InventoryItemsEx).WithMany(t => t.EntryDataDetailsExs).HasForeignKey(d => d.ItemNumber);
-              this.HasRequired(t => t.EntryDataEx).WithMany(t => t.EntryDataDetailsExs).HasForeignKey(d => d.EntryDataId);
-              this.HasMany(t => t.AsycudaDocumentSets).WithRequired(t => t.EntryDataDetailsEx);
+              this.HasRequired(t => t.InventoryItemsEx).WithMany(t =>(ICollection<EntryDataDetailsEx>) t.EntryDataDetailsExs).HasForeignKey(d => d.ItemNumber);
+              this.HasRequired(t => t.EntryDataEx).WithMany(t =>(ICollection<EntryDataDetailsEx>) t.EntryDataDetailsExs).HasForeignKey(d => d.EntryDataId);
+              this.HasMany(t => t.AsycudaDocumentSets).WithRequired(t => (EntryDataDetailsEx)t.EntryDataDetailsEx);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

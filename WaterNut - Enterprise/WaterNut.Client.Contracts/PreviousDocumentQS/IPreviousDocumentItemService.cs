@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using PreviousDocumentQS.Client.DTO;
 
+
 namespace PreviousDocumentQS.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace PreviousDocumentQS.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<PreviousDocumentItem> UpdatePreviousDocumentItem(DTO.PreviousDocumentItem entity);
+        Task<PreviousDocumentItem> UpdatePreviousDocumentItem(PreviousDocumentItem entity);
 
         [OperationContract]
-        Task<PreviousDocumentItem> CreatePreviousDocumentItem(DTO.PreviousDocumentItem entity);
+        Task<PreviousDocumentItem> CreatePreviousDocumentItem(PreviousDocumentItem entity);
 
         [OperationContract]
         Task<bool> DeletePreviousDocumentItem(string id);

@@ -13,6 +13,7 @@ using OversShortQS.Client.DTO;
 using OversShortQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace OversShortQS.Client.Services
     public partial class InventoryItemClient :  ClientService<IInventoryItemService>, IInventoryItemService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.InventoryItem>> GetInventoryItems(List<string> includesLst = null)
+        public async Task<IEnumerable<InventoryItem>> GetInventoryItems(List<string> includesLst = null)
         {
             return await Channel.GetInventoryItems(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.InventoryItem> GetInventoryItemByKey(string id, List<string> includesLst = null)
+        public async Task<InventoryItem> GetInventoryItemByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetInventoryItemByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.InventoryItem>> GetInventoryItemsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<InventoryItem>> GetInventoryItemsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetInventoryItemsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.InventoryItem>> GetInventoryItemsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<InventoryItem>> GetInventoryItemsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetInventoryItemsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.InventoryItem>> GetInventoryItemsByExpressionNav(string exp,
+		public async Task<IEnumerable<InventoryItem>> GetInventoryItemsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetInventoryItemsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace OversShortQS.Client.Services
             return await Channel.GetInventoryItemsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.InventoryItem> UpdateInventoryItem(DTO.InventoryItem entity)
+        public async Task<InventoryItem> UpdateInventoryItem(InventoryItem entity)
         {
            return await Channel.UpdateInventoryItem(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.InventoryItem> CreateInventoryItem(DTO.InventoryItem entity)
+        public async Task<InventoryItem> CreateInventoryItem(InventoryItem entity)
         {
            return await Channel.CreateInventoryItem(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace OversShortQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.InventoryItem>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<InventoryItem>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.InventoryItem>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<InventoryItem>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace OversShortQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

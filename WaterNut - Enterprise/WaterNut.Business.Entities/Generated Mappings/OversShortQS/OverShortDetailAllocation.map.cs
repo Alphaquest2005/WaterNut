@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class OverShortDetailAllocationMap : EntityTypeConfiguration<OverShortDetailAllocation>
     {
@@ -17,8 +18,8 @@
               this.Property(t => t.QtyAllocated).HasColumnName("QtyAllocated");
               this.Property(t => t.Status).HasColumnName("Status").IsUnicode(false);
               this.Property(t => t.OverShortAllocationId).HasColumnName("OverShortAllocationId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
-              this.HasRequired(t => t.OverShortDetail).WithMany(t => t.OverShortDetailAllocations).HasForeignKey(d => d.OverShortDetailId);
-              this.HasOptional(t => t.EX).WithRequired(t => t.OverShortDetailAllocation);
+              this.HasRequired(t => t.OverShortDetail).WithMany(t =>(ICollection<OverShortDetailAllocation>) t.OverShortDetailAllocations).HasForeignKey(d => d.OverShortDetailId);
+              this.HasOptional(t => t.EX).WithRequired(t => (OverShortDetailAllocation) t.OverShortDetailAllocation);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class OversShortEXMap : EntityTypeConfiguration<OversShortEX>
     {
@@ -15,8 +16,8 @@
               this.Property(t => t.OversShortsId).HasColumnName("OversShortsId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
               this.Property(t => t.ReceivedValue).HasColumnName("ReceivedValue");
               this.Property(t => t.InvoiceValue).HasColumnName("InvoiceValue");
-              this.HasMany(t => t.OverShortDetailsEXes).WithRequired(t => t.OversShortEX);
-              this.HasOptional(t => t.OverShortSuggestedDocuments).WithRequired(t => t.OversShortEX);
+              this.HasMany(t => t.OverShortDetailsEXes).WithRequired(t => (OversShortEX)t.OversShortEX);
+              this.HasOptional(t => t.OverShortSuggestedDocuments).WithRequired(t => (OversShortEX) t.OversShortEX);
              // Nav Property Names
                   
     

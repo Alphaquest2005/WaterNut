@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_Supplementary_unitMap : EntityTypeConfiguration<xcuda_Supplementary_unit>
     {
@@ -18,7 +19,7 @@
               this.Property(t => t.Suppplementary_unit_code).HasColumnName("Suppplementary_unit_code");
               this.Property(t => t.Suppplementary_unit_name).HasColumnName("Suppplementary_unit_name");
               this.Property(t => t.IsFirstRow).HasColumnName("IsFirstRow");
-              this.HasRequired(t => t.xcuda_Tarification).WithMany(t => t.xcuda_Supplementary_unit).HasForeignKey(d => d.Tarification_Id);
+              this.HasRequired(t => t.xcuda_Tarification).WithMany(t =>(ICollection<xcuda_Supplementary_unit>) t.xcuda_Supplementary_unit).HasForeignKey(d => d.Tarification_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

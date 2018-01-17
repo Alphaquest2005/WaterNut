@@ -12,11 +12,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using WaterNut.Interfaces;
+using TrackableEntities.Client;
 using Core.Common.Client.Entities;
 using SalesDataQS.Client.DTO;
-using TrackableEntities.Client;
-using TrackableEntities;
+
+
 using Core.Common.Validation;
 
 namespace SalesDataQS.Client.Entities
@@ -56,7 +56,7 @@ public string EntryDataId
 			{
 			    if (value == this.salesdata.EntryDataId) return;
 				this.salesdata.EntryDataId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataId");
 			}
 		}
@@ -71,7 +71,7 @@ public System.DateTime EntryDataDate
 			{
 			    if (value == this.salesdata.EntryDataDate) return;
 				this.salesdata.EntryDataDate = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("EntryDataDate");
 			}
 		}
@@ -88,7 +88,7 @@ public string Type
 			{
 			    if (value == this.salesdata.Type) return;
 				this.salesdata.Type = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Type");
 			}
 		}
@@ -103,7 +103,7 @@ public Nullable<double> TaxAmount
 			{
 			    if (value == this.salesdata.TaxAmount) return;
 				this.salesdata.TaxAmount = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("TaxAmount");
 			}
 		}
@@ -120,7 +120,7 @@ public string CustomerName
 			{
 			    if (value == this.salesdata.CustomerName) return;
 				this.salesdata.CustomerName = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("CustomerName");
 			}
 		}
@@ -135,7 +135,7 @@ public Nullable<double> Total
 			{
 			    if (value == this.salesdata.Total) return;
 				this.salesdata.Total = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("Total");
 			}
 		}
@@ -150,7 +150,7 @@ public Nullable<double> AllocatedTotal
 			{
 			    if (value == this.salesdata.AllocatedTotal) return;
 				this.salesdata.AllocatedTotal = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AllocatedTotal");
 			}
 		}
@@ -165,7 +165,7 @@ public Nullable<int> AsycudaDocumentSetId
 			{
 			    if (value == this.salesdata.AsycudaDocumentSetId) return;
 				this.salesdata.AsycudaDocumentSetId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentSetId");
 			}
 		}
@@ -180,7 +180,7 @@ public Nullable<int> AsycudaDocumentId
 			{
 			    if (value == this.salesdata.AsycudaDocumentId) return;
 				this.salesdata.AsycudaDocumentId = value;
-                if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("AsycudaDocumentId");
 			}
 		}
@@ -209,7 +209,7 @@ public Nullable<int> AsycudaDocumentId
 				if (value != null)
 					this.salesdata.SalesDataDetails = new ChangeTrackingCollection<DTO.SalesDataDetail>(value.Select(x => x.DTO).ToList());
                 _SalesDataDetails = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_SalesDataDetails != null)
 				_SalesDataDetails.CollectionChanged += SalesDataDetails_CollectionChanged;               
 				NotifyPropertyChanged("SalesDataDetails");
@@ -226,7 +226,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.SalesDataDetails.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (SalesDataDetail itm in e.OldItems)
@@ -234,7 +234,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.SalesDataDetails.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -263,7 +263,7 @@ public Nullable<int> AsycudaDocumentId
 				if (value != null)
 					this.salesdata.AsycudaDocumentSets = new ChangeTrackingCollection<DTO.AsycudaDocumentSetEntryData>(value.Select(x => x.DTO).ToList());
                 _AsycudaDocumentSets = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_AsycudaDocumentSets != null)
 				_AsycudaDocumentSets.CollectionChanged += AsycudaDocumentSets_CollectionChanged;               
 				NotifyPropertyChanged("AsycudaDocumentSets");
@@ -280,7 +280,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.AsycudaDocumentSets.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (AsycudaDocumentSetEntryData itm in e.OldItems)
@@ -288,7 +288,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.AsycudaDocumentSets.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -317,7 +317,7 @@ public Nullable<int> AsycudaDocumentId
 				if (value != null)
 					this.salesdata.SalesDataAllocations = new ChangeTrackingCollection<DTO.SalesDataAllocations>(value.Select(x => x.DTO).ToList());
                 _SalesDataAllocations = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_SalesDataAllocations != null)
 				_SalesDataAllocations.CollectionChanged += SalesDataAllocations_CollectionChanged;               
 				NotifyPropertyChanged("SalesDataAllocations");
@@ -334,7 +334,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.SalesDataAllocations.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (SalesDataAllocations itm in e.OldItems)
@@ -342,7 +342,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.SalesDataAllocations.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -371,7 +371,7 @@ public Nullable<int> AsycudaDocumentId
 				if (value != null)
 					this.salesdata.AsycudaDocuments = new ChangeTrackingCollection<DTO.AsycudaDocumentEntryData>(value.Select(x => x.DTO).ToList());
                 _AsycudaDocuments = value;
-				if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+				if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				if (_AsycudaDocuments != null)
 				_AsycudaDocuments.CollectionChanged += AsycudaDocuments_CollectionChanged;               
 				NotifyPropertyChanged("AsycudaDocuments");
@@ -388,7 +388,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.AsycudaDocuments.Add(itm.DTO);
                     }
-                    if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+                    if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (AsycudaDocumentEntryData itm in e.OldItems)
@@ -396,7 +396,7 @@ public Nullable<int> AsycudaDocumentId
                         if (itm != null)
                         salesdata.AsycudaDocuments.Remove(itm.DTO);
                     }
-					if(this.DTO.TrackingState == TrackableEntities.TrackingState.Unchanged)this.DTO.TrackingState = TrackableEntities.TrackingState.Modified;
+					if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
                     break;
                 
             }
@@ -416,11 +416,11 @@ public Nullable<int> AsycudaDocumentId
         {
             get
             {
-                return this.DTO.TrackingState;
+                return this.TrackingState;
             }
             set
             {
-                this.DTO.TrackingState = value;
+                this.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }

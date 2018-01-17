@@ -13,6 +13,7 @@ using InventoryQS.Client.DTO;
 using InventoryQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace InventoryQS.Client.Services
     public partial class TariffCategoryClient :  ClientService<ITariffCategoryService>, ITariffCategoryService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.TariffCategory>> GetTariffCategory(List<string> includesLst = null)
+        public async Task<IEnumerable<TariffCategory>> GetTariffCategory(List<string> includesLst = null)
         {
             return await Channel.GetTariffCategory(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.TariffCategory> GetTariffCategoryByKey(string id, List<string> includesLst = null)
+        public async Task<TariffCategory> GetTariffCategoryByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetTariffCategoryByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffCategory>> GetTariffCategoryByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<TariffCategory>> GetTariffCategoryByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetTariffCategoryByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffCategory>> GetTariffCategoryByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<TariffCategory>> GetTariffCategoryByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetTariffCategoryByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffCategory>> GetTariffCategoryByExpressionNav(string exp,
+		public async Task<IEnumerable<TariffCategory>> GetTariffCategoryByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetTariffCategoryByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace InventoryQS.Client.Services
             return await Channel.GetTariffCategoryByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.TariffCategory> UpdateTariffCategory(DTO.TariffCategory entity)
+        public async Task<TariffCategory> UpdateTariffCategory(TariffCategory entity)
         {
            return await Channel.UpdateTariffCategory(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.TariffCategory> CreateTariffCategory(DTO.TariffCategory entity)
+        public async Task<TariffCategory> CreateTariffCategory(TariffCategory entity)
         {
            return await Channel.CreateTariffCategory(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace InventoryQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.TariffCategory>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<TariffCategory>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.TariffCategory>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<TariffCategory>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace InventoryQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

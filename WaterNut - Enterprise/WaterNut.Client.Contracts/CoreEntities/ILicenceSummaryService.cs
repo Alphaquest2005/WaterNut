@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Core.Common.Contracts;
 using CoreEntities.Client.DTO;
 
+
 namespace CoreEntities.Client.Contracts
 {
     [ServiceContract (Namespace="http://www.insight-software.com/WaterNut")]
@@ -40,10 +41,10 @@ namespace CoreEntities.Client.Contracts
                                                                         int totalrow, List<string> includesLst = null);
 
 		[OperationContract]
-        Task<LicenceSummary> UpdateLicenceSummary(DTO.LicenceSummary entity);
+        Task<LicenceSummary> UpdateLicenceSummary(LicenceSummary entity);
 
         [OperationContract]
-        Task<LicenceSummary> CreateLicenceSummary(DTO.LicenceSummary entity);
+        Task<LicenceSummary> CreateLicenceSummary(LicenceSummary entity);
 
         [OperationContract]
         Task<bool> DeleteLicenceSummary(string id);

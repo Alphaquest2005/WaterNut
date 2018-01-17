@@ -13,6 +13,7 @@ using CoreEntities.Client.DTO;
 using CoreEntities.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace CoreEntities.Client.Services
     public partial class LicenceSummaryClient :  ClientService<ILicenceSummaryService>, ILicenceSummaryService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.LicenceSummary>> GetLicenceSummary(List<string> includesLst = null)
+        public async Task<IEnumerable<LicenceSummary>> GetLicenceSummary(List<string> includesLst = null)
         {
             return await Channel.GetLicenceSummary(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.LicenceSummary> GetLicenceSummaryByKey(string id, List<string> includesLst = null)
+        public async Task<LicenceSummary> GetLicenceSummaryByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetLicenceSummaryByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.LicenceSummary>> GetLicenceSummaryByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<LicenceSummary>> GetLicenceSummaryByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetLicenceSummaryByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.LicenceSummary>> GetLicenceSummaryByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<LicenceSummary>> GetLicenceSummaryByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetLicenceSummaryByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.LicenceSummary>> GetLicenceSummaryByExpressionNav(string exp,
+		public async Task<IEnumerable<LicenceSummary>> GetLicenceSummaryByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetLicenceSummaryByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace CoreEntities.Client.Services
             return await Channel.GetLicenceSummaryByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.LicenceSummary> UpdateLicenceSummary(DTO.LicenceSummary entity)
+        public async Task<LicenceSummary> UpdateLicenceSummary(LicenceSummary entity)
         {
            return await Channel.UpdateLicenceSummary(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.LicenceSummary> CreateLicenceSummary(DTO.LicenceSummary entity)
+        public async Task<LicenceSummary> CreateLicenceSummary(LicenceSummary entity)
         {
            return await Channel.CreateLicenceSummary(entity).ConfigureAwait(false);
         }
@@ -96,17 +97,17 @@ namespace CoreEntities.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.LicenceSummary>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<LicenceSummary>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.LicenceSummary>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<LicenceSummary>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
         }
-		public async Task<IEnumerable<DTO.LicenceSummary>> GetLicenceSummaryByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
+		public async Task<IEnumerable<LicenceSummary>> GetLicenceSummaryByAsycudaDocumentSetId(string AsycudaDocumentSetId, List<string> includesLst = null)
         {
             return  await Channel.GetLicenceSummaryByAsycudaDocumentSetId(AsycudaDocumentSetId, includesLst).ConfigureAwait(false);
         }
@@ -118,7 +119,7 @@ namespace CoreEntities.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

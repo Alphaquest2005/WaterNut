@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class xcuda_PrincipalMap : EntityTypeConfiguration<xcuda_Principal>
     {
@@ -14,7 +15,7 @@
               this.ToTable("xcuda_Principal");
               this.Property(t => t.Principal_Id).HasColumnName("Principal_Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.Property(t => t.Transit_Id).HasColumnName("Transit_Id");
-              this.HasOptional(t => t.xcuda_Transit).WithMany(t => t.xcuda_Principal).HasForeignKey(d => d.Transit_Id);
+              this.HasOptional(t => t.xcuda_Transit).WithMany(t =>(ICollection<xcuda_Principal>) t.xcuda_Principal).HasForeignKey(d => d.Transit_Id);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

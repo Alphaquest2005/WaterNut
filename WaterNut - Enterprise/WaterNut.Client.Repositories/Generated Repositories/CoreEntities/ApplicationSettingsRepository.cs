@@ -13,7 +13,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using TrackableEntities.Common;
+
 using Core.Common.Client.Services;
 using Core.Common.Client.Repositories;
 using CoreEntities.Client.Services;
@@ -21,7 +21,6 @@ using CoreEntities.Client.Entities;
 using CoreEntities.Client.DTO;
 using Core.Common.Business.Services;
 using System.Diagnostics;
-using TrackableEntities.Client;
 
 
 using System.Threading.Tasks;
@@ -31,6 +30,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System;
 using System.ServiceModel;
+using TrackableEntities.Common;
 
 using ApplicationSettings = CoreEntities.Client.Entities.ApplicationSettings;
 
@@ -41,8 +41,7 @@ namespace CoreEntities.Client.Repositories
     {
 
        private static readonly ApplicationSettingsRepository instance;
-
-        static ApplicationSettingsRepository()
+       static ApplicationSettingsRepository()
         {
             instance = new ApplicationSettingsRepository();
         }
@@ -51,13 +50,10 @@ namespace CoreEntities.Client.Repositories
         {
             get { return instance; }
         }
-
         
         public async Task<IEnumerable<ApplicationSettings>> ApplicationSettings(List<string> includesLst = null)
         {
             if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime) return new List<ApplicationSettings>().AsEnumerable();
-
-            
             try
             {
                 using (var t = new ApplicationSettingsClient())
@@ -84,9 +80,7 @@ namespace CoreEntities.Client.Repositories
             }
         }
 
-       
-
-        public async Task<IEnumerable<ApplicationSettings>> GetApplicationSettingsByExpression(string exp, List<string> includesLst = null)
+		 public async Task<IEnumerable<ApplicationSettings>> GetApplicationSettingsByExpression(string exp, List<string> includesLst = null)
         {
             if (System.ComponentModel.LicenseManager.UsageMode == LicenseUsageMode.Designtime || exp == null || exp == "None") return new List<ApplicationSettings>().AsEnumerable();
             try

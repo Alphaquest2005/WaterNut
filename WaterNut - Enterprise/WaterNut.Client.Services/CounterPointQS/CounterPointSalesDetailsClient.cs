@@ -13,6 +13,7 @@ using CounterPointQS.Client.DTO;
 using CounterPointQS.Client.Contracts;
 using Core.Common.Client.Services;
 
+
 using Core.Common.Contracts;
 using System.ComponentModel.Composition;
 
@@ -26,27 +27,27 @@ namespace CounterPointQS.Client.Services
     public partial class CounterPointSalesDetailsClient :  ClientService<ICounterPointSalesDetailsService>, ICounterPointSalesDetailsService, IDisposable
     {
         
-        public async Task<IEnumerable<DTO.CounterPointSalesDetails>> GetCounterPointSalesDetails(List<string> includesLst = null)
+        public async Task<IEnumerable<CounterPointSalesDetails>> GetCounterPointSalesDetails(List<string> includesLst = null)
         {
             return await Channel.GetCounterPointSalesDetails(includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.CounterPointSalesDetails> GetCounterPointSalesDetailsByKey(string id, List<string> includesLst = null)
+        public async Task<CounterPointSalesDetails> GetCounterPointSalesDetailsByKey(string id, List<string> includesLst = null)
         {
             return await Channel.GetCounterPointSalesDetailsByKey(id, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.CounterPointSalesDetails>> GetCounterPointSalesDetailsByExpression(string exp, List<string> includesLst = null)
+		public async Task<IEnumerable<CounterPointSalesDetails>> GetCounterPointSalesDetailsByExpression(string exp, List<string> includesLst = null)
         {
             return await Channel.GetCounterPointSalesDetailsByExpression(exp, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.CounterPointSalesDetails>> GetCounterPointSalesDetailsByExpressionLst(List<string> expLst, List<string> includesLst = null)
+		public async Task<IEnumerable<CounterPointSalesDetails>> GetCounterPointSalesDetailsByExpressionLst(List<string> expLst, List<string> includesLst = null)
         {
             return await Channel.GetCounterPointSalesDetailsByExpressionLst(expLst, includesLst).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.CounterPointSalesDetails>> GetCounterPointSalesDetailsByExpressionNav(string exp,
+		public async Task<IEnumerable<CounterPointSalesDetails>> GetCounterPointSalesDetailsByExpressionNav(string exp,
 															 Dictionary<string, string> navExp, List<string> includesLst = null)
 		{
 			return await Channel.GetCounterPointSalesDetailsByExpressionNav(exp, navExp, includesLst).ConfigureAwait(false);
@@ -64,12 +65,12 @@ namespace CounterPointQS.Client.Services
             return await Channel.GetCounterPointSalesDetailsByBatchExpressionLst(expLst, totalrow, includesLst).ConfigureAwait(false);
         }
 
-        public async Task<DTO.CounterPointSalesDetails> UpdateCounterPointSalesDetails(DTO.CounterPointSalesDetails entity)
+        public async Task<CounterPointSalesDetails> UpdateCounterPointSalesDetails(CounterPointSalesDetails entity)
         {
            return await Channel.UpdateCounterPointSalesDetails(entity).ConfigureAwait(false);
         }
 
-        public async Task<DTO.CounterPointSalesDetails> CreateCounterPointSalesDetails(DTO.CounterPointSalesDetails entity)
+        public async Task<CounterPointSalesDetails> CreateCounterPointSalesDetails(CounterPointSalesDetails entity)
         {
            return await Channel.CreateCounterPointSalesDetails(entity).ConfigureAwait(false);
         }
@@ -96,12 +97,12 @@ namespace CounterPointQS.Client.Services
            return await Channel.CountNav(exp, navExp).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<DTO.CounterPointSalesDetails>> LoadRange(int startIndex, int count, string exp)
+        public async Task<IEnumerable<CounterPointSalesDetails>> LoadRange(int startIndex, int count, string exp)
         {
             return await Channel.LoadRange(startIndex,count,exp).ConfigureAwait(false);
         }
 
-		public async Task<IEnumerable<DTO.CounterPointSalesDetails>>  LoadRangeNav(int startIndex, int count, string exp,
+		public async Task<IEnumerable<CounterPointSalesDetails>>  LoadRangeNav(int startIndex, int count, string exp,
                                                                                  Dictionary<string, string> navExp, IEnumerable<string> includeLst = null)
         {
             return await Channel.LoadRangeNav(startIndex,count,exp, navExp, includeLst).ConfigureAwait(false);
@@ -113,7 +114,7 @@ namespace CounterPointQS.Client.Services
 
         public async Task<decimal> SumNav( string exp, Dictionary<string, string> navExp, string field)
         {
-            return await Channel.SumNav(exp,navExp,field).ConfigureAwait(false);
+            return await Channel.SumNav(exp,navExp,field);
         }
 
 		public string MinField(string whereExp, string sumExp)

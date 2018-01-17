@@ -5,6 +5,7 @@
     using System.Data.Entity.ModelConfiguration;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Collections.Generic;
     
     public partial class TariffCodesMap : EntityTypeConfiguration<TariffCodes>
     {
@@ -25,7 +26,7 @@
               this.Property(t => t.TariffCategoryCode).HasColumnName("TariffCategoryCode").IsUnicode(false).HasMaxLength(8);
               this.Property(t => t.LicenseRequired).HasColumnName("LicenseRequired");
               this.Property(t => t.Invalid).HasColumnName("Invalid");
-              this.HasOptional(t => t.TariffCategory).WithMany(t => t.TariffCodes).HasForeignKey(d => d.TariffCategoryCode);
+              this.HasOptional(t => t.TariffCategory).WithMany(t =>(ICollection<TariffCodes>) t.TariffCodes).HasForeignKey(d => d.TariffCategoryCode);
               this.HasMany(t => t.InventoryItemsEx).WithOptional(t => t.TariffCodes).HasForeignKey(d => d.TariffCode);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
