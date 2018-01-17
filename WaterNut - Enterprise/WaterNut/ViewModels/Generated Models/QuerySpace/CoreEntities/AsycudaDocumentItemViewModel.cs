@@ -1114,7 +1114,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
                     DFQtyAllocated = x.DFQtyAllocated ,
                     
  
-                    PiQuantity = x.PiQuantity ,
+                    PiQuantity = Convert.ToDouble(x.PiQuantity) ,
                     
  
                     ImportComplete = x.ImportComplete ,

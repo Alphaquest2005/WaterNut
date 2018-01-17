@@ -863,7 +863,7 @@ namespace WaterNut.QuerySpace.OversShortQS.ViewModels
                     InvoiceValue = x.InvoiceValue ,
                     
  
-                    LineNumber = x.LineNumber ,
+                    LineNumber = Convert.ToInt16(x.LineNumber) ,
                     
  
                     PiQuantity = x.PiQuantity ,
@@ -875,7 +875,7 @@ namespace WaterNut.QuerySpace.OversShortQS.ViewModels
                     QtyAllocated = x.QtyAllocated ,
                     
  
-                    AllocationStatus = x.AllocationStatus 
+                    AllocationStatus = x.AllocationStatus
                     
                 }).ToList()
             };

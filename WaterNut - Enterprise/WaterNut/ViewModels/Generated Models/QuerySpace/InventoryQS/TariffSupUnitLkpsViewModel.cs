@@ -345,7 +345,7 @@ namespace WaterNut.QuerySpace.InventoryQS.ViewModels
                 dataToPrint = lst.Select(x => new TariffSupUnitLkpsExcelLine
                 {
  
-                    TariffCategoryCode = x.TariffCategoryCode ,
+                   // TariffCategoryCode = x.TariffCategoryCode ,
                     
  
                     SuppUnitCode2 = x.SuppUnitCode2 ,

@@ -89,9 +89,7 @@
     <Compile Include="Custom Entities\AllocationQS\AsycudaSalesAllocationsEX.cs" />
     <Compile Include="Custom Entities\CoreEntities\Customs_Procedure.cs" />
     <Compile Include="Custom Entities\CoreEntities\Document_Type.cs" />
-    <Compile Include="Custom Entities\CoreEntities\AsycudaDocument.cs" />
     <Compile Include="Custom Entities\CoreEntities\AsycudaDocumentItem.cs" />
-    <Compile Include="Custom Entities\CoreEntities\AsycudaDocumentSetQS.cs" />
     <Compile Include="Custom Entities\EntryDataQS\EntryDataDetailsEx.cs" />
     <Compile Include="Custom Entities\EntryDataQS\EntryDataEx.cs" />
     <Compile Include="Custom Entities\InventoryQS\InventoryItem.cs" />
@@ -130,6 +128,7 @@
     <Compile Include="Generated Client Entities\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated Client Entities\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated Client Entities\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated Client Entities\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Client Entities\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated Client Entities\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated Client Entities\OversShortQS\AsycudaDocument.cs" />
@@ -180,6 +179,7 @@
     <Compile Include="Generated Constructors Models\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated Constructors Models\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated Constructors Models\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated Constructors Models\OversShortQS\AsycudaDocument.cs" />
@@ -230,6 +230,7 @@
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated IIdentitfiableEntity Models\OversShortQS\AsycudaDocument.cs" />
@@ -285,6 +286,7 @@
     <Compile Include="Generated MyNavProp Models\InventoryQS\EntryDataDetailsEx.cs" />
     <Compile Include="Generated MyNavProp Models\InventoryQS\InventoryItemsEx.cs" />
     <Compile Include="Generated MyNavProp Models\InventoryQS\TariffCategory.cs" />
+    <Compile Include="Generated MyNavProp Models\InventoryQS\TariffCategoryCodeSuppUnit.cs" />
     <Compile Include="Generated MyNavProp Models\InventoryQS\TariffCodes.cs" />
     <Compile Include="Generated MyNavProp Models\InventoryQS\TariffSupUnitLkps.cs" />
     <Compile Include="Generated MyNavProp Models\OversShortQS\AsycudaDocument.cs" />

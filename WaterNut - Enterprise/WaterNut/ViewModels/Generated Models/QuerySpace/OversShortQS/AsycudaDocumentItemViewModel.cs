@@ -793,7 +793,7 @@ namespace WaterNut.QuerySpace.OversShortQS.ViewModels
                 dataToPrint = lst.Select(x => new AsycudaDocumentItemExcelLine
                 {
  
-                    LineNumber = x.LineNumber ,
+                    LineNumber = Convert.ToUInt16(x.LineNumber) ,
                     
  
                     IsAssessed = x.IsAssessed ,
@@ -856,16 +856,16 @@ namespace WaterNut.QuerySpace.OversShortQS.ViewModels
                     Statistical_value = x.Statistical_value ,
                     
  
-                    DPQtyAllocated = x.DPQtyAllocated ,
+                    DPQtyAllocated = Convert.ToDouble(x.DPQtyAllocated) ,
                     
  
-                    DFQtyAllocated = x.DFQtyAllocated ,
+                    DFQtyAllocated = Convert.ToDouble(x.DFQtyAllocated) ,
                     
  
                     PiQuantity = x.PiQuantity ,
                     
  
-                    ImportComplete = x.ImportComplete 
+                    ImportComplete = Convert.ToBoolean(x.ImportComplete)
                     
                 }).ToList()
             };

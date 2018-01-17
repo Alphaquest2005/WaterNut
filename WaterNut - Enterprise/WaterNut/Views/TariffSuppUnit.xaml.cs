@@ -35,24 +35,24 @@ namespace WaterNut.Views
         private async void DataGrid_RowEditEnding_1(object sender, DataGridRowEditEndingEventArgs e)
         {
 
-            if (((TariffSupUnitLkps)e.Row.Item).TariffCategoryCode != null)
-            {
+            //if (((TariffSupUnitLkps)e.Row.Item).TariffCategoryCode != null)
+            //{
 
-               await im.SaveTariffSupUnitLkps((sender as FrameworkElement).DataContext as TariffSupUnitLkps).ConfigureAwait(false);
-            }
+            //   await im.SaveTariffSupUnitLkps((sender as FrameworkElement).DataContext as TariffSupUnitLkps).ConfigureAwait(false);
+            //}
         }
 
         private void DataGrid_InitializingNewItem_1(object sender, InitializingNewItemEventArgs e)
         {
-            if (BaseViewModel.Instance.CurrentTariffCategory != null)
-            {
-                ((TariffSupUnitLkps)(e.NewItem)).TariffCategoryCode = BaseViewModel.Instance.CurrentTariffCategory.TariffCategoryCode;
-            }
-            else
-            {
-                MessageBox.Show("Please select a tariff Category Code");
+            //if (BaseViewModel.Instance.CurrentTariffCategory != null)
+            //{
+            //    ((TariffSupUnitLkps)(e.NewItem)).TariffCategoryCode = BaseViewModel.Instance.CurrentTariffCategory.TariffCategoryCode;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Please select a tariff Category Code");
                 
-            }
+            //}
         }
 
         private void SuppGrd_SelectionChanged(object sender, SelectionChangedEventArgs e)
