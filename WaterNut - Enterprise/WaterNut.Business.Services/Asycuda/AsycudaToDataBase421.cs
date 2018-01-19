@@ -953,17 +953,34 @@ namespace WaterNut.DataSpace.Asycuda
 
                 if(i > 1)
                 {
-                    var tc =(InventoryDS.DataModels.BaseDataModel.Instance.SearchTariffCode(new List<string>()
+                    using (var ctx = new InventoryDSContext())
+                    {
+                        var tc = ctx.TariffCodes.Include("TariffCategory.TariffCategoryCodeSuppUnits.TariffSupUnitLkp")
+                            .FirstOrDefault(x => x.TariffCodeName == ai.Tarification.HScode.Commodity_code);
+                        if (tc != null)
+                        {
+                            var lst = tc.TariffCategory.TariffCategoryCodeSuppUnits
+                                .Where(z => z.TariffSupUnitLkp.SuppUnitCode2 == au.Suppplementary_unit_code.Text[0]);
+                            if (!lst.Any())
                             {
-                                string.Format("TariffCodeName == \"{0}\"", ai.Tarification.HScode.Commodity_code)
-                            }).Result).FirstOrDefault();
-                    var supUnit = new TariffSupUnitLkp() {
-                        SuppUnitCode2 = au.Suppplementary_unit_name.Text[0],
-                        //SuppQty = 
-                    };
-                    //tc.TariffCategory.TariffSupUnitLkps.Add( );
+                                var supUnit = new TariffCategoryCodeSuppUnit(true)
+                                {
+                                    TariffCategory = tc.TariffCategory,
+                                    TariffSupUnitLkp = new TariffSupUnitLkp(true)
+                                    {
+                                        SuppUnitCode2 = au.Suppplementary_unit_name.Text[0],
+                                        SuppUnitName2 = au.Suppplementary_unit_name.Text[0],
+                                        SuppQty = 1,
+                                        TrackingState=TrackingState.Added
+                                    }
+                                };
+                                tc.TariffCategory.TariffCategoryCodeSuppUnits.Add( supUnit);
+                                ctx.ApplyChanges(tc);
+                                ctx.SaveChanges();
+                            }
+                        }
+                    }
                 }
-
             }
         }
 
