@@ -18,6 +18,9 @@ namespace AllocationQS.Business.Services
         Task ManuallyAllocate(int AllocationId, int PreviousItem_Id);
         [OperationContract][FaultContract(typeof(ValidationFault))]
         Task ClearAllocations(IEnumerable<int> alst);
+        [OperationContract]
+        [FaultContract(typeof(ValidationFault))]
+        Task ClearAllAllocations();
         [OperationContract][FaultContract(typeof(ValidationFault))]
         Task ClearAllocationsByFilter(string filterExpression);
         //[OperationContract][FaultContract(typeof(ValidationFault))]

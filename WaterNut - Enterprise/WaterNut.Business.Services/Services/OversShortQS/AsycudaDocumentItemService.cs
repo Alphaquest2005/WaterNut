@@ -77,7 +77,7 @@ namespace OversShortQS.Business.Services
                     IEnumerable<AsycudaDocumentItem> entities = await set.AsNoTracking().ToListAsync()
 													       .ConfigureAwait(continueOnCapturedContext: false);
                            //scope.Complete();
-                            if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                            if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                             return entities;
                    }
                 //}
@@ -139,7 +139,7 @@ namespace OversShortQS.Business.Services
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false);
 
-                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -147,7 +147,7 @@ namespace OversShortQS.Business.Services
 						var entities = await set.AsNoTracking().Where(exp)
 											.ToListAsync() 
 											.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -180,7 +180,7 @@ namespace OversShortQS.Business.Services
                     {
 						var entities = await set.AsNoTracking().ToListAsync()
 											.ConfigureAwait(continueOnCapturedContext: false); 
-                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                         return entities; 
                     }
 					else
@@ -188,7 +188,7 @@ namespace OversShortQS.Business.Services
 						set = AddWheres(expLst, set);
 						var entities = await set.AsNoTracking().ToListAsync() 
 										.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                        if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                         return entities; 
 											
 					}
@@ -225,7 +225,7 @@ namespace OversShortQS.Business.Services
                         var aentities = await AddIncludes(includesLst, dbContext)
 												.ToListAsync()
 												.ConfigureAwait(continueOnCapturedContext: false);
-                        if(tracking) aentities.AsParallel().ForAll(x => x.StartTracking());
+                        if(tracking) aentities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                         return aentities; 
                     }
                     foreach (var itm in navExp)
@@ -251,7 +251,7 @@ namespace OversShortQS.Business.Services
                     var entities = await set.AsNoTracking().Where(exp)
 									.ToListAsync()
 									.ConfigureAwait(continueOnCapturedContext: false);
-                    if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                    if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                         return entities; 
 
                 }
@@ -327,7 +327,7 @@ namespace OversShortQS.Business.Services
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
     
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                 return entities; 
 
             }
@@ -401,7 +401,7 @@ namespace OversShortQS.Business.Services
                     );
                 if (exceptions.Count > 0) throw new AggregateException(exceptions);
                 var entities = res.SelectMany(x => x.ToList());
-                if(tracking) entities.AsParallel().ForAll(x => x.StartTracking());
+                if(tracking) entities.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x => x.StartTracking());
                 return entities; 
             }
             catch (Exception updateEx)

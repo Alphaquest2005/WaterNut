@@ -133,6 +133,7 @@ namespace WaterNut.DataSpace
             }
         }
 
+
         public string TranslateAllocationWhereExpression(string FilterExpression)
         {
             var map = new Dictionary<string, string>()
@@ -216,6 +217,24 @@ namespace WaterNut.DataSpace
             var lst = await GetAsycudaSalesAllocations(filterExpression).ConfigureAwait(false);
             await ClearAllocations(lst).ConfigureAwait(false);
         }
+
+        public async Task ClearAllAllocations()
+        {
+            StatusModel.Timer("Clear All Existing Allocations");
+
+            using (var ctx = new AllocationDSContext())
+            {
+               await ctx.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "delete from AsycudaSalesAllocations" +
+                    "\r\n\r\n" +
+                    "update xcuda_Item" + "\r\n" +
+                    "set DFQtyAllocated = 0, DPQtyAllocated = 0\r\n\r\n\r\n" +
+                    "update EntryDataDetails\r\n" + "set QtyAllocated = 0\r\n\r\n" +
+                    "update xcuda_PreviousItem\r\nset QtyAllocated = 0\r\n\r\n" +
+                    "update SubItems \r\nset QtyAllocated = 0").ConfigureAwait(false);
+            }
+        }
+
 
         public  async Task ClearAllocations(IEnumerable<AsycudaSalesAllocations> alst)
         {

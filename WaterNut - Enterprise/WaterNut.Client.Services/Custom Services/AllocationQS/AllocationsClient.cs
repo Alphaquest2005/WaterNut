@@ -67,6 +67,11 @@ namespace AllocationQS.Client.Services
             await Channel.ReBuildSalesReports().ConfigureAwait(false);
         }
 
+        public async Task ClearAllAllocations()
+        {
+            await Channel.ClearAllAllocations().ConfigureAwait(false);
+        }
+
         public async Task ReBuildSalesReports(int asycuda_Id)
         {
             await Channel.ReBuildSalesReports().ConfigureAwait(false);
@@ -109,6 +114,8 @@ namespace AllocationQS.Client.Services
                 }
             }
         }
+
+
 
 
 

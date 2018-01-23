@@ -90,6 +90,14 @@ namespace AllocationQS.Client.Repositories
             }
         }
 
+        public async Task ClearAllocations()
+        {
+            using (var t = new AllocationsClient())
+            {
+                await t.ClearAllAllocations().ConfigureAwait(false);
+            }
+        }
+
         public async Task ReBuildSalesReports()
         {
             using (var t = new AllocationsClient())

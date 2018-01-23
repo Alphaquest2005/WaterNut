@@ -175,7 +175,7 @@ namespace WaterNut.DataSpace
         {
 
             var exceptions = new ConcurrentQueue<Exception>();
-            flst.AsParallel().ForAll(itm =>
+            flst.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(itm =>
             {
                 try
                 {
@@ -295,7 +295,7 @@ namespace WaterNut.DataSpace
             {
 
                 var exceptions = new ConcurrentQueue<Exception>();
-                itmList.AsParallel().ForAll(itm =>
+                itmList.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(itm =>
                 {
                     try
                     {

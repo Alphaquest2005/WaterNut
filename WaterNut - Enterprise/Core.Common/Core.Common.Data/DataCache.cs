@@ -19,7 +19,7 @@ namespace Core.Common.Data
 
             if (source != null)
             {
-                source.AsParallel().ForAll(i => { _innerData.AddOrUpdate(i.EntityId, i, (key, oldValue) => i); });
+                source.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(i => { _innerData.AddOrUpdate(i.EntityId, i, (key, oldValue) => i); });
             }
             
           //  _cloner = cloner;

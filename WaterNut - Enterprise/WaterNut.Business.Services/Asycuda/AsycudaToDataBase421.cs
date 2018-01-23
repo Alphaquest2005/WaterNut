@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 //using WaterNut.DataLayer;
 using TrackableEntities;
 using Asycuda421;
+using TrackableEntities.Common;
 using TrackableEntities.EF6;
 using WaterNut.Business.Entities;
 using WaterNut.Interfaces;
@@ -569,17 +570,10 @@ namespace WaterNut.DataSpace.Asycuda
                 var ai = a.Item.ElementAt(i);
                 xcuda_Item di;
 
-                /////*******************remove check because of duplicate on im7 to make this standard procedure
-                //if (da.xcuda_Identification.xcuda_Type.DisplayName == "Ex9" || da.xcuda_Identification.xcuda_Type.DisplayName == "IM4")
-                //{
+                
                 di = da.DocumentItems.ElementAtOrDefault(i);
-                //}
-                //else
-                //{
-                //    di = da.xcuda_Item.FirstOrDefault(x => x.ItemNumber == ai.Tarification.HScode.Precision_4
-                //                                                  && x.ItemQuantity.ToString() == ai.Tarification.Supplementary_unit.FirstOrDefault().Suppplementary_unit_quantity
-                //                                                  && Math.Round(x.xcuda_Tarification.Item_price, 2).ToString() == ai.Tarification.Item_price);
-                //}                                                 
+                
+
                 if (di == null)
                 {
                     di = new xcuda_Item(true) { ASYCUDA_Id = da.Document.ASYCUDA_Id, ImportComplete = false, TrackingState = TrackingState.Added };
@@ -627,8 +621,15 @@ namespace WaterNut.DataSpace.Asycuda
                await Save_Item_Valuation_item(di, ai).ConfigureAwait(false);
                // Save_Item_Valuation_item(di, ai).Wait();
 
+                
+
                 di.ImportComplete = true;
                //await DIBaseDataModel.Instance.Savexcuda_Item(di).ConfigureAwait(false);
+                if (UpdateItemsTariffCode)
+                {
+                    Update_TarrifCodes(ai);
+                }
+
 
             }
             //    );
@@ -636,6 +637,126 @@ namespace WaterNut.DataSpace.Asycuda
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        private void Update_TarrifCodes(ASYCUDAItem ai)
+        {
+            try
+            {
+
+
+                using (var ctx = new InventoryDSContext())
+                {
+                    var tariffCode = ctx.TariffCodes
+                        .Include("TariffCategory.TariffCategoryCodeSuppUnits.TariffSupUnitLkp")
+                        .FirstOrDefault(x => x.TariffCodeName == ai.Tarification.HScode.Commodity_code);
+                        if(tariffCode == null)
+                        tariffCode = new TariffCode(true)
+                                     {
+                                         TariffCodeName = ai.Tarification.HScode.Commodity_code,
+                                         TariffCategory = ctx.TariffCategories.FirstOrDefault(x =>
+                                                              x.TariffCategoryCode == ai.Tarification.HScode
+                                                                  .Commodity_code.Substring(0, 4))
+                                                          ,
+                                         TrackingState = TrackingState.Added
+
+                                     };
+
+                    if (tariffCode.TariffCategory == null)
+                    {
+                        tariffCode.TariffCategory = new TariffCategory(true)
+                        {
+                            TariffCategoryCode =
+                                ai.Tarification.HScode.Commodity_code.Substring(0, 4),
+                            Description = ai.Goods_description.Description_of_goods.Text[0],
+                        TrackingState = TrackingState.Added
+                        };
+                    }
+
+                    for (var i = 0;
+                        i < ai.Tarification.Supplementary_unit.Count(x => x.Suppplementary_unit_code.Text.Count > 0);
+                        i++)
+                    {
+                        var au = ai.Tarification.Supplementary_unit.ElementAt(i);
+
+                        var lst = tariffCode.TariffCategory?.TariffCategoryCodeSuppUnits?
+                            .Where(z => z.TariffSupUnitLkp.SuppUnitCode2 == au.Suppplementary_unit_code.Text[0]);
+                        if (lst == null || !lst.Any())
+                        {
+                            var tcc = au.Suppplementary_unit_code.Text[0];
+                            var tn = au.Suppplementary_unit_name.Text.Any() ? au.Suppplementary_unit_name.Text[0] : "";
+
+
+                            TariffSupUnitLkp tariffSupUnitLkp =
+                                ctx.TariffSupUnitLkps.FirstOrDefault(x => x.SuppUnitCode2 == tcc)
+                                ?? new TariffSupUnitLkp(true)
+                                {
+                                    SuppUnitCode2 = tcc,
+                                    SuppUnitName2 = tn,
+                                    SuppQty = 1,
+                                    TrackingState = TrackingState.Added
+                                };
+
+                            var supUnit = new TariffCategoryCodeSuppUnit(true)
+                            {
+                                TariffCategory = tariffCode.TariffCategory,
+                                TariffSupUnitLkp = tariffSupUnitLkp,
+                                TrackingState = TrackingState.Added
+                            };
+
+                            
+
+                            tariffCode.TariffCategory.TariffCategoryCodeSuppUnits.Add(supUnit);
+                            ctx.ApplyChanges(supUnit);
+                            ctx.SaveChanges();
+                            supUnit.AcceptChanges();
+
+                        }
+
+                    }
+
+                    tariffCode.Description = ai.Goods_description.Description_of_goods.Text[0];
+                    if (ai.Licence_number.Text.Any()) tariffCode.TariffCategory.LicenseRequired = true;
+
+                    for (var i = 0; i < ai.Taxation.Taxation_line.Count(x => x.Duty_tax_code.Text.Count > 0); i++)
+                    {
+                        var au = ai.Taxation.Taxation_line.ElementAt(i);
+                        var rate = (Convert.ToDouble(au.Duty_tax_rate) / 100).ToString("00.00");
+                        switch (au.Duty_tax_code.Text[0])
+                        {
+                            case "CET":
+                                tariffCode.RateofDuty = rate;
+                                break;
+                            case "CSC":
+                                tariffCode.CustomsServiceCharge = rate;
+                                break;
+                            case "EVL":
+                                tariffCode.EnvironmentalLevy = rate;
+                                break;
+                            case "EXT":
+                                tariffCode.ExciseTax = rate;
+                                break;
+                            case "VAT":
+                                tariffCode.VatRate = rate;
+                                break;
+                            case "PET":
+                                tariffCode.PetrolTax = rate;
+                                break;
+                            default:
+                                break;
+                        }
+
+                    }
+                    ctx.ApplyChanges(tariffCode);
+                    ctx.SaveChanges();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
                 throw;
             }
         }
@@ -662,17 +783,11 @@ namespace WaterNut.DataSpace.Asycuda
 
 
                     var tc =ctx.TariffCodes.FirstOrDefault(x => x.TariffCodeName == ai.Tarification.HScode.Commodity_code);
-                    //(await DataSpace.InventoryDS.ViewModels.BaseDataModel.Instance.SearchTariffCode(new List<string>()
-                    //{
-                    //    string.Format("TariffCodeName == \"{0}\"", ai.Tarification.HScode.Commodity_code)
-                    //}).ConfigureAwait(false)).FirstOrDefault();
+                    
                     if (tc != null)
                         iv.TariffCode = ai.Tarification.HScode.Commodity_code;
 
-                    // DataSpace.InventoryDS.ViewModels.BaseDataModel.Instance.SaveInventoryItem(iv).Wait();
-                    //await
-                    //    DataSpace.InventoryDS.DataModels.BaseDataModel.Instance.SaveInventoryItem(iv)
-                    //        .ConfigureAwait(false);
+                    
 
                     ctx.ApplyChanges(iv);
                     ctx.SaveChanges();
@@ -951,38 +1066,14 @@ namespace WaterNut.DataSpace.Asycuda
 
                 if (i == 0) su.IsFirstRow = true;
 
-                if(i > 1)
-                {
-                    using (var ctx = new InventoryDSContext())
-                    {
-                        var tc = ctx.TariffCodes.Include("TariffCategory.TariffCategoryCodeSuppUnits.TariffSupUnitLkp")
-                            .FirstOrDefault(x => x.TariffCodeName == ai.Tarification.HScode.Commodity_code);
-                        if (tc != null)
-                        {
-                            var lst = tc.TariffCategory.TariffCategoryCodeSuppUnits
-                                .Where(z => z.TariffSupUnitLkp.SuppUnitCode2 == au.Suppplementary_unit_code.Text[0]);
-                            if (!lst.Any())
-                            {
-                                var supUnit = new TariffCategoryCodeSuppUnit(true)
-                                {
-                                    TariffCategory = tc.TariffCategory,
-                                    TariffSupUnitLkp = new TariffSupUnitLkp(true)
-                                    {
-                                        SuppUnitCode2 = au.Suppplementary_unit_name.Text[0],
-                                        SuppUnitName2 = au.Suppplementary_unit_name.Text[0],
-                                        SuppQty = 1,
-                                        TrackingState=TrackingState.Added
-                                    }
-                                };
-                                tc.TariffCategory.TariffCategoryCodeSuppUnits.Add( supUnit);
-                                ctx.ApplyChanges(tc);
-                                ctx.SaveChanges();
-                            }
-                        }
-                    }
+                
+                    
+                        
+                    
                 }
             }
-        }
+        
+    
 
         private async Task Save_HScode(xcuda_Tarification t,xcuda_Item di, ASYCUDAItem ai)
         {
@@ -1016,22 +1107,7 @@ namespace WaterNut.DataSpace.Asycuda
            
 
             var i = await SaveInventoryItem(ai).ConfigureAwait(false);
-            if (i != null)
-            {
-                h.InventoryItems = i as IInventoryItem;
-
-                if (h.InventoryItems.TariffCode == null || (updateItemsTariffCode == true && h.InventoryItems.TariffCode != h.Commodity_code))
-                {
-                    var tc =
-                        (await
-                            DataSpace.InventoryDS.DataModels.BaseDataModel.Instance.SearchTariffCode(new List<string>()
-                            {
-                                string.Format("TariffCodeName == \"{0}\"", h.Commodity_code)
-                            }).ConfigureAwait(false)).FirstOrDefault();
-                    if(tc != null)
-                        h.InventoryItems.TariffCode = h.Commodity_code;
-                }
-            }
+            
         }
 
         private async Task Save_Item_Packages(xcuda_Item di, ASYCUDAItem ai)

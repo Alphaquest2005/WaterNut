@@ -745,7 +745,7 @@ namespace WaterNut.DataSpace
                             //foreach (var item in cdoc.DocumentItems)
                             //{
                             var exceptions = new ConcurrentQueue<Exception>();
-                            cdoc.DocumentItems.AsParallel().ForAll((t) =>
+                            cdoc.DocumentItems.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll((t) =>
                             {
                                 try
                                 {

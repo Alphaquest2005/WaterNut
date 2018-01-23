@@ -40,7 +40,7 @@ namespace WaterNut.DataSpace
 
            var flst = FixExistingEntryData(elst);
            var exceptions = new ConcurrentQueue<Exception>();
-            flst.AsParallel().ForAll(itm =>
+            flst.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(itm =>
             {
                 try
                 {
@@ -99,7 +99,7 @@ namespace WaterNut.DataSpace
                                     TrackingState = TrackingState.Added
                                 }));
             var exceptions = new ConcurrentQueue<Exception>();
-            lst.AsParallel().ForAll(itm =>
+            lst.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(itm =>
             {
                 try
                 {

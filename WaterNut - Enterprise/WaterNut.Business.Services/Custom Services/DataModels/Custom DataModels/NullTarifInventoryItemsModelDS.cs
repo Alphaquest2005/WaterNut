@@ -103,7 +103,7 @@ namespace WaterNut.DataSpace
 	                }
 
 
-	                ilst.AsParallel().ForAll(x =>
+	                ilst.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll(x =>
 	                {
 	                    using (var ctx = new InventoryDSContext())
 	                    {

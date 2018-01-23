@@ -25,6 +25,8 @@ namespace AllocationQS.Client.Contracts
         [OperationContract]
         Task ClearAllocations(IEnumerable<int> alst);
         [OperationContract]
+        Task ClearAllAllocations();
+        [OperationContract]
         Task ClearAllocationsByFilter(string filterExpression);
         [OperationContract]
         Task CreateIncompOPS(string filterExpression, int AsycudaDocumentSetId);

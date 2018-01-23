@@ -70,7 +70,13 @@ namespace AllocationQS.Business.Services
             await WaterNut.DataSpace.AllocationsModel.Instance.ClearAllocations(allst).ConfigureAwait(false);
         }
 
-        public async Task ClearAllocationsByFilter(string filterExpression)
+       public async Task ClearAllAllocations()
+       {
+           await WaterNut.DataSpace.AllocationsModel.Instance.ClearAllAllocations().ConfigureAwait(false);
+
+       }
+
+       public async Task ClearAllocationsByFilter(string filterExpression)
         {
             await WaterNut.DataSpace.AllocationsModel.Instance.ClearAllocations(filterExpression).ConfigureAwait(false);
         }
