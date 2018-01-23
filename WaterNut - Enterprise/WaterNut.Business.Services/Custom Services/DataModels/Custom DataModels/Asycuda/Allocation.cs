@@ -108,38 +108,51 @@ namespace WaterNut.DataSpace
         {
            // MarkNoAsycudaEntry();
                 
-                        IEnumerable<xcuda_Item> lst; //"EX"
-                        using (var ctx = new xcuda_ItemService())
-                        {
-                            lst = await ctx.Getxcuda_ItemByExpressionNav(
-                                "All",
-                                // "xcuda_Tarification.xcuda_HScode.Precision_4 == \"1360\"",
-                                new Dictionary<string, string>()
-                                {
-                                    {
-                                        "AsycudaDocument",
-                                        (BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate.HasValue
-                                            ? string.Format("AssessmentDate >= \"{0}\" && ",
-                                                BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate)
-                                            : "") +
-                                        "(CNumber != null || IsManuallyAssessed == true) && (Extended_customs_procedure == \"7000\" || Extended_customs_procedure == \"9000\") && DoNotAllocate != true"
-                                    }
-                                }
-                                , new List<string>()
-                                {
-                                    "AsycudaDocument",
-                                    "xcuda_Tarification.xcuda_HScode",
-                                    "xcuda_Tarification.xcuda_Supplementary_unit",
-                                    "SubItems",
-                                    "xcuda_Goods_description",
-                                }).ConfigureAwait(false);
-                        }
-                        var imAsycudaEntries = lst as IList<xcuda_Item> ?? lst.ToList();
-                        MarkOverAllocatedEntries(imAsycudaEntries);
+                        List<xcuda_Item> lst; //"EX"
+
+            using (var ctx = new AllocationDSContext() {StartTracking = false})
+            {
+                lst = ctx.xcuda_Item.Include(x => x.AsycudaDocument)
+                    .Include(x => x.xcuda_Tarification.xcuda_HScode)
+                    .Include(x => x.xcuda_Tarification.xcuda_Supplementary_unit)
+                    .Include(x => x.SubItems)
+                    .Include(x => x.xcuda_Goods_description)
+                    .Where(x => (x.AsycudaDocument.CNumber != null || x.AsycudaDocument.IsManuallyAssessed == true) &&
+                                (x.AsycudaDocument.Extended_customs_procedure == "7000" ||
+                                 x.AsycudaDocument.Extended_customs_procedure == "9000") &&
+                                x.AsycudaDocument.DoNotAllocate != true)
+                    .Where(x => x.AsycudaDocument.AssessmentDate >= (BaseDataModel.Instance.CurrentApplicationSettings
+                                                                         .OpeningStockDate ?? DateTime.MinValue.Date))
+                    .ToList();
+            }
+            //    lst = await ctx.Getxcuda_ItemByExpressionNav(
+                        //        "All",
+                        //        // "xcuda_Tarification.xcuda_HScode.Precision_4 == \"1360\"",
+                        //        new Dictionary<string, string>()
+                        //        {
+                        //            {
+                        //                "AsycudaDocument",
+                        //                (BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate.HasValue
+                        //                    ? string.Format("AssessmentDate >= \"{0}\" && ",
+                        //                        BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate)
+                        //                    : "") +
+                        //                "(CNumber != null || IsManuallyAssessed == true) && (Extended_customs_procedure == \"7000\" || Extended_customs_procedure == \"9000\") && DoNotAllocate != true"
+                        //            }
+                        //        }
+                        //        , new List<string>()
+                        //        {
+                        //            "AsycudaDocument",
+                        //            "xcuda_Tarification.xcuda_HScode",
+                        //            "xcuda_Tarification.xcuda_Supplementary_unit",
+                        //            "SubItems",
+                        //            "xcuda_Goods_description",
+                        //        }).ConfigureAwait(false);
+                        //}
+                       // var imAsycudaEntries = lst as IList<xcuda_Item> ?? lst.ToList();
+                        MarkOverAllocatedEntries(lst);
 
 
-            
-
+           
 
 
 
@@ -444,8 +457,8 @@ namespace WaterNut.DataSpace
 
                                 }
 
-                                
-                                ctx.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction, sql).ConfigureAwait(false);
+                                if(!string.IsNullOrEmpty(sql))
+                                                    ctx.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction, sql).ConfigureAwait(false);
                                 
                             }
                         });
@@ -812,17 +825,21 @@ namespace WaterNut.DataSpace
             StatusModel.Timer("Getting Data - Asycuda Entries...");
             //string itmnumber = "WMHP24-72";
             IEnumerable<ItemEntries> asycudaEntries = null;
-            using (var ctx = new xcuda_ItemService())
+            using (var ctx = new AllocationDSContext(){StartTracking = false})
             {
-                var lst = await ctx.Getxcuda_ItemByExpressionNav(
-                     "All",
-                   // "xcuda_Tarification.xcuda_HScode.Precision_4 == \"1360\"",
-                    new Dictionary<string, string>() { { "AsycudaDocument", (BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate.HasValue ? string.Format("AssessmentDate >= \"{0}\" && ", BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate) : "") + "(CNumber != null || IsManuallyAssessed == true) && (Extended_customs_procedure == \"7000\" || Extended_customs_procedure == \"9000\") && DoNotAllocate != true" } }
-                    , new List<string>() { "AsycudaDocument",
-                        "xcuda_Tarification.xcuda_HScode", "xcuda_Tarification.xcuda_Supplementary_unit","SubItems" 
-                                         },false).ConfigureAwait(false);//"EX"
-
-
+                var lst = ctx.xcuda_Item.Include(x => x.AsycudaDocument)
+                    .Include(x => x.xcuda_Tarification.xcuda_HScode)
+                    .Include(x => x.xcuda_Tarification.xcuda_Supplementary_unit)
+                    .Include(x => x.SubItems)
+                    .Where(x => (x.AsycudaDocument.CNumber != null || x.AsycudaDocument.IsManuallyAssessed == true) &&
+                                (x.AsycudaDocument.Extended_customs_procedure == "7000" ||
+                                 x.AsycudaDocument.Extended_customs_procedure == "9000") &&
+                                x.AsycudaDocument.DoNotAllocate != true)
+                    .Where(x => x.AsycudaDocument.AssessmentDate >= (BaseDataModel.Instance.CurrentApplicationSettings
+                                    .OpeningStockDate ?? DateTime.MinValue.Date))
+                    .ToList();
+                                        
+                
                 asycudaEntries = from s in lst.Where(x => x.ItemNumber != null)
                    // .Where(x => x.ItemNumber == itmnumber)
                     //       .Where(x => x.AsycudaDocument.CNumber != null).AsEnumerable()

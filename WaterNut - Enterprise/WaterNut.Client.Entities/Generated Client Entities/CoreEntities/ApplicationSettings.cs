@@ -571,11 +571,11 @@ public string DeclarantCode
         {
             get
             {
-                return this.TrackingState;
+                return this.DTO.TrackingState;
             }
             set
             {
-                this.TrackingState = value;
+                this.DTO.TrackingState = value;
                 NotifyPropertyChanged("TrackingState");
             }
         }
