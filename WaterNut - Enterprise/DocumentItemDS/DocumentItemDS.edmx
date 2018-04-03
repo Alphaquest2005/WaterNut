@@ -67,7 +67,7 @@
             <PropertyRef Name="ItemNumber" />
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="xcuda_Item">
@@ -1107,7 +1107,7 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
             <PropertyRef Name="ItemNumber" />
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Id" Nullable="false" />
           <NavigationProperty Name="xcuda_HScode" Relationship="WaterNutDBModel.FK_xcuda_Inventory_Item_xcuda_HScode" FromRole="xcuda_Inventory_Item" ToRole="xcuda_HScode" />
         </EntityType>
@@ -1608,7 +1608,7 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           <Property Name="RndCurrent_Value" Type="Double" Nullable="false" />
           <NavigationProperty Name="xcuda_PreviousItem" Relationship="WaterNutDBModel.xcuda_PreviousItemPreviousItemsEx" FromRole="PreviousItemsEx" ToRole="xcuda_PreviousItem" />
           <Property Name="CNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="RegistrationDate" Type="DateTime" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
           <Property Name="PreviousDocumentItemId" Type="Int32" />
           <Property Name="AsycudaDocumentItemId" Type="Int32" />
         </EntityType>

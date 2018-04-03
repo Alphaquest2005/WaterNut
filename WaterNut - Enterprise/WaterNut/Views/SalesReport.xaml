@@ -111,8 +111,14 @@
                                                     Binding="{Binding TariffCode}"
                                                     Header="TariffCode" />
                                 <DataGridTextColumn Width="60"
-                                                    Binding="{Binding Quantity}"
-                                                    Header="Quantity" />
+                                                    Binding="{Binding SalesQuantity}"
+                                                    Header="SalesQuantity" />
+                                <DataGridTextColumn Width="60"
+                                                    Binding="{Binding SalesFactor}"
+                                                    Header="SalesFactor" />
+                                <DataGridTextColumn Width="60"
+                                                    Binding="{Binding xQuantity}"
+                                                    Header="xQuantity" />
                                 <DataGridTextColumn Width="50"
                                                     Binding="{Binding Price,
                                                                       StringFormat=c}"

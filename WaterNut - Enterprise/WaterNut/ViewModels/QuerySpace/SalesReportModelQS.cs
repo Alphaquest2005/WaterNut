@@ -13,7 +13,9 @@ using System.Windows.Controls;
 using AllocationQS.Client.Repositories;
 using Core.Common.Converters;
 using Core.Common.UI;
+using CoreEntities.Business.Entities;
 using CoreEntities.Client.Entities;
+using CoreEntities.Client.Repositories;
 using SalesDataQS.Client.Repositories;
 using SimpleMvvmToolkit;
 
@@ -80,7 +82,9 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
                                 ItemNumber = s.ItemNumber,
                                 ItemDescription = s.ItemDescription,
                                 TariffCode = s.TariffCode,
-                                Quantity = Convert.ToDouble(s.QtyAllocated),
+                                SalesFactor = Convert.ToDouble(s.SalesFactor),
+                                SalesQuantity = Convert.ToDouble(s.QtyAllocated),
+                                xQuantity = Convert.ToDouble(s.xQuantity),// Convert.ToDouble(s.QtyAllocated),
                                 Price = Convert.ToDouble(s.Cost),
                                 SalesType = s.DutyFreePaid,
                                 GrossSales = Convert.ToDouble(s.TotalValue),
@@ -130,7 +134,9 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
             public string ItemNumber { get; set; }
             public string ItemDescription { get; set; }
             public string TariffCode { get; set; }
-            public double Quantity { get; set; }
+            public double SalesQuantity { get; set; }
+            public double SalesFactor { get; set; }
+            public double xQuantity { get; set; }
             public double Price { get; set; }
             public string SalesType { get; set; }
             public double GrossSales { get; set; }
@@ -139,6 +145,8 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
             public string PreviousRegDate { get; set; }
             public double CIFValue { get; set; }
             public double DutyLiablity { get; set; }
+
+            
         }
 
 
@@ -182,6 +190,7 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
                     SalesDataRepository.Instance.GetSalesDocuments(
                         docSet.AsycudaDocumentSetId)
                         .ConfigureAwait(false);
+            if (doclst == null || !doclst.ToList().Any()) return;
             StatusModel.StartStatusUpdate("Exporting Files", doclst.Count());
 
             var exceptions = new ConcurrentQueue<Exception>();
@@ -225,6 +234,17 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
 
         public async Task Send2Excel(string folder, AsycudaDocument doc)
         {
+            if (doc != null)
+            {
+                using (var ctx = new AsycudaDocumentRepository ())
+                {
+                    var doctype = await ctx.GetAsycudaDocument(doc.ASYCUDA_Id.ToString()).ConfigureAwait(false);
+                    if (doctype.DocumentType == "IM7") return;
+
+                }
+
+            }
+
             using (var sta = new StaTaskScheduler(numberOfThreads: 1))
             {
 
@@ -248,7 +268,8 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
                                 }
                                 else
                                 {
-                                    File.Create(Path.Combine(folder, doc.CNumber ?? doc.ReferenceNumber + ".xls"));
+                                s.dataToPrint = new List<SaleReportLine>();
+                                File.Create(Path.Combine(folder, doc.CNumber ?? doc.ReferenceNumber + ".xls"));
                                 }
                                 StatusModel.StatusUpdate();
                             }

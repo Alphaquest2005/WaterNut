@@ -649,6 +649,36 @@ namespace AllocationQS.Business.Entities
             }
         }
         string _pitemnumber;
+        [DataMember]
+        public Nullable<double> xQuantity 
+        {
+            get
+            {
+                return _xquantity;
+            }
+            set
+            {
+                _xquantity = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _xquantity;
+        [DataMember]
+        public Nullable<double> SalesFactor 
+        {
+            get
+            {
+                return _salesfactor;
+            }
+            set
+            {
+                _salesfactor = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _salesfactor;
 
  //       [DataMember]
  //       public TrackingState TrackingState { get; set; }

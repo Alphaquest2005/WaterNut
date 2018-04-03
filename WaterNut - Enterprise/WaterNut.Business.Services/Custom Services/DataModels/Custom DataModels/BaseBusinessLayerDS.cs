@@ -283,7 +283,7 @@ namespace WaterNut.DataSpace
                         {
                             InventoryItem = ctx.GetInventoryItemByKey(_itemNumber, new List<string>()
                             {
-                                "TariffCodes.TariffCategory.TariffSupUnitLkps"
+                                "TariffCodes.TariffCategory.TariffCategoryCodeSuppUnits.TariffSupUnitLkp"
                             } ).Result;
                         }
                         else
@@ -669,7 +669,8 @@ namespace WaterNut.DataSpace
                     EntryDataDetails = g.Select(x => new EntryDataDetailSummary()
                     {
                         EntryDataDetailsId = x.EntryDataDetailsId,
-                        EntryDataId = x.EntryDataId
+                        EntryDataId = x.EntryDataId,
+                        QtyAllocated = x.QtyAllocated,
                     }).ToList(),
                     EntryData = g.Key.EntryData,
                     Freight = Convert.ToDouble(g.Sum(x => x.Freight)),
@@ -861,6 +862,7 @@ namespace WaterNut.DataSpace
            // {
             try
             {
+               
 
                var itm = CreateNewDocumentItem();
                 cdoc.DocumentItems.Add(itm);
@@ -1983,7 +1985,9 @@ namespace WaterNut.DataSpace
             i.StartTracking();
             // null for now cuz there are no navigation properties involved.
             i.InjectFrom(asycudaDocument);
-            
+            i.xcuda_ASYCUDA_ExtendedProperties.StartTracking();
+            i.xcuda_ASYCUDA_ExtendedProperties.EffectiveRegistrationDate = asycudaDocument.EffectiveRegistrationDate;
+            i.xcuda_ASYCUDA_ExtendedProperties.DoNotAllocate = asycudaDocument.DoNotAllocate;
             await Save_xcuda_ASYCUDA(i).ConfigureAwait(false);
         }
 
@@ -2057,5 +2061,7 @@ namespace WaterNut.DataSpace
         public string EntryDataId { get; set; }
         public int EntryDataDetailsId { get; set; }
         public DateTime EntryDataDate { get; set; }
+
+        public double QtyAllocated { get; set; }
     }
 }

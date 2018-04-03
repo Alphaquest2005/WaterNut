@@ -567,6 +567,32 @@ namespace AllocationQS.Client.DTO
 		}
         private string _pItemNumber;
 
+        [DataMember]
+        public Nullable<double> xQuantity
+		{ 
+		    get { return _xQuantity; }
+			set
+			{
+			    if (value == _xQuantity) return;
+				_xQuantity = value;
+				NotifyPropertyChanged();//m => this.xQuantity
+			}
+		}
+        private Nullable<double> _xQuantity;
+
+        [DataMember]
+        public Nullable<double> SalesFactor
+		{ 
+		    get { return _SalesFactor; }
+			set
+			{
+			    if (value == _SalesFactor) return;
+				_SalesFactor = value;
+				NotifyPropertyChanged();//m => this.SalesFactor
+			}
+		}
+        private Nullable<double> _SalesFactor;
+
        
    //     [DataMember]
    //     public TrackingState TrackingState { get; set; }

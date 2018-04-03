@@ -73,7 +73,7 @@ namespace WaterNut.DataSpace
 				
 
 				foreach (var g in ps)
-			  //  Parallel.ForEach(ps, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 }, g =>
+			 //   Parallel.ForEach(ps, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 1 }, g =>
 				{
 					try
 					{
@@ -91,7 +91,7 @@ namespace WaterNut.DataSpace
 					}
 				}
 
-				 // });
+				// });
 
 
 
@@ -132,7 +132,8 @@ namespace WaterNut.DataSpace
 										    && z.xcuda_Item.AsycudaDocument.Cancelled != true
 											&& z.xcuda_Item.AsycudaDocument.DoNotAllocate != true
 											&& z.xcuda_Item.AsycudaDocument != null
-											&& z.xcuda_Item.AsycudaDocument.CNumber != null)
+											&& z.xcuda_Item.AsycudaDocument.CNumber != null
+                                            && z.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.Extended_customs_procedure == (x.EntryDataDetails.Sales.TaxAmount == 0 ? "9070" : "4070"))
 									&& x.PreviousDocumentItem.AsycudaDocument != null
 									&& x.PreviousDocumentItem.AsycudaDocument.Cancelled != true)
 						.OrderBy(x => x.EntryDataDetails.Sales.EntryDataDate)
@@ -143,27 +144,26 @@ namespace WaterNut.DataSpace
 							SalesDate = x.EntryDataDetails.Sales.EntryDataDate,
 							Item_Id = x.PreviousDocumentItem.Item_Id,
 							DutyFreePaid = (x.EntryDataDetails.Sales.TaxAmount == 0 ? "9070" : "4070"),
-							Pi = x.PreviousDocumentItem.EntryPreviousItems.Where(p => p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.Cancelled != true
-																				 &&   x.EntryDataDetails.Sales.EntryDataDate >= p.xcuda_Item.AsycudaDocument.AssessmentDate
-                                                                                 && p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.Extended_customs_procedure == (x.EntryDataDetails.Sales.TaxAmount == 0?"9070": "4070"))
+							Pi = x.PreviousDocumentItem.EntryPreviousItems // already filtered out
+                     //       .Where(p => p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.Cancelled != true
+																				 //&&   x.EntryDataDetails.Sales.EntryDataDate >= p.xcuda_Item.AsycudaDocument.AssessmentDate
+                     //                                                            && p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.Extended_customs_procedure == (x.EntryDataDetails.Sales.TaxAmount == 0?"9070": "4070"))
 																			  
 							.Select(p => new DatedPi
 							{
 								Pi = p.xcuda_PreviousItem,
 								CNumber = p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.CNumber,
-								pAssessmentDate = Convert.ToDateTime(p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.AssessmentDate),
+								pAssessmentDate = p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.AssessmentDate??DateTime.MinValue,
 								pRegDate =
-									(p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.RegistrationDate.HasValue
-										? p.xcuda_Item.AsycudaDocument.RegistrationDate.Value
-										: DateTime.MinValue)
+									(p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.RegistrationDate?? DateTime.MinValue)
 							}).OrderBy(q => q.pAssessmentDate).ThenBy(q => q.pRegDate),
 
 
 						})
 						.Where(x => x.Pi.Any())
-						.OrderBy(x => x.Pi.FirstOrDefault().pAssessmentDate)
-						.ThenBy(x => x.Pi.FirstOrDefault().pRegDate)
-						.ToList();
+                        .ToList()
+						.OrderBy(x => x.Pi.First().pAssessmentDate)
+						.ThenBy(x => x.Pi.First().pRegDate);
 					return res;
 
 					
@@ -294,8 +294,8 @@ namespace WaterNut.DataSpace
 
 				pitm.QtyAllocated += amt;
 
-				await SaveXbond(ssa, pitm).ConfigureAwait(false);
-				await SavePitm(pitm).ConfigureAwait(false);
+				//await SaveXbond(ssa, pitm).ConfigureAwait(false);
+				//await SavePitm(pitm).ConfigureAwait(false);
 			}
 			else
 			{
@@ -311,12 +311,12 @@ namespace WaterNut.DataSpace
 								QtyAllocated = ssa.QtyAllocated - atot,
 								 Status = "Ex9 Fix"
 				};
-				await SaveAllocation(nallo);
+				//await SaveAllocation(nallo);
 				ssa.QtyAllocated = atot;
 				ssa.Status = "Ex9 issue";
-				await SaveAllocation(ssa);
-				await SaveXbond(ssa, pitm).ConfigureAwait(false);
-				await SavePitm(pitm).ConfigureAwait(false);
+				//await SaveAllocation(ssa);
+				//await SaveXbond(ssa, pitm).ConfigureAwait(false);
+				//await SavePitm(pitm).ConfigureAwait(false);
 			}
 
 
@@ -327,7 +327,7 @@ namespace WaterNut.DataSpace
 			var xbond = new xBondAllocations(true)
 			{
 				AllocationId = ssa.AllocationId,
-				xEntryItem_Id = pitm.PreviousItem_Id,
+                xEntryItem_Id = pitm.PreviousItem_Id,
 				TrackingState = TrackingState.Added
 			};
 			await AllocationDS.DataModels.BaseDataModel.Instance.SavexBondAllocations(xbond)
@@ -337,9 +337,18 @@ namespace WaterNut.DataSpace
 		private async Task SavePitm(xcuda_PreviousItem pitm)
 		{
 			var res = pitm.ChangeTracker.GetChanges().FirstOrDefault();
-		   
-			await AllocationDS.DataModels.BaseDataModel.Instance.Savexcuda_PreviousItem(res)
-				.ConfigureAwait(false);
+		    if (res == null) return;
+		    var sql = $@"INSERT INTO xcuda_PreviousItem
+                         (Packages_number, Previous_Packages_number, Hs_code, Commodity_code, Previous_item_number, Goods_origin, Net_weight, Prev_net_weight, Prev_reg_ser, Prev_reg_nbr, Prev_reg_dat, Prev_reg_cuo, 
+                         Suplementary_Quantity, Preveious_suplementary_quantity, Current_value, Previous_value, Current_item_number, ASYCUDA_Id, QtyAllocated)
+                        VALUES        ({res.Packages_number},{res.Previous_Packages_number},{res.Hs_code},{res.Commodity_code},{res.Previous_item_number},{res.Goods_origin},{res.Net_weight},{res.Prev_net_weight},{res.Prev_reg_ser},{res.Prev_reg_nbr},{res.Prev_reg_dat},{res.Prev_reg_cuo},
+                                        {res.Suplementary_Quantity},{res.Preveious_suplementary_quantity},{res.Current_value},{res.Previous_value},{res.Current_item_number},{res.ASYCUDA_Id},{res.QtyAllocated})";
+            //await AllocationDS.DataModels.BaseDataModel.Instance.Savexcuda_PreviousItem(res)
+            //	.ConfigureAwait(false);
+		    using (var ctx = new AllocationDSContext())
+		    {
+		        
+		    }
 		}
 
 		private async Task SaveAllocation(AsycudaSalesAllocations pitm)

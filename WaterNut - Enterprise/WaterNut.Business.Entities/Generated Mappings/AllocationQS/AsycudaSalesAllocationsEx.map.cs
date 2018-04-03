@@ -24,7 +24,7 @@
               this.Property(t => t.SalesQuantity).HasColumnName("SalesQuantity");
               this.Property(t => t.SalesQtyAllocated).HasColumnName("SalesQtyAllocated");
               this.Property(t => t.InvoiceNo).HasColumnName("InvoiceNo").IsUnicode(false).HasMaxLength(50);
-              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsUnicode(false).HasMaxLength(255);
               this.Property(t => t.ItemDescription).HasColumnName("ItemDescription").IsUnicode(false);
               this.Property(t => t.EntryDataDetailsId).HasColumnName("EntryDataDetailsId");
               this.Property(t => t.xBond_Item_Id).HasColumnName("xBond_Item_Id");
@@ -55,6 +55,8 @@
               this.Property(t => t.CustomerName).HasColumnName("CustomerName").IsUnicode(false);
               this.Property(t => t.pTariffCode).HasColumnName("pTariffCode").IsUnicode(false).HasMaxLength(8);
               this.Property(t => t.pItemNumber).HasColumnName("pItemNumber").IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.xQuantity).HasColumnName("xQuantity");
+              this.Property(t => t.SalesFactor).HasColumnName("SalesFactor");
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);
     			this.Ignore(t => t.ModifiedProperties);

@@ -9,7 +9,7 @@ namespace AllocationDS.Business.Entities
 {
     public partial class xcuda_Item 
     {
-        [IgnoreDataMember]
+         
         [NotMapped]
         public String ItemDescription
         {

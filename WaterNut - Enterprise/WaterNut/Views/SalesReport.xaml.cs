@@ -38,6 +38,11 @@ namespace WaterNut.Views
 	    private SalesReportModel im;
         private async void PrintReport(object sender, MouseButtonEventArgs e)
         {
+            if (BaseViewModel.Instance.CurrentAsycudaDocument == null)
+            {
+                MessageBox.Show("Please select a document.");
+                return;
+            }
             var res = MessageBox.Show("Do you want to Export Sales?", "Export Sales", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {

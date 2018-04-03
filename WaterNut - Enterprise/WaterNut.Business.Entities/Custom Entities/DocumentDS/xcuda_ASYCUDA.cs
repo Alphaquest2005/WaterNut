@@ -233,6 +233,12 @@ namespace DocumentDS.Business.Entities
 
             }
         }
-
+        [NotMapped]
+        [IgnoreDataMember]
+        public DateTime? EffectiveRegistrationDate
+        {
+            get { return xcuda_ASYCUDA_ExtendedProperties.EffectiveRegistrationDate; }
+            set { xcuda_ASYCUDA_ExtendedProperties.EffectiveRegistrationDate = value; }
+        }
     }
 }

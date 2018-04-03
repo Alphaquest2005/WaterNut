@@ -104,7 +104,8 @@ namespace WaterNut.DataSpace
                             EntryDataDetails = g.Select(x => new EntryDataDetailSummary()
                             {
                                 EntryDataDetailsId = (int) x.EntryDataDetailsId,
-                                EntryDataId = x.EntryDataDetails.EntryDataId
+                                EntryDataId = x.EntryDataDetails.EntryDataId,
+                                QtyAllocated = x.QtyAllocated
                             }).ToList()
                         };
             return cslst.Where(x => x.Quantity > 0);

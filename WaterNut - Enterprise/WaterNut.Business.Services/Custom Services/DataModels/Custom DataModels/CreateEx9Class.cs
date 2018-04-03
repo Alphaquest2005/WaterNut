@@ -76,9 +76,18 @@ namespace WaterNut.DataSpace
             var dutylst = new List<string>(){"Duty Paid", "Duty Free"};
             foreach (var dfp in dutylst)
             {
+                var exPro = " && PreviousDocumentItem.AsycudaDocument.Extended_customs_procedure == \"7000\"";
                 var slst =
-                (await CreateAllocationDataBlocks(filterExp).ConfigureAwait(false)).Where(
+                (await CreateAllocationDataBlocks(filterExp + exPro).ConfigureAwait(false)).Where(
                     x => x.Allocations.Count > 0);
+
+                await CreateDutyFreePaidDocument(dfp, slst.Where(x => x.DutyFreePaid == dfp), docSet)
+                    .ConfigureAwait(false);
+
+                exPro = " && PreviousDocumentItem.AsycudaDocument.Extended_customs_procedure == \"7100\"";
+                slst =
+                    (await CreateAllocationDataBlocks(filterExp + exPro).ConfigureAwait(false)).Where(
+                        x => x.Allocations.Count > 0);
 
                 await CreateDutyFreePaidDocument(dfp, slst.Where(x => x.DutyFreePaid == dfp), docSet)
                     .ConfigureAwait(false);
@@ -130,7 +139,7 @@ namespace WaterNut.DataSpace
                     foreach (var mypod in elst)
                     {
                         //itmcount = await InitializeDocumentCT(itmcount, prevEntryId, mypod, cdoc, prevIM7, monthyear, dt, dfp).ConfigureAwait(true);
-
+                        if (!(mypod.EntlnData.Quantity > 0)) continue;
                         if (MaxLineCount(itmcount)
                             || InvoicePerEntry(prevEntryId, mypod)
                             || (cdoc.Document == null || itmcount == 0)
@@ -331,7 +340,7 @@ namespace WaterNut.DataSpace
             FilterExpression =
                 FilterExpression.Replace("&& (pExpiryDate >= \"" + DateTime.Now.Date.ToShortDateString() + "\")", "");
 
-            FilterExpression += "&& PreviousDocumentItem.DoNotAllocate != true && PreviousDocumentItem.DoNotEX != true && PreviousDocumentItem.AsycudaDocument.DocumentType == \"IM7\"";
+            FilterExpression += "&& PreviousDocumentItem.DoNotAllocate != true && PreviousDocumentItem.DoNotEX != true && PreviousDocumentItem.WarehouseError == null && PreviousDocumentItem.AsycudaDocument.DocumentType == \"IM7\"";
 
             var exp1 = AllocationsModel.Instance.TranslateAllocationWhereExpression(FilterExpression);
             var map = new Dictionary<string, string>()
@@ -730,7 +739,8 @@ namespace WaterNut.DataSpace
                                     new EntryDataDetailSummary()
                                     {
                                         EntryDataDetailsId = s.EntryDataDetailsId,
-                                        EntryDataId = s.InvoiceNo
+                                        EntryDataId = s.InvoiceNo,
+                                        QtyAllocated = 0,
                                     }
                                 },
                                 PreviousDocumentItemId = s.PreviousItem_Id.ToString(),
@@ -792,7 +802,8 @@ namespace WaterNut.DataSpace
                                     new EntryDataDetailSummary()
                                     {
                                         EntryDataDetailsId = s.LastOrDefault().EntryDataDetailsId,
-                                        EntryDataId = s.LastOrDefault().InvoiceNo
+                                        EntryDataId = s.LastOrDefault().InvoiceNo,
+                                        QtyAllocated = s.LastOrDefault().QtyAllocated
                                     }
                                 },
                                 PreviousDocumentItemId = s.Key.ToString(),
@@ -883,7 +894,8 @@ namespace WaterNut.DataSpace
                                         g.Select(x => new EntryDataDetailSummary()
                                         {
                                             EntryDataDetailsId = x.EntryDataDetailsId,
-                                            EntryDataId = x.InvoiceNo
+                                            EntryDataId = x.InvoiceNo,
+                                            QtyAllocated = x.QtyAllocated
                                         }).ToList(),
                                     //g.Select(x => new EntryDataDetails()
                                     //{
@@ -1092,63 +1104,82 @@ namespace WaterNut.DataSpace
             try
             {
                 
-                var eld = mypod.EntlnData;
-                var previousItem = mypod.EntlnData.pDocumentItem;
+                var entryLine = mypod.EntlnData;
+                var asycudaLine = mypod.EntlnData.pDocumentItem;
+                var allocations = mypod.Allocations;
                 
-                if (previousItem == null) return;
-                var PdfpAllocated = (dfp == "Duty Free" ? previousItem.DFQtyAllocated : previousItem.DPQtyAllocated);
-                if (PdfpAllocated > previousItem.ItemQuantity) PdfpAllocated = (int) previousItem.ItemQuantity;
+                if (asycudaLine == null) return;
+                var dutyFreePaidAllocated = (dfp == "Duty Free" ? asycudaLine.DFQtyAllocated : asycudaLine.DPQtyAllocated);
+                if (dutyFreePaidAllocated > asycudaLine.ItemQuantity) dutyFreePaidAllocated = (int) asycudaLine.ItemQuantity;
                 //if (previousItem.QtyAllocated == 0) return;
 
-                var maxQuantityToEx9 = previousItem.ItemQuantity;//PdfpAllocated;//
+                var asycudaTotalQuantity = asycudaLine.ItemQuantity;//PdfpAllocated;//
 
 
-                if (previousItem.previousItems.Any() == false && eld.Quantity > maxQuantityToEx9)
+                if (asycudaLine.previousItems.Any() == false && entryLine.Quantity > asycudaTotalQuantity)
                 {
-                    eld.Quantity = maxQuantityToEx9;
+                    entryLine.Quantity = asycudaTotalQuantity;
                     return;
                 }
 
-                var plst = previousItem.previousItems;
-                var pqty = plst.Where(x => x.DutyFreePaid == dfp).Sum(xx => xx.Suplementary_Quantity);
-                var apqty = plst.Sum(xx => xx.Suplementary_Quantity);
+                var alreadyTakenOutItemsLst = asycudaLine.previousItems;
+                var alreadyTakenOutDFPQty = alreadyTakenOutItemsLst.Where(x => x.DutyFreePaid == dfp).Sum(xx => xx.Suplementary_Quantity);
+                var alreadyTakenOutTotalQuantity = alreadyTakenOutItemsLst.Sum(xx => xx.Suplementary_Quantity);
                 
-                if (maxQuantityToEx9 == apqty)
+
+                if ((asycudaTotalQuantity == alreadyTakenOutTotalQuantity) 
+                    || (dutyFreePaidAllocated < alreadyTakenOutDFPQty))
                 {
-                    mypod.Allocations.Clear();
-                    eld.EntryDataDetails.Clear();
-                    eld.Quantity = 0;
+                    allocations.Clear();
+                    entryLine.EntryDataDetails.Clear();
+                    entryLine.Quantity = 0;
                     return;
                 }
-                if (PdfpAllocated - (pqty + eld.Quantity) < 0)
-                {
+                //if (dutyFreePaidAllocated - (alreadyTakenOutDFPQty + entryLine.Quantity) < 0)
+                //{
+                
+                    var remainingQtyToBeTakenOut = Math.Round(dutyFreePaidAllocated - alreadyTakenOutDFPQty,3);
+                    if (remainingQtyToBeTakenOut + alreadyTakenOutTotalQuantity > asycudaTotalQuantity) remainingQtyToBeTakenOut = asycudaTotalQuantity - alreadyTakenOutTotalQuantity;
+                    var salesLst = entryLine.EntryDataDetails.OrderBy(x => x.EntryDataDate).ToList();
 
-                    var qty = PdfpAllocated - (pqty);
-                    if (qty + apqty > maxQuantityToEx9) qty = maxQuantityToEx9 - apqty;
-                    var lst = eld.EntryDataDetails.OrderBy(x => x.EntryDataDate).ToList();
-
-                    var lqty = mypod.Allocations.Sum(x => x.QtyAllocated);
-                    while (qty < lqty)
+                    var totalAllocatedQty = allocations.Sum(x => x.QtyAllocated);
+                    var totalGottenOut = 0;
+                    while (remainingQtyToBeTakenOut < totalAllocatedQty )
                     {
-                        if (lst.Any() == false) break;
 
-                        var entlst = mypod.Allocations.Where(x => x.EntryDataDetailsId == lst.ElementAt(0).EntryDataDetailsId).ToList();
-                        foreach (var item in entlst)
+                        if (entryLine.Quantity <= 0) break;
+                        if (remainingQtyToBeTakenOut == 0) break;
+                        if (salesLst.Any() == false) break;
+
+                        EntryDataDetailSummary saleItm = salesLst.ElementAt(0);
+                        var saleAllocationsLst = allocations.Where(x => x.EntryDataDetailsId == saleItm.EntryDataDetailsId).ToList();
+                        foreach (var allocation in saleAllocationsLst)
                         {
-                            lqty -= item.QtyAllocated;
-                            mypod.Allocations.Remove(item);
+                            var takeOut = allocation.QtyAllocated;
+                            if (remainingQtyToBeTakenOut < takeOut) takeOut = remainingQtyToBeTakenOut;
+                            if (remainingQtyToBeTakenOut > totalAllocatedQty) takeOut = totalAllocatedQty;
+                            totalAllocatedQty -= takeOut;
+                            allocation.QtyAllocated -= takeOut;
+                            saleItm.QtyAllocated -= takeOut;
+                            entryLine.Quantity -= takeOut;
+                            
+                            if(allocation.QtyAllocated == 0) allocations.Remove(allocation);
+                            
                         }
 
+                        if (saleItm.QtyAllocated == 0)
+                        {
+                            entryLine.EntryDataDetails.Remove(saleItm);
+                            salesLst.RemoveAt(0);
+                        }
 
-                        eld.EntryDataDetails.Remove(lst.ElementAt(0));
-                        lst.RemoveAt(0);
                     }
 
 
-                    eld.Quantity = qty;
-                    return;
-                }
-                if (eld.Quantity + apqty > maxQuantityToEx9) eld.Quantity = maxQuantityToEx9 - apqty;
+                   // entryLine.Quantity = remainingQtyToBeTakenOut;
+                   
+                //}
+                //if (entryLine.Quantity + alreadyTakenOutTotalQuantity > asycudaTotalQuantity) entryLine.Quantity = asycudaTotalQuantity - alreadyTakenOutTotalQuantity;
 
 
             }

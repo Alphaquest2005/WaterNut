@@ -16,7 +16,7 @@ namespace WaterNut.Interfaces
 
 		public partial interface IDocument //CoreEntities|AsycudaDocument
 		{
-		//DateTime? EffectiveRegistrationDate {get;set;}
+		DateTime? EffectiveRegistrationDate {get;set;}
 		
 		
 		

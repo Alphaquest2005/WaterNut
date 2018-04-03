@@ -16,7 +16,7 @@
               this.Property(t => t.EntryDataDetailsId).HasColumnName("EntryDataDetailsId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
               this.Property(t => t.EntryDataId).HasColumnName("EntryDataId").IsRequired().IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.LineNumber).HasColumnName("LineNumber");
-              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(255);
               this.Property(t => t.Quantity).HasColumnName("Quantity");
               this.Property(t => t.Units).HasColumnName("Units").IsUnicode(false).HasMaxLength(15);
               this.Property(t => t.ItemDescription).HasColumnName("ItemDescription").IsRequired().IsUnicode(false);

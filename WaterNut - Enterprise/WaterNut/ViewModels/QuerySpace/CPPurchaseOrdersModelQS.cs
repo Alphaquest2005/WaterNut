@@ -58,5 +58,29 @@ namespace WaterNut.QuerySpace.CounterPointQS.ViewModels
             MessageBox.Show("Complete");
 
         }
-    }
+
+	    internal async Task SilentDownloadCPO(CounterPointPOs counterPointPOs)
+	    {
+
+	        //db.Refresh(System.Data.Objects.RefreshMode.StoreWins, db.EntryData);
+	        //CycleCurrentAsycudaDocument();
+	        await CounterPointPOsRepository.Instance.DownloadCPO(counterPointPOs,
+	            CoreEntities.ViewModels.BaseViewModel.Instance.CurrentAsycudaDocumentSetEx.AsycudaDocumentSetId).ConfigureAwait(false);
+
+	        
+	    }
+
+	    internal void NotifyComplete()
+	    {
+	        MessageBus.Default.BeginNotify(QuerySpace.EntryDataQS.MessageToken.EntryDataExChanged,
+	            new CPPurchaseOrdersModel(),
+	            new NotificationEventArgs(QuerySpace.EntryDataQS.MessageToken.EntryDataExChanged));
+	        MessageBus.Default.BeginNotify(MessageToken.CurrentCounterPointPOsChanged, new CPPurchaseOrdersModel(),
+	            new NotificationEventArgs(MessageToken.CurrentCounterPointPOsChanged));
+	        MessageBus.Default.BeginNotify(MessageToken.CounterPointPOsChanged, new CPPurchaseOrdersModel(),
+	            new NotificationEventArgs(MessageToken.CounterPointPOsChanged));
+
+	        MessageBox.Show("Complete");
+	    }
+	}
 }

@@ -14,8 +14,8 @@
               this.HasKey(t => t.AliasId);        
               this.ToTable("InventoryItemAlias");
               this.Property(t => t.AliasId).HasColumnName("AliasId").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.Identity));
-              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(50);
-              this.Property(t => t.AliasName).HasColumnName("AliasName").IsRequired().IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(255);
+              this.Property(t => t.AliasName).HasColumnName("AliasName").IsRequired().IsUnicode(false).HasMaxLength(255);
               this.HasRequired(t => t.InventoryItems).WithMany(t =>(ICollection<InventoryItemAlias>) t.InventoryItemAlias).HasForeignKey(d => d.ItemNumber);
              // Tracking Properties
     			this.Ignore(t => t.TrackingState);

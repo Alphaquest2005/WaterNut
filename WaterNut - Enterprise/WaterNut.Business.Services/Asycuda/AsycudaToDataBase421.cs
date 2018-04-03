@@ -591,6 +591,7 @@ namespace WaterNut.DataSpace.Asycuda
 
 
                 di.LineNumber = i + 1;
+                di.SalesFactor = 1;
 
                 if (ai.Licence_number.Text.Count > 0)
                 {
@@ -670,7 +671,7 @@ namespace WaterNut.DataSpace.Asycuda
                         {
                             TariffCategoryCode =
                                 ai.Tarification.HScode.Commodity_code.Substring(0, 4),
-                            Description = ai.Goods_description.Description_of_goods.Text[0],
+                            Description = ai.Goods_description.Description_of_goods.Text.Any()?ai.Goods_description.Description_of_goods.Text[0]:"",
                         TrackingState = TrackingState.Added
                         };
                     }
@@ -717,7 +718,7 @@ namespace WaterNut.DataSpace.Asycuda
 
                     }
 
-                    tariffCode.Description = ai.Goods_description.Description_of_goods.Text[0];
+                    if(ai.Goods_description.Description_of_goods.Text.Any()) tariffCode.Description = ai.Goods_description.Description_of_goods.Text[0];
                     if (ai.Licence_number.Text.Any()) tariffCode.TariffCategory.LicenseRequired = true;
 
                     for (var i = 0; i < ai.Taxation.Taxation_line.Count(x => x.Duty_tax_code.Text.Count > 0); i++)

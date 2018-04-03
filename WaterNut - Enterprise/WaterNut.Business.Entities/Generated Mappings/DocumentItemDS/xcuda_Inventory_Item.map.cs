@@ -13,7 +13,7 @@
         {                        
               this.HasKey(t => new {t.ItemNumber, t.Id});        
               this.ToTable("xcuda_Inventory_Item");
-              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsRequired().IsUnicode(false).HasMaxLength(255);
               this.Property(t => t.Id).HasColumnName("Id").HasDatabaseGeneratedOption(new Nullable<DatabaseGeneratedOption>(DatabaseGeneratedOption.None));
               this.HasRequired(t => t.xcuda_HScode).WithMany(t =>(ICollection<xcuda_Inventory_Item>) t.xcuda_Inventory_Item).HasForeignKey(d => d.Id);
              // Tracking Properties

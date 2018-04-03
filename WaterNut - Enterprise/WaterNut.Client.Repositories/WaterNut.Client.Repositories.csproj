@@ -136,6 +136,7 @@
     <Compile Include="Generated Repositories\InventoryQSRepository.cs" />
     <Compile Include="Generated Repositories\InventoryQS\EntryDataDetailsExRepository.cs" />
     <Compile Include="Generated Repositories\InventoryQS\InventoryItemsExRepository.cs" />
+    <Compile Include="Generated Repositories\InventoryQS\TariffCategoryCodeSuppUnitRepository.cs" />
     <Compile Include="Generated Repositories\InventoryQS\TariffCategoryRepository.cs" />
     <Compile Include="Generated Repositories\InventoryQS\TariffCodesRepository.cs" />
     <Compile Include="Generated Repositories\InventoryQS\TariffSupUnitLkpsRepository.cs" />

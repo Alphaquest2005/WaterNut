@@ -118,7 +118,7 @@ namespace WaterNut.DataSpace
                     .Include(x => x.SubItems)
                     .Include(x => x.xcuda_Goods_description)
                     .Where(x => (x.AsycudaDocument.CNumber != null || x.AsycudaDocument.IsManuallyAssessed == true) &&
-                                (x.AsycudaDocument.Extended_customs_procedure == "7000" ||
+                                (x.AsycudaDocument.Extended_customs_procedure == "7000" || x.AsycudaDocument.Extended_customs_procedure == "7100" ||
                                  x.AsycudaDocument.Extended_customs_procedure == "9000") &&
                                 x.AsycudaDocument.DoNotAllocate != true)
                     .Where(x => x.AsycudaDocument.AssessmentDate >= (BaseDataModel.Instance.CurrentApplicationSettings
@@ -167,7 +167,7 @@ namespace WaterNut.DataSpace
             var t = 0;
             var exceptions = new ConcurrentQueue<Exception>();
             Parallel.ForEach(itemSets.Values
-                                    // .Where(x => x.Key.Contains("139761"))
+                                    // .Where(x => x.Key.Contains("194129"))
                                     //.Where(x => "".Contains(x.Key))
                                      //.Where(x => "FAA/SCPI18X112".Contains(x.ItemNumber))//SND/IVF1010MPSF,BRG/NAVICOTE-GL,
                                      , new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount *  1 }, itm => //.Where(x => x.ItemNumber == "AT18547")
@@ -398,7 +398,7 @@ namespace WaterNut.DataSpace
                                         allo.QtyAllocated -= r;
                                         allo.EntryDataDetails.QtyAllocated -= r;
                                         sql += $@" UPDATE       EntryDataDetails
-                                                            SET                QtyAllocated =  QtyAllocated-{r}
+                                                            SET                QtyAllocated =  QtyAllocated{(r >= 0 ? $"-{r}" : $"+{r * -1}")}
                                                             where	EntryDataDetailsId = {allo.EntryDataDetails.EntryDataDetailsId}";
 
                                         if (allo.EntryDataDetails.EntryDataDetailsEx.DutyFreePaid == "Duty Free")
@@ -409,7 +409,7 @@ namespace WaterNut.DataSpace
                                             /////// is the same thing
 
                                             sql += $@" UPDATE       xcuda_Item
-                                                            SET                DFQtyAllocated = (DFQtyAllocated-{r})
+                                                            SET                DFQtyAllocated = (DFQtyAllocated{(r >= 0 ? $"-{r}" : $"+{r * -1}")})
                                                             where	item_id = {allo.PreviousDocumentItem.Item_Id}";
                                         }
                                         else
@@ -420,7 +420,7 @@ namespace WaterNut.DataSpace
                                             
 
                                             sql += $@" UPDATE       xcuda_Item
-                                                            SET                DFQtyAllocated = (DPQtyAllocated-{r})
+                                                            SET                DFQtyAllocated = (DPQtyAllocated{(r >= 0 ? $"-{r}" : $"+{r * -1}")})
                                                             where	item_id = {allo.PreviousDocumentItem.Item_Id}";
                                         }
 
@@ -430,7 +430,7 @@ namespace WaterNut.DataSpace
                                             allo.Status = $"Over Allocated Entry by {r}";
 
                                             sql += $@"  Update AsycudaSalesAllocations
-                                                        Set Status = '{allo.Status}', QtyAllocated = {r}
+                                                        Set Status = '{allo.Status}', QtyAllocated = {r }
                                                         Where AllocationId = {allo.AllocationId}";
                                             
                                         }
@@ -458,7 +458,7 @@ namespace WaterNut.DataSpace
                                 }
 
                                 if(!string.IsNullOrEmpty(sql))
-                                                    ctx.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction, sql).ConfigureAwait(false);
+                                                    ctx.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction, sql);
                                 
                             }
                         });
@@ -467,7 +467,7 @@ namespace WaterNut.DataSpace
                     var sql = @" DELETE FROM AsycudaSalesAllocations
                                 WHERE(Status IS NULL) AND(QtyAllocated = 0)";
                                 
-                    ctx.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction, sql).ConfigureAwait(false);
+                    ctx.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction, sql);
                 }
                 
             }
@@ -622,7 +622,7 @@ namespace WaterNut.DataSpace
                     {
                         (BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate.HasValue ? string.Format("AsycudaDocument.RegistrationDate >= \"{0}\"", BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate) : "AsycudaDocument.RegistrationDate >= \"1/1/2010\"") ,
                         "DoNotAllocate == null || DoNotAllocate != true",
-                        "(AsycudaDocument.Extended_customs_procedure == \"7000\" || AsycudaDocument.Extended_customs_procedure == \"9000\")",
+                        "(AsycudaDocument.Extended_customs_procedure == \"7000\" || AsycudaDocument.Extended_customs_procedure == \"7100\" || AsycudaDocument.Extended_customs_procedure == \"9000\")",
                        //"SubItems.Count > 0",
                        // "AttributeOnlyAllocation == true"
                         //string.Format("EX.Precision_4.ToUpper() == \"{0}\"", attrib)
@@ -688,7 +688,7 @@ namespace WaterNut.DataSpace
                             new List<string>()
                             {
                                 "DoNotAllocate == null || DoNotAllocate != true",
-                                "(AsycudaDocument.Extended_customs_procedure == \"7000\" || AsycudaDocument.Extended_customs_procedure == \"9000\")",
+                                "(AsycudaDocument.Extended_customs_procedure == \"7000\" ||AsycudaDocument.Extended_customs_procedure == \"7100\" || AsycudaDocument.Extended_customs_procedure == \"9000\")",
                                 "SubItems.Count == 0",
                                 "AttributeOnlyAllocation == true",
                                 string.Format("xcuda_Tarification.xcuda_HScode.Precision_4.ToUpper() == \"{0}\"", attrib)
@@ -700,7 +700,7 @@ namespace WaterNut.DataSpace
                 alst.AddRange((ctx.Getxcuda_ItemByExpressionLst(new List<string>()
                 {
                     "DoNotAllocate == null || DoNotAllocate != true",
-                    "(AsycudaDocument.Extended_customs_procedure == \"7000\" || AsycudaDocument.Extended_customs_procedure == \"9000\")",
+                    "(AsycudaDocument.Extended_customs_procedure == \"7000\" ||AsycudaDocument.Extended_customs_procedure == \"7100\" || AsycudaDocument.Extended_customs_procedure == \"9000\")",
                    "SubItems.Count == 0",
                     "AttributeOnlyAllocation == null || AttributeOnlyAllocation != true",
                     string.Format("\"{0}\".Contains(xcuda_Tarification.xcuda_HScode.Precision_4.ToUpper())", salesDescrip)
@@ -776,10 +776,11 @@ namespace WaterNut.DataSpace
             }
 
             
-            foreach (var r in res)
+            foreach (var r in res)//.Where(x => x.Key == "5331368").ToList()
             {
                 var alias = Instance.InventoryAliasCache.Data.Where(x => x.ItemNumber.ToUpper().Trim() == r.Key).Select(y => y.AliasName.ToUpper().Trim()).ToList();
                 if (!alias.Any()) continue;
+                //var te = asycudaEntries.Where(x => x.Key == "35014").ToList();
                 var ae = asycudaEntries.Where(x => alias.Contains(x.Key)).SelectMany(y => y.EntriesList).ToList();
                 if (ae.Any()) r.Value.EntriesList.AddRange(ae);
             }
@@ -832,13 +833,15 @@ namespace WaterNut.DataSpace
                     .Include(x => x.xcuda_Tarification.xcuda_Supplementary_unit)
                     .Include(x => x.SubItems)
                     .Where(x => (x.AsycudaDocument.CNumber != null || x.AsycudaDocument.IsManuallyAssessed == true) &&
-                                (x.AsycudaDocument.Extended_customs_procedure == "7000" ||
+                                (x.AsycudaDocument.Extended_customs_procedure == "7000" || x.AsycudaDocument.Extended_customs_procedure == "7100" ||
                                  x.AsycudaDocument.Extended_customs_procedure == "9000") &&
-                                x.AsycudaDocument.DoNotAllocate != true)
+                                // x.WarehouseError == null && 
+                                 x.AsycudaDocument.DoNotAllocate != true )
                     .Where(x => x.AsycudaDocument.AssessmentDate >= (BaseDataModel.Instance.CurrentApplicationSettings
                                     .OpeningStockDate ?? DateTime.MinValue.Date))
+                    .OrderBy(x => x.LineNumber)
                     .ToList();
-                                        
+
                 
                 asycudaEntries = from s in lst.Where(x => x.ItemNumber != null)
                    // .Where(x => x.ItemNumber == itmnumber)
@@ -872,7 +875,7 @@ namespace WaterNut.DataSpace
                 var lst = await ctx.Getxcuda_ItemByExpressionNav(
                     "All",
                     // "xcuda_Tarification.xcuda_HScode.Precision_4 == \"1360\"",
-                    new Dictionary<string, string>() { { "AsycudaDocument", (BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate.HasValue ? string.Format("AssessmentDate >= \"{0}\" && ", BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate) : "") + "(CNumber != null || IsManuallyAssessed == true) && (Extended_customs_procedure == \"7000\" || Extended_customs_procedure == \"9000\") && DoNotAllocate != true" } }
+                    new Dictionary<string, string>() { { "AsycudaDocument", (BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate.HasValue ? string.Format("AssessmentDate >= \"{0}\" && ", BaseDataModel.Instance.CurrentApplicationSettings.OpeningStockDate) : "") + "(CNumber != null || IsManuallyAssessed == true) && (Extended_customs_procedure == \"7000\" ||Extended_customs_procedure == \"7100\" || Extended_customs_procedure == \"9000\") && DoNotAllocate != true" } }
                     , new List<string>() { "AsycudaDocument",
                         "xcuda_Tarification.xcuda_HScode", "xcuda_Tarification.xcuda_Supplementary_unit","SubItems", "xcuda_Goods_description",
                     }).ConfigureAwait(false);//"EX"
@@ -1212,6 +1215,7 @@ namespace WaterNut.DataSpace
             {
                 //cAsycudaItm.StartTracking();
                 //saleitm.StartTracking();
+                if (cAsycudaItm.SalesFactor == 0) cAsycudaItm.SalesFactor = 1;
 
                 var dfp = ((Sales) saleitm.Sales).DutyFreePaid;
                 // allocate Sale item
@@ -1223,7 +1227,11 @@ namespace WaterNut.DataSpace
                     TrackingState = TrackingState.Added
                 };
 
-
+                if (!string.IsNullOrEmpty(cAsycudaItm.WarehouseError))
+                {
+                    ssa.Status = cAsycudaItm.WarehouseError;
+                }
+                
 
 
                 if (saleitmQtyToallocate != 0)//&& removed because of previous return//cAsycudaItm.QtyAllocated >= 0 && 
@@ -1297,8 +1305,8 @@ namespace WaterNut.DataSpace
                 using (var ctx = new AllocationDSContext(){StartTracking = false})
                 {
                     var sql = $@" INSERT INTO AsycudaSalesAllocations
-                                                         (EntryDataDetailsId, PreviousItem_Id, QtyAllocated, EANumber, SANumber)
-                                                        VALUES        ({ssa.EntryDataDetailsId},{ssa.PreviousItem_Id},{ssa.QtyAllocated},0,0)                                                      
+                                                         (EntryDataDetailsId, PreviousItem_Id, QtyAllocated, EANumber, SANumber, Status)
+                                                        VALUES        ({ssa.EntryDataDetailsId},{ssa.PreviousItem_Id},{ssa.QtyAllocated},0,0,{(ssa.Status == null?"NULL":$"'{ssa.Status}'")})                                                      
                                                          
                                                         
                                                          UPDATE       xcuda_Item

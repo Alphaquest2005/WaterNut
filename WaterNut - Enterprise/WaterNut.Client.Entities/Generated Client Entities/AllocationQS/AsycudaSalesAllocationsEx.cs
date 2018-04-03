@@ -214,7 +214,7 @@ public string InvoiceNo
        
        
                 
-                [MaxLength(50, ErrorMessage = "ItemNumber has a max length of 50 letters ")]
+                [MaxLength(255, ErrorMessage = "ItemNumber has a max length of 255 letters ")]
 public string ItemNumber
 		{ 
 		    get { return this.asycudasalesallocationsex.ItemNumber; }
@@ -694,6 +694,36 @@ public string pItemNumber
 				this.asycudasalesallocationsex.pItemNumber = value;
                 if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
 				NotifyPropertyChanged("pItemNumber");
+			}
+		}
+     
+
+       
+       [NumberValidationAttribute]
+public Nullable<double> xQuantity
+		{ 
+		    get { return this.asycudasalesallocationsex.xQuantity; }
+			set
+			{
+			    if (value == this.asycudasalesallocationsex.xQuantity) return;
+				this.asycudasalesallocationsex.xQuantity = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("xQuantity");
+			}
+		}
+     
+
+       
+       [NumberValidationAttribute]
+public Nullable<double> SalesFactor
+		{ 
+		    get { return this.asycudasalesallocationsex.SalesFactor; }
+			set
+			{
+			    if (value == this.asycudasalesallocationsex.SalesFactor) return;
+				this.asycudasalesallocationsex.SalesFactor = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("SalesFactor");
 			}
 		}
      

@@ -66,7 +66,8 @@ namespace WaterNut.DataSpace
                         EntryDataDetails = new List<EntryDataDetailSummary>() { new EntryDataDetailSummary()
                         {
                             EntryDataDetailsId = g.First().EntryDataDetailsId,
-                            EntryDataId = g.First().EntryDataId
+                            EntryDataId = g.First().EntryDataId,
+                            QtyAllocated = g.First().QtyAllocated
                         }}
                     }
 

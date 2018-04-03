@@ -26,7 +26,7 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
           <Property Name="SalesQuantity" Type="float" />
           <Property Name="SalesQtyAllocated" Type="float" />
           <Property Name="InvoiceNo" Type="varchar" MaxLength="50" />
-          <Property Name="ItemNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="255" />
           <Property Name="ItemDescription" Type="varchar(max)" />
           <Property Name="EntryDataDetailsId" Type="int" />
           <Property Name="xBond_Item_Id" Type="int" Nullable="false" />
@@ -36,8 +36,10 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
           <Property Name="pQuantity" Type="float" />
           <Property Name="pQtyAllocated" Type="float" />
           <Property Name="PiQuantity" Type="float" />
+          <Property Name="SalesFactor" Type="float" />
           <Property Name="xCNumber" Type="varchar(max)" />
           <Property Name="xRegistrationDate" Type="datetime" />
+          <Property Name="xQuantity" Type="float" />
           <Property Name="pReferenceNumber" Type="nvarchar(max)" />
           <Property Name="pLineNumber" Type="int" />
           <Property Name="xASYCUDA_Id" Type="int" />
@@ -82,8 +84,10 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaSalesAllocationsE
 [AsycudaSalesAllocationsEx].[pQuantity] AS [pQuantity], 
 [AsycudaSalesAllocationsEx].[pQtyAllocated] AS [pQtyAllocated], 
 [AsycudaSalesAllocationsEx].[PiQuantity] AS [PiQuantity], 
+[AsycudaSalesAllocationsEx].[SalesFactor] AS [SalesFactor], 
 [AsycudaSalesAllocationsEx].[xCNumber] AS [xCNumber], 
 [AsycudaSalesAllocationsEx].[xRegistrationDate] AS [xRegistrationDate], 
+[AsycudaSalesAllocationsEx].[xQuantity] AS [xQuantity], 
 [AsycudaSalesAllocationsEx].[pReferenceNumber] AS [pReferenceNumber], 
 [AsycudaSalesAllocationsEx].[pLineNumber] AS [pLineNumber], 
 [AsycudaSalesAllocationsEx].[xASYCUDA_Id] AS [xASYCUDA_Id], 
@@ -127,7 +131,7 @@ FROM [dbo].[AsycudaSalesAllocationsEx] AS [AsycudaSalesAllocationsEx]</DefiningQ
           <Property Name="SalesQuantity" Type="Double" />
           <Property Name="SalesQtyAllocated" Type="Double" />
           <Property Name="InvoiceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EntryDataDetailsId" Type="Int32" />
           <Property Name="xBond_Item_Id" Type="Int32" Nullable="false" />
@@ -158,6 +162,8 @@ FROM [dbo].[AsycudaSalesAllocationsEx] AS [AsycudaSalesAllocationsEx]</DefiningQ
           <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="pTariffCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="pItemNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="xQuantity" Type="Double" />
+          <Property Name="SalesFactor" Type="Double" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -168,6 +174,8 @@ FROM [dbo].[AsycudaSalesAllocationsEx] AS [AsycudaSalesAllocationsEx]</DefiningQ
           <EntitySetMapping Name="AsycudaSalesAllocationsExs">
             <EntityTypeMapping TypeName="WaterNutDBModel.AsycudaSalesAllocationsEx">
               <MappingFragment StoreEntitySet="AsycudaSalesAllocationsEx">
+                <ScalarProperty Name="SalesFactor" ColumnName="SalesFactor" />
+                <ScalarProperty Name="xQuantity" ColumnName="xQuantity" />
                 <ScalarProperty Name="pItemNumber" ColumnName="pItemNumber" />
                 <ScalarProperty Name="pTariffCode" ColumnName="pTariffCode" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />

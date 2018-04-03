@@ -54,7 +54,7 @@
           <Property Name="EntryDataDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDataId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LineNumber" Type="int" />
-          <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Quantity" Type="float" Nullable="false" />
           <Property Name="Units" Type="varchar" MaxLength="15" />
           <Property Name="ItemDescription" Type="varchar(max)" Nullable="false" />
@@ -79,14 +79,14 @@
             <PropertyRef Name="AliasId" />
           </Key>
           <Property Name="AliasId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="AliasName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AliasName" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="InventoryItems">
           <Key>
             <PropertyRef Name="ItemNumber" />
           </Key>
-          <Property Name="ItemNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemNumber" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="60" />
           <Property Name="TariffCode" Type="varchar" MaxLength="8" />
@@ -1136,7 +1136,7 @@ FROM [dbo].[EX9AsycudaSalesAllocations] AS [EX9AsycudaSalesAllocations]</Definin
           <Property Name="EntryDataDetailsId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IEntryDataDetail.EntryDataDetailsId</a:ImplementsProperty></Property>
           <Property Name="EntryDataId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IEntryDataDetail.EntryDataId</a:ImplementsProperty></Property>
           <Property Name="LineNumber" Type="Int32" />
-          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IEntryDataDetail.ItemNumber</a:ImplementsProperty></Property>
+          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IEntryDataDetail.ItemNumber</a:ImplementsProperty></Property>
           <Property Name="Quantity" Type="Double" Nullable="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IEntryDataDetail.Quantity</a:ImplementsProperty></Property>
           <Property Name="Units" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="ItemDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IEntryDataDetail.ItemDescription</a:ImplementsProperty></Property>
@@ -1405,7 +1405,7 @@ FROM [dbo].[EX9AsycudaSalesAllocations] AS [EX9AsycudaSalesAllocations]</Definin
           <Key>
             <PropertyRef Name="ItemNumber" />
           </Key>
-          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.ItemNumber</a:ImplementsProperty></Property>
+          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.ItemNumber</a:ImplementsProperty></Property>
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.Description</a:ImplementsProperty></Property>
           <Property Name="Category" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="TariffCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false"><a:ImplementsProperty xmlns:a="http://schemas.tempuri.com/ImplementsProperty">IInventoryItem.TariffCode</a:ImplementsProperty></Property>
@@ -1784,8 +1784,8 @@ FROM [dbo].[EX9AsycudaSalesAllocations] AS [EX9AsycudaSalesAllocations]</Definin
             <PropertyRef Name="AliasId" />
           </Key>
           <Property Name="AliasId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AliasName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemNumber" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AliasName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="InventoryItems" Relationship="WaterNutDBModel.FK_InventoryItemAlias_InventoryItems" FromRole="InventoryItemAlias" ToRole="InventoryItems" />
         </EntityType>
         <EntityType Name="EX9AsycudaSalesAllocations">
