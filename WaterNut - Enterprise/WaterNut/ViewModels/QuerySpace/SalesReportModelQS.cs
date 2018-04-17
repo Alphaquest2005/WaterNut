@@ -84,6 +84,7 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
                                 TariffCode = s.TariffCode,
                                 SalesFactor = Convert.ToDouble(s.SalesFactor),
                                 SalesQuantity = Convert.ToDouble(s.QtyAllocated),
+                                
                                 xQuantity = Convert.ToDouble(s.xQuantity),// Convert.ToDouble(s.QtyAllocated),
                                 Price = Convert.ToDouble(s.Cost),
                                 SalesType = s.DutyFreePaid,
@@ -135,6 +136,7 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
             public string ItemDescription { get; set; }
             public string TariffCode { get; set; }
             public double SalesQuantity { get; set; }
+           
             public double SalesFactor { get; set; }
             public double xQuantity { get; set; }
             public double Price { get; set; }

@@ -1146,7 +1146,9 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
                     InvalidHSCode = x.InvalidHSCode ,
                     
  
-                    WarehouseError = x.WarehouseError 
+                    WarehouseError = x.WarehouseError,
+                    
+                    SalesFactor = Convert.ToDouble(x.SalesFactor)
                     
                 }).ToList()
             };
@@ -1156,113 +1158,117 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
             }
         }
 
-        public class AsycudaDocumentItemExcelLine
-        {
-		 
-                    public Nullable<int> LineNumber { get; set; } 
-                    
- 
-                    public Nullable<bool> IsAssessed { get; set; } 
-                    
- 
-                    public Nullable<bool> DoNotAllocate { get; set; } 
-                    
- 
-                    public Nullable<bool> DoNotEX { get; set; } 
-                    
- 
-                    public Nullable<bool> AttributeOnlyAllocation { get; set; } 
-                    
- 
-                    public string Description_of_goods { get; set; } 
-                    
- 
-                    public string Commercial_Description { get; set; } 
-                    
- 
-                    public double Gross_weight_itm { get; set; } 
-                    
- 
-                    public double Net_weight_itm { get; set; } 
-                    
- 
-                    public Nullable<double> Item_price { get; set; } 
-                    
- 
-                    public Nullable<double> ItemQuantity { get; set; } 
-                    
- 
-                    public string Suppplementary_unit_code { get; set; } 
-                    
- 
-                    public string ItemNumber { get; set; } 
-                    
- 
-                    public string TariffCode { get; set; } 
-                    
- 
-                    public Nullable<bool> TariffCodeLicenseRequired { get; set; } 
-                    
- 
-                    public Nullable<bool> TariffCategoryLicenseRequired { get; set; } 
-                    
- 
-                    public string TariffCodeDescription { get; set; } 
-                    
- 
-                    public Nullable<double> DutyLiability { get; set; } 
-                    
- 
-                    public Nullable<double> Total_CIF_itm { get; set; } 
-                    
- 
-                    public Nullable<double> Freight { get; set; } 
-                    
- 
-                    public Nullable<double> Statistical_value { get; set; } 
-                    
- 
-                    public Nullable<double> DPQtyAllocated { get; set; } 
-                    
- 
-                    public Nullable<double> DFQtyAllocated { get; set; } 
-                    
- 
-                    public double PiQuantity { get; set; } 
-                    
- 
-                    public Nullable<bool> ImportComplete { get; set; } 
-                    
- 
-                    public string CNumber { get; set; } 
-                    
- 
-                    public Nullable<System.DateTime> RegistrationDate { get; set; } 
-                    
- 
-                    public Nullable<double> Number_of_packages { get; set; } 
-                    
- 
-                    public string Country_of_origin_code { get; set; } 
-                    
- 
-                    public double PiWeight { get; set; } 
-                    
- 
-                    public Nullable<double> Currency_rate { get; set; } 
-                    
- 
-                    public string Currency_code { get; set; } 
-                    
- 
-                    public Nullable<bool> InvalidHSCode { get; set; } 
-                    
- 
-                    public string WarehouseError { get; set; }
-            public string DocumentType { get; set; }
-        }
+	    public class AsycudaDocumentItemExcelLine
+	    {
+	        public string DocumentType { get; set; }
+	        public string CNumber { get; set; }
 
-		
-    }
+
+	        public Nullable<System.DateTime> RegistrationDate { get; set; }
+
+	        public Nullable<int> LineNumber { get; set; }
+
+
+	        public string ItemNumber { get; set; }
+
+
+	        public string Description_of_goods { get; set; }
+
+
+	        public string Commercial_Description { get; set; }
+
+	        public Nullable<double> ItemQuantity { get; set; }
+	        public double PiQuantity { get; set; }
+
+	        public double SalesFactor { get; set; }
+
+	        public Nullable<double> DPQtyAllocated { get; set; }
+
+
+	        public Nullable<double> DFQtyAllocated { get; set; }
+
+	        public double Gross_weight_itm { get; set; }
+
+
+	        public double Net_weight_itm { get; set; }
+
+
+	        public Nullable<double> Item_price { get; set; }
+
+
+
+	        public Nullable<double> Total_CIF_itm { get; set; }
+
+
+	        public Nullable<double> DutyLiability { get; set; }
+
+	        public string Suppplementary_unit_code { get; set; }
+
+
+
+
+
+	        public string TariffCode { get; set; }
+
+
+	        public Nullable<bool> TariffCodeLicenseRequired { get; set; }
+
+
+	        public Nullable<bool> TariffCategoryLicenseRequired { get; set; }
+
+
+	        public string TariffCodeDescription { get; set; }
+
+
+
+
+	        public Nullable<double> Freight { get; set; }
+
+
+	        public Nullable<double> Statistical_value { get; set; }
+
+
+
+
+
+	        public Nullable<bool> ImportComplete { get; set; }
+
+
+
+	        public Nullable<double> Number_of_packages { get; set; }
+
+
+	        public string Country_of_origin_code { get; set; }
+
+
+	        public double PiWeight { get; set; }
+
+
+	        public Nullable<double> Currency_rate { get; set; }
+
+
+	        public string Currency_code { get; set; }
+
+
+	        public Nullable<bool> InvalidHSCode { get; set; }
+
+	        public Nullable<bool> IsAssessed { get; set; }
+
+
+	        public Nullable<bool> DoNotAllocate { get; set; }
+
+
+	        public Nullable<bool> DoNotEX { get; set; }
+
+
+	        public Nullable<bool> AttributeOnlyAllocation { get; set; }
+
+
+	        public string WarehouseError { get; set; }
+
+	    }
+
+
+	}
 }
 		

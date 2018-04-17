@@ -396,6 +396,10 @@ namespace WaterNut.DataSpace
 
 
                                         allo.QtyAllocated -= r;
+                                        sql += $@" UPDATE       AsycudaSalesAllocations
+                                                            SET                QtyAllocated =  QtyAllocated{(r >= 0 ? $"-{r}" : $"+{r * -1}")}
+                                                            where	AllocationId = {allo.AllocationId}";
+
                                         allo.EntryDataDetails.QtyAllocated -= r;
                                         sql += $@" UPDATE       EntryDataDetails
                                                             SET                QtyAllocated =  QtyAllocated{(r >= 0 ? $"-{r}" : $"+{r * -1}")}

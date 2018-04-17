@@ -51,7 +51,7 @@ namespace WaterNut.DataSpace
 				StatusModel.Timer("Processing Allocations");//, alst.Count()
 				var exceptions = new ConcurrentQueue<Exception>();
 			   
-			   var alst = GetAllocations().ToList();
+			   var alst = GetAllocations().Where(x => x.Item_Id == 968).ToList();//
 				//Parallel.ForEach(alst, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2}, g =>//
 
 			   // var ps = alst.SelectMany(x => x.Pi).DistinctBy(x => x.Pi.PreviousItem_Id).OrderBy(x => x.pAssessmentDate).ThenBy(x => x.pRegDate);
@@ -66,7 +66,8 @@ namespace WaterNut.DataSpace
 									//SalesMonth = x.Key.Month,
 									PList = x.SelectMany(z => z.Pi)
                                              .Where(z => z.pAssessmentDate.Month == x.Key.SalesDate.Month && z.pAssessmentDate.Year == x.Key.SalesDate.Year)
-                                    .DistinctBy(z => z.Pi.PreviousItem_Id).OrderBy(z => z.pAssessmentDate).ThenBy(z => z.pRegDate),//
+                                    .DistinctBy(z => z.Pi.PreviousItem_Id)
+                                    .OrderBy(z => z.pAssessmentDate).ThenBy(z => z.pRegDate),//
 									x.Key.DutyFreePaid
 								   
 								});
@@ -79,7 +80,7 @@ namespace WaterNut.DataSpace
 					{
 						//var lst = alst.Where(x => x.Pi.Any(z => z.Pi.PreviousItem_Id == g.Pi.PreviousItem_Id)).Select(x => x.Allocation);   
 					   
-							SetXBondLst(g.Allocations , g.PList.OrderBy(z => z.pAssessmentDate).ThenBy(z => z.pRegDate).Select(x => x.Pi).ToList()).Wait();
+							SetXBondLst(g.Allocations , g.PList.OrderBy(z => z.pAssessmentDate).ThenBy(z => z.pRegDate).Select(x => (Pi:x.Pi, SalesFactor: x.SalesFactor)).ToList()).Wait();
 						
 							StatusModel.StatusUpdate();
 					  
@@ -104,9 +105,10 @@ namespace WaterNut.DataSpace
 			}
 		}
 
-		
 
-		public IEnumerable<AllocationPi> GetAllocations()
+
+
+	    public IEnumerable<AllocationPi> GetAllocations()
 		{
 
 
@@ -122,7 +124,7 @@ namespace WaterNut.DataSpace
 					var res = ctx.AsycudaSalesAllocations
 						.Where(x => x.EntryDataDetails.Sales != null
 
-                                   // && "LUB/11350".Contains(x.EntryDataDetails.ItemNumber) && x.EntryDataDetails.Sales.EntryDataDate.Month == 1 && x.EntryDataDetails.Sales.EntryDataDate.Year == 2017
+                                //   && "17997453".Contains(x.EntryDataDetails.ItemNumber) && x.EntryDataDetails.Sales.EntryDataDate.Month == 11 && x.EntryDataDetails.Sales.EntryDataDate.Year == 2016
 
 
                                     && x.PreviousDocumentItem != null
@@ -152,7 +154,8 @@ namespace WaterNut.DataSpace
 							.Select(p => new DatedPi
 							{
 								Pi = p.xcuda_PreviousItem,
-								CNumber = p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.CNumber,
+                                SalesFactor = p.xcuda_Item.SalesFactor,
+                                CNumber = p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.CNumber,
 								pAssessmentDate = p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.AssessmentDate??DateTime.MinValue,
 								pRegDate =
 									(p.xcuda_PreviousItem.xcuda_Item.AsycudaDocument.RegistrationDate?? DateTime.MinValue)
@@ -184,6 +187,7 @@ namespace WaterNut.DataSpace
 			public DateTime pAssessmentDate { get; set; }
 			public DateTime? pRegDate { get; set; }
 			public string CNumber { get; set; }
+		    public double SalesFactor { get; set; }
 		}
 
 		public class AllocationPi
@@ -214,7 +218,7 @@ namespace WaterNut.DataSpace
 			}
 		}
 
-		private async Task SetXBondLst(IEnumerable<AsycudaSalesAllocations> slst, List<xcuda_PreviousItem> plst)
+		private async Task SetXBondLst(IEnumerable<AsycudaSalesAllocations> slst, List<(xcuda_PreviousItem Pi, double SalesFactor)> plst)
 		{
 			try
 			{
@@ -222,18 +226,18 @@ namespace WaterNut.DataSpace
 			if (plst == null || !plst.Any()) return;
 			var pn = 0;
 			var pitm = plst[pn];
-			plst.ForEach(x => x.QtyAllocated = 0);
+			plst.ForEach(x => x.Pi.QtyAllocated = 0);
 				
 				for (int i = 0; i < slst.Count(); i++)
 				{
 				   
 					var ssa = slst.ElementAt(i);
 					
-					if (slst.Skip(i).Take(3).Sum(x => x.QtyAllocated) == ssa.QtyAllocated && pitm.Suplementary_Quantity - pitm.QtyAllocated >= ssa.QtyAllocated)//
+					if (slst.Skip(i).Take(3).Sum(x => x.QtyAllocated) == ssa.QtyAllocated && ((pitm.Pi.Suplementary_Quantity * pitm.SalesFactor) - (pitm.Pi.QtyAllocated * pitm.SalesFactor)) >= ssa.QtyAllocated)//
 					{
-						slst.Skip(i).Take(3).ForEach(async x => await SaveXbond(x, pitm).ConfigureAwait(false));
-						pitm.QtyAllocated += slst.Skip(i).Take(3).Sum(x => x.QtyAllocated);
-						await SavePitm(pitm).ConfigureAwait(false);
+						slst.Skip(i).Take(3).ForEach(async x => await SaveXbond(x, pitm.Pi).ConfigureAwait(false));
+						pitm.Pi.QtyAllocated += (slst.Skip(i).Take(3).Sum(x => x.QtyAllocated)/ pitm.SalesFactor);
+						await SavePitm(pitm.Pi).ConfigureAwait(false);
 						i += 2;
 						continue;
 					}
@@ -245,7 +249,7 @@ namespace WaterNut.DataSpace
 						if (pn < 0) pn = 0;
 						pitm = plst[pn];
 					}                    
-					if (pitm.QtyAllocated >= pitm.Suplementary_Quantity && diff > 0)
+					if ((pitm.Pi.QtyAllocated * pitm.SalesFactor) >= (pitm.Pi.Suplementary_Quantity * pitm.SalesFactor) && diff > 0)
 					{
 
 						if (pn + 1 <= plst.Count - 1)
@@ -262,11 +266,14 @@ namespace WaterNut.DataSpace
 						}
 
 					}
-					await SetXBond(ssa, pitm).ConfigureAwait(false);
+					await SetXBond(ssa, pitm.Pi).ConfigureAwait(false);
+				    await SaveXbond(ssa, pitm.Pi).ConfigureAwait(false);
+                    pitm.Pi.QtyAllocated += ssa.QtyAllocated;
+				    await SavePitm(pitm.Pi).ConfigureAwait(false);
 
-                    if (slst.Skip(i).Sum(x => x.QtyAllocated) == 0 && (pitm.Suplementary_Quantity - pitm.QtyAllocated) == 0)//
+                    if (slst.Skip(i).Sum(x => x.QtyAllocated) == 0 && ((pitm.Pi.Suplementary_Quantity * pitm.SalesFactor) - (pitm.Pi.QtyAllocated * pitm.SalesFactor)) == 0)//
                     {
-                        slst.Skip(i).ForEach(async x => await SaveXbond(x, pitm).ConfigureAwait(false));
+                        slst.Skip(i).ForEach(async x => await SaveXbond(x, pitm.Pi).ConfigureAwait(false));
                         return;
                     }
 

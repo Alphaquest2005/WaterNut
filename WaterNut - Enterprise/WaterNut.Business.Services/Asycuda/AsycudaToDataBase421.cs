@@ -319,7 +319,7 @@ namespace WaterNut.DataSpace.Asycuda
                     var ai = a.Prev_decl.ElementAt(i);
                     if (ai == null) continue;
                     var itm = da.DocumentItems.OrderBy(x => x.LineNumber).ElementAt(i);
-
+                    if (itm.xcuda_Tarification.Extended_customs_procedure == "9071") return;
                     var pi = new xcuda_PreviousItem(true)
                     {
                         PreviousItem_Id = itm.Item_Id,
@@ -329,7 +329,7 @@ namespace WaterNut.DataSpace.Asycuda
                     itm.xcuda_PreviousItem = pi;
                     pi.xcuda_Item = itm;
 
-                    if (LinkPi)
+                    if (LinkPi )
                     {
                         await LinkPIItem(ai, itm, pi).ConfigureAwait(false);
                     }
