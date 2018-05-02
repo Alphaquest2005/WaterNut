@@ -1133,8 +1133,9 @@ namespace SalesDataQS.Business.Services
                     if (exp == "All" && navExp.Count == 0)
                     {
                         return Convert.ToDecimal(dbContext.SalesDataDetails
-										.AsNoTracking()
-                                        .Sum(field)??0);
+										.AsNoTracking().Select(x => x.SalesValue)
+                                            .DefaultIfEmpty(0)
+                                        .Sum());
                     }
                     foreach (var itm in navExp)
                     {
@@ -1148,9 +1149,9 @@ namespace SalesDataQS.Business.Services
 											.ConfigureAwait(continueOnCapturedContext: false);
 						}
                     }
-                    return Convert.ToDecimal(dbContext.SalesDataDetails.Where(exp == "All" || exp == null ? "EntryDataDetailsId != null" : exp)
-											.AsNoTracking()
-                                            .Sum(field)??0);
+                    return Convert.ToDecimal(dbContext.SalesDataDetails.AsNoTracking().Where(exp == "All" || exp == null ? "EntryDataDetailsId != null" : exp).Select(x => x.SalesValue)
+                                            .DefaultIfEmpty(0)
+											.Sum(field)??0);
                 }
                 
             }

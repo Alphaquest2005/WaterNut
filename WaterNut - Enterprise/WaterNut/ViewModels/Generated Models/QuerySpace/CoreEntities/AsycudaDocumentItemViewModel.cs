@@ -65,7 +65,12 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
             OnTotals();
         }
 
-        partial void OnCreated();
+	    private void OnCurrentAsycudaDocumentItemChanged(object sender, NotificationEventArgs<AsycudaDocumentItem> e)
+	    {
+	        
+	    }
+
+	    partial void OnCreated();
         partial void OnTotals();
 
 		private VirtualList<AsycudaDocumentItem> _AsycudaDocumentItems = null;
@@ -127,11 +132,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
             }
         }
 
-        internal void OnCurrentAsycudaDocumentItemChanged(object sender, NotificationEventArgs<AsycudaDocumentItem> e)
-        {
-            if(BaseViewModel.Instance.CurrentAsycudaDocumentItem != null) BaseViewModel.Instance.CurrentAsycudaDocumentItem.PropertyChanged += CurrentAsycudaDocumentItem__propertyChanged;
-           // NotifyPropertyChanged(x => this.CurrentAsycudaDocumentItem);
-        }   
+          
 
             void CurrentAsycudaDocumentItem__propertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
                 {
@@ -205,8 +206,8 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
 
  
 
-		private Int32? _lineNumberFilter;
-        public Int32? LineNumberFilter
+		private string _lineNumberFilter;
+        public string LineNumberFilter
         {
             get
             {
@@ -219,11 +220,27 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
                 FilterData();
                 
             }
-        }	
+        }
 
- 
+	    private Int32? _asycudaDocumentIdFilter;
+	    public Int32? AsycudaDocumentIdFilter
+        {
+	        get
+	        {
+	            return _asycudaDocumentIdFilter;
+	        }
+	        set
+	        {
+	            _asycudaDocumentIdFilter = value;
+	            NotifyPropertyChanged(x => AsycudaDocumentIdFilter);
+	            FilterData();
 
-		private Boolean? _isAssessedFilter;
+	        }
+	    }
+
+
+
+        private Boolean? _isAssessedFilter;
         public Boolean? IsAssessedFilter
         {
             get
@@ -876,10 +893,12 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
 		internal virtual StringBuilder GetAutoPropertyFilterString()
 		{
 		var res = new StringBuilder();
- 
 
-					if(LineNumberFilter.HasValue)
-						res.Append(" && " + string.Format("LineNumber == {0}",  LineNumberFilter.ToString()));				 
+		    if (AsycudaDocumentIdFilter.HasValue)
+		        res.Append(" && " + string.Format("AsycudaDocumentId == {0}", AsycudaDocumentIdFilter.ToString()));
+
+            if (!string.IsNullOrEmpty(LineNumberFilter))
+						res.Append(" && " + string.Format("LineNumber == {0}",  LineNumberFilter));				 
 
 									if(IsAssessedFilter.HasValue)
 						res.Append(" && " + string.Format("IsAssessed == {0}",  IsAssessedFilter));						

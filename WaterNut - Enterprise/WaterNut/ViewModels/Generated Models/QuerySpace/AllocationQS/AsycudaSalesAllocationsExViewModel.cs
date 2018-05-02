@@ -908,232 +908,252 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
 
 			AsycudaSalesAllocationsExs.Refresh();
 			NotifyPropertyChanged(x => this.AsycudaSalesAllocationsExs);
-		}		  
-
-
-
-		internal virtual StringBuilder GetAutoPropertyFilterString()
-		{
-		var res = new StringBuilder();
- 
-
-					if(TotalValueFilter.HasValue)
-						res.Append(" && " + string.Format("TotalValue == {0}",  TotalValueFilter.ToString()));				 
-
-					if(AllocatedValueFilter.HasValue)
-						res.Append(" && " + string.Format("AllocatedValue == {0}",  AllocatedValueFilter.ToString()));				 
-
-									if(string.IsNullOrEmpty(StatusFilter) == false)
-						res.Append(" && " + string.Format("Status.Contains(\"{0}\")",  StatusFilter));						
- 
-
-					if(QtyAllocatedFilter.HasValue)
-						res.Append(" && " + string.Format("QtyAllocated == {0}",  QtyAllocatedFilter.ToString()));				 
-
-					if(xLineNumberFilter.HasValue)
-						res.Append(" && " + string.Format("xLineNumber == {0}",  xLineNumberFilter.ToString()));				 
-
- 
-
-				if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue) res.Append(" && (");
-
-					if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue)
-						{
-							if(StartInvoiceDateFilter.HasValue)
-								res.Append(
-                                            (Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue?"":" && ") +
-                                            string.Format("InvoiceDate >= \"{0}\"",  Convert.ToDateTime(StartInvoiceDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-
-					if (Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue)
-						{
-							if(EndInvoiceDateFilter.HasValue)
-								res.Append(" && " + string.Format("InvoiceDate <= \"{0}\"",  Convert.ToDateTime(EndInvoiceDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
-						}
-
-				if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue) res.Append(" )");
-
-					if (Convert.ToDateTime(_invoiceDateFilter).Date != DateTime.MinValue)
-						{
-							if(InvoiceDateFilter.HasValue)
-								res.Append(" && " + string.Format("InvoiceDate == \"{0}\"",  Convert.ToDateTime(InvoiceDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-				 
-
-					if(SalesQuantityFilter.HasValue)
-						res.Append(" && " + string.Format("SalesQuantity == {0}",  SalesQuantityFilter.ToString()));				 
-
-					if(SalesQtyAllocatedFilter.HasValue)
-						res.Append(" && " + string.Format("SalesQtyAllocated == {0}",  SalesQtyAllocatedFilter.ToString()));				 
-
-									if(string.IsNullOrEmpty(InvoiceNoFilter) == false)
-						res.Append(" && " + string.Format("InvoiceNo.Contains(\"{0}\")",  InvoiceNoFilter));						
- 
-
-									if(string.IsNullOrEmpty(ItemNumberFilter) == false)
-						res.Append(" && " + string.Format("ItemNumber.Contains(\"{0}\")",  ItemNumberFilter));						
- 
-
-									if(string.IsNullOrEmpty(ItemDescriptionFilter) == false)
-						res.Append(" && " + string.Format("ItemDescription.Contains(\"{0}\")",  ItemDescriptionFilter));						
- 
-
-									if(string.IsNullOrEmpty(DutyFreePaidFilter) == false)
-						res.Append(" && " + string.Format("DutyFreePaid.Contains(\"{0}\")",  DutyFreePaidFilter));						
- 
-
-									if(string.IsNullOrEmpty(pCNumberFilter) == false)
-						res.Append(" && " + string.Format("pCNumber.Contains(\"{0}\")",  pCNumberFilter));						
- 
-
- 
-
-				if (Convert.ToDateTime(StartpRegistrationDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" && (");
-
-					if (Convert.ToDateTime(StartpRegistrationDateFilter).Date != DateTime.MinValue)
-						{
-							if(StartpRegistrationDateFilter.HasValue)
-								res.Append(
-                                            (Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue?"":" && ") +
-                                            string.Format("pRegistrationDate >= \"{0}\"",  Convert.ToDateTime(StartpRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-
-					if (Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue)
-						{
-							if(EndpRegistrationDateFilter.HasValue)
-								res.Append(" && " + string.Format("pRegistrationDate <= \"{0}\"",  Convert.ToDateTime(EndpRegistrationDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
-						}
-
-				if (Convert.ToDateTime(StartpRegistrationDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" )");
-
-					if (Convert.ToDateTime(_pRegistrationDateFilter).Date != DateTime.MinValue)
-						{
-							if(pRegistrationDateFilter.HasValue)
-								res.Append(" && " + string.Format("pRegistrationDate == \"{0}\"",  Convert.ToDateTime(pRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-				 
-
-					if(pQuantityFilter.HasValue)
-						res.Append(" && " + string.Format("pQuantity == {0}",  pQuantityFilter.ToString()));				 
-
-					if(pQtyAllocatedFilter.HasValue)
-						res.Append(" && " + string.Format("pQtyAllocated == {0}",  pQtyAllocatedFilter.ToString()));				 
-
-					if(PiQuantityFilter.HasValue)
-						res.Append(" && " + string.Format("PiQuantity == {0}",  PiQuantityFilter.ToString()));				 
-
-									if(string.IsNullOrEmpty(xCNumberFilter) == false)
-						res.Append(" && " + string.Format("xCNumber.Contains(\"{0}\")",  xCNumberFilter));						
- 
-
- 
-
-				if (Convert.ToDateTime(StartxRegistrationDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" && (");
-
-					if (Convert.ToDateTime(StartxRegistrationDateFilter).Date != DateTime.MinValue)
-						{
-							if(StartxRegistrationDateFilter.HasValue)
-								res.Append(
-                                            (Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue?"":" && ") +
-                                            string.Format("xRegistrationDate >= \"{0}\"",  Convert.ToDateTime(StartxRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-
-					if (Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue)
-						{
-							if(EndxRegistrationDateFilter.HasValue)
-								res.Append(" && " + string.Format("xRegistrationDate <= \"{0}\"",  Convert.ToDateTime(EndxRegistrationDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
-						}
-
-				if (Convert.ToDateTime(StartxRegistrationDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" )");
-
-					if (Convert.ToDateTime(_xRegistrationDateFilter).Date != DateTime.MinValue)
-						{
-							if(xRegistrationDateFilter.HasValue)
-								res.Append(" && " + string.Format("xRegistrationDate == \"{0}\"",  Convert.ToDateTime(xRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-				 
-
-					if(pLineNumberFilter.HasValue)
-						res.Append(" && " + string.Format("pLineNumber == {0}",  pLineNumberFilter.ToString()));				 
-
-					if(CostFilter.HasValue)
-						res.Append(" && " + string.Format("Cost == {0}",  CostFilter.ToString()));				 
-
-					if(Total_CIF_itmFilter.HasValue)
-						res.Append(" && " + string.Format("Total_CIF_itm == {0}",  Total_CIF_itmFilter.ToString()));				 
-
-					if(DutyLiabilityFilter.HasValue)
-						res.Append(" && " + string.Format("DutyLiability == {0}",  DutyLiabilityFilter.ToString()));				 
-
-					if(TaxAmountFilter.HasValue)
-						res.Append(" && " + string.Format("TaxAmount == {0}",  TaxAmountFilter.ToString()));				 
-
-									if(pIsAssessedFilter.HasValue)
-						res.Append(" && " + string.Format("pIsAssessed == {0}",  pIsAssessedFilter));						
- 
-
-									if(DoNotAllocateSalesFilter.HasValue)
-						res.Append(" && " + string.Format("DoNotAllocateSales == {0}",  DoNotAllocateSalesFilter));						
- 
-
-									if(DoNotAllocatePreviousEntryFilter.HasValue)
-						res.Append(" && " + string.Format("DoNotAllocatePreviousEntry == {0}",  DoNotAllocatePreviousEntryFilter));						
- 
-
-					if(SANumberFilter.HasValue)
-						res.Append(" && " + string.Format("SANumber == {0}",  SANumberFilter.ToString()));				 
-
-									if(string.IsNullOrEmpty(pReferenceNumberFilter) == false)
-						res.Append(" && " + string.Format("pReferenceNumber.Contains(\"{0}\")",  pReferenceNumberFilter));						
- 
-
-									if(string.IsNullOrEmpty(xReferenceNumberFilter) == false)
-						res.Append(" && " + string.Format("xReferenceNumber.Contains(\"{0}\")",  xReferenceNumberFilter));						
- 
-
-									if(string.IsNullOrEmpty(TariffCodeFilter) == false)
-						res.Append(" && " + string.Format("TariffCode.Contains(\"{0}\")",  TariffCodeFilter));						
- 
-
-									if(InvalidFilter.HasValue)
-						res.Append(" && " + string.Format("Invalid == {0}",  InvalidFilter));						
- 
-
- 
-
-				if (Convert.ToDateTime(StartpExpiryDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue) res.Append(" && (");
-
-					if (Convert.ToDateTime(StartpExpiryDateFilter).Date != DateTime.MinValue)
-						{
-							if(StartpExpiryDateFilter.HasValue)
-								res.Append(
-                                            (Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue?"":" && ") +
-                                            string.Format("pExpiryDate >= \"{0}\"",  Convert.ToDateTime(StartpExpiryDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-
-					if (Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue)
-						{
-							if(EndpExpiryDateFilter.HasValue)
-								res.Append(" && " + string.Format("pExpiryDate <= \"{0}\"",  Convert.ToDateTime(EndpExpiryDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
-						}
-
-				if (Convert.ToDateTime(StartpExpiryDateFilter).Date != DateTime.MinValue &&
-		        Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue) res.Append(" )");
-
-					if (Convert.ToDateTime(_pExpiryDateFilter).Date != DateTime.MinValue)
-						{
-							if(pExpiryDateFilter.HasValue)
-								res.Append(" && " + string.Format("pExpiryDate == \"{0}\"",  Convert.ToDateTime(pExpiryDateFilter).Date.ToString("MM/dd/yyyy")));
-						}
-							return res.ToString().StartsWith(" &&") || res.Length == 0 ? res:  res.Insert(0," && ");		
 		}
+
+
+
+	    internal virtual StringBuilder GetAutoPropertyFilterString()
+	    {
+	        var res = new StringBuilder();
+
+
+	        if (TotalValueFilter.HasValue)
+	            res.Append(" && " + string.Format("TotalValue == {0}", TotalValueFilter.ToString()));
+
+	        if (AllocatedValueFilter.HasValue)
+	            res.Append(" && " + string.Format("AllocatedValue == {0}", AllocatedValueFilter.ToString()));
+
+	        if (string.IsNullOrEmpty(StatusFilter) == false)
+	            res.Append(" && " + string.Format("Status.Contains(\"{0}\")", StatusFilter));
+
+
+	        if (QtyAllocatedFilter.HasValue)
+	            res.Append(" && " + string.Format("QtyAllocated == {0}", QtyAllocatedFilter.ToString()));
+
+
+
+
+
+	        if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue) res.Append(" && (");
+
+	        if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (StartInvoiceDateFilter.HasValue)
+	                res.Append(
+	                    (Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue ? "" : " && ") +
+	                    string.Format("InvoiceDate >= \"{0}\"",
+	                        Convert.ToDateTime(StartInvoiceDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (EndInvoiceDateFilter.HasValue)
+	                res.Append(" && " + string.Format("InvoiceDate <= \"{0}\"",
+	                               Convert.ToDateTime(EndInvoiceDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue) res.Append(" )");
+
+	        if (Convert.ToDateTime(_invoiceDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (InvoiceDateFilter.HasValue)
+	                res.Append(" && " + string.Format("InvoiceDate == \"{0}\"",
+	                               Convert.ToDateTime(InvoiceDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+
+	        if (SalesQuantityFilter.HasValue)
+	            res.Append(" && " + string.Format("SalesQuantity == {0}", SalesQuantityFilter.ToString()));
+
+	        if (SalesQtyAllocatedFilter.HasValue)
+	            res.Append(" && " + string.Format("SalesQtyAllocated == {0}", SalesQtyAllocatedFilter.ToString()));
+
+	        if (string.IsNullOrEmpty(InvoiceNoFilter) == false)
+	            res.Append(" && " + string.Format("InvoiceNo.Contains(\"{0}\")", InvoiceNoFilter));
+
+
+	        if (string.IsNullOrEmpty(ItemNumberFilter) == false)
+	            res.Append(" && " + string.Format("ItemNumber.Contains(\"{0}\")", ItemNumberFilter));
+
+
+	        if (string.IsNullOrEmpty(ItemDescriptionFilter) == false)
+	            res.Append(" && " + string.Format("ItemDescription.Contains(\"{0}\")", ItemDescriptionFilter));
+
+
+	        if (string.IsNullOrEmpty(DutyFreePaidFilter) == false)
+	            res.Append(" && " + string.Format("DutyFreePaid.Contains(\"{0}\")", DutyFreePaidFilter));
+
+
+	        if (TaxAmountFilter.HasValue)
+	            res.Append(" && " + string.Format("TaxAmount == {0}", TaxAmountFilter.ToString()));
+
+	        if (CostFilter.HasValue)
+	            res.Append(" && " + string.Format("Cost == {0}", CostFilter.ToString()));
+
+	        if (DoNotAllocateSalesFilter.HasValue)
+	            res.Append(" && " + string.Format("DoNotAllocateSales == {0}", DoNotAllocateSalesFilter));
+
+	        if (SANumberFilter.HasValue)
+	            res.Append(" && " + string.Format("SANumber == {0}", SANumberFilter.ToString()));
+
+
+
+
+
+
+
+	        if (string.IsNullOrEmpty(pCNumberFilter) == false)
+	            res.Append(" && " + string.Format("pCNumber.Contains(\"{0}\")", pCNumberFilter));
+
+	        if (Convert.ToDateTime(StartpRegistrationDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" && (");
+
+	        if (Convert.ToDateTime(StartpRegistrationDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (StartpRegistrationDateFilter.HasValue)
+	                res.Append(
+	                    (Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue ? "" : " && ") +
+	                    string.Format("pRegistrationDate >= \"{0}\"",
+	                        Convert.ToDateTime(StartpRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (EndpRegistrationDateFilter.HasValue)
+	                res.Append(" && " + string.Format("pRegistrationDate <= \"{0}\"",
+	                               Convert.ToDateTime(EndpRegistrationDateFilter).Date.AddHours(23)
+	                                   .ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(StartpRegistrationDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndpRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" )");
+
+	        if (Convert.ToDateTime(_pRegistrationDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (pRegistrationDateFilter.HasValue)
+	                res.Append(" && " + string.Format("pRegistrationDate == \"{0}\"",
+	                               Convert.ToDateTime(pRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+
+	        if (pQuantityFilter.HasValue)
+	            res.Append(" && " + string.Format("pQuantity == {0}", pQuantityFilter.ToString()));
+
+	        if (pQtyAllocatedFilter.HasValue)
+	            res.Append(" && " + string.Format("pQtyAllocated == {0}", pQtyAllocatedFilter.ToString()));
+
+	        if (PiQuantityFilter.HasValue)
+	            res.Append(" && " + string.Format("PiQuantity == {0}", PiQuantityFilter.ToString()));
+
+	        if (string.IsNullOrEmpty(TariffCodeFilter) == false)
+	            res.Append(" && " + string.Format("TariffCode.Contains(\"{0}\")", TariffCodeFilter));
+
+
+	        if (InvalidFilter.HasValue)
+	            res.Append(" && " + string.Format("Invalid == {0}", InvalidFilter));
+	        if (pLineNumberFilter.HasValue)
+	            res.Append(" && " + string.Format("pLineNumber == {0}", pLineNumberFilter.ToString()));
+
+
+
+	        if (Convert.ToDateTime(StartpExpiryDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue) res.Append(" && (");
+
+	        if (Convert.ToDateTime(StartpExpiryDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (StartpExpiryDateFilter.HasValue)
+	                res.Append(
+	                    (Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue ? "" : " && ") +
+	                    string.Format("pExpiryDate >= \"{0}\"",
+	                        Convert.ToDateTime(StartpExpiryDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (EndpExpiryDateFilter.HasValue)
+	                res.Append(" && " + string.Format("pExpiryDate <= \"{0}\"",
+	                               Convert.ToDateTime(EndpExpiryDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(StartpExpiryDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndpExpiryDateFilter).Date != DateTime.MinValue) res.Append(" )");
+
+	        if (Convert.ToDateTime(_pExpiryDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (pExpiryDateFilter.HasValue)
+	                res.Append(" && " + string.Format("pExpiryDate == \"{0}\"",
+	                               Convert.ToDateTime(pExpiryDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+
+	        if (string.IsNullOrEmpty(pReferenceNumberFilter) == false)
+	            res.Append(" && " + string.Format("pReferenceNumber.Contains(\"{0}\")", pReferenceNumberFilter));
+
+	        if (Total_CIF_itmFilter.HasValue)
+	            res.Append(" && " + string.Format("Total_CIF_itm == {0}", Total_CIF_itmFilter.ToString()));
+
+	        if (DutyLiabilityFilter.HasValue)
+	            res.Append(" && " + string.Format("DutyLiability == {0}", DutyLiabilityFilter.ToString()));
+
+	        if (pIsAssessedFilter.HasValue)
+	            res.Append(" && " + string.Format("pIsAssessed == {0}", pIsAssessedFilter));
+
+	        if (DoNotAllocatePreviousEntryFilter.HasValue)
+	            res.Append(" && " + string.Format("DoNotAllocatePreviousEntry == {0}", DoNotAllocatePreviousEntryFilter));
+
+
+
+
+
+
+
+	        if (string.IsNullOrEmpty(xCNumberFilter) == false)
+	            res.Append(" && " + string.Format("xCNumber.Contains(\"{0}\")", xCNumberFilter));
+
+
+	        if (xLineNumberFilter.HasValue)
+	            res.Append(" && " + string.Format("xLineNumber == {0}", xLineNumberFilter.ToString()));
+
+	        if (Convert.ToDateTime(StartxRegistrationDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" && (");
+
+	        if (Convert.ToDateTime(StartxRegistrationDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (StartxRegistrationDateFilter.HasValue)
+	                res.Append(
+	                    (Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue ? "" : " && ") +
+	                    string.Format("xRegistrationDate >= \"{0}\"",
+	                        Convert.ToDateTime(StartxRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (EndxRegistrationDateFilter.HasValue)
+	                res.Append(" && " + string.Format("xRegistrationDate <= \"{0}\"",
+	                               Convert.ToDateTime(EndxRegistrationDateFilter).Date.AddHours(23)
+	                                   .ToString("MM/dd/yyyy")));
+	        }
+
+	        if (Convert.ToDateTime(StartxRegistrationDateFilter).Date != DateTime.MinValue &&
+	            Convert.ToDateTime(EndxRegistrationDateFilter).Date != DateTime.MinValue) res.Append(" )");
+
+	        if (Convert.ToDateTime(_xRegistrationDateFilter).Date != DateTime.MinValue)
+	        {
+	            if (xRegistrationDateFilter.HasValue)
+	                res.Append(" && " + string.Format("xRegistrationDate == \"{0}\"",
+	                               Convert.ToDateTime(xRegistrationDateFilter).Date.ToString("MM/dd/yyyy")));
+	        }
+
+	        if (string.IsNullOrEmpty(xReferenceNumberFilter) == false)
+	            res.Append(" && " + string.Format("xReferenceNumber.Contains(\"{0}\")", xReferenceNumberFilter));
+
+
+	        return res.ToString().StartsWith(" &&") || res.Length == 0 ? res : res.Insert(0, " && ");
+
+
+	    }
 
 // Send to Excel Implementation
 

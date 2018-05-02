@@ -37,6 +37,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
         private AsycudaDocumentItemsModel()
         {
             RegisterToReceiveMessages<AsycudaDocument>(MessageToken.CurrentAsycudaDocumentChanged, OnCurrentAsycudaDocumentChanged2);
+            RegisterToReceiveMessages<AsycudaDocumentItem>(MessageToken.CurrentAsycudaDocumentItemChanged, OnCurrentAsycudaDocumentItemChanged2);
             RegisterToReceiveMessages<PreviousItemsEx>(PreviousDocumentQS.MessageToken.CurrentPreviousItemsExChanged, OnCurrentPreviousItemsExChanged);
         }
 
@@ -45,10 +46,22 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
             if (e.Data != null)
             {
                 CNumberFilter = e.Data.Prev_reg_nbr;
-                LineNumberFilter = Convert.ToInt16(e.Data.Current_item_number);
+                LineNumberFilter = e.Data.Current_item_number;
                 ViewCurrentDocumentOnly = false;
             }
         }
+
+	    internal void OnCurrentAsycudaDocumentItemChanged2(object sender, NotificationEventArgs<AsycudaDocumentItem> e)
+	    {
+	        // if(BaseViewModel.Instance.CurrentAsycudaDocumentItem != null) BaseViewModel.Instance.CurrentAsycudaDocumentItem.PropertyChanged += CurrentAsycudaDocumentItem__propertyChanged;
+	        // NotifyPropertyChanged(x => this.CurrentAsycudaDocumentItem);
+	        if (e.Data != null)
+	        {
+	            AsycudaDocumentIdFilter =  e.Data.AsycudaDocumentId;
+                LineNumberFilter = e.Data.LineNumber.GetValueOrDefault().ToString();
+	            ViewCurrentDocumentOnly = false;
+	        }
+	    }
 
         private void OnCurrentAsycudaDocumentChanged2(object sender, NotificationEventArgs<AsycudaDocument> e)
         {

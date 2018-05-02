@@ -64,7 +64,7 @@ namespace WaterNut.Views
 
         private async void GoToEntryTxt_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            await AllocationsModel.Instance.GoToxBondEntry((((FrameworkElement)sender).DataContext) as AsycudaSalesAllocationsEx).ConfigureAwait(false);
+            await AllocationsModel.Instance.GoToxBondEntry(((VirtualListItem<AsycudaSalesAllocationsEx>)((FrameworkElement)sender).DataContext).Data).ConfigureAwait(false);
         }
 
         private void ItemLst_Drop(object sender, DragEventArgs e)

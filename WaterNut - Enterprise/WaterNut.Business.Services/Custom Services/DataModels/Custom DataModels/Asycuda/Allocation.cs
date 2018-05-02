@@ -167,8 +167,8 @@ namespace WaterNut.DataSpace
             var t = 0;
             var exceptions = new ConcurrentQueue<Exception>();
             Parallel.ForEach(itemSets.Values
-                                    // .Where(x => x.Key.Contains("194129"))
-                                    //.Where(x => "".Contains(x.Key))
+                                     ///.Where(x => x.Key.Contains("1005H/GL"))
+                                     //.Where(x => "1005H/GL, 1005/GL".Contains(x.Key))
                                      //.Where(x => "FAA/SCPI18X112".Contains(x.ItemNumber))//SND/IVF1010MPSF,BRG/NAVICOTE-GL,
                                      , new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount *  1 }, itm => //.Where(x => x.ItemNumber == "AT18547")
              {

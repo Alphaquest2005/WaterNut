@@ -485,8 +485,12 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
         {
             if (allo != null )
             {
-                CoreEntities.ViewModels.BaseViewModel.Instance.CurrentAsycudaDocumentItem = await AsycudaDocumentItemRepository.Instance.GetAsycudaDocumentItem(allo.xBond_Item_Id.ToString()).ConfigureAwait(false);
-                Core.Common.UI.BaseViewModel.Slider.MoveTo("AsycudaDocumentsExP");
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    CoreEntities.ViewModels.BaseViewModel.Instance.CurrentAsycudaDocumentItem = AsycudaDocumentItemRepository.Instance.GetAsycudaDocumentItem(allo.xBond_Item_Id.ToString()).Result;
+                    Core.Common.UI.BaseViewModel.Slider.MoveTo("AsycudaDocumentsExP");
+                });
+               
             }
         }
 
