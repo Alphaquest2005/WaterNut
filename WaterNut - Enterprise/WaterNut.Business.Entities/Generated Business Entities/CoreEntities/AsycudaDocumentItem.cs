@@ -612,6 +612,21 @@ namespace CoreEntities.Business.Entities
         }
         Nullable<double> _salesfactor;
         [DataMember]
+        public string ReferenceNumber 
+        {
+            get
+            {
+                return _referencenumber;
+            }
+            set
+            {
+                _referencenumber = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _referencenumber;
+        [DataMember]
         public AsycudaDocument AsycudaDocument { get; set; }
         [DataMember]
         public List<SubItems> SubItems { get; set; }

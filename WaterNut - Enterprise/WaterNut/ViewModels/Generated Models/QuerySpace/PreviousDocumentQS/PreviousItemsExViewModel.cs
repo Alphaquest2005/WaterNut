@@ -863,7 +863,9 @@ namespace WaterNut.QuerySpace.PreviousDocumentQS.ViewModels
                     CNumber = x.CNumber ,
                     
  
-                    RegistrationDate = x.RegistrationDate 
+                    RegistrationDate = x.RegistrationDate,
+                    
+                    ReferenceNumber = x.ReferenceNumber
                     
                 }).ToList()
             };
@@ -936,8 +938,8 @@ namespace WaterNut.QuerySpace.PreviousDocumentQS.ViewModels
                     public string CNumber { get; set; } 
                     
  
-                    public Nullable<System.DateTime> RegistrationDate { get; set; } 
-                    
+                    public Nullable<System.DateTime> RegistrationDate { get; set; }
+            public string ReferenceNumber { get; set; }
         }
 
 		

@@ -52,6 +52,7 @@
               this.Property(t => t.WarehouseError).HasColumnName("WarehouseError").IsUnicode(false).HasMaxLength(50);
               this.Property(t => t.Cancelled).HasColumnName("Cancelled");
               this.Property(t => t.SalesFactor).HasColumnName("SalesFactor");
+              this.Property(t => t.ReferenceNumber).HasColumnName("ReferenceNumber");
               this.HasOptional(t => t.AsycudaDocument).WithMany(t =>(ICollection<AsycudaDocumentItem>) t.AsycudaDocumentItems).HasForeignKey(d => d.AsycudaDocumentId);
               this.HasMany(t => t.SubItems).WithRequired(t => (AsycudaDocumentItem)t.AsycudaDocumentItem);
               this.HasMany(t => t.PreviousItems).WithRequired(t => (AsycudaDocumentItem)t.AsycudaDocumentItem);

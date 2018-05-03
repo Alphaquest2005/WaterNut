@@ -346,6 +346,19 @@ namespace PreviousDocumentQS.Client.DTO
 		}
         private Nullable<int> _AsycudaDocumentItemId;
 
+        [DataMember]
+        public string ReferenceNumber
+		{ 
+		    get { return _ReferenceNumber; }
+			set
+			{
+			    if (value == _ReferenceNumber) return;
+				_ReferenceNumber = value;
+				NotifyPropertyChanged();//m => this.ReferenceNumber
+			}
+		}
+        private string _ReferenceNumber;
+
        
         [DataMember]
         public PreviousDocumentItem PreviousDocumentItem

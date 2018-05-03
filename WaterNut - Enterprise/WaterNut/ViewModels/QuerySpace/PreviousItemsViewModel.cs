@@ -240,7 +240,9 @@ namespace WaterNut.QuerySpace.PreviousDocumentQS.ViewModels
                     CNumber = x.CNumber,
 
 
-                    RegistrationDate = x.RegistrationDate
+                    RegistrationDate = x.RegistrationDate,
+
+                    ReferenceNumber = x.ReferenceNumber
 
                 }).ToList()
             };

@@ -441,6 +441,23 @@ public Nullable<int> AsycudaDocumentItemId
 		}
      
 
+       
+       
+                
+                
+public string ReferenceNumber
+		{ 
+		    get { return this.previousitemsex.ReferenceNumber; }
+			set
+			{
+			    if (value == this.previousitemsex.ReferenceNumber) return;
+				this.previousitemsex.ReferenceNumber = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("ReferenceNumber");
+			}
+		}
+     
+
        private PreviousDocumentItem _PreviousDocumentItem;
         public  PreviousDocumentItem PreviousDocumentItem
 		{

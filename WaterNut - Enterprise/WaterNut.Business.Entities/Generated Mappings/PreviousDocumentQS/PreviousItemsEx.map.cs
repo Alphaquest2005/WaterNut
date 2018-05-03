@@ -38,6 +38,7 @@
               this.Property(t => t.RegistrationDate).HasColumnName("RegistrationDate");
               this.Property(t => t.PreviousDocumentItemId).HasColumnName("PreviousDocumentItemId");
               this.Property(t => t.AsycudaDocumentItemId).HasColumnName("AsycudaDocumentItemId");
+              this.Property(t => t.ReferenceNumber).HasColumnName("ReferenceNumber");
               this.HasOptional(t => t.PreviousDocumentItem).WithMany(t =>(ICollection<PreviousItemsEx>) t.PreviousItemsExes).HasForeignKey(d => d.PreviousDocumentItemId);
               this.HasOptional(t => t.AsycudaDocumentItem).WithMany(t =>(ICollection<PreviousItemsEx>) t.PreviousItemEx).HasForeignKey(d => d.AsycudaDocumentItemId);
              // Tracking Properties

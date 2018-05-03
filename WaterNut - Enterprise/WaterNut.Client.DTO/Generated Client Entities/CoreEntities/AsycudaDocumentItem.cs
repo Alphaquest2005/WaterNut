@@ -528,6 +528,19 @@ namespace CoreEntities.Client.DTO
 		}
         private Nullable<double> _SalesFactor;
 
+        [DataMember]
+        public string ReferenceNumber
+		{ 
+		    get { return _ReferenceNumber; }
+			set
+			{
+			    if (value == _ReferenceNumber) return;
+				_ReferenceNumber = value;
+				NotifyPropertyChanged();//m => this.ReferenceNumber
+			}
+		}
+        private string _ReferenceNumber;
+
        
         [DataMember]
         public AsycudaDocument AsycudaDocument

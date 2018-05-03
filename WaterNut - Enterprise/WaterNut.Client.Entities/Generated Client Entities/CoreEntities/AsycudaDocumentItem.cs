@@ -650,6 +650,23 @@ public Nullable<double> SalesFactor
 		}
      
 
+       
+       
+                
+                
+public string ReferenceNumber
+		{ 
+		    get { return this.asycudadocumentitem.ReferenceNumber; }
+			set
+			{
+			    if (value == this.asycudadocumentitem.ReferenceNumber) return;
+				this.asycudadocumentitem.ReferenceNumber = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("ReferenceNumber");
+			}
+		}
+     
+
        private AsycudaDocument _AsycudaDocument;
         public  AsycudaDocument AsycudaDocument
 		{

@@ -395,6 +395,21 @@ namespace PreviousDocumentQS.Business.Entities
         }
         Nullable<int> _asycudadocumentitemid;
         [DataMember]
+        public string ReferenceNumber 
+        {
+            get
+            {
+                return _referencenumber;
+            }
+            set
+            {
+                _referencenumber = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _referencenumber;
+        [DataMember]
         public PreviousDocumentItem PreviousDocumentItem { get; set; }
         [DataMember]
         public PreviousDocumentItem AsycudaDocumentItem { get; set; }
