@@ -173,6 +173,7 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocumentItem' doe
           <Property Name="PiQuantity" Type="float" />
           <Property Name="Cancelled" Type="bit" />
           <Property Name="SalesFactor" Type="float" />
+          <Property Name="ReferenceNumber" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.AsycudaDocumentSetEx' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -305,7 +306,8 @@ FROM [dbo].[AsycudaDocument] AS [AsycudaDocument]</DefiningQuery>
 [AsycudaDocumentItem].[WarehouseError] AS [WarehouseError], 
 [AsycudaDocumentItem].[PiQuantity] AS [PiQuantity], 
 [AsycudaDocumentItem].[Cancelled] AS [Cancelled], 
-[AsycudaDocumentItem].[SalesFactor] AS [SalesFactor]
+[AsycudaDocumentItem].[SalesFactor] AS [SalesFactor], 
+[AsycudaDocumentItem].[ReferenceNumber] AS [ReferenceNumber]
 FROM [dbo].[AsycudaDocumentItem] AS [AsycudaDocumentItem]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="AsycudaDocumentSetEx" EntityType="Self.AsycudaDocumentSetEx" store:Type="Views" store:Schema="dbo">
@@ -507,7 +509,8 @@ FROM [dbo].[LicenceSummary] AS [LicenceSummary]</DefiningQuery>
           <Property Name="InvalidHSCode" Type="Boolean" />
           <Property Name="WarehouseError" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cancelled" Type="Boolean" />
-          <Property Name="SalesFactor" Type="Double" /><a:DomainInterfaceProperty xmlns:a="http://schemas.tempuri.com/DomainInterfaceProperty">IDocumentItem,IWeightItem</a:DomainInterfaceProperty>
+          <Property Name="SalesFactor" Type="Double" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" /><a:DomainInterfaceProperty xmlns:a="http://schemas.tempuri.com/DomainInterfaceProperty">IDocumentItem,IWeightItem</a:DomainInterfaceProperty>
         </EntityType>
         <Association Name="AsycudaDocumentAsycudaDocumentItem">
           <End Type="WaterNutDBModel.AsycudaDocument" Role="AsycudaDocument" Multiplicity="0..1" />
@@ -764,6 +767,7 @@ FROM [dbo].[LicenceSummary] AS [LicenceSummary]</DefiningQuery>
           <EntitySetMapping Name="AsycudaDocumentItems">
             <EntityTypeMapping TypeName="WaterNutDBModel.AsycudaDocumentItem">
               <MappingFragment StoreEntitySet="AsycudaDocumentItem">
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
                 <ScalarProperty Name="SalesFactor" ColumnName="SalesFactor" />
                 <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
                 <ScalarProperty Name="WarehouseError" ColumnName="WarehouseError" />

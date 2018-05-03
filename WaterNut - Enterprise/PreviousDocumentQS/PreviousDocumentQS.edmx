@@ -104,6 +104,7 @@ warning 6002: The table/view 'WaterNutDB-Enterprise.dbo.PreviousItemsEx' does no
           <Property Name="QtyAllocated" Type="float" Nullable="false" />
           <Property Name="PreviousDocumentItemId" Type="int" />
           <Property Name="RndCurrent_Value" Type="float" Nullable="false" />
+          <Property Name="ReferenceNumber" Type="nvarchar(max)" />
           <Property Name="CNumber" Type="varchar(max)" />
           <Property Name="RegistrationDate" Type="datetime" />
           <Property Name="AsycudaDocumentItemId" Type="int" />
@@ -186,6 +187,7 @@ FROM [dbo].[PreviousDocumentItem] AS [PreviousDocumentItem]</DefiningQuery>
 [PreviousItemsEx].[QtyAllocated] AS [QtyAllocated], 
 [PreviousItemsEx].[PreviousDocumentItemId] AS [PreviousDocumentItemId], 
 [PreviousItemsEx].[RndCurrent_Value] AS [RndCurrent_Value], 
+[PreviousItemsEx].[ReferenceNumber] AS [ReferenceNumber], 
 [PreviousItemsEx].[CNumber] AS [CNumber], 
 [PreviousItemsEx].[RegistrationDate] AS [RegistrationDate], 
 [PreviousItemsEx].[AsycudaDocumentItemId] AS [AsycudaDocumentItemId]
@@ -315,6 +317,7 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           <Property Name="PreviousDocumentItemId" Type="Int32" />
           <Property Name="AsycudaDocumentItemId" Type="Int32" />
           <NavigationProperty Name="AsycudaDocumentItem" Relationship="WaterNutDBModel.PreviousDocumentItemPreviousItemsEx1" FromRole="PreviousItemsEx" ToRole="PreviousDocumentItem" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="PreviousDocumentItemPreviousItemsEx">
           <End Type="WaterNutDBModel.PreviousDocumentItem" Role="PreviousDocumentItem" Multiplicity="0..1" />
@@ -406,6 +409,7 @@ FROM [dbo].[PreviousItemsEx] AS [PreviousItemsEx]</DefiningQuery>
           <EntitySetMapping Name="PreviousItemsExes">
             <EntityTypeMapping TypeName="WaterNutDBModel.PreviousItemsEx">
               <MappingFragment StoreEntitySet="PreviousItemsEx">
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
                 <ScalarProperty Name="AsycudaDocumentItemId" ColumnName="AsycudaDocumentItemId" />
                 <ScalarProperty Name="PreviousDocumentItemId" ColumnName="PreviousDocumentItemId" />
                 <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />

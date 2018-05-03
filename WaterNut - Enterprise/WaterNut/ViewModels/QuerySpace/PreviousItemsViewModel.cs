@@ -6,7 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks.Schedulers;
+using System.Windows;
 using AllocationQS.Client.Entities;
+using Core.Common.Converters;
 using PreviousDocumentQS.Client.Repositories;
 using PreviousDocumentQS.Client.Entities;
 using SimpleMvvmToolkit;
@@ -163,5 +167,88 @@ namespace WaterNut.QuerySpace.PreviousDocumentQS.ViewModels
             }
         }
 
-	}
+        public async Task Send2Excel()
+        {
+            IEnumerable<PreviousItemsEx> lst = PreviousItems;
+            if (lst == null || !lst.Any())
+            {
+                MessageBox.Show("No Data to Send to Excel");
+                return;
+            }
+            var s = new ExportToExcel<PreviousItemsExViewModel_AutoGen.PreviousItemsExExcelLine, List<PreviousItemsExViewModel_AutoGen.PreviousItemsExExcelLine>>
+            {
+                dataToPrint = lst.Select(x => new PreviousItemsExViewModel_AutoGen.PreviousItemsExExcelLine
+                {
+
+                    Packages_number = x.Packages_number,
+
+
+                    Previous_Packages_number = x.Previous_Packages_number,
+
+
+                    Hs_code = x.Hs_code,
+
+
+                    Commodity_code = x.Commodity_code,
+
+
+                    Previous_item_number = x.Previous_item_number,
+
+
+                    Goods_origin = x.Goods_origin,
+
+
+                    Net_weight = x.Net_weight,
+
+
+                    Prev_net_weight = x.Prev_net_weight,
+
+
+                    Prev_reg_ser = x.Prev_reg_ser,
+
+
+                    Prev_reg_nbr = x.Prev_reg_nbr,
+
+
+                    Prev_reg_dat = x.Prev_reg_dat,
+
+
+                    Prev_reg_cuo = x.Prev_reg_cuo,
+
+
+                    Suplementary_Quantity = x.Suplementary_Quantity,
+
+
+                    Preveious_suplementary_quantity = x.Preveious_suplementary_quantity,
+
+
+                    Current_value = x.Current_value,
+
+
+                    Previous_value = x.Previous_value,
+
+
+                    Current_item_number = x.Current_item_number,
+
+
+                    QtyAllocated = x.QtyAllocated,
+
+
+                    RndCurrent_Value = x.RndCurrent_Value,
+
+
+                    CNumber = x.CNumber,
+
+
+                    RegistrationDate = x.RegistrationDate
+
+                }).ToList()
+            };
+            using (var sta = new StaTaskScheduler(numberOfThreads: 1))
+            {
+                await Task.Factory.StartNew(s.GenerateReport, CancellationToken.None, TaskCreationOptions.None, sta).ConfigureAwait(false);
+            }
+        }
+
+    }
 }

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WaterNut.QuerySpace.PreviousDocumentQS.ViewModels;
 
 namespace WaterNut.Views
 {
@@ -29,9 +30,9 @@ namespace WaterNut.Views
 
         }
 
-        private void Send2Excel(object sender, MouseButtonEventArgs e)
+        private async void Send2Excel(object sender, MouseButtonEventArgs e)
         {
-
+            await PreviousItemsViewModel.Instance.Send2Excel().ConfigureAwait(false);
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)

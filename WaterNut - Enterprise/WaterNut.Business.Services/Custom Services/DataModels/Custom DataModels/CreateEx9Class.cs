@@ -116,14 +116,15 @@ namespace WaterNut.DataSpace
                                           //  && x.xcuda_Item.IsAssessed == true --- did not force assesed so that system checks potential ex-warehouse too
                                             && (x.xcuda_Item.AsycudaDocument.Extended_customs_procedure == "9070" || x.xcuda_Item.AsycudaDocument.Extended_customs_procedure == "4070")
                                             && x.xcuda_Item.AsycudaDocument.AssessmentDate != null 
-                                            && x.xcuda_Item.AsycudaDocument.AssessmentDate >= startDate
+                                          //  && x.xcuda_Item.AsycudaDocument.AssessmentDate >= startDate
                                             && x.xcuda_Item.AsycudaDocument.AssessmentDate.Value <= endDate)
                     .GroupBy(x => new { ItemNumber = x.xcuda_Item.xcuda_Tarification.xcuda_HScode.Precision_4, DutyFreePaid = (x.xcuda_Item.AsycudaDocument.Extended_customs_procedure == "9070"? "Duty Free": "Duty Paid") })
                     .Select(g => new PiSummary
                     {
                         ItemNumber = g.Key.ItemNumber,
                         DutyFreePaid = g.Key.DutyFreePaid,
-                        TotalQuantity = g.Sum(z => z.Suplementary_Quantity)
+                        TotalQuantity = g.Sum(z => z.Suplementary_Quantity),
+                        
                     }).ToList();
                 return piSummary;
             }
@@ -134,7 +135,7 @@ namespace WaterNut.DataSpace
            
             using (var ctx = new AllocationDSContext())
             {
-                var salesLst = ctx.EntryDataDetails.Where(x => x.Sales.EntryDataDate >= startDate && x.Sales.EntryDataDate <= endDate)
+                var salesLst = ctx.EntryDataDetails.Where(x =>  x.Sales.EntryDataDate <= endDate)//x.Sales.EntryDataDate >= startDate &&
                                .GroupBy(x => new { x.ItemNumber, DutyFreePaid =  (x.Sales.TaxAmount == 0?"Duty Free":"Duty Paid") })
                                .Select(g => new SalesSummary
                                {

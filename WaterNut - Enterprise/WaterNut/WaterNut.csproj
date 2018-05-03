@@ -354,7 +354,7 @@
     <Compile Include="ViewModels\QuerySpace\OverShortDetailsModel.cs" />
     <Compile Include="ViewModels\QuerySpace\OversShortsModel.cs" />
     <Compile Include="ViewModels\QuerySpace\PreviousDocumentsModelQS.cs" />
-    <Compile Include="ViewModels\QuerySpace\PreviousItemsModelQS.cs" />
+    <Compile Include="ViewModels\QuerySpace\PreviousItemsViewModel.cs" />
     <Compile Include="ViewModels\QuerySpace\AllocationsModelQS.cs" />
     <Compile Include="ViewModels\QuerySpace\CPSalesModelQS.cs" />
     <Compile Include="ViewModels\QuerySpace\EX9SalesDataDetailsModelQS.cs" />

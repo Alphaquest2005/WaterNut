@@ -51,7 +51,7 @@ namespace WaterNut.DataSpace
 				StatusModel.Timer("Processing Allocations");//, alst.Count()
 				var exceptions = new ConcurrentQueue<Exception>();
 			   
-			   var alst = GetAllocations().Where(x => x.Item_Id == 968).ToList();//
+			   var alst = GetAllocations().ToList();//.Where(x => x.Item_Id == 968)
 				//Parallel.ForEach(alst, new ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2}, g =>//
 
 			   // var ps = alst.SelectMany(x => x.Pi).DistinctBy(x => x.Pi.PreviousItem_Id).OrderBy(x => x.pAssessmentDate).ThenBy(x => x.pRegDate);
