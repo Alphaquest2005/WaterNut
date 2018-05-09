@@ -370,6 +370,7 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
                     "&& (QtyAllocated != null && EntryDataDetailsId != null && Cost > 0)" +
                     "&& (pRegistrationDate != DateTime.MinValue)" +
                     "&& (pCNumber != null)" +
+                    "&& (Status == null || Status == \"\")" +
                     (CoreEntities.ViewModels.BaseViewModel.Instance.CurrentApplicationSettings.AllowNonXEntries == "Visible"? string.Format("&& (Invalid != true && (pExpiryDate >= \"{0}\") && (Status == null || Status == \"\"))", DateTime.Now.ToShortDateString()): ""));
                 //&& (PreviousEntry.AsycudaDocument.IsManuallyAssessed == null
                 //    || PreviousEntry.AsycudaDocument.IsManuallyAssessed != true))

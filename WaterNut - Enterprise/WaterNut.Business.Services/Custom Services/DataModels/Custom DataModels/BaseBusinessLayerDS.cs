@@ -743,26 +743,26 @@ namespace WaterNut.DataSpace
                     
                         using (var ctx = new xcuda_ItemService())
                         {
-                            //foreach (var item in cdoc.DocumentItems)
-                            //{
-                            var exceptions = new ConcurrentQueue<Exception>();
-                            cdoc.DocumentItems.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll((t) =>
+                            foreach (var t in cdoc.DocumentItems)
                             {
+                                var exceptions = new ConcurrentQueue<Exception>();
+                                //cdoc.DocumentItems.AsParallel(new ParallelLinqOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount }).ForAll((t) =>
+                                //{
                                 try
                                 {
-                                    if(t.ChangeTracker != null)
-                                    ctx.Updatexcuda_Item(t).Wait();//.ChangeTracker.GetChanges().FirstOrDefault()
+                                    if (t.ChangeTracker != null)
+                                        ctx.Updatexcuda_Item(t).Wait(); //.ChangeTracker.GetChanges().FirstOrDefault()
                                 }
                                 catch (Exception ex)
                                 {
-                                    
+
                                     exceptions.Enqueue(ex);
                                 }
-                                
-                            });
-                            if(exceptions.Count > 0) throw new AggregateException(exceptions);
-                            //    await ctx.Updatexcuda_Item(cdoc.DocumentItems).ConfigureAwait(false);
-                            //}
+
+                                //});
+                                if (exceptions.Count > 0) throw new AggregateException(exceptions);
+                                //    await ctx.Updatexcuda_Item(cdoc.DocumentItems).ConfigureAwait(false);
+                            }
                         }
                 //});
               //  await CalculateDocumentSetFreight(cdoc.Document.xcuda_ASYCUDA_ExtendedProperties.AsycudaDocumentSetId.GetValueOrDefault()).ConfigureAwait(false);
