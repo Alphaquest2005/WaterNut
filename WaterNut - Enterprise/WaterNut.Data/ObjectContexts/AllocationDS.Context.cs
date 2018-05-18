@@ -173,5 +173,3 @@ namespace AllocationDS.Business.Entities
 		partial void OnModelCreatingExtentsion(DbModelBuilder modelBuilder);
     }
 }
-
- 	

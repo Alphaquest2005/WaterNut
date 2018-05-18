@@ -410,6 +410,51 @@ namespace PreviousDocumentQS.Business.Entities
         }
         string _referencenumber;
         [DataMember]
+        public Nullable<System.DateTime> AssessmentDate 
+        {
+            get
+            {
+                return _assessmentdate;
+            }
+            set
+            {
+                _assessmentdate = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<System.DateTime> _assessmentdate;
+        [DataMember]
+        public string ItemNumber 
+        {
+            get
+            {
+                return _itemnumber;
+            }
+            set
+            {
+                _itemnumber = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        string _itemnumber;
+        [DataMember]
+        public Nullable<double> SalesFactor 
+        {
+            get
+            {
+                return _salesfactor;
+            }
+            set
+            {
+                _salesfactor = value;
+                //if(this.TrackingState == TrackingState.Unchanged) this.TrackingState = TrackingState.Modified;  
+                NotifyPropertyChanged();
+            }
+        }
+        Nullable<double> _salesfactor;
+        [DataMember]
         public PreviousDocumentItem PreviousDocumentItem { get; set; }
         [DataMember]
         public PreviousDocumentItem AsycudaDocumentItem { get; set; }

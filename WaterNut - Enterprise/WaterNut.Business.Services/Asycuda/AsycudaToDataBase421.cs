@@ -96,7 +96,7 @@ namespace WaterNut.DataSpace.Asycuda
 
                 
 
-                await   SaveGeneralInformation().ConfigureAwait(false);
+                await SaveGeneralInformation().ConfigureAwait(false);
                 await SaveDeclarant().ConfigureAwait(false);
                 await SaveTraders().ConfigureAwait(false);
                 await SaveProperty().ConfigureAwait(false);
@@ -404,11 +404,9 @@ namespace WaterNut.DataSpace.Asycuda
                      pdoc = ctx.xcuda_ASYCUDA.FirstOrDefault(
                         x =>
                             x.xcuda_Identification.xcuda_Registration.Date != null &&
-                            x.xcuda_Identification.xcuda_Registration.Date.Substring(x.xcuda_Identification.xcuda_Registration.Date.Length-2) ==
-                            ai.Prev_decl_reg_year.Substring(ai.Prev_decl_reg_year.Length - 2)
+                            x.xcuda_Identification.xcuda_Registration.Date.Substring(x.xcuda_Identification.xcuda_Registration.Date.Length-2) == ai.Prev_decl_reg_year.Substring(ai.Prev_decl_reg_year.Length - 2)
                             && x.xcuda_Identification.xcuda_Registration.Number == ai.Prev_decl_reg_number &&
-                            x.xcuda_Identification.xcuda_Office_segment.Customs_clearance_office_code ==
-                            ai.Prev_decl_office_code);
+                            x.xcuda_Identification.xcuda_Office_segment.Customs_clearance_office_code == ai.Prev_decl_office_code);
                 }
                 if (pdoc == null)
               throw new ApplicationException(string.Format("Please Import CNumber {0} Year {1} Office {2} before importing this file {3}-{4}", ai.Prev_decl_reg_number, ai.Prev_decl_reg_year, ai.Prev_decl_office_code, a.Identification.Registration.Number, a.Identification.Registration.Date));
@@ -417,7 +415,8 @@ namespace WaterNut.DataSpace.Asycuda
                     var itm = ctx.xcuda_Item.FirstOrDefault(
                         x => x.LineNumber.ToString() == ai.Prev_decl_item_number
                              && x.ASYCUDA_Id == pdoc.ASYCUDA_Id
-                             && x.xcuda_Tarification.xcuda_HScode.Precision_4 == itemNumber);
+                             //&& x.xcuda_Tarification.xcuda_HScode.Precision_4 == itemNumber // cuz of c#39457
+                             );
 
                     if (itm != null) return itm.Item_Id;
                     return 0;

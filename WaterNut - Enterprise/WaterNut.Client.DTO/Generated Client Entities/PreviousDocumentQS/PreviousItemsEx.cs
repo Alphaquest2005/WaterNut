@@ -359,6 +359,45 @@ namespace PreviousDocumentQS.Client.DTO
 		}
         private string _ReferenceNumber;
 
+        [DataMember]
+        public Nullable<System.DateTime> AssessmentDate
+		{ 
+		    get { return _AssessmentDate; }
+			set
+			{
+			    if (value == _AssessmentDate) return;
+				_AssessmentDate = value;
+				NotifyPropertyChanged();//m => this.AssessmentDate
+			}
+		}
+        private Nullable<System.DateTime> _AssessmentDate;
+
+        [DataMember]
+        public string ItemNumber
+		{ 
+		    get { return _ItemNumber; }
+			set
+			{
+			    if (value == _ItemNumber) return;
+				_ItemNumber = value;
+				NotifyPropertyChanged();//m => this.ItemNumber
+			}
+		}
+        private string _ItemNumber;
+
+        [DataMember]
+        public Nullable<double> SalesFactor
+		{ 
+		    get { return _SalesFactor; }
+			set
+			{
+			    if (value == _SalesFactor) return;
+				_SalesFactor = value;
+				NotifyPropertyChanged();//m => this.SalesFactor
+			}
+		}
+        private Nullable<double> _SalesFactor;
+
        
         [DataMember]
         public PreviousDocumentItem PreviousDocumentItem

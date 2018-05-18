@@ -940,6 +940,7 @@ namespace WaterNut.QuerySpace.PreviousDocumentQS.ViewModels
  
                     public Nullable<System.DateTime> RegistrationDate { get; set; }
             public string ReferenceNumber { get; set; }
+            public DateTime? AssessmentDate { get; set; }
         }
 
 		

@@ -458,6 +458,53 @@ public string ReferenceNumber
 		}
      
 
+       
+       
+public Nullable<System.DateTime> AssessmentDate
+		{ 
+		    get { return this.previousitemsex.AssessmentDate; }
+			set
+			{
+			    if (value == this.previousitemsex.AssessmentDate) return;
+				this.previousitemsex.AssessmentDate = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("AssessmentDate");
+			}
+		}
+     
+
+       
+       
+                
+                [MaxLength(50, ErrorMessage = "ItemNumber has a max length of 50 letters ")]
+public string ItemNumber
+		{ 
+		    get { return this.previousitemsex.ItemNumber; }
+			set
+			{
+			    if (value == this.previousitemsex.ItemNumber) return;
+				this.previousitemsex.ItemNumber = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("ItemNumber");
+			}
+		}
+     
+
+       
+       [NumberValidationAttribute]
+public Nullable<double> SalesFactor
+		{ 
+		    get { return this.previousitemsex.SalesFactor; }
+			set
+			{
+			    if (value == this.previousitemsex.SalesFactor) return;
+				this.previousitemsex.SalesFactor = value;
+                if(this.TrackingState == TrackableEntities.TrackingState.Unchanged)this.TrackingState = TrackableEntities.TrackingState.Modified;
+				NotifyPropertyChanged("SalesFactor");
+			}
+		}
+     
+
        private PreviousDocumentItem _PreviousDocumentItem;
         public  PreviousDocumentItem PreviousDocumentItem
 		{

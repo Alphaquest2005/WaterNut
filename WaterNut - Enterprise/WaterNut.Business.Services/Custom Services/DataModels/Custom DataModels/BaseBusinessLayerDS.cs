@@ -1429,7 +1429,7 @@ namespace WaterNut.DataSpace
                 using (var ctx = new CoreEntitiesContext())
                 {
                     var declarantCode = ctx.ApplicationSettings.First().DeclarantCode;
-                    var fileCode = a.Warehouse.Identification.Text.FirstOrDefault();// a.Declarant.Declarant_code;
+                    var fileCode = a.Warehouse.Identification.Text.FirstOrDefault()?? a.Declarant.Declarant_code;
                     if (fileCode != declarantCode)
                     {
                         throw new ApplicationException($"Could not import file - '{f} - The file is for another warehouse{fileCode}. While this Warehouse is {declarantCode}");

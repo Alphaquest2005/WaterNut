@@ -39,6 +39,9 @@
               this.Property(t => t.PreviousDocumentItemId).HasColumnName("PreviousDocumentItemId");
               this.Property(t => t.AsycudaDocumentItemId).HasColumnName("AsycudaDocumentItemId");
               this.Property(t => t.ReferenceNumber).HasColumnName("ReferenceNumber");
+              this.Property(t => t.AssessmentDate).HasColumnName("AssessmentDate");
+              this.Property(t => t.ItemNumber).HasColumnName("ItemNumber").IsUnicode(false).HasMaxLength(50);
+              this.Property(t => t.SalesFactor).HasColumnName("SalesFactor");
               this.HasOptional(t => t.PreviousDocumentItem).WithMany(t =>(ICollection<PreviousItemsEx>) t.PreviousItemsExes).HasForeignKey(d => d.PreviousDocumentItemId);
               this.HasOptional(t => t.AsycudaDocumentItem).WithMany(t =>(ICollection<PreviousItemsEx>) t.PreviousItemEx).HasForeignKey(d => d.AsycudaDocumentItemId);
              // Tracking Properties
