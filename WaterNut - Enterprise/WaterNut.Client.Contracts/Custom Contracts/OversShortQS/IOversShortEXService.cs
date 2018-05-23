@@ -31,7 +31,7 @@ namespace OversShortQS.Client.Contracts
         Task CreateOversOps(IEnumerable<int> selOS, int docSet);
         [OperationContract]
         Task CreateShortsEx9(IEnumerable<int> selos, int docSet,
-            bool BreakOnMonthYear, bool ApplyEX9Bucket);
+            bool applyCurrentChecks, bool process7100);
         [OperationContract]
         Task<StringBuilder> BuildOSLst(List<int> lst);
     }

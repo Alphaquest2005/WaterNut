@@ -31,12 +31,12 @@ namespace AllocationQS.Client.Repositories
                 }
         }
 
-        public async Task CreateEx9(string filterExpression, bool perIM7, bool applyEx9Bucket, bool breakOnMonthYear, int asycudaDocumentSetId)
+        public async Task CreateEx9(string filterExpression, bool perIM7, bool process7100, bool applyCurrentChecks, int asycudaDocumentSetId)
         {
             using (var t = new AllocationsClient())
             {
                 
-                await t.CreateEx9(filterExpression, perIM7, applyEx9Bucket, breakOnMonthYear, asycudaDocumentSetId).ConfigureAwait(false);
+                await t.CreateEx9(filterExpression, perIM7, process7100, applyCurrentChecks, asycudaDocumentSetId).ConfigureAwait(false);
             }
         }
 

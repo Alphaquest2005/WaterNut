@@ -11,7 +11,7 @@ namespace AllocationQS.Business.Services
     {
 
         [OperationContract][FaultContract(typeof(ValidationFault))]
-        Task CreateEx9(string filterExpression, bool perIM7, bool applyEx9Bucket, bool breakOnMonthYear, int AsycudaDocumentSetId);
+        Task CreateEx9(string filterExpression, bool perIM7, bool process7100, bool applyCurrentChecks, int AsycudaDocumentSetId);
         [OperationContract][FaultContract(typeof(ValidationFault))]
         Task CreateOPS(string filterExpression, int AsycudaDocumentSetId);
         [OperationContract][FaultContract(typeof(ValidationFault))]

@@ -27,9 +27,9 @@ namespace AllocationQS.Client.Services
             return Channel.GetAsycudaSalesAllocationsExesByDates(startDate,endDate);
         }
 
-        public async Task CreateEx9(string filterExpression, bool perIM7, bool applyEx9Bucket, bool breakOnMonthYear, int AsycudaDocumentSetId)
+        public async Task CreateEx9(string filterExpression, bool perIM7, bool process7100, bool applyCurrentChecks, int AsycudaDocumentSetId)
         {
-             await Channel.CreateEx9(filterExpression, perIM7, applyEx9Bucket, breakOnMonthYear, AsycudaDocumentSetId).ConfigureAwait(false);
+             await Channel.CreateEx9(filterExpression, perIM7, process7100, applyCurrentChecks, AsycudaDocumentSetId).ConfigureAwait(false);
         }
 
         public async Task CreateOPS(string filterExpression, int AsycudaDocumentSetId)

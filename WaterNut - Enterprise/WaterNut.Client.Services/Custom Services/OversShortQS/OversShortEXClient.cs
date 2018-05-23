@@ -55,9 +55,9 @@ namespace OversShortQS.Client.Services
         }
 
         public async Task CreateShortsEx9(IEnumerable<int> selos, int docSetId,
-            bool BreakOnMonthYear, bool ApplyEX9Bucket)
+            bool applyCurrentChecks, bool process7100)
         {
-            await Channel.CreateShortsEx9(selos, docSetId, BreakOnMonthYear, ApplyEX9Bucket).ConfigureAwait(false);
+            await Channel.CreateShortsEx9(selos, docSetId, applyCurrentChecks, process7100).ConfigureAwait(false);
         }
 
         public async Task<StringBuilder> BuildOSLst(List<int> lst)

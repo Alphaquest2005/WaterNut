@@ -17,7 +17,7 @@ namespace AllocationQS.Client.Contracts
         [OperationContract]
         Task<IEnumerable<AsycudaSalesAllocationsEx>> GetAsycudaSalesAllocationsExesByDates(DateTime startDate, DateTime endDate);
         [OperationContract]
-        Task CreateEx9(string filterExpression, bool perIM7, bool applyEx9Bucket, bool breakOnMonthYear, int AsycudaDocumentSetId);
+        Task CreateEx9(string filterExpression, bool perIM7, bool process7100, bool applyCurrentChecks, int AsycudaDocumentSetId);
         [OperationContract]
         Task CreateOPS(string filterExpression, int AsycudaDocumentSetId);
         [OperationContract]

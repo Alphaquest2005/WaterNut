@@ -33,8 +33,8 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
         private AllocationsModel()
         {
 
-            ApplyEx9Bucket = false;
-            BreakOnMonthYear = true;            
+            Process7100 = false;
+            ApplyCurrentChecks = true;            
             FilterData();
 
             RegisterToReceiveMessages<SalesDataDetail>(SalesDataQS.MessageToken.CurrentSalesDataDetailChanged, OnCurrentSalesDataDetailChanged);
@@ -461,23 +461,23 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
         }
 
      
-        private  bool _applyEx9Bucket = false;
-        public bool ApplyEx9Bucket
+        private  bool _process7100 = false;
+        public bool Process7100
         {
-            get { return _applyEx9Bucket; }
+            get { return _process7100; }
 
             set
             {
-                _applyEx9Bucket = value;
-                if (_applyEx9Bucket == true)
+                _process7100 = value;
+                if (_process7100 == true)
                 {
-                    BreakOnMonthYear = false;
-                    NotifyPropertyChanged(x => BreakOnMonthYear);
+                   
+                    NotifyPropertyChanged(x => Process7100);
                 }
             }
         }
 
-        public bool BreakOnMonthYear { get; set; }
+        public bool ApplyCurrentChecks { get; set; }
         public  bool PerIM7 { get; set; }
 
 
@@ -508,8 +508,8 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
             await AsycudaSalesAllocationsExRepository.Instance.CreateEx9(vloader.FilterExpression + (CoreEntities.ViewModels.BaseViewModel.Instance.CurrentApplicationSettings.OpeningStockDate.HasValue ? string.Format(" && pRegistrationDate >= \"{0}\"", CoreEntities.ViewModels.BaseViewModel.Instance.CurrentApplicationSettings.OpeningStockDate) : "")
                   ,
                             PerIM7,
-                            ApplyEx9Bucket,
-                            BreakOnMonthYear, CoreEntities.ViewModels.BaseViewModel.Instance.CurrentAsycudaDocumentSetEx.AsycudaDocumentSetId).ConfigureAwait(false);
+                            Process7100,
+                            ApplyCurrentChecks, CoreEntities.ViewModels.BaseViewModel.Instance.CurrentAsycudaDocumentSetEx.AsycudaDocumentSetId).ConfigureAwait(false);
            MessageBus.Default.BeginNotify(CoreEntities.MessageToken.AsycudaDocumentSetExsChanged, this, new NotificationEventArgs(CoreEntities.MessageToken.AsycudaDocumentSetExsChanged));
           StatusModel.StopStatusUpdate();
             MessageBox.Show("Complete");
