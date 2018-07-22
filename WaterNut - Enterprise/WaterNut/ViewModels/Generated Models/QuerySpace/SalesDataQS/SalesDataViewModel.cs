@@ -394,7 +394,7 @@ namespace WaterNut.QuerySpace.SalesDataQS.ViewModels
 					if (Convert.ToDateTime(EndEntryDataDateFilter).Date != DateTime.MinValue)
 						{
 							if(EndEntryDataDateFilter.HasValue)
-								res.Append(" && " + string.Format("EntryDataDate <= \"{0}\"",  Convert.ToDateTime(EndEntryDataDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("EntryDataDate <= \"{0}\"",  Convert.ToDateTime(EndEntryDataDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartEntryDataDateFilter).Date != DateTime.MinValue &&

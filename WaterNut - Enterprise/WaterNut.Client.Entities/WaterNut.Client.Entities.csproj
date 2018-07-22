@@ -41,19 +41,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core.Common">
-      <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Core.Common.Contracts">
-      <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SimpleMvvmToolkit-Common, Version=5.5.0.0, Culture=neutral, PublicKeyToken=20fad5ed49a0c3b4, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\SimpleMvvmToolkit-Common.dll</HintPath>
@@ -312,9 +306,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{0dd350c7-3cbe-4791-a9b5-332bf3f1b756}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
       <Project>{D6846386-8741-4619-BAE3-B0CFEDBF2597}</Project>
       <Name>Core.Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common\Core.Common.csproj">
+      <Project>{4d734eac-e84b-40a2-9726-d17263b0ff4a}</Project>
+      <Name>Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
       <Project>{11235d24-1165-4dc4-b91b-0426ea669451}</Project>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Common
 {
-    public abstract class DataLayerObjectBase
+    public abstract class BusinessObjectBase
     {
         static CompositionContainer container;
         public static CompositionContainer Container

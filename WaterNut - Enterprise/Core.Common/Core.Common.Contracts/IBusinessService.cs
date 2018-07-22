@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Common.Contracts
 {
-    public interface IDataLayerService
+    public interface IBusinessService
     {
     }
 }

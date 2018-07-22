@@ -59,15 +59,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core.Common">
-      <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Core.Common.Contracts">
-      <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Core.Common.UI">
-      <HintPath>..\Common Dlls\Core.Common.UI.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -77,8 +68,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="SimpleMvvmToolkit-Common">
@@ -132,9 +123,21 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{0dd350c7-3cbe-4791-a9b5-332bf3f1b756}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
       <Project>{d6846386-8741-4619-bae3-b0cfedbf2597}</Project>
       <Name>Core.Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
+      <Name>Core.Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common\Core.Common.csproj">
+      <Project>{4d734eac-e84b-40a2-9726-d17263b0ff4a}</Project>
+      <Name>Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
       <Project>{11235d24-1165-4dc4-b91b-0426ea669451}</Project>

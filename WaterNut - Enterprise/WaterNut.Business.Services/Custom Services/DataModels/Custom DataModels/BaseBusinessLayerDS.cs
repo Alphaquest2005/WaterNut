@@ -140,8 +140,9 @@ namespace WaterNut.DataSpace
             {
                 
                 if (Environment.MachineName.ToLower() == "alphaquest-PC".ToLower())return true;
+                if (Environment.MachineName.ToLower() == "Joseph-PC".ToLower()) return true;
 
-                if (Environment.ProcessorCount == 4 && Environment.MachineName.ToLower() == "Alister-PC".ToLower()
+                    if (Environment.ProcessorCount == 4 && Environment.MachineName.ToLower() == "Alister-PC".ToLower()
                     && ctx.Database.Connection.ConnectionString.ToLower().Contains(@"Alister-PC\SQLEXPRESS2017;Initial Catalog=IWWDB-Enterprise".ToLower()))
                 {
                     return true;

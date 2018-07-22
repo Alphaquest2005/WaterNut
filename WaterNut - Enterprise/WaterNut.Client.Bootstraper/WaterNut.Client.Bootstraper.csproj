@@ -39,12 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core.Common">
-      <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Core.Common.Contracts">
-      <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -55,6 +49,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{0dd350c7-3cbe-4791-a9b5-332bf3f1b756}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common\Core.Common.csproj">
+      <Project>{4d734eac-e84b-40a2-9726-d17263b0ff4a}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WaterNut.Client.Contracts\WaterNut.Client.Contracts.csproj">
       <Project>{658bb505-087e-48b0-9adc-b227367af83c}</Project>
       <Name>WaterNut.Client.Contracts</Name>

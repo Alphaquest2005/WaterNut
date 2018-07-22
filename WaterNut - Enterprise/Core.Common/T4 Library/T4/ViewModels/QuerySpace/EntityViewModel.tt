@@ -535,7 +535,7 @@ namespace <#=projectName #>.QuerySpace.<#=conTextName #>.ViewModels
 					if (Convert.ToDateTime(End<#=displayName#>Filter).Date != DateTime.MinValue)
 						{
 							if(End<#=displayName#>Filter.HasValue)
-								res.Append(" && " + string.Format("<#=p.Name#> <= \"{0}\"",  Convert.ToDateTime(End<#=displayName#>Filter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("<#=p.Name#> <= \"{0}\"",  Convert.ToDateTime(End<#=displayName#>Filter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(Start<#=displayName#>Filter).Date != DateTime.MinValue &&

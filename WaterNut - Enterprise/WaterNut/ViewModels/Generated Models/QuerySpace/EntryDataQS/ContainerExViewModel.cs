@@ -580,7 +580,7 @@ namespace WaterNut.QuerySpace.EntryDataQS.ViewModels
 					if (Convert.ToDateTime(EndShipDateFilter).Date != DateTime.MinValue)
 						{
 							if(EndShipDateFilter.HasValue)
-								res.Append(" && " + string.Format("ShipDate <= \"{0}\"",  Convert.ToDateTime(EndShipDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("ShipDate <= \"{0}\"",  Convert.ToDateTime(EndShipDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartShipDateFilter).Date != DateTime.MinValue &&
@@ -609,7 +609,7 @@ namespace WaterNut.QuerySpace.EntryDataQS.ViewModels
 					if (Convert.ToDateTime(EndDeliveryDateFilter).Date != DateTime.MinValue)
 						{
 							if(EndDeliveryDateFilter.HasValue)
-								res.Append(" && " + string.Format("DeliveryDate <= \"{0}\"",  Convert.ToDateTime(EndDeliveryDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("DeliveryDate <= \"{0}\"",  Convert.ToDateTime(EndDeliveryDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartDeliveryDateFilter).Date != DateTime.MinValue &&

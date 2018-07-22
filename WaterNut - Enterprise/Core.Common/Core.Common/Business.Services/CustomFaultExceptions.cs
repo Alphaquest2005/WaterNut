@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 
 
-namespace Core.Common.DataLayer.Services
+namespace Core.Common.Business.Services
 {
     [DataContract]
     public class ValidationFault

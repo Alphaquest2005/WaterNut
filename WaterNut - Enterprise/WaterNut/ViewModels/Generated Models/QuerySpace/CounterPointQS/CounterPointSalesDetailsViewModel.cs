@@ -490,7 +490,7 @@ namespace WaterNut.QuerySpace.CounterPointQS.ViewModels
 					if (Convert.ToDateTime(EndDATEFilter).Date != DateTime.MinValue)
 						{
 							if(EndDATEFilter.HasValue)
-								res.Append(" && " + string.Format("DATE <= \"{0}\"",  Convert.ToDateTime(EndDATEFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("DATE <= \"{0}\"",  Convert.ToDateTime(EndDATEFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartDATEFilter).Date != DateTime.MinValue &&

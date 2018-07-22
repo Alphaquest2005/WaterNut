@@ -41,17 +41,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core.Common">
-      <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Core.Common.Contracts">
-      <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Serialize.Linq, Version=1.6.0.0, Culture=neutral, PublicKeyToken=25bcc11ba213b377, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serialize.Linq.1.6.0\lib\net45\Serialize.Linq.dll</HintPath>
+    <Reference Include="Serialize.Linq, Version=1.7.1.0, Culture=neutral, PublicKeyToken=25bcc11ba213b377, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serialize.Linq.1.7.1\lib\net45\Serialize.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -60,6 +55,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +131,14 @@
     <Compile Include="ServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{0dd350c7-3cbe-4791-a9b5-332bf3f1b756}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common\Core.Common.csproj">
+      <Project>{4d734eac-e84b-40a2-9726-d17263b0ff4a}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WaterNut.Client.Contracts\WaterNut.Client.Contracts.csproj">
       <Project>{658bb505-087e-48b0-9adc-b227367af83c}</Project>
       <Name>WaterNut.Client.Contracts</Name>

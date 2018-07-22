@@ -790,7 +790,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
 					if (Convert.ToDateTime(EndRegistrationDateFilter).Date != DateTime.MinValue)
 						{
 							if(EndRegistrationDateFilter.HasValue)
-								res.Append(" && " + string.Format("RegistrationDate <= \"{0}\"",  Convert.ToDateTime(EndRegistrationDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("RegistrationDate <= \"{0}\"",  Convert.ToDateTime(EndRegistrationDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartRegistrationDateFilter).Date != DateTime.MinValue &&
@@ -827,7 +827,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
 					if (Convert.ToDateTime(EndEffectiveRegistrationDateFilter).Date != DateTime.MinValue)
 						{
 							if(EndEffectiveRegistrationDateFilter.HasValue)
-								res.Append(" && " + string.Format("EffectiveRegistrationDate <= \"{0}\"",  Convert.ToDateTime(EndEffectiveRegistrationDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("EffectiveRegistrationDate <= \"{0}\"",  Convert.ToDateTime(EndEffectiveRegistrationDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartEffectiveRegistrationDateFilter).Date != DateTime.MinValue &&

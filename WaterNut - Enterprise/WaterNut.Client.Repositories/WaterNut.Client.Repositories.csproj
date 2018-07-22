@@ -41,12 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core.Common">
-      <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Core.Common.Contracts">
-      <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -55,23 +49,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Omu.ValueInjecter, Version=3.1.1.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
-      <HintPath>..\packages\valueinjecter.3.1.1.2\lib\net40\Omu.ValueInjecter.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Omu.ValueInjecter, Version=3.1.3.0, Culture=neutral, PublicKeyToken=5692a4ecdffbe736, processorArchitecture=MSIL">
+      <HintPath>..\packages\ValueInjecter.3.1.3\lib\net45\Omu.ValueInjecter.dll</HintPath>
     </Reference>
-    <Reference Include="Serialize.Linq">
-      <HintPath>..\packages\Serialize.Linq.1.2.3\lib\net45\Serialize.Linq.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Serialize.Linq, Version=1.7.1.0, Culture=neutral, PublicKeyToken=25bcc11ba213b377, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serialize.Linq.1.7.1\lib\net45\Serialize.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.ComponentModel.DataAnnotations.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows" />
     <Reference Include="TrackableEntities.Client, Version=2.5.0.0, Culture=neutral, PublicKeyToken=b10b51e7b9be6a2e, processorArchitecture=MSIL">
@@ -166,9 +159,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{0dd350c7-3cbe-4791-a9b5-332bf3f1b756}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
       <Project>{d6846386-8741-4619-bae3-b0cfedbf2597}</Project>
       <Name>Core.Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common\Core.Common.csproj">
+      <Project>{4d734eac-e84b-40a2-9726-d17263b0ff4a}</Project>
+      <Name>Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainInterfaces\InterfacesModel.csproj">
       <Project>{11235D24-1165-4DC4-B91B-0426EA669451}</Project>

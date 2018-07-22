@@ -280,8 +280,8 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
             }
             set
             {
-                _endInvoiceDateFilter = value;
-				NotifyPropertyChanged(x => EndInvoiceDateFilter);
+                _endInvoiceDateFilter = value;// done in filter .GetValueOrDefault().AddHours(23)
+                NotifyPropertyChanged(x => EndInvoiceDateFilter);
                 FilterData();
                 
             }
@@ -950,7 +950,7 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
 	        {
 	            if (EndInvoiceDateFilter.HasValue)
 	                res.Append(" && " + string.Format("InvoiceDate <= \"{0}\"",
-	                               Convert.ToDateTime(EndInvoiceDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+	                               Convert.ToDateTime(EndInvoiceDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 	        }
 
 	        if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue &&
@@ -1074,7 +1074,7 @@ namespace WaterNut.QuerySpace.AllocationQS.ViewModels
 	        {
 	            if (EndpExpiryDateFilter.HasValue)
 	                res.Append(" && " + string.Format("pExpiryDate <= \"{0}\"",
-	                               Convert.ToDateTime(EndpExpiryDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+	                               Convert.ToDateTime(EndpExpiryDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 	        }
 
 	        if (Convert.ToDateTime(StartpExpiryDateFilter).Date != DateTime.MinValue &&

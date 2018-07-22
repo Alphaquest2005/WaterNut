@@ -541,7 +541,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
 					if (Convert.ToDateTime(EndEntryTimeStampFilter).Date != DateTime.MinValue)
 						{
 							if(EndEntryTimeStampFilter.HasValue)
-								res.Append(" && " + string.Format("EntryTimeStamp <= \"{0}\"",  Convert.ToDateTime(EndEntryTimeStampFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("EntryTimeStamp <= \"{0}\"",  Convert.ToDateTime(EndEntryTimeStampFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartEntryTimeStampFilter).Date != DateTime.MinValue &&

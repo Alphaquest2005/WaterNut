@@ -41,15 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core.Common">
-      <HintPath>..\Common Dlls\Core.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Core.Common.Contracts">
-      <HintPath>..\Common Dlls\Core.Common.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="Core.Common.UI">
-      <HintPath>..\Common Dlls\Core.Common.UI.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -61,20 +52,20 @@
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MoreLinq, Version=2.9.21302.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
-      <HintPath>..\packages\morelinq.2.9.0\lib\net40\MoreLinq.dll</HintPath>
+    <Reference Include="MoreLinq, Version=3.0.0.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.0.0\lib\net451\MoreLinq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Omu.ValueInjecter, Version=3.1.1.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
-      <HintPath>..\packages\ValueInjecter.3.1.1.5\lib\net40\Omu.ValueInjecter.dll</HintPath>
+    <Reference Include="Omu.ValueInjecter, Version=3.1.3.0, Culture=neutral, PublicKeyToken=5692a4ecdffbe736, processorArchitecture=MSIL">
+      <HintPath>..\packages\ValueInjecter.3.1.3\lib\net45\Omu.ValueInjecter.dll</HintPath>
     </Reference>
     <Reference Include="ParallelExtensionsExtras">
       <HintPath>..\packages\MSFT.ParallelExtensionsExtras.1.2.0\lib\ParallelExtensionsExtras.dll</HintPath>
     </Reference>
-    <Reference Include="Serialize.Linq, Version=1.6.0.0, Culture=neutral, PublicKeyToken=25bcc11ba213b377, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serialize.Linq.1.6.0\lib\net45\Serialize.Linq.dll</HintPath>
+    <Reference Include="Serialize.Linq, Version=1.7.1.0, Culture=neutral, PublicKeyToken=25bcc11ba213b377, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serialize.Linq.1.7.1\lib\net45\Serialize.Linq.dll</HintPath>
     </Reference>
     <Reference Include="SimpleMvvmToolkit-Common">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\SimpleMvvmToolkit-Common.dll</HintPath>
@@ -93,8 +84,8 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\packages\SimpleMvvmToolkit.5.5.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -749,9 +740,21 @@
       <Project>{917d4053-ae15-44b2-a434-4411af44b9a6}</Project>
       <Name>Core.Common.PDF2TXT</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{0dd350c7-3cbe-4791-a9b5-332bf3f1b756}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.Data\Core.Common.Data.csproj">
       <Project>{d6846386-8741-4619-bae3-b0cfedbf2597}</Project>
       <Name>Core.Common.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.UI\Core.Common.UI.csproj">
+      <Project>{5dd82ad7-f344-45e3-92cc-96f8d07700af}</Project>
+      <Name>Core.Common.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common\Core.Common.csproj">
+      <Project>{4d734eac-e84b-40a2-9726-d17263b0ff4a}</Project>
+      <Name>Core.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
       <Project>{11bb58a0-1c42-49d9-bf54-ea05ecc74719}</Project>

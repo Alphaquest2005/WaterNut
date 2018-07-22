@@ -400,7 +400,7 @@ namespace WaterNut.QuerySpace.EntryDataQS.ViewModels
 					if (Convert.ToDateTime(EndInvoiceDateFilter).Date != DateTime.MinValue)
 						{
 							if(EndInvoiceDateFilter.HasValue)
-								res.Append(" && " + string.Format("InvoiceDate <= \"{0}\"",  Convert.ToDateTime(EndInvoiceDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("InvoiceDate <= \"{0}\"",  Convert.ToDateTime(EndInvoiceDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartInvoiceDateFilter).Date != DateTime.MinValue &&

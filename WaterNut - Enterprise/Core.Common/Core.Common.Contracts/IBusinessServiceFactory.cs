@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Core.Common.Contracts
 {
-    public interface IDataLayerServiceFactory
+    public interface IBusinessServiceFactory
     {
-        T CreateDataLayerService<T>() where T : IDataLayerService;
+        T CreateBusinessService<T>() where T : IBusinessService;
     }
 }

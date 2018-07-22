@@ -873,7 +873,7 @@ namespace WaterNut.QuerySpace.CoreEntities.ViewModels
 					if (Convert.ToDateTime(EndOpeningStockDateFilter).Date != DateTime.MinValue)
 						{
 							if(EndOpeningStockDateFilter.HasValue)
-								res.Append(" && " + string.Format("OpeningStockDate <= \"{0}\"",  Convert.ToDateTime(EndOpeningStockDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy")));
+								res.Append(" && " + string.Format("OpeningStockDate <= \"{0}\"",  Convert.ToDateTime(EndOpeningStockDateFilter).Date.AddHours(23).ToString("MM/dd/yyyy HH:mm:ss")));
 						}
 
 				if (Convert.ToDateTime(StartOpeningStockDateFilter).Date != DateTime.MinValue &&
