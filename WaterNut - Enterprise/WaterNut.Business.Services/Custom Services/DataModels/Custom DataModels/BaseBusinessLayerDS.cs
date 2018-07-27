@@ -133,29 +133,31 @@ namespace WaterNut.DataSpace
         {
             try
             {
+                if (DateTime.Now.Year == 2019) return false;
 
-           
-           //return true;
-            using (var ctx = new CoreEntitiesContext())
-            {
-                
-                if (Environment.MachineName.ToLower() == "alphaquest-PC".ToLower())return true;
-                if (Environment.MachineName.ToLower() == "Joseph-PC".ToLower()) return true;
+                return true;
 
-                    if (Environment.ProcessorCount == 4 && Environment.MachineName.ToLower() == "Alister-PC".ToLower()
-                    && ctx.Database.Connection.ConnectionString.ToLower().Contains(@"Alister-PC\SQLEXPRESS2017;Initial Catalog=IWWDB-Enterprise".ToLower()))
-                {
-                    return true;
-                }
+                //return true;
+                //using (var ctx = new CoreEntitiesContext())
+                //{
 
-                if (Environment.MachineName.ToLower() == "DESKTOP-JP7GRGD".ToLower())return true;
-                
+                //    //if (Environment.MachineName.ToLower() == "alphaquest-PC".ToLower())return true;
+                //    //if (Environment.MachineName.ToLower() == "Joseph-PC".ToLower()) return true;
 
-                if (Environment.MachineName.ToLower() == "DESKTOP-VIS2G9B".ToLower())return true;
+                //    //    if (Environment.ProcessorCount == 4 && Environment.MachineName.ToLower() == "Alister-PC".ToLower()
+                //    //    && ctx.Database.Connection.ConnectionString.ToLower().Contains(@"Alister-PC\SQLEXPRESS2017;Initial Catalog=IWWDB-Enterprise".ToLower()))
+                //    //{
+                //    //    return true;
+                //    //}
 
-                return false;
-                
-            }
+                //    //if (Environment.MachineName.ToLower() == "DESKTOP-JP7GRGD".ToLower())return true;
+
+
+                //    //if (Environment.MachineName.ToLower() == "DESKTOP-VIS2G9B".ToLower())return true;
+
+                //    return false;
+
+                //}
 
             }
             catch (Exception)

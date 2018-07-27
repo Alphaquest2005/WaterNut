@@ -5,10 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
+using System.Diagnostics;
 using System.Reflection;
+using System.Security.Permissions;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows;
+using Core.Common.UI;
 using CoreEntities.Client.Repositories;
 using CoreEntities.Client.Services;
 using WaterNut.Client.Bootstrapper;
@@ -20,6 +23,7 @@ namespace WaterNut
     /// </summary>
     public partial class App : Application
     {
+       
         public static SplashScreen2 splash = new SplashScreen2(@"coconut-water-splash.jpg");
         public App()
             : base()
@@ -33,9 +37,19 @@ namespace WaterNut
                 Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 Dispatcher.UnhandledException += OnDispatcherUnhandledException;
                 
+
+
+                if (!Core.Common.Utils.ProcessExtentions.IsProcessOpen("WCFConsoleHost"))
+                {
+                    Process p = new Process();
+                    p.StartInfo = new ProcessStartInfo("WCFConsoleHost.exe");
+                    p.StartInfo.CreateNoWindow = true;
+                    p.StartInfo.UseShellExecute = false;
+                    p.Start();
+                }
                 // LoginRoutine();
-             
-                    ClientObjectBase.Container = MEFLoader.Init(new List<ComposablePartCatalog>()
+
+                ClientObjectBase.Container = MEFLoader.Init(new List<ComposablePartCatalog>()
                     {
                         new AssemblyCatalog(Assembly.GetExecutingAssembly())
                     });
